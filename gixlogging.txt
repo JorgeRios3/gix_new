@@ -1,0 +1,2 @@
+DEBUG:root:<<Forzando raise en conexión de mac>>
+DEBUG:root:<<epale, cai en el except. MAC>>
