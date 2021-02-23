@@ -58,7 +58,8 @@ except:
 	pass
 
 #URL = "iguana.grupoiclar.com"
-URL = "201.116.243.213"
+#URL = "201.116.243.213"
+URL = "192.168.1.124"
 
 #URLSMAIL = "http://%s:8028/smail" % URL
 URLSMAIL = "http://www.pinarestapalpa.com/emailgix.php"
@@ -181,7 +182,7 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 			mcache = memcache.Client(["10.0.1.106:11211"], debug = 0)
 	except:
 		aviso("<<Problema al conectarse con memcache>>")
-		MessageBox(u"¡ No se puede establecer conexión con memcache !")
+		MessageBox(u"ï¿½ No se puede establecer conexiï¿½n con memcache !")
 		return False
 
 	#asignaMcache(mcache)
@@ -202,7 +203,7 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 	#asignaForce(FORCEHOST, FORCELOCAL, FORCEPORT, FORCEINSTANCE, FORCERPYC, FORCEWEB, FORCETEST, SMARTICS)
 	
 	if sys.version_info[0] != 2 or sys.version_info[1] not in ( 5,6,7):
-		MessageBox(u"Solo se puede correr Gix desde la versión 2.5, 2.6 o 2.7 de python")
+		MessageBox(u"Solo se puede correr Gix desde la versiï¿½n 2.5, 2.6 o 2.7 de python")
 		return False
 	
 	r_cngcmex, data2 = "", ""
@@ -386,7 +387,7 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 						aviso("<<Intento poner traceback>>")
 						traceback.print_exc()
 				else:
-					aviso("<<Forzando raise en conexión de mac>>")
+					aviso("<<Forzando raise en conexiï¿½n de mac>>")
 					raise
 			except:
 				aviso("<<epale, cai en el except. MAC>>")
@@ -410,5 +411,5 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 		auto_ansi2oem = "Ansi2Oem Failure to Launch"
 		return False
 	
-	# Versión para probar cliente de FTP
+	# Versiï¿½n para probar cliente de FTP
 

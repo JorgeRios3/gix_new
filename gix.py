@@ -118,7 +118,7 @@ except:
 ################
 
 
-#Para obtener los módulos instalados (about).
+#Para obtener los mï¿½dulos instalados (about).
 #from pip.util import get_installed_distributions
 #whatIwant = False # set this to True if in a virtualenv
 #for x in get_installed_distributions(local_only = whatIwant):
@@ -212,8 +212,8 @@ import socket
 		#print x[usuarios.c.Usuario]
 	
 #except:
-	#warnings.warn("<<No hubo conexión con el coordinador central de postgresql>>\n\n%s" % conn)
-	#Mensajes().Error(self, u"¡ Se hubo conexión con el coordinador central de postgresql !", u"Atención")
+	#warnings.warn("<<No hubo conexiï¿½n con el coordinador central de postgresql>>\n\n%s" % conn)
+	#Mensajes().Error(self, u"ï¿½ Se hubo conexiï¿½n con el coordinador central de postgresql !", u"Atenciï¿½n")
 try:
 	import dbfpy.dbf
 except:
@@ -291,7 +291,8 @@ FORCEWEB, FORCETEST, FORCEQUERYONLY, FORCEGCMEX, FORCESCROLL = "", "", "", "", "
 SMARTICS, G_USER = "", ""
 MACHINE_HASH_VALUE = None
 URL = "iguana.grupoiclar.com"
-URL = "201.116.243.213"
+#URL = "201.116.243.213"
+URL = "192.168.1.124"
 #URL = "172.16.25.106"
 URLSMAIL = "http://%s:8028/smail" % URL
 #URLSMAIL = "http://www.grupoiclar.com:8028/smail"
@@ -367,16 +368,16 @@ def aviso(mensaje):
 	#Pero la otra alternativa es usar el Rpyc y dejar que sea el Linux Server el encargado de hacer todo
 	#lo de la base de datos ( conectarse, hacer queries , etc ).  Este mecanismo ha probado ser lento de manera remota.
 	
-	#En este mecanismo el contacto no es directo al engine sino a través de SQLRelay que es un Proxy 
+	#En este mecanismo el contacto no es directo al engine sino a travï¿½s de SQLRelay que es un Proxy 
 	#de base de datos, que a su vez requiere su propia autentificacion
 	#y usa el puerto 9000.  Este mecanismo como corre directamente desde el Linux Server esconde los secretos alli
 	#y no esta expuesto en este codigo.
 	
-	#Para forzar uso de rpyc como mecanismo de utilización de SQL Server basta tener un archivo llamado forcerpyc en el 
+	#Para forzar uso de rpyc como mecanismo de utilizaciï¿½n de SQL Server basta tener un archivo llamado forcerpyc en el 
 	#mismo directorio donde se encuentra este archivo de codigo fuente. 
 	
 	#Nota:  todos los usuarios de GI o GIX usan al mismo nombre usuario de sql server para loggearse al engine
-	#Es en base una tabla de usuarios que el propio sistema restringe o permite privilegios sobre la aplicación
+	#Es en base una tabla de usuarios que el propio sistema restringe o permite privilegios sobre la aplicaciï¿½n
 	#"""
 
 	#global mcache
@@ -407,7 +408,7 @@ def aviso(mensaje):
 	#asignaForce(FORCEHOST, FORCELOCAL, FORCEPORT, FORCEINSTANCE, FORCERPYC, FORCEWEB, FORCETEST, SMARTICS)
 	
 	#if sys.version_info[0] != 2 or sys.version_info[1] not in ( 4,5,6):
-		#wx.MessageBox(u"Solo se puede correr Gix desde la versión 2.4 o 2.5 de python")
+		#wx.MessageBox(u"Solo se puede correr Gix desde la versiï¿½n 2.4 o 2.5 de python")
 		#return False
 	
 	#if force_web:
@@ -1183,7 +1184,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 				self.NewFlag = True
 				
 				if not VengodelArbol:
-					Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 					return
 					
 		if self.ValidarControles:
@@ -1209,7 +1210,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 		self.GetControl(ID_TEXTCTRLCATCTACONTIPOCUENTA).SetEditable(False)
 
 
-		id = self.GetControl(ID_CHECKBOXCATCTACONAFECTABLE)                  # revisión de checkbox
+		id = self.GetControl(ID_CHECKBOXCATCTACONAFECTABLE)                  # revisiï¿½n de checkbox
 		if id.GetValue() <> self.originales[ID_CHECKBOXCATCTACONAFECTABLE]:
 			id.SetBackgroundColour(wx.CYAN)
 			id.Refresh()
@@ -1219,7 +1220,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 			id.SetBackgroundColour(wx.NullColour)
 			id.Refresh()
 
-		id = self.GetControl(ID_RADIOBOXCATCTACONNATURALEZA)                 # revisión de radiobox
+		id = self.GetControl(ID_RADIOBOXCATCTACONNATURALEZA)                 # revisiï¿½n de radiobox
 		if id.GetStringSelection() <> self.originales[ID_RADIOBOXCATCTACONNATURALEZA]:
 			id.SetOwnBackgroundColour(wx.CYAN)
 			id.Refresh()
@@ -1261,7 +1262,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 				
 				Mensajes().Info(self, u"No puede agregar una subcuenta a la cuenta '%s %s'\n" \
 								u"ya que esta se afecta directamente."
-								% (self.dicNodeInfo['C'][6], self.dicNodeInfo['C'][5]), u"Atención")
+								% (self.dicNodeInfo['C'][6], self.dicNodeInfo['C'][5]), u"Atenciï¿½n")
 				return
 			
 			else:
@@ -1301,7 +1302,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 			
 			Mensajes().Info(self, u"No puede eliminar la cuenta '%s %s'\n" \
 							u"ya que esta no se afecta directamente."
-							% (self.dicNodeInfo['C'][6], self.dicNodeInfo['C'][5]), u"Atención")
+							% (self.dicNodeInfo['C'][6], self.dicNodeInfo['C'][5]), u"Atenciï¿½n")
 			return
 		
 		else:
@@ -1320,10 +1321,10 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 				
 				Mensajes().Info(self, u"No puede eliminar la cuenta '%s %s'\n" \
 								u"ya que esta tiene subcuentas."
-								% (self.dicNodeInfo['C'][6], self.dicNodeInfo['C'][5]), u"Atención")
+								% (self.dicNodeInfo['C'][6], self.dicNodeInfo['C'][5]), u"Atenciï¿½n")
 				return
 			
-			elif Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación"):
+			elif Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n"):
 			
 				sql = "delete from cont_Cuentas where CuentaID = %s" % cuentaid
 		
@@ -1337,9 +1338,9 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 				
 				except:
 					r_cn.rollback()
-					Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-									u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s" \
-									% sql, u"Atención")
+					Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+									u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s" \
+									% sql, u"Atenciï¿½n")
 					queTal = False
 			else:
 				
@@ -1398,7 +1399,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 					
 			self.VengoDeDelete = False
 			
-			#Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+			#Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 			
 		return
 
@@ -1428,7 +1429,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 			
 		else:
 
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 		return bienGrabado
 	
@@ -1448,7 +1449,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 			if rowscount:
 				Mensajes().Info(self, u"No puede afectar directamente la cuenta '%s %s'\n" \
 								u"ya que esta tiene subcuentas."
-								% (self.dicNodeInfo['C'][6], self.dicNodeInfo['C'][5]), u"Atención")
+								% (self.dicNodeInfo['C'][6], self.dicNodeInfo['C'][5]), u"Atenciï¿½n")
 				self.GetControl(ID_CHECKBOXCATCTACONAFECTABLE).SetValue(False)
 				self.GetControl(ID_CHECKBOXCATCTACONAFECTABLE).SetBackgroundColour(wx.NullColour)
 				self.GetControl(ID_CHECKBOXCATCTACONAFECTABLE).Refresh()
@@ -1513,7 +1514,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 					tree.SetItemHasChildren(item)
 					if self.OriginalDistinto(ID_TEXTCTRLCATCTACONTIPOCUENTA):
 						Mensajes().Info(self,u"Ha modificado el tipo de cuenta, por lo tanto,\n" \
-										u"se afectarán todas las subcuentas.", u"Aviso")
+										u"se afectarï¿½n todas las subcuentas.", u"Aviso")
 						sqlhijas = """
 						select CuentaID, ClaveCuenta, Descripcion from cont_Cuentas where HijaDeCuentaID = %s
 						""" % cuentaid
@@ -1528,7 +1529,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 								if not self.QueryUpdateRecord(sql):
 									Mensajes().Info(self,u"La subcuenta '%s - %s'\n" \
 													u"no pudo ser modificada en el tipo de cuenta." \
-													% (str(row[1]), str(row[2])), u"Atención")
+													% (str(row[1]), str(row[2])), u"Atenciï¿½n")
 						refresca = True
 				else:
 					tree.SetItemHasChildren(item, 0)
@@ -1750,7 +1751,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 	
 	def ObtenTipoCuenta(self, CuentaTipoID):
 		""" 
-		Obtener de la base de datos la descripción del tipo de cuenta
+		Obtener de la base de datos la descripciï¿½n del tipo de cuenta
 		"""
 		sql = "select Descripcion from cont_CuentaTipo where CuentaTipoID = '%s'" % CuentaTipoID
 		
@@ -1912,7 +1913,7 @@ class GixCatalogoCuentasContabilidad(wx.Frame, GixBase):
 				self.Text()
 				self.ValidarControles = False
 				if not self.NewFlag:
-					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?",u"Confirmación"):
+					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?",u"Confirmaciï¿½n"):
 						self.VengoDelSelect = True
 						if self.SaveRecord():
 							data = self.dataprev
@@ -2234,14 +2235,14 @@ class GixPolizasDropTarget(GixDropTarget):
 			pass
 		
 		#msg = " He recibido %s que ira a parar a la celda ( %d,%d) " % (data,fila,col)
-		#wx.MessageBox(message= msg, caption=u"Atención")              
+		#wx.MessageBox(message= msg, caption=u"Atenciï¿½n")              
 		self.grid.SetCellValue(fila,col,data)
 		
 		cuenta = self.grid.GetCellValue(fila, col)
 		cuentaid, descripcion = self.ObtenDescripcionCuenta(cuenta, self.empresaid)
 		if descripcion == "" and cuentaid == 0:
-			Mensajes().Info(self, u"¡ Cuenta equivocada !\n\nVerifique que exista, que tenga descripción\n" \
-							u"y que se pueda afectar directamente.", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Cuenta equivocada !\n\nVerifique que exista, que tenga descripciï¿½n\n" \
+							u"y que se pueda afectar directamente.", u"Atenciï¿½n")
 			return
 		self.grid.SetCellValue(fila, 6, str(cuentaid))
 		self.grid.SetCellValue(fila, 2, str(descripcion))
@@ -2308,7 +2309,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 		self.CreateStatusBar(2)
 		self.SetStatusWidths(anchos)
 		self.SetStatusText(u"Contabilidad", 0)
-		self.SetStatusText(u"Pólizas Contables", 1)
+		self.SetStatusText(u"Pï¿½lizas Contables", 1)
 		
 		self.poliza = self.GetControl(ID_TEXTCTRLPOLIZAPOLIZASCONTABLES)
 		
@@ -2355,7 +2356,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 			self.SetTitle(self.GetStringFromField(row[0]))
 		else:
 			Mensajes().Info(self, u"No se ha encontrado la empresa de trabajo.\n" \
-							u"Por favor abandone este módulo y verifique.", u"Atención")
+							u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 			
 		return
 			
@@ -2375,7 +2376,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 			choiceformat = str(row[0]) + " - " + self.GetStringFromField(row[1])
 			self.chopolizatipo.append(choiceformat + '                                                           ')
 
-		self.index = wx.GetSingleChoiceIndex(u"Opciones",  u"Elegir Tipo de Póliza", self.chopolizatipo, parent = None)
+		self.index = wx.GetSingleChoiceIndex(u"Opciones",  u"Elegir Tipo de Pï¿½liza", self.chopolizatipo, parent = None)
 		
 		if int(self.index) > -1:
 			polizatipoid, descripcion = self.chopolizatipo[self.index].split(' - ')
@@ -2400,7 +2401,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 			if self.tb.GetToolEnabled(ID_TOOLNEW):
 				if lbox.IsEmpty():
 					self.GetControl(ID_NOTEBOOKPOLIZASCONTABLES).SetSelection(0)
-					Mensajes().Info(self, u"¡ No hay detalle que consultar !\n\n", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No hay detalle que consultar !\n\n", u"Atenciï¿½n")
 				else:
 					self.PrepararQuery()
 					self.grid.SetGridCursor(0, 1)
@@ -2409,7 +2410,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 					self.grid.SetFocus()
 			else:
 				self.GetControl(ID_NOTEBOOKPOLIZASCONTABLES).SetSelection(0)
-				Mensajes().Info(self, u"Por favor introduzca la información general y grabela", u"Atención")
+				Mensajes().Info(self, u"Por favor introduzca la informaciï¿½n general y grabela", u"Atenciï¿½n")
 				
 		return
 	
@@ -2447,7 +2448,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 			
 		else:
 			
-			titulo = u"Catálogo de Cuentas"
+			titulo = u"Catï¿½logo de Cuentas"
 			dialog = GixCatalogoCuentasContabilidad(self, -1, titulo, size = (800,620), style = wx.DEFAULT_DIALOG_STYLE)
 			
 			wx.BeginBusyCursor()
@@ -2529,7 +2530,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 		
 		self.meta = ((5,u""),
 			(100, u"Cuenta (F1)"),
-			(250, u"Descripción"),
+			(250, u"Descripciï¿½n"),
 			(95, u"Cargo", wx.ALIGN_RIGHT),
 			(95, u"Abono", wx.ALIGN_RIGHT),
 			(300, u"Referencia"),
@@ -2552,7 +2553,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 		
 		if evtkey == wx.WXK_F6:
 			archivo = "detalle_poliza_contable.xls"
-			if Mensajes().YesNo(self, u"¿ Desea volcar el detalle al archivo de excel\n %s ?" % (archivo), u"Atención"):
+			if Mensajes().YesNo(self, u"ï¿½ Desea volcar el detalle al archivo de excel\n %s ?" % (archivo), u"Atenciï¿½n"):
 				siono = "SI"
 				try:
 					exc = SimNoraExcel(excel = archivo)
@@ -2561,7 +2562,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 				except:
 					siono = "NO"
 					
-				Mensajes().Info(self,u"El archivo de excel\n%s\n%s pudo ser generado!" % (archivo,siono), u"Atención")
+				Mensajes().Info(self,u"El archivo de excel\n%s\n%s pudo ser generado!" % (archivo,siono), u"Atenciï¿½n")
 				
 			evt.Skip()
 			return
@@ -2593,7 +2594,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 				clavecuenta, descripcion = self.chocuenta[self.index].split('  -  ')
 				
 				if descripcion == "":
-					Mensajes().Info(self, u"¡ Cuenta equivocada !\n\nNo tiene descripción.", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Cuenta equivocada !\n\nNo tiene descripciï¿½n.", u"Atenciï¿½n")
 					evt.Skip()
 					return
 				else:
@@ -2623,8 +2624,8 @@ class GixPolizasContables(wx.Frame, GixBase):
 			cuentaid, descripcion = self.ObtenDescripcionCuenta(cuenta)
 			
 			if descripcion == "" and cuentaid == 0:
-				Mensajes().Info(self, u"¡ Cuenta equivocada !\n\nVerifique que exista, que tenga descripción\n" \
-								u"y que se pueda afectar directamente.", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Cuenta equivocada !\n\nVerifique que exista, que tenga descripciï¿½n\n" \
+								u"y que se pueda afectar directamente.", u"Atenciï¿½n")
 				evt.Skip()
 				return
 			
@@ -2639,7 +2640,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 			
 	def Asigna(self, fila, col, graba, evt = ""):
 		"""
-			************ Asignaciones a variables y afectación ****************
+			************ Asignaciones a variables y afectaciï¿½n ****************
 		"""
 
 		try:
@@ -2883,7 +2884,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 		abono = self.grid.GetCellValue(fila, 4)
 		referencia1 = self.grid.GetCellValue(fila, 5)
 
-		if Mensajes().YesNo(self,u"¿ Desea eliminar la partida %s ?" % (fila + 1), u"Confirmación"):
+		if Mensajes().YesNo(self,u"ï¿½ Desea eliminar la partida %s ?" % (fila + 1), u"Confirmaciï¿½n"):
 			
 			if "" in (item, cuentaid, descripcion, cargo, abono, referencia1):
 				
@@ -2995,7 +2996,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 			
 			cursor.close()
 			r_cn.rollback()
-			Mensajes().Info( self, u"No pudo afectarse la información", u"Atención")
+			Mensajes().Info( self, u"No pudo afectarse la informaciï¿½n", u"Atenciï¿½n")
 			return False
 
 		self.grid.AutoSizeColumns()
@@ -3072,13 +3073,13 @@ class GixPolizasContables(wx.Frame, GixBase):
 		
 		tabla = self.dbtable
 		
-		meta = ((100,u"Cuenta"), (200,u"Descripción"), (150, u"Cargo"), (150,u"Abono"), (300,u"Referencia"))
+		meta = ((100,u"Cuenta"), (200,u"Descripciï¿½n"), (150, u"Cargo"), (150,u"Abono"), (300,u"Referencia"))
 		
 		#query = """
 		#select e.identradainv, convert(varchar(10),e.fecha,103), p.razonsocial, e.referencia, e.notas
 		#from gixentradasinv e join gixproveedores p on e.idproveedor = p.idproveedor order by e.fecha DESC
 		#"""
-		#titulo = u"Consulta del Detalle de la Póliza" 
+		#titulo = u"Consulta del Detalle de la Pï¿½liza" 
 		#self.DisplayGrid(tabla, meta, query, titulo)
 		
 		return
@@ -3153,24 +3154,24 @@ class GixPolizasContables(wx.Frame, GixBase):
 					self.NewFlag = True
 					
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 						return
 
 			if id == ID_TEXTCTRLTIPOPOLIZASCONTABLES:
 				tipopoliza = control.GetValue().strip()
 				if tipopoliza != "":
 					if not tipopoliza.isdigit():
-						Mensajes().Info(self, u"¡ El tipo de póliza debe ser numérico !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El tipo de pï¿½liza debe ser numï¿½rico !", u"Atenciï¿½n")
 						return
 					descripcion = self.ObtenTipoPoliza(tipopoliza)
 					if descripcion == "":
-						Mensajes().Info(self, u"¡ El tipo de póliza no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El tipo de pï¿½liza no existe !", u"Atenciï¿½n")
 						return
 					self.GetControl(ID_TEXTTIPOPOLIZASCONTABLES).SetLabel(descripcion)
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ El tipo de póliza no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El tipo de pï¿½liza no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 		
 		self.EndOfOnText(self.controlactual)    
@@ -3220,7 +3221,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 			
 			self.GetRecord("%s" % (poliza))
 		else:
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 		return
 			
@@ -3293,7 +3294,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 
 		self.delpos = True
 		
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n") :
 
 			if self.DeleteRecord():
 
@@ -3304,7 +3305,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 				if self.delpos:
 					lbx.Delete(pos)
 					
-				Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+				Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 				
 				#self.LimpiaControles()
 				
@@ -3324,7 +3325,7 @@ class GixPolizasContables(wx.Frame, GixBase):
 
 		if polizaid == "":
 			
-			Mensajes().Info(self, u"No se ha especificado la póliza", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado la pï¿½liza", u"Atenciï¿½n")
 			
 			return False
 		
@@ -3338,9 +3339,9 @@ class GixPolizasContables(wx.Frame, GixBase):
 
 		if rowscount > 1:
 			
-			Mensajes().Info(self,u"¡ No puede eliminar la póliza !\n\n" \
-							u"Su petición ha sido rechazada ya que la póliza\n" \
-							u"cuenta con movimientos de detalle.", u"Atención")
+			Mensajes().Info(self,u"ï¿½ No puede eliminar la pï¿½liza !\n\n" \
+							u"Su peticiï¿½n ha sido rechazada ya que la pï¿½liza\n" \
+							u"cuenta con movimientos de detalle.", u"Atenciï¿½n")
 			return False
 		
 		elif rowscount == 1:
@@ -3357,9 +3358,9 @@ class GixPolizasContables(wx.Frame, GixBase):
 				
 				cursor.close()
 				r_cn.rollback()
-				Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-								u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s" \
-								% sql, u"Atención")
+				Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+								u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s" \
+								% sql, u"Atenciï¿½n")
 				return False
 		
 		sql = "delete from %s where PolizaID = %s" % (self.dbtable, polizaid) 
@@ -3387,9 +3388,9 @@ class GixPolizasContables(wx.Frame, GixBase):
 
 			cursor.close()
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s" \
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s" \
+							% sql, u"Atenciï¿½n")
 			return False
 	
 	def GetAnotherRecord(self, comparison):
@@ -3549,7 +3550,7 @@ class GixImportaArchivoDbf(wx.Dialog, GixBase):
 		self.chotablasql = []
 		
 		self.inxtablasql.append(u'cont_Cuentas')
-		self.chotablasql.append('cont_Cuentas - Catálogo de Cuentas de Contabilidad' + \
+		self.chotablasql.append('cont_Cuentas - Catï¿½logo de Cuentas de Contabilidad' + \
 							'                                                                  ')
 
 		self.index = wx.GetSingleChoiceIndex(u"Opciones",  u"Elegir Tabla SQL Destino", self.chotablasql, parent = None)
@@ -3616,7 +3617,7 @@ class GixImportaArchivoDbf(wx.Dialog, GixBase):
 			
 		else:
 			
-			Mensajes().Info(self, u"Seleccione el archivo DBF que desea consultar.", u"Atención")
+			Mensajes().Info(self, u"Seleccione el archivo DBF que desea consultar.", u"Atenciï¿½n")
 
 		return
 	
@@ -3630,11 +3631,11 @@ class GixImportaArchivoDbf(wx.Dialog, GixBase):
 		else:
 			
 			if not self.archivodbf:
-				Mensajes().Info(self, u"Seleccione el archivo DBF que desea importar.", u"Atención")
+				Mensajes().Info(self, u"Seleccione el archivo DBF que desea importar.", u"Atenciï¿½n")
 			elif not self.destinosql:
-				Mensajes().Info(self, u"Seleccione la tabla SQL destino.", u"Atención")
+				Mensajes().Info(self, u"Seleccione la tabla SQL destino.", u"Atenciï¿½n")
 			else:
-				Mensajes().Info(self, u"Seleccione la empresa destino.", u"Atención")
+				Mensajes().Info(self, u"Seleccione la empresa destino.", u"Atenciï¿½n")
 
 		return
 	
@@ -3715,17 +3716,17 @@ class GixImportaArchivoDbf(wx.Dialog, GixBase):
 		wx.EndBusyCursor()      
 		
 		if self.importa:
-			Mensajes().Info(self,u"¡ Ha finalizado la importación !\n\n" \
-							u"A continuación se estructurará el catálogo de cuentas.\n", u"Atención")
-			self.dlgProgreso = wx.ProgressDialog(u"Estructurando Catálogo de Cuentas", u"Progreso",
+			Mensajes().Info(self,u"ï¿½ Ha finalizado la importaciï¿½n !\n\n" \
+							u"A continuaciï¿½n se estructurarï¿½ el catï¿½logo de cuentas.\n", u"Atenciï¿½n")
+			self.dlgProgreso = wx.ProgressDialog(u"Estructurando Catï¿½logo de Cuentas", u"Progreso",
 			                                maximum = self.contadorcuentas,
 			                                style = wx.PD_AUTO_HIDE | wx.PD_APP_MODAL | wx.PD_SMOOTH | \
 			                                wx.PD_ELAPSED_TIME | wx.PD_ESTIMATED_TIME | wx.PD_REMAINING_TIME)
 			self.EstructuraCatalogo()
 			self.dlgProgreso.Destroy()
-			Mensajes().Info(self, u"¡ Ha finalizado la estructuración !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Ha finalizado la estructuraciï¿½n !", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"¡ Ha finalizado la consulta !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Ha finalizado la consulta !", u"Atenciï¿½n")
 		
 		return
 	
@@ -3734,13 +3735,13 @@ class GixImportaArchivoDbf(wx.Dialog, GixBase):
 		if datoscuenta[5] in (0, 3, 4):
 			
 			Mensajes().Info(self,u"El registro no fue grabado ya que la cuenta de mayor\n" \
-							u"no puede ser 0, 3 o 4.", u"Atención")
+							u"no puede ser 0, 3 o 4.", u"Atenciï¿½n")
 			return
 		
 		elif not datoscuenta[1]:
 			
 			Mensajes().Info(self,u"El registro no fue grabado por no\n" \
-							u"tener descripción.", u"Atención")
+							u"tener descripciï¿½n.", u"Atenciï¿½n")
 			return
 		
 		else:
@@ -3784,7 +3785,7 @@ class GixImportaArchivoDbf(wx.Dialog, GixBase):
 				
 			else:
 	
-				Mensajes().Info(self, u"¡ La cuenta '%s' no fue grabada !" % clavecuenta, u"Atención")
+				Mensajes().Info(self, u"ï¿½ La cuenta '%s' no fue grabada !" % clavecuenta, u"Atenciï¿½n")
 
 		return
 	
@@ -3916,9 +3917,9 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 					self.GetControl(ID_TEXTCENTROCOSTOCUENTACUADRECLAVE).SetLabel(cuentacuadre)
 					self.GetControl(ID_TEXTCENTROCOSTOCUENTACUADREDESCRIPCION).SetLabel(descripcion)
 			else:
-				Mensajes().Info(self, u"¡ La empresa no tiene cuentas registradas !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ La empresa no tiene cuentas registradas !", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"¡ La empresa no tiene cuentas registradas !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ La empresa no tiene cuentas registradas !", u"Atenciï¿½n")
 
 	def OnCambiaTab(self, event):
 		self.CambiaTab()
@@ -3932,7 +3933,7 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 				self.PrepararQuery()
 			else:
 				self.GetControl(ID_NOTEBOOKCENTROCOSTO).SetSelection(0)
-				Mensajes().Info(self, u"Por favor introduzca la información de la empresa y grabela", u"Atención")
+				Mensajes().Info(self, u"Por favor introduzca la informaciï¿½n de la empresa y grabela", u"Atenciï¿½n")
 		
 	def InsertaFilas(self):
 		control = self.GetControl(ID_TEXTCTRLCENTROCOSTOEMPRESAID)
@@ -3955,7 +3956,7 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 			select CentroCostoID, Descripcion from gixcentroscostos where EmpresaID = %s order by Descripcion
 			""" % empresaid
 		
-		self.meta = ((5,u""), (300, u"Descripción"))
+		self.meta = ((5,u""), (300, u"Descripciï¿½n"))
 		self.buildFromQuery()
 		
 	def OnKeyDown(self, evt):
@@ -3970,7 +3971,7 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 		if evtkey == wx.WXK_F6:
 			archivo = "centros_de_costos.xls"
 			if Mensajes().YesNo(self, u"Desea volcar los centros de costos al archivo de excel\n %s ?" \
-								% (archivo), u"Atención"):
+								% (archivo), u"Atenciï¿½n"):
 				siono = "SI"
 				try:
 					exc = SimNoraExcel(excel = archivo)
@@ -3978,7 +3979,7 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 					exc.HazExcelDesdeGrid()
 				except:
 					siono = "NO"
-				Mensajes().Info(self,u"El archivo de excel\n%s\n%s pudo ser generado!" % (archivo, siono), u"Atención")
+				Mensajes().Info(self,u"El archivo de excel\n%s\n%s pudo ser generado!" % (archivo, siono), u"Atenciï¿½n")
 			evt.Skip()
 			return
 		
@@ -4121,8 +4122,8 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 		partida = self.grid.GetCellValue(fila, 0)
 		descripcion = self.grid.GetCellValue(fila, 1)
 
-		#if Mensajes().YesNo(self,u"¿ Desea eliminar el registro %s ?" % (fila + 1), u"Confirmación"):
-		if Mensajes().YesNo(self,u"¿ Desea eliminar el centro de costo %s ?" % descripcion, u"Confirmación"):
+		#if Mensajes().YesNo(self,u"ï¿½ Desea eliminar el registro %s ?" % (fila + 1), u"Confirmaciï¿½n"):
+		if Mensajes().YesNo(self,u"ï¿½ Desea eliminar el centro de costo %s ?" % descripcion, u"Confirmaciï¿½n"):
 			if descripcion == "":
 				self.grid.DeleteRows(fila, 1)
 			else:
@@ -4179,10 +4180,10 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 			r_cn.rollback()
 			if soloEliminar:
 				Mensajes().Info( self, u"No pudo eliminarse el centro de costo.\n\n" \
-							u"Tal vez se deba a que otra información depende\n" \
-							u"de este centro de costo.", u"Atención")
+							u"Tal vez se deba a que otra informaciï¿½n depende\n" \
+							u"de este centro de costo.", u"Atenciï¿½n")
 			else:
-				Mensajes().Info( self, u"No pudo afectarse la información", u"Atención")
+				Mensajes().Info( self, u"No pudo afectarse la informaciï¿½n", u"Atenciï¿½n")
 				
 			return False
 
@@ -4210,7 +4211,7 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 		
 	def OnPrint(self,event):
 		tabla = self.dbtable
-		meta = ((20, u"Id"), (300, u"Razón Social"), (200, u"R.F.C."), (200, u"Mascara Cta."),
+		meta = ((20, u"Id"), (300, u"Razï¿½n Social"), (200, u"R.F.C."), (200, u"Mascara Cta."),
 			(200, u"Cta. de Cuadre"))
 		query = """
 		select EmpresaID, RazonSocial, RFC, MascaraCuenta, CuadreCuentaID
@@ -4248,7 +4249,7 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 			if valor == "" and not self.FillingARecord and not self.NewFlag:
 				self.NewFlag = True
 				if not VengodelaLista:
-					Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 					return
 				
 		self.EndOfOnText(self.controlactual)    
@@ -4273,7 +4274,7 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 			self.MenuSetter(ID_MENUNUEVO, True)
 			self.GetRecord("%s" % (empresaid))
 		else:
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord( self ):
 		EmpresaID = self.GetControl(ID_TEXTCTRLCENTROCOSTOEMPRESAID).GetValue()
@@ -4316,17 +4317,17 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 		return queTal
 	
 	def OnDeleteRecord( self, event):
-		password = wx.GetPasswordFromUser(u"Digite Contraseña", caption = u"Autorización",
+		password = wx.GetPasswordFromUser(u"Digite Contraseï¿½a", caption = u"Autorizaciï¿½n",
 						  default_value = "", parent = None)
 		if password:
 			if password == PASSWORD:
-				if Mensajes().YesNo(self,u"¿ Desea realmente eliminar esta empresa ?", u"Confirmación") :
+				if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar esta empresa ?", u"Confirmaciï¿½n") :
 					if self.DeleteRecord():
 						lbx = self.GetControl(ID_LISTBOXCENTROCOSTO)
 						pos = lbx.GetSelection()
 						self.MoveOneStep("PREVIOUS")
 						lbx.Delete(pos)
-						Mensajes().Info(self,u"¡ Empresa Eliminada !", u"Atención")
+						Mensajes().Info(self,u"ï¿½ Empresa Eliminada !", u"Atenciï¿½n")
 						self.tb.EnableTool(ID_TOOLSAV, False)
 						self.tb.EnableTool(ID_TOOLDEL, True)
 						self.tb.EnableTool(ID_TOOLNEW, True)
@@ -4334,12 +4335,12 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 						self.MenuSetter(ID_MENUELIMINAR, True)
 						self.MenuSetter(ID_MENUNUEVO, True)
 			else:
-				Mensajes().Error(self, u"¡ Contraseña Inválida !", u"Petición Denegada")
+				Mensajes().Error(self, u"ï¿½ Contraseï¿½a Invï¿½lida !", u"Peticiï¿½n Denegada")
 				
 	def DeleteRecord(self):
 		empresaid = self.GetControl(ID_TEXTCTRLCENTROCOSTOEMPRESAID).GetValue().strip()
 		if empresaid == "":
-			Mensajes().Info(self, u"No se ha especificado la empresa", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado la empresa", u"Atenciï¿½n")
 			return False
 		
 		sql = "delete from %s where EmpresaID = %s" % (self.dbtable, empresaid) 
@@ -4351,9 +4352,9 @@ class GixEmpresasCentrosCostos(wx.Frame, GixBase, GixContabilidad):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar esta empresa.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de esta empresa\n%s" \
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar esta empresa.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de esta empresa\n%s" \
+							% sql, u"Atenciï¿½n")
 			return False
 	
 	def GetAnotherRecord(self, comparison):
@@ -4508,7 +4509,7 @@ class GixVentasCandidatos(wx.Frame, GixBase):
 		if self.vendedor:
 			vendedor = '%s%s%s' % ("%%", self.vendedor.encode("iso8859-1"), "%%")
 		sql = (query % (vendedor))
-		metapiece = ((10, u"Código", wx.ALIGN_RIGHT), (250, u"Vendedor"), (80, u"Interno", wx.ALIGN_CENTER),
+		metapiece = ((10, u"Cï¿½digo", wx.ALIGN_RIGHT), (250, u"Vendedor"), (80, u"Interno", wx.ALIGN_CENTER),
 					(80, u"Candidato", wx.ALIGN_CENTER))
 		elements = len(metapiece)
 		filas = self.grid.GetNumberRows()
@@ -4662,13 +4663,13 @@ class GixPrecioSustentableOferta(wx.Frame, GixBase):
 				cu.close()
 				if int(row[0]):
 					actualiza = False
-					#pwd = wx.GetPasswordFromUser(u"Digite Contraseña", caption = u"Autorización Oferta %s" % int(oferta),
+					#pwd = wx.GetPasswordFromUser(u"Digite Contraseï¿½a", caption = u"Autorizaciï¿½n Oferta %s" % int(oferta),
 												 #default_value = "", parent = self)
 					#if pwd:
 						#if self.Autorizacion(pwd):
 							#actualiza = True
 						#else:
-							#Mensajes().Error(self, u"¡ Contraseña Inválida !", u"Autorización Denegada")
+							#Mensajes().Error(self, u"ï¿½ Contraseï¿½a Invï¿½lida !", u"Autorizaciï¿½n Denegada")
 							
 					if self.usuario in self.autorizadores:  # este if sustituye a lo comentado anteriormente
 						actualiza = True
@@ -4965,13 +4966,13 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 				cu.close()
 				if int(row[0]):
 					actualiza = False
-					#pwd = wx.GetPasswordFromUser(u"Digite Contraseña", caption = u"Autorización Inmueble %s" % int(inmueble),
+					#pwd = wx.GetPasswordFromUser(u"Digite Contraseï¿½a", caption = u"Autorizaciï¿½n Inmueble %s" % int(inmueble),
 												 #default_value = "", parent = self)
 					#if pwd:
 						#if self.Autorizacion(pwd):
 							#actualiza = True
 						#else:
-							#Mensajes().Error(self, u"¡ Contraseña Inválida !", u"Autorización Denegada")
+							#Mensajes().Error(self, u"ï¿½ Contraseï¿½a Invï¿½lida !", u"Autorizaciï¿½n Denegada")
 							
 					if self.usuario in self.autorizadores:  # este if sustituye a lo comentado anteriormente
 						actualiza = True
@@ -5312,7 +5313,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 				#self.GetControl(ID_CHOICEPROSPECTOGERENTEFILTRO).SetSelection(0)
 		
 	#def OnImportar(self, event):
-		#if Mensajes().YesNo(self, u"¿ Desea realmente hacer la importación de prospectos ?", u"Confirmación"):
+		#if Mensajes().YesNo(self, u"ï¿½ Desea realmente hacer la importaciï¿½n de prospectos ?", u"Confirmaciï¿½n"):
 			#wx.BeginBusyCursor()
 			#vendedor = {60:252,62:247,63:250,64:145,2:272,3:85,5:156,6:157,13:139,14:143,16:107,18:106,19:89,
 						#22:172,23:178,27:194,28:159,30:200,37:207,42:226,43:233,44:207,46:146,47:134,49:238,52:238,
@@ -5414,10 +5415,10 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 								#values ('%s', getdate(), '%s', '%s', '%s', '%s')
 								#""" % (self.BlogGUID, self.usuario, "Alta del Prospecto (Traspaso)", "", "")
 								#if not self.QueryUpdateRecord(sql):
-									#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+									#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 				
 			#wx.EndBusyCursor()
-			#Mensajes().Info(self, u"¡ Importación Finalizada !", u"Aviso")
+			#Mensajes().Info(self, u"ï¿½ Importaciï¿½n Finalizada !", u"Aviso")
 				
 		#return
 		
@@ -5565,7 +5566,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 			#values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			#""" % (self.BlogGUID, self.usuario, comentario, "", "")
 			#if not self.QueryUpdateRecord(sql):
-				#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 	#def ActiveNoteBook(self, nbtrue, nbfalse, width, height):
 		#self.GetControl(nbtrue).Show(False)
@@ -5612,7 +5613,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 		#nombre = ctrl.GetValue().strip()
 		#if self.ExisteProspecto(nombre, agrega):
 			#if Mensajes().YesNo(self, u"Ya existe el prospecto: %s\n\n" \
-								#u"¿ Desea localizarlo ?" % nombre, u"Confirmación"):
+								#u"ï¿½ Desea localizarlo ?" % nombre, u"Confirmaciï¿½n"):
 				#ctrl.SetValue("")
 				#self.GetControl(ID_TEXTCTRLPROSPECTONOMBREFILTRO).SetValue(str(nombre.encode("iso8859-1")))
 				#self.GetControl(ID_CHOICEPROSPECTOTIPOFECHAFILTRO).SetSelection(0)
@@ -5630,7 +5631,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 			#self.NewFlag = False
 			#self.Text()
 			#if not self.NewFlag:
-				##if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+				##if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 				#self.SaveRecord()
 				#self.detail = False
 					##self.GetControl(ID_BUTTONMOVTOBANCOAGREGAR).Enable(True)
@@ -5723,7 +5724,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 				
 	#def OnPrintExcel(self, event):
 		#tabla = self.dbtable
-		#meta = ((14,"Id") , (200,u"Prospecto"), (70,u"Asignación"), (70,u"Cierre"), (70,u"Teléfono(s)"), (70,u"No. IMSS"),
+		#meta = ((14,"Id") , (200,u"Prospecto"), (70,u"Asignaciï¿½n"), (70,u"Cierre"), (70,u"Telï¿½fono(s)"), (70,u"No. IMSS"),
 			#(70,u"Seguimiento"), (70,u"No Seguimiento"), (200,u"Vendedor"), (200,u"Gerente"), (200,u"Medio Publicitario"))
 		#query = self.FillListCtrl(printexcel = True)
 		#titulo = u"Prospectos"
@@ -5752,7 +5753,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 						#control.SetBackgroundColour(wx.Colour(153,255,153))
 						#control.SetForegroundColour(wx.NamedColour("BLACK"))
 						#control.SetValue("0.00")
-						#Mensajes().Info(self, u"¡ La Fecha Inicial no debe ser mayor a la Fecha Final !", u"Atención")
+						#Mensajes().Info(self, u"ï¿½ La Fecha Inicial no debe ser mayor a la Fecha Final !", u"Atenciï¿½n")
 						#return
 					#elif tipofechafiltro:
 						#self.sqlfiltro = """
@@ -5861,8 +5862,8 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 		#fila = 0
 		
 		#if rows:
-			#title = ((u"Id", wx.LIST_FORMAT_CENTER), (u"Prospecto", wx.LIST_FORMAT_LEFT), (u"Asignación", wx.LIST_FORMAT_CENTER),
-				 #(u"Cierre", wx.LIST_FORMAT_CENTER), (u"Teléfono(s)", wx.LIST_FORMAT_LEFT), (u"No. IMSS", wx.LIST_FORMAT_CENTER),
+			#title = ((u"Id", wx.LIST_FORMAT_CENTER), (u"Prospecto", wx.LIST_FORMAT_LEFT), (u"Asignaciï¿½n", wx.LIST_FORMAT_CENTER),
+				 #(u"Cierre", wx.LIST_FORMAT_CENTER), (u"Telï¿½fono(s)", wx.LIST_FORMAT_LEFT), (u"No. IMSS", wx.LIST_FORMAT_CENTER),
 				 #(u"Seguimiento", wx.LIST_FORMAT_CENTER), (u"No Seguimiento", wx.LIST_FORMAT_CENTER),
 				 #(u"Vendedor", wx.LIST_FORMAT_LEFT), (u"Gerente", wx.LIST_FORMAT_LEFT), (u"Medio Publicitario", wx.LIST_FORMAT_LEFT))
 			#for i, coltitle in enumerate(title):
@@ -5947,8 +5948,8 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 			##self.NewFlag = False
 			##self.Text(True)
 			##if not self.NewFlag:
-				##if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?", \
-						    ##u"Confirmación"):
+				##if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?", \
+						    ##u"Confirmaciï¿½n"):
 					##self.SaveRecord()
 					
 		#if self.datointernoynombre:
@@ -5963,7 +5964,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 			##if self.eliminado == "N" and self.clasificado == "N":
 				##self.GetControl(ID_BUTTONMOVTOBANCOELIMINARLISTCTRL).Enable(True)
 		#else:
-			#Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+			#Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		
 	#def GetLFRecord(self, what):
 		#lctrl = self.GetControl(ID_LISTCTRLPROSPECTO)
@@ -6028,7 +6029,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 					##nombre = ctrl.GetValue().strip()
 					##if self.ExisteProspecto(nombre):
 						##if Mensajes().YesNo(self, u"Ya existe el prospecto: %s\n\n" \
-											##u"¿ Desea localizarlo ?" % nombre, u"Confirmación"):
+											##u"ï¿½ Desea localizarlo ?" % nombre, u"Confirmaciï¿½n"):
 							##ctrl.SetValue("")
 							##self.GetControl(ID_TEXTCTRLPROSPECTONOMBREFILTRO).SetValue(str(nombre.encode("iso8859-1")))
 							##return True
@@ -6045,7 +6046,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 			#if valor == "" and not self.FillingARecord and not self.NewFlag:
 				#self.NewFlag = True
 				#if not VengodelaLista:
-					#Mensajes().Info(self, u"¡ No debe quedar ningún dato requerido * en blanco !", u"Atención")
+					#Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato requerido * en blanco !", u"Atenciï¿½n")
 					#return False
 					
 		#id = self.controlactual
@@ -6190,11 +6191,11 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 		#if idprospecto.strip() == "" :
 			#bienGrabado, self.idprospecto = self.AddRecord()
 			#if not bienGrabado:
-				#Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+				#Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 		#else:
 			#bienGrabado, self.idprospecto = self.UpdateRecord()
 			#if not bienGrabado:
-				#Mensajes().Info(self,u"¡ El Registro no fue actualizado !", u"Atención")
+				#Mensajes().Info(self,u"ï¿½ El Registro no fue actualizado !", u"Atenciï¿½n")
 		#if bienGrabado:
 			#if wx.Platform == '__WXMSW__':
 				#self.ActiveNoteBook(ID_NOTEBOOKPROSPECTOLISTCTRL, ID_NOTEBOOKPROSPECTOFORM, 1011, 670)
@@ -6242,14 +6243,14 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 		
 		#descripcion = self.GetControl(ID_COMBOPROSPECTOMEDIOPUBLICITARIO).GetValue()
 		#if not self.ExisteMedioPublicitario(descripcion):
-			#Mensajes().Info(self, u"¡ El medio publicitario %s no existe !\n\n" \
-							#u"Si desea agregarlo solicite autorización." % descripcion, u"Atención")
+			#Mensajes().Info(self, u"ï¿½ El medio publicitario %s no existe !\n\n" \
+							#u"Si desea agregarlo solicite autorizaciï¿½n." % descripcion, u"Atenciï¿½n")
 			#return False, 0
 			
 			## Lo siguiente es por si se permite dar de alta medios publicitarios al usuario.
 			##
-			##if Mensajes().YesNo(self, u"¡ El medio publicitario %s no existe !\n\n¿ Desea agregarlo ?" \
-								##% descripcion, u"Confirmación"):
+			##if Mensajes().YesNo(self, u"ï¿½ El medio publicitario %s no existe !\n\nï¿½ Desea agregarlo ?" \
+								##% descripcion, u"Confirmaciï¿½n"):
 				##sql = "insert into gixmediospublicitarios (descripcion) values ('%s')" % (descripcion)
 				##queTal, idmediopublicitario = self.QueryUpdateRecord(sql, True)
 				##if not queTal:
@@ -6275,9 +6276,9 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 			#sql = """
 			#insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 			#values ('%s', getdate(), '%s', '%s', '%s', '%s')
-			#""" % (self.BlogGUID, self.usuario, u"Modificación del Prospecto", "", "")
+			#""" % (self.BlogGUID, self.usuario, u"Modificaciï¿½n del Prospecto", "", "")
 			#if not self.QueryUpdateRecord(sql):
-				#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		#return queTal, numero
 	
@@ -6288,7 +6289,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 				#gooddate = "'%04d/%02d/%02d'" % (int(fecha_ano), int(fecha_mes), int(fecha_dia))
 				#return True, gooddate
 			#except:
-				#Mensajes().Info(self, u"Problemas con la fecha al agregar el prospecto", u"Atención")
+				#Mensajes().Info(self, u"Problemas con la fecha al agregar el prospecto", u"Atenciï¿½n")
 				#return False, "Null"
 		#else:
 			#return True, "Null"
@@ -6331,14 +6332,14 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 		
 		#descripcion = self.GetControl(ID_COMBOPROSPECTOMEDIOPUBLICITARIO).GetValue()
 		#if not self.ExisteMedioPublicitario(descripcion):
-			#Mensajes().Info(self, u"¡ El medio publicitario %s no existe !\n\n" \
-							#u"Si desea agregarlo solicite autorización." % descripcion, u"Atención")
+			#Mensajes().Info(self, u"ï¿½ El medio publicitario %s no existe !\n\n" \
+							#u"Si desea agregarlo solicite autorizaciï¿½n." % descripcion, u"Atenciï¿½n")
 			#return False, 0
 			
 			## Lo siguiente es por si se permite dar de alta medios publicitarios al usuario.
 			##
-			##if Mensajes().YesNo(self, u"¡ El medio publicitario %s no existe !\n\n¿ Desea agregarlo ?" \
-								##% descripcion, u"Confirmación"):
+			##if Mensajes().YesNo(self, u"ï¿½ El medio publicitario %s no existe !\n\nï¿½ Desea agregarlo ?" \
+								##% descripcion, u"Confirmaciï¿½n"):
 				##sql = "insert into gixmediospublicitarios (descripcion) values ('%s')" % (descripcion)
 				##queTal, idmediopublicitario = self.QueryUpdateRecord(sql, True)
 				##if not queTal:
@@ -6374,9 +6375,9 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 				#values ('%s', getdate(), '%s', '%s', '%s', '%s')
 				#""" % (self.BlogGUID, self.usuario, "Alta del Prospecto", "", "")
 				#if not self.QueryUpdateRecord(sql):
-					#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 			#else:
-				#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		#else:
 			#idprospecto = 0
 
@@ -6384,14 +6385,14 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 	
 	#def OnDeleteRecord(self, event):
 		#id = self.GetControl(ID_TEXTCTRLMOVTOBANCOID).GetValue()
-		#if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?" % id, u"Confirmación") :
+		#if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?" % id, u"Confirmaciï¿½n") :
 			#if self.DeleteRecord():
 				#sql = """
 				#insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 				#values ('%s', getdate(), '%s', '%s', '%s', '%s')
-				#""" % (self.BlogGUID, self.usuario, u"Eliminación del Movimiento", "", "")
+				#""" % (self.BlogGUID, self.usuario, u"Eliminaciï¿½n del Movimiento", "", "")
 				#if not self.QueryUpdateRecord(sql):
-					#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 				#fechaanterior = self.originales[ID_TEXTCTRLMOVTOBANCOFECHAMOVTO]
 				#dia_anterior, mes_anterior, ano_anterior = fechaanterior.split('/')
 				#tipomovtoanterior = self.originales[ID_CHOICEMOVTOBANCOTIPOMOVIMIENTO]
@@ -6414,7 +6415,7 @@ class GixPrecioSustentableInmueble(wx.Frame, GixBase):
 	#def DeleteRecord(self):
 		#idreferenciamovto = self.idreferenciamovto.GetValue().strip()
 		#if idreferenciamovto == "":
-			#Mensajes().Info(self, u"No se ha especificado el movimiento", u"Atención")
+			#Mensajes().Info(self, u"No se ha especificado el movimiento", u"Atenciï¿½n")
 			#return False
 		#sql = "update %s set eliminado = 'S' where idreferenciamovto = %s" % (self.dbtable, idreferenciamovto)
 		#return self.QueryUpdateRecord(sql)
@@ -6550,7 +6551,7 @@ class GixConteoMediosPublicitarios(wx.Frame, GixBase):
 		sql = "insert into gixmediosmovimientos (fkmediopublicitario) values (%s)" % int(self.medio)
 		transicion, trash = self.QueryUpdateRecord(sql)
 		if not transicion:
-			Mensajes().Info(self, u"¡ Problemas al agregar conteo de medio publicitario !\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"ï¿½ Problemas al agregar conteo de medio publicitario !\n%s" % sql, u"Atenciï¿½n")
 		
 		self.BuildListCtrl()
 
@@ -6607,7 +6608,7 @@ class GixVentasProspectosConsulta(wx.Frame, GixBase):
 	
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
 		self.usuario = usuario
-		self.limitedias = 41   # 126 versión original a 2 ciclos
+		self.limitedias = 41   # 126 versiï¿½n original a 2 ciclos
 		self.sortoptions = {0:("p.idprospecto asc",
 		                       "p.idprospecto desc", "desc", ""),
 		                    1:("p.apellidopaterno1 asc, p.apellidomaterno1 asc, p.nombre1 asc",
@@ -7081,7 +7082,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 					#""" % (int(row[0]), row[3], int(row[1]), int(row[2]))
 					#transicion, trash = self.QueryUpdateRecord(sql)
 					#if not transicion:
-						#Mensajes().Info(self, u"Problemas al insertar transiciones\n%s" % sql, u"Atención")
+						#Mensajes().Info(self, u"Problemas al insertar transiciones\n%s" % sql, u"Atenciï¿½n")
 				#else:
 					#sql = """
 					#update gixprospectostransiciones set fecha = '%s' where idtransicion = %s
@@ -7116,7 +7117,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 			""" % (registros, self.usuario, self.dbtable, idprospecto)
 			todook, trash = self.QueryUpdateRecord(sql)
 			if not todook:
-				Mensajes().Info(self, u"Problemas al actualizar log (prospectos)\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar log (prospectos)\n%s" % sql, u"Atenciï¿½n")
 		elif registros:
 			sql = """
 			insert into gixprospectoslog
@@ -7129,7 +7130,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 			""" % (registros, self.usuario)
 			todook, trash = self.QueryUpdateRecord(sql)
 			if not todook:
-				Mensajes().Info(self, u"Problemas al actualizar log (registros)\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar log (registros)\n%s" % sql, u"Atenciï¿½n")
 		else:
 			pass
 			
@@ -7164,8 +7165,8 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 			self.ActiveNoteBook(ID_NOTEBOOKPROSPECTOLISTCTRL, ID_NOTEBOOKPROSPECTOFORM, 1080, 698)
 			
 	def ObtenerDerechosUsuarios(self):
-		self.revinculador = ["GMV"] # Revinculador(es) con máxima autoridad (incluye 5 días al final del 1er. ciclo)
-		self.specialuser = [] #["JORGE H", "ELIZABETH"] # Pueden modificar la fecha de alta e imponer el número del imss
+		self.revinculador = ["GMV"] # Revinculador(es) con mï¿½xima autoridad (incluye 5 dï¿½as al final del 1er. ciclo)
+		self.specialuser = [] #["JORGE H", "ELIZABETH"] # Pueden modificar la fecha de alta e imponer el nï¿½mero del imss
 		self.cashuser = ["JORGE H", "ELIZABETH"] # Pueden asignar prospectos (ventas) de contado e hipotecaria
 		self.recepcionistas = {"KARIME":0}
 		self.congelador = ["ELIZABETH","EDUARDOFM"]
@@ -7396,7 +7397,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 				else:
 					continua = False
 			else:
-				Mensajes().Info(self, u"¡ No existen gerentes registrados !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No existen gerentes registrados !", u"Atenciï¿½n")
 				continua = False
 				
 		if continua:
@@ -7419,13 +7420,13 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 					if Mensajes().YesNo(self, u"Prospecto(s) a revincular: %s\nCantidad de prospectos: %s\n" \
 					                    u"Gerente destino: %s\n"
 						            u"Vendedor destino: %s\n\n"
-						            u"¿ Desea realmente llevar a cabo la revinculación ?" \
+						            u"ï¿½ Desea realmente llevar a cabo la revinculaciï¿½n ?" \
 						            % (self.selecteditems, len(self.selecteditems),
-					                       nombregte, lVendedorNombre[inx]), u"Confirmación"):
+					                       nombregte, lVendedorNombre[inx]), u"Confirmaciï¿½n"):
 						self.Revincula(idgerente, idvendedor)
 						self.FillListCtrl()
 			else:
-				Mensajes().Info(self, u"¡ El gerente no tiene asignados vendedores !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ El gerente no tiene asignados vendedores !", u"Atenciï¿½n")
 			
 	def Revincula(self, idgerente, idvendedor):
 		setListForQuery = "idgerente = %s, idvendedor = %s" % (idgerente, idvendedor)
@@ -7442,9 +7443,9 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 			cu.close()
 			
 			#if not self.usuario in self.revinculador and not int(row[3]):
-				#Mensajes().Info(self, u"¡ No puede revincular el prospecto %s !\n\n" \
+				#Mensajes().Info(self, u"ï¿½ No puede revincular el prospecto %s !\n\n" \
 				                #u"No proviene del vendedor virtual." % idprospecto,
-				                #u"Atención")
+				                #u"Atenciï¿½n")
 			#else:
 			
 			wx.BeginBusyCursor()
@@ -7473,7 +7474,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 				        """ % (idprospecto, idgerente, idvendedor, ciclo)
 					transicion, trash = self.QueryUpdateRecord(sql)
 					if not transicion:
-						Mensajes().Info(self, u"Problemas al actualizar transiciones\n%s" % sql, u"Atención")
+						Mensajes().Info(self, u"Problemas al actualizar transiciones\n%s" % sql, u"Atenciï¿½n")
 					sql = """
 				        select convert(varchar(100), BlogGUID) from %s where idprospecto = %s
 				        """ % (self.dbtable, idprospecto)
@@ -7487,10 +7488,10 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 				        (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 				        values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 				        """ % (blogprospecto, self.usuario,
-				               u"Revinculación proveniente del vendedor: %s, Gerente: %s" % (nombreorigen, gerenteorigen),
+				               u"Revinculaciï¿½n proveniente del vendedor: %s, Gerente: %s" % (nombreorigen, gerenteorigen),
 				               "", "", "")
 					if not self.QueryUpdateRecord(sql):
-						Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+						Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					if ciclo == 1:
 						sql = """
 					        select idtransicion from gixprospectostransiciones
@@ -7508,7 +7509,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 						        values (%s, getdate(), 'I', %s, %s, 2, '%s')
 						        """ % (idprospecto, idgerente, idvendedor, aviso)
 							if not self.QueryUpdateRecord(sql):
-								Mensajes().Info(self, u"Problemas al agregar transición", u"Atención")
+								Mensajes().Info(self, u"Problemas al agregar transiciï¿½n", u"Atenciï¿½n")
 							sql = """
 						        insert into Blogs
 						        (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario,
@@ -7516,14 +7517,14 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 						        values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 						        """ % (blogprospecto, self.usuario, aviso, "", "", "")
 							if not self.QueryUpdateRecord(sql):
-								Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+								Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 				
 			wx.EndBusyCursor()
 		
 	def OnCongelarProspecto(self, event):
 		if Mensajes().YesNo(self, u"Prospecto(s) a congelar: %s\nCantidad de prospectos: %s\n\n" \
-		                    u"¿ Desea realmente enviar a la congeladora ?" % (self.selecteditems, len(self.selecteditems)),
-		                    u"Confirmación"):
+		                    u"ï¿½ Desea realmente enviar a la congeladora ?" % (self.selecteditems, len(self.selecteditems)),
+		                    u"Confirmaciï¿½n"):
 			self.Congelar()
 			self.FillListCtrl()
 			
@@ -7549,27 +7550,27 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 			        values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			        """ % (blogprospecto, self.usuario, u"Enviado a la congeladora", "", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					
 		wx.EndBusyCursor()
 		
 	def OnColoresProspecto(self, event):
-		#Mensajes().Info(self, u"Azul.- Prospecto en el primer ciclo (primeros 40 días).\n" \
-		                #u"Amarillo.- Prospecto en el primer ciclo (últimos 20 días).\n\n" \
-		                #u"Verde.- Prospecto en el segundo ciclo (primeros 40 días).\n" \
-		                #u"Naranja.- Prospecto en el segundo ciclo (últimos 20 días).\n\n" \
+		#Mensajes().Info(self, u"Azul.- Prospecto en el primer ciclo (primeros 40 dï¿½as).\n" \
+		                #u"Amarillo.- Prospecto en el primer ciclo (ï¿½ltimos 20 dï¿½as).\n\n" \
+		                #u"Verde.- Prospecto en el segundo ciclo (primeros 40 dï¿½as).\n" \
+		                #u"Naranja.- Prospecto en el segundo ciclo (ï¿½ltimos 20 dï¿½as).\n\n" \
 		                #u"Rojo.- Prospecto que pertenece a un vendedor inhabilitado." \
 		                #, u"Significado de los Colores")
 		
-		Mensajes().Info(self, u"El ciclo actual de vida de un prospecto es de 40 días.\n\n" \
-		                u"Azul.- Prospecto dentro de los primeros 35 días.\n" \
-		                u"Amarillo.- Prospecto en los últimos 5 días de su ciclo.\n\n" \
-		                u"Verde.- Prospecto más de los 40 días (cierre).\n" \
+		Mensajes().Info(self, u"El ciclo actual de vida de un prospecto es de 40 dï¿½as.\n\n" \
+		                u"Azul.- Prospecto dentro de los primeros 35 dï¿½as.\n" \
+		                u"Amarillo.- Prospecto en los ï¿½ltimos 5 dï¿½as de su ciclo.\n\n" \
+		                u"Verde.- Prospecto mï¿½s de los 40 dï¿½as (cierre).\n" \
 		                u"Rojo.- Prospecto que pertenece a un vendedor inhabilitado." \
 		                , u"Significado de los Colores")
 
 	def OnHistoriaCiclo(self, event):
-		goal = ((90, u"Fecha"), (300, u"Transición"), (100, u"Vendedor"), (100, u"Gerente"))
+		goal = ((90, u"Fecha"), (300, u"Transiciï¿½n"), (100, u"Vendedor"), (100, u"Gerente"))
 		query = """
 		select convert(varchar(10), t.fecha, 103), t.notas, v.nombre, g.nombre
 		from gixprospectostransiciones t
@@ -7695,7 +7696,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 		nombre = ctrl.GetValue().strip()
 		if self.ExisteProspecto(nombre, agrega):
 			if Mensajes().YesNo(self, u"Ya existe el prospecto: %s\n\n" \
-					    u"¿ Desea localizarlo ?" % nombre, u"Confirmación"):
+					    u"ï¿½ Desea localizarlo ?" % nombre, u"Confirmaciï¿½n"):
 				ctrl.SetValue("")
 				self.GetControl(ID_TEXTCTRLPROSPECTONOMBREFILTRO).SetValue(str(nombre.encode("iso8859-1")))
 				self.GetControl(ID_CHOICEPROSPECTOTIPOFECHAFILTRO).SetSelection(0)
@@ -7727,19 +7728,19 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 								self.detail = False
 							else:
 								if self.usuario in self.specialuser:
-									if Mensajes().YesNo(self, u"¡ El número de afiliación al I.M.S.S. ya existe !\n\n" \
+									if Mensajes().YesNo(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !\n\n" \
 											    u"Duplicidad en el(los) siguiente(s) Id(s):\n%s\n" \
-											    u"¿ Desea continuar con el registro del prospecto ?" \
-											    % self.IdDuplicado(afiliaciones), u"Confirmación"):
+											    u"ï¿½ Desea continuar con el registro del prospecto ?" \
+											    % self.IdDuplicado(afiliaciones), u"Confirmaciï¿½n"):
 										self.SaveRecord()
 										self.detail = False
 									else:
 										pass
 								else:
 									#aqui va mi codigo JDAC
-									Mensajes().Error(self, u"¡ El número de afiliación al I.M.S.S. ya existe !", u"Error")
+									Mensajes().Error(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !", u"Error")
 									if self.es_universal:
-										Mensajes().Error(self, u"El número de afiliación al I.M.S.S. corresponde a un prospecto universal", u"Aviso")
+										Mensajes().Error(self, u"El nï¿½mero de afiliaciï¿½n al I.M.S.S. corresponde a un prospecto universal", u"Aviso")
 						else:
 							if len(afiliaciones) == 0:
 								self.SaveRecord()
@@ -7750,32 +7751,32 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 									self.detail = False
 								else:
 									if self.usuario in self.specialuser:
-										if Mensajes().YesNo(self, u"¡ El número de afiliación al I.M.S.S. ya existe !\n\n" \
+										if Mensajes().YesNo(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !\n\n" \
 												    u"Duplicidad en el(los) siguiente(s) Id(s):\n%s\n" \
-												    u"¿ Desea continuar con el registro del prospecto ?" \
-												    % self.IdDuplicado(afiliaciones), u"Confirmación"):
+												    u"ï¿½ Desea continuar con el registro del prospecto ?" \
+												    % self.IdDuplicado(afiliaciones), u"Confirmaciï¿½n"):
 											self.SaveRecord()
 											self.detail = False
 										else:
 											pass
 									else:
-										Mensajes().Error(self, u"¡ El número de afiliación al I.M.S.S. ya existe !", u"Error")
+										Mensajes().Error(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !", u"Error")
 							else:
 								if self.usuario in self.specialuser:
-									if Mensajes().YesNo(self, u"¡ El número de afiliación al I.M.S.S. ya existe !\n\n" \
+									if Mensajes().YesNo(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !\n\n" \
 											    u"Duplicidad en el(los) siguiente(s) Id(s):\n%s\n" \
-											    u"¿ Desea continuar con el registro del prospecto ?" \
-											    % self.IdDuplicado(afiliaciones), u"Confirmación"):
+											    u"ï¿½ Desea continuar con el registro del prospecto ?" \
+											    % self.IdDuplicado(afiliaciones), u"Confirmaciï¿½n"):
 										self.SaveRecord()
 										self.detail = False
 									else:
 										pass
 								else:
-									Mensajes().Error(self, u"¡ El número de afiliación al I.M.S.S. ya existe !", u"Error")
+									Mensajes().Error(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !", u"Error")
 					else:
-						Mensajes().Error(self, u"¡ Por favor revise el número de afiliación al I.M.S.S. !", u"Error")
+						Mensajes().Error(self, u"ï¿½ Por favor revise el nï¿½mero de afiliaciï¿½n al I.M.S.S. !", u"Error")
 				else:
-					Mensajes().Error(self, u"¡ Por favor revise el número de afiliación al I.M.S.S. !", u"Error")
+					Mensajes().Error(self, u"ï¿½ Por favor revise el nï¿½mero de afiliaciï¿½n al I.M.S.S. !", u"Error")
 	
 	def OnSalirDetalle(self, event):
 		self.SalirDetalle()
@@ -7875,7 +7876,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 	def OnPrintExcel(self, event):
 		pass
 		#tabla = self.dbtable
-		#meta = ((14,"Id") , (200,u"Prospecto"), (70,u"Alta"), (70,u"Cierre"), (70,u"Teléfono(s)"), (70,u"No. IMSS"),
+		#meta = ((14,"Id") , (200,u"Prospecto"), (70,u"Alta"), (70,u"Cierre"), (70,u"Telï¿½fono(s)"), (70,u"No. IMSS"),
 			#(70,u"Seguimiento"), (70,u"No Seguimiento"), (200,u"Vendedor"), (200,u"Gerente"), (200,u"Medio Publicitario"))
 		#query = self.FillListCtrl(printexcel = True)
 		#titulo = u"Prospectos"
@@ -7911,7 +7912,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 						control.SetForegroundColour(wx.NamedColour("BLACK"))
 						control.SetValue("0.00")
 						wx.EndBusyCursor()
-						Mensajes().Info(self, u"¡ La Fecha Inicial no debe ser mayor a la Fecha Final !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La Fecha Inicial no debe ser mayor a la Fecha Final !", u"Atenciï¿½n")
 						return
 					elif tipofechafiltro:
 						self.sqlfiltro += " and (%s >= %s and %s <= %s)" \
@@ -8077,7 +8078,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 				 (u"%sNombre Formato Anterior" % self.sortoptions[7][3], wx.LIST_FORMAT_LEFT),
 			         (u"%sAlta" % self.sortoptions[8][3], wx.LIST_FORMAT_CENTER),
 				 (u"%sCierre" % self.sortoptions[9][3], wx.LIST_FORMAT_CENTER),
-			         (u"%sTeléfono(s)" % self.sortoptions[10][3], wx.LIST_FORMAT_LEFT),
+			         (u"%sTelï¿½fono(s)" % self.sortoptions[10][3], wx.LIST_FORMAT_LEFT),
 			         (u"%sNo. IMSS" % self.sortoptions[11][3], wx.LIST_FORMAT_CENTER),
 				 (u"%sVendedor" % self.sortoptions[12][3], wx.LIST_FORMAT_LEFT),
 			         (u"%sGerente" % self.sortoptions[13][3], wx.LIST_FORMAT_LEFT),
@@ -8214,7 +8215,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 			if self.datointernoynombre:
 				self.GetRecord(datointerno, nombre)
 			elif not self.GetRecord(datointerno):
-				Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+				Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 				todobien = False
 		else:
 			Mensajes().Error(self, u"No hay nada que editar", u"Error")
@@ -8293,7 +8294,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 					#nombre = ctrl.GetValue().strip()
 					#if self.ExisteProspecto(nombre):
 						#if Mensajes().YesNo(self, u"Ya existe el prospecto: %s\n\n" \
-											#u"¿ Desea localizarlo ?" % nombre, u"Confirmación"):
+											#u"ï¿½ Desea localizarlo ?" % nombre, u"Confirmaciï¿½n"):
 							#ctrl.SetValue("")
 							#self.GetControl(ID_TEXTCTRLPROSPECTONOMBREFILTRO).SetValue(str(nombre.encode("iso8859-1")))
 							#return True
@@ -8314,7 +8315,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 					                                       self.GetControl(ID_CHECKBOXPROSPECTOHIPOTECARIA).IsChecked()):
 						self.NewFlag = False
 					else:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato requerido * en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato requerido * en blanco !", u"Atenciï¿½n")
 						return False
 					
 		id = self.controlactual
@@ -8384,13 +8385,13 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 		if idprospecto.strip() == "" :
 			bienGrabado, self.idprospecto, self.prospecto = self.AddRecord()
 			if not bienGrabado:
-				Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+				Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			else:
 				self.NuevoProspectoAgregado()
 		else:
 			bienGrabado, self.idprospecto = self.UpdateRecord()
 			if not bienGrabado:
-				Mensajes().Info(self,u"¡ El Registro no fue actualizado !", u"Atención")
+				Mensajes().Info(self,u"ï¿½ El Registro no fue actualizado !", u"Atenciï¿½n")
 		if bienGrabado:
 			self.ChangeNoteBook()
 			if (self.usuario in self.usuariorestringido) and (self.usuario not in self.vendedores) and \
@@ -8442,8 +8443,8 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 			return False, 0
 		descripcion = self.GetControl(ID_COMBOPROSPECTOMEDIOPUBLICITARIO).GetValue()
 		if not self.ExisteMedioPublicitario(descripcion):
-			Mensajes().Info(self, u"¡ El medio publicitario %s no existe !\n\n" \
-					u"Si desea agregarlo solicite autorización." % descripcion, u"Atención")
+			Mensajes().Info(self, u"ï¿½ El medio publicitario %s no existe !\n\n" \
+					u"Si desea agregarlo solicite autorizaciï¿½n." % descripcion, u"Atenciï¿½n")
 			return False, 0
 		else:
 			inx = self.GetControl(ID_COMBOPROSPECTOMEDIOPUBLICITARIO).GetSelection()
@@ -8471,9 +8472,9 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
-			""" % (self.BlogGUID, self.usuario, u"Modificación del Prospecto", "", "")
+			""" % (self.BlogGUID, self.usuario, u"Modificaciï¿½n del Prospecto", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal, numero
 	
@@ -8484,7 +8485,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 				gooddate = "'%04d/%02d/%02d'" % (int(fecha_ano), int(fecha_mes), int(fecha_dia))
 				return True, gooddate
 			except:
-				Mensajes().Info(self, u"Problemas con la fecha al agregar el prospecto", u"Atención")
+				Mensajes().Info(self, u"Problemas con la fecha al agregar el prospecto", u"Atenciï¿½n")
 				return False, "Null"
 		else:
 			return True, "Null"
@@ -8532,8 +8533,8 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 			return False, 0, ""
 		descripcion = self.GetControl(ID_COMBOPROSPECTOMEDIOPUBLICITARIO).GetValue()
 		if not self.ExisteMedioPublicitario(descripcion):
-			Mensajes().Info(self, u"¡ El medio publicitario %s no existe !\n\n" \
-					u"Si desea agregarlo solicite autorización." % descripcion, u"Atención")
+			Mensajes().Info(self, u"ï¿½ El medio publicitario %s no existe !\n\n" \
+					u"Si desea agregarlo solicite autorizaciï¿½n." % descripcion, u"Atenciï¿½n")
 			return False, 0, ""
 		else:
 			inx = self.GetControl(ID_COMBOPROSPECTOMEDIOPUBLICITARIO).GetSelection()
@@ -8549,11 +8550,11 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 		cu.close()
 		if vendedor is not None:
 			if int(vendedor[0]) == int(idvendedor):
-				if Mensajes().YesNo(self, u"El prospecto que desea agregar ya estuvo 40 días\n" \
-				                    u"en su bandeja.\n\nSi desea retomarlo continue y solicite autorización\n" \
+				if Mensajes().YesNo(self, u"El prospecto que desea agregar ya estuvo 40 dï¿½as\n" \
+				                    u"en su bandeja.\n\nSi desea retomarlo continue y solicite autorizaciï¿½n\n" \
 				                    u"para que le sea reasignado.\n\n" \
 				                    u"Nota.- Es caso de duda consulte a su gerente.\n\n" \
-				                    u"¿ Desea continuar ?\n", u"Confirmación alta de prospecto"):
+				                    u"ï¿½ Desea continuar ?\n", u"Confirmaciï¿½n alta de prospecto"):
 					idgerente = 9; idvendedor = 474
 				else:
 					return False, 0, ""
@@ -8581,7 +8582,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 			""" % (int(idprospecto), int(idgerente), int(idvendedor))
 			transicion, trash = self.QueryUpdateRecord(sql)
 			if not transicion:
-				Mensajes().Info(self, u"Problemas al actualizar transiciones\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar transiciones\n%s" % sql, u"Atenciï¿½n")
 			sql = "select convert(varchar(100), BlogGUID) from %s where idprospecto = %s" % (self.dbtable, idprospecto)
 			cu = r_cn.cursor()
 			cu.execute(str(sql))
@@ -8595,9 +8596,9 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 				values ('%s', getdate(), '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, "Alta del Prospecto", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 			else:
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		else:
 			idprospecto = 0
 			
@@ -8952,7 +8953,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 					#""" % (int(row[0]), row[3], int(row[1]), int(row[2]))
 					#transicion, trash = self.QueryUpdateRecord(sql)
 					#if not transicion:
-						#Mensajes().Info(self, u"Problemas al insertar transiciones\n%s" % sql, u"Atención")
+						#Mensajes().Info(self, u"Problemas al insertar transiciones\n%s" % sql, u"Atenciï¿½n")
 				#else:
 					#sql = """
 					#update gixprospectostransiciones set fecha = '%s' where idtransicion = %s
@@ -8987,7 +8988,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 			""" % (registros, self.usuario, self.dbtable, idprospecto)
 			todook, trash = self.QueryUpdateRecord(sql)
 			if not todook:
-				Mensajes().Info(self, u"Problemas al actualizar log (prospectos)\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar log (prospectos)\n%s" % sql, u"Atenciï¿½n")
 		elif registros:
 			sql = """
 			insert into gixprospectoslog
@@ -9000,7 +9001,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 			""" % (registros, self.usuario)
 			todook, trash = self.QueryUpdateRecord(sql)
 			if not todook:
-				Mensajes().Info(self, u"Problemas al actualizar log (registros)\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar log (registros)\n%s" % sql, u"Atenciï¿½n")
 		else:
 			pass
 			
@@ -9035,8 +9036,8 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 			self.ActiveNoteBook(ID_NOTEBOOKPROSPECTOLISTCTRL, ID_NOTEBOOKPROSPECTOFORM, 1080, 698)
 		
 	def ObtenerDerechosUsuarios(self):
-		self.revinculador = ["GMV"] # Revinculador(es) con máxima autoridad (incluye 5 días al final del 1er. ciclo)
-		self.specialuser = [] #["JORGE H", "ELIZABETH"] # Pueden modificar la fecha de alta e imponer el número del imss
+		self.revinculador = ["GMV"] # Revinculador(es) con mï¿½xima autoridad (incluye 5 dï¿½as al final del 1er. ciclo)
+		self.specialuser = [] #["JORGE H", "ELIZABETH"] # Pueden modificar la fecha de alta e imponer el nï¿½mero del imss
 		self.cashuser = ["JORGE H", "ELIZABETH"] # Pueden asignar prospectos (ventas) de contado e hipotecaria
 		self.recepcionistas = {"KARIME":0}
 		self.usuariorestringido, self.gerentes, self.vendedores = {}, {}, {}
@@ -9263,7 +9264,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 				else:
 					continua = False
 			else:
-				Mensajes().Info(self, u"¡ No existen gerentes registrados !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No existen gerentes registrados !", u"Atenciï¿½n")
 				continua = False
 				
 		if continua:
@@ -9286,13 +9287,13 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 					if Mensajes().YesNo(self, u"Prospecto(s) a revincular: %s\nCantidad de prospectos: %s\n" \
 					                    u"Gerente destino: %s\n"
 						            u"Vendedor destino: %s\n\n"
-						            u"¿ Desea realmente llevar a cabo la revinculación ?" \
+						            u"ï¿½ Desea realmente llevar a cabo la revinculaciï¿½n ?" \
 						            % (self.selecteditems, len(self.selecteditems),
-					                       nombregte, lVendedorNombre[inx]), u"Confirmación"):
+					                       nombregte, lVendedorNombre[inx]), u"Confirmaciï¿½n"):
 						self.Revincula(idgerente, idvendedor)
 						self.FillListCtrl()
 			else:
-				Mensajes().Info(self, u"¡ El gerente no tiene asignados vendedores !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ El gerente no tiene asignados vendedores !", u"Atenciï¿½n")
 			
 	def Revincula(self, idgerente, idvendedor):
 		wx.BeginBusyCursor()
@@ -9333,7 +9334,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 					""" % (idprospecto, idgerente, idvendedor, ciclo)
 					transicion, trash = self.QueryUpdateRecord(sql)
 					if not transicion:
-						Mensajes().Info(self, u"Problemas al actualizar transiciones\n%s" % sql, u"Atención")
+						Mensajes().Info(self, u"Problemas al actualizar transiciones\n%s" % sql, u"Atenciï¿½n")
 					sql = """
 					select convert(varchar(100), BlogGUID) from %s where idprospecto = %s
 					""" % (self.dbtable, idprospecto)
@@ -9347,10 +9348,10 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 					(BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 					values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 					""" % (blogprospecto, self.usuario,
-					       u"Revinculación proveniente del vendedor: %s, Gerente: %s" % (nombreorigen, gerenteorigen),
+					       u"Revinculaciï¿½n proveniente del vendedor: %s, Gerente: %s" % (nombreorigen, gerenteorigen),
 					       "", "", "")
 					if not self.QueryUpdateRecord(sql):
-						Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+						Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					if ciclo == 1:
 						sql = """
 						select idtransicion from gixprospectostransiciones
@@ -9368,7 +9369,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 							values (%s, getdate(), 'I', %s, %s, 2, '%s')
 							""" % (idprospecto, idgerente, idvendedor, aviso)
 							if not self.QueryUpdateRecord(sql):
-								Mensajes().Info(self, u"Problemas al agregar transición", u"Atención")
+								Mensajes().Info(self, u"Problemas al agregar transiciï¿½n", u"Atenciï¿½n")
 							sql = """
 							insert into Blogs
 							(BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario,
@@ -9376,20 +9377,20 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 							values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 							""" % (blogprospecto, self.usuario, aviso, "", "", "")
 							if not self.QueryUpdateRecord(sql):
-								Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+								Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					
 		wx.EndBusyCursor()
 		
 	def OnColoresProspecto(self, event):
-		Mensajes().Info(self, u"Azul.- Prospecto en el primer ciclo (primeros 40 días).\n" \
-		                u"Amarillo.- Prospecto en el primer ciclo (últimos 20 días).\n\n" \
-		                u"Verde.- Prospecto en el segundo ciclo (primeros 40 días).\n" \
-		                u"Naranja.- Prospecto en el segundo ciclo (últimos 20 días).\n\n" \
+		Mensajes().Info(self, u"Azul.- Prospecto en el primer ciclo (primeros 40 dï¿½as).\n" \
+		                u"Amarillo.- Prospecto en el primer ciclo (ï¿½ltimos 20 dï¿½as).\n\n" \
+		                u"Verde.- Prospecto en el segundo ciclo (primeros 40 dï¿½as).\n" \
+		                u"Naranja.- Prospecto en el segundo ciclo (ï¿½ltimos 20 dï¿½as).\n\n" \
 		                u"Rojo.- Prospecto que pertenece a un vendedor inhabilitado." \
 		                , u"Significado de los Colores")
 				
 	def OnHistoriaCiclo(self, event):
-		goal = ((90, u"Fecha"), (300, u"Transición"), (100, u"Vendedor"), (100, u"Gerente"))
+		goal = ((90, u"Fecha"), (300, u"Transiciï¿½n"), (100, u"Vendedor"), (100, u"Gerente"))
 		query = """
 		select convert(varchar(10), t.fecha, 103), t.notas, v.nombre, g.nombre
 		from gixprospectostransiciones t
@@ -9486,7 +9487,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 		nombre = ctrl.GetValue().strip()
 		if self.ExisteProspecto(nombre, agrega):
 			if Mensajes().YesNo(self, u"Ya existe el prospecto: %s\n\n" \
-					    u"¿ Desea localizarlo ?" % nombre, u"Confirmación"):
+					    u"ï¿½ Desea localizarlo ?" % nombre, u"Confirmaciï¿½n"):
 				ctrl.SetValue("")
 				self.GetControl(ID_TEXTCTRLPROSPECTONOMBREFILTRO).SetValue(str(nombre.encode("iso8859-1")))
 				self.GetControl(ID_CHOICEPROSPECTOTIPOFECHAFILTRO).SetSelection(0)
@@ -9518,16 +9519,16 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 								self.detail = False
 							else:
 								if self.usuario in self.specialuser:
-									if Mensajes().YesNo(self, u"¡ El número de afiliación al I.M.S.S. ya existe !\n\n" \
+									if Mensajes().YesNo(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !\n\n" \
 											    u"Duplicidad en el(los) siguiente(s) Id(s):\n%s\n" \
-											    u"¿ Desea continuar con el registro del prospecto ?" \
-											    % self.IdDuplicado(afiliaciones), u"Confirmación"):
+											    u"ï¿½ Desea continuar con el registro del prospecto ?" \
+											    % self.IdDuplicado(afiliaciones), u"Confirmaciï¿½n"):
 										self.SaveRecord()
 										self.detail = False
 									else:
 										pass
 								else:
-									Mensajes().Error(self, u"¡ El número de afiliación al I.M.S.S. ya existe !", u"Error")
+									Mensajes().Error(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !", u"Error")
 						else:
 							if len(afiliaciones) == 0:
 								self.SaveRecord()
@@ -9538,32 +9539,32 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 									self.detail = False
 								else:
 									if self.usuario in self.specialuser:
-										if Mensajes().YesNo(self, u"¡ El número de afiliación al I.M.S.S. ya existe !\n\n" \
+										if Mensajes().YesNo(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !\n\n" \
 												    u"Duplicidad en el(los) siguiente(s) Id(s):\n%s\n" \
-												    u"¿ Desea continuar con el registro del prospecto ?" \
-												    % self.IdDuplicado(afiliaciones), u"Confirmación"):
+												    u"ï¿½ Desea continuar con el registro del prospecto ?" \
+												    % self.IdDuplicado(afiliaciones), u"Confirmaciï¿½n"):
 											self.SaveRecord()
 											self.detail = False
 										else:
 											pass
 									else:
-										Mensajes().Error(self, u"¡ El número de afiliación al I.M.S.S. ya existe !", u"Error")
+										Mensajes().Error(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !", u"Error")
 							else:
 								if self.usuario in self.specialuser:
-									if Mensajes().YesNo(self, u"¡ El número de afiliación al I.M.S.S. ya existe !\n\n" \
+									if Mensajes().YesNo(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !\n\n" \
 											    u"Duplicidad en el(los) siguiente(s) Id(s):\n%s\n" \
-											    u"¿ Desea continuar con el registro del prospecto ?" \
-											    % self.IdDuplicado(afiliaciones), u"Confirmación"):
+											    u"ï¿½ Desea continuar con el registro del prospecto ?" \
+											    % self.IdDuplicado(afiliaciones), u"Confirmaciï¿½n"):
 										self.SaveRecord()
 										self.detail = False
 									else:
 										pass
 								else:
-									Mensajes().Error(self, u"¡ El número de afiliación al I.M.S.S. ya existe !", u"Error")
+									Mensajes().Error(self, u"ï¿½ El nï¿½mero de afiliaciï¿½n al I.M.S.S. ya existe !", u"Error")
 					else:
-						Mensajes().Error(self, u"¡ Por favor revise el número de afiliación al I.M.S.S. !", u"Error")
+						Mensajes().Error(self, u"ï¿½ Por favor revise el nï¿½mero de afiliaciï¿½n al I.M.S.S. !", u"Error")
 				else:
-					Mensajes().Error(self, u"¡ Por favor revise el número de afiliación al I.M.S.S. !", u"Error")
+					Mensajes().Error(self, u"ï¿½ Por favor revise el nï¿½mero de afiliaciï¿½n al I.M.S.S. !", u"Error")
 	
 	def OnSalirDetalle(self, event):
 		self.SalirDetalle()
@@ -9661,7 +9662,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 				
 	def OnPrintExcel(self, event):
 		tabla = self.dbtable
-		meta = ((14,"Id") , (200,u"Prospecto"), (70,u"Alta"), (70,u"Cierre"), (70,u"Teléfono(s)"), (70,u"No. IMSS"),
+		meta = ((14,"Id") , (200,u"Prospecto"), (70,u"Alta"), (70,u"Cierre"), (70,u"Telï¿½fono(s)"), (70,u"No. IMSS"),
 			(70,u"Seguimiento"), (70,u"No Seguimiento"), (200,u"Vendedor"), (200,u"Gerente"), (200,u"Medio Publicitario"))
 		query = self.FillListCtrl(printexcel = True)
 		titulo = u"Prospectos"
@@ -9697,7 +9698,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 						control.SetForegroundColour(wx.NamedColour("BLACK"))
 						control.SetValue("0.00")
 						wx.EndBusyCursor()
-						Mensajes().Info(self, u"¡ La Fecha Inicial no debe ser mayor a la Fecha Final !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La Fecha Inicial no debe ser mayor a la Fecha Final !", u"Atenciï¿½n")
 						return
 					elif tipofechafiltro:
 						self.sqlfiltro += " and (%s >= %s and %s <= %s)" \
@@ -9863,7 +9864,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 				 (u"%sNombre Formato Anterior" % self.sortoptions[7][3], wx.LIST_FORMAT_LEFT),
 			         (u"%sAlta" % self.sortoptions[8][3], wx.LIST_FORMAT_CENTER),
 				 (u"%sCierre" % self.sortoptions[9][3], wx.LIST_FORMAT_CENTER),
-			         (u"%sTeléfono(s)" % self.sortoptions[10][3], wx.LIST_FORMAT_LEFT),
+			         (u"%sTelï¿½fono(s)" % self.sortoptions[10][3], wx.LIST_FORMAT_LEFT),
 			         (u"%sNo. IMSS" % self.sortoptions[11][3], wx.LIST_FORMAT_CENTER),
 				 (u"%sVendedor" % self.sortoptions[12][3], wx.LIST_FORMAT_LEFT),
 			         (u"%sGerente" % self.sortoptions[13][3], wx.LIST_FORMAT_LEFT),
@@ -9987,7 +9988,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 			if self.datointernoynombre:
 				self.GetRecord(datointerno, nombre)
 			elif not self.GetRecord(datointerno):
-				Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+				Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 				todobien = False
 		else:
 			Mensajes().Error(self, u"No hay nada que editar", u"Error")
@@ -10066,7 +10067,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 					#nombre = ctrl.GetValue().strip()
 					#if self.ExisteProspecto(nombre):
 						#if Mensajes().YesNo(self, u"Ya existe el prospecto: %s\n\n" \
-											#u"¿ Desea localizarlo ?" % nombre, u"Confirmación"):
+											#u"ï¿½ Desea localizarlo ?" % nombre, u"Confirmaciï¿½n"):
 							#ctrl.SetValue("")
 							#self.GetControl(ID_TEXTCTRLPROSPECTONOMBREFILTRO).SetValue(str(nombre.encode("iso8859-1")))
 							#return True
@@ -10087,7 +10088,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 					                                       self.GetControl(ID_CHECKBOXPROSPECTOHIPOTECARIA).IsChecked()):
 						self.NewFlag = False
 					else:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato requerido * en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato requerido * en blanco !", u"Atenciï¿½n")
 						return False
 					
 		id = self.controlactual
@@ -10157,13 +10158,13 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 		if idprospecto.strip() == "" :
 			bienGrabado, self.idprospecto, self.prospecto = self.AddRecord()
 			if not bienGrabado:
-				Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+				Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			else:
 				self.NuevoProspectoAgregado()
 		else:
 			bienGrabado, self.idprospecto = self.UpdateRecord()
 			if not bienGrabado:
-				Mensajes().Info(self,u"¡ El Registro no fue actualizado !", u"Atención")
+				Mensajes().Info(self,u"ï¿½ El Registro no fue actualizado !", u"Atenciï¿½n")
 		if bienGrabado:
 			self.ChangeNoteBook()
 			if (self.usuario in self.usuariorestringido) and (self.usuario not in self.vendedores) and \
@@ -10215,8 +10216,8 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 			return False, 0
 		descripcion = self.GetControl(ID_COMBOPROSPECTOMEDIOPUBLICITARIO).GetValue()
 		if not self.ExisteMedioPublicitario(descripcion):
-			Mensajes().Info(self, u"¡ El medio publicitario %s no existe !\n\n" \
-					u"Si desea agregarlo solicite autorización." % descripcion, u"Atención")
+			Mensajes().Info(self, u"ï¿½ El medio publicitario %s no existe !\n\n" \
+					u"Si desea agregarlo solicite autorizaciï¿½n." % descripcion, u"Atenciï¿½n")
 			return False, 0
 		else:
 			inx = self.GetControl(ID_COMBOPROSPECTOMEDIOPUBLICITARIO).GetSelection()
@@ -10244,9 +10245,9 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
-			""" % (self.BlogGUID, self.usuario, u"Modificación del Prospecto", "", "")
+			""" % (self.BlogGUID, self.usuario, u"Modificaciï¿½n del Prospecto", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal, numero
 	
@@ -10257,7 +10258,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 				gooddate = "'%04d/%02d/%02d'" % (int(fecha_ano), int(fecha_mes), int(fecha_dia))
 				return True, gooddate
 			except:
-				Mensajes().Info(self, u"Problemas con la fecha al agregar el prospecto", u"Atención")
+				Mensajes().Info(self, u"Problemas con la fecha al agregar el prospecto", u"Atenciï¿½n")
 				return False, "Null"
 		else:
 			return True, "Null"
@@ -10305,8 +10306,8 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 			return False, 0
 		descripcion = self.GetControl(ID_COMBOPROSPECTOMEDIOPUBLICITARIO).GetValue()
 		if not self.ExisteMedioPublicitario(descripcion):
-			Mensajes().Info(self, u"¡ El medio publicitario %s no existe !\n\n" \
-					u"Si desea agregarlo solicite autorización." % descripcion, u"Atención")
+			Mensajes().Info(self, u"ï¿½ El medio publicitario %s no existe !\n\n" \
+					u"Si desea agregarlo solicite autorizaciï¿½n." % descripcion, u"Atenciï¿½n")
 			return False, 0
 		else:
 			inx = self.GetControl(ID_COMBOPROSPECTOMEDIOPUBLICITARIO).GetSelection()
@@ -10336,7 +10337,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 			""" % (int(idprospecto), int(idgerente), int(idvendedor))
 			transicion, trash = self.QueryUpdateRecord(sql)
 			if not transicion:
-				Mensajes().Info(self, u"Problemas al actualizar transiciones\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar transiciones\n%s" % sql, u"Atenciï¿½n")
 			sql = "select convert(varchar(100), BlogGUID) from %s where idprospecto = %s" % (self.dbtable, idprospecto)
 			cu = r_cn.cursor()
 			cu.execute(str(sql))
@@ -10350,9 +10351,9 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 				values ('%s', getdate(), '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, "Alta del Prospecto", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 			else:
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		else:
 			idprospecto = 0
 			
@@ -10632,7 +10633,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comentario, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 	def GetEmpresa(self):
 		obj = Parametro(usuario = self.usuario)
@@ -10654,9 +10655,9 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 		self.GetControl(ID_TEXTCTRLMOVTOBANCOFECHARANGO).SetValue("")
 		
 	def OnReconstruirSaldoCuenta(self, event):
-		if Mensajes().YesNo(self,u"¿ Desea realmente reconstruir el saldo de la cuenta ?", u"Confirmación"):
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente reconstruir el saldo de la cuenta ?", u"Confirmaciï¿½n"):
 			self.ReconstruirSaldoCuenta()
-			Mensajes().Info(self, u"¡ Ha finalizado la reconstrucción del saldo de la cuenta !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Ha finalizado la reconstrucciï¿½n del saldo de la cuenta !", u"Atenciï¿½n")
 		
 	def ReconstruirSaldoCuenta(self):
 		wx.BeginBusyCursor()    
@@ -10678,9 +10679,9 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 					cu.execute(str(sql))
 				except:
 					wx.EndBusyCursor()
-					Mensajes().Info(self, u"Sucedió algo que impidió eliminar este registro.\n" \
-					                u"Quizá se deba a que hay otra información\n" \
-					                u"que depende de este registro.\n\n%s" % sql, u"Atención")
+					Mensajes().Info(self, u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+					                u"Quizï¿½ se deba a que hay otra informaciï¿½n\n" \
+					                u"que depende de este registro.\n\n%s" % sql, u"Atenciï¿½n")
 					wx.BeginBusyCursor()    
 			cu.close()
 			
@@ -10731,7 +10732,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 				""" % (self.idbanco, periodo, float(saldoinicial), float(totalabonos), float(totalcargos))
 				if not self.QueryUpdateRecord(sql):
 					wx.EndBusyCursor()
-					Mensajes().Info(self, u"Problemas al actualizar saldos.\n\n%s" % sql, u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar saldos.\n\n%s" % sql, u"Atenciï¿½n")
 					wx.BeginBusyCursor()    
 		self.ObtenerSaldo()
 		wx.EndBusyCursor()    
@@ -10743,17 +10744,17 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 		cantidad = control.GetValue().strip()
 		try:
 			if not float(cantidad) > 0:
-				Mensajes().Info(self, u"¡ La cantidad debe ser mayor a cero !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ La cantidad debe ser mayor a cero !", u"Atenciï¿½n")
 				control.SetValue("")
 				control.SetSelection(-1,-1)
 				return
 		except:
-			Mensajes().Info(self, u"¡ Digite correctamente la cantidad !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Digite correctamente la cantidad !", u"Atenciï¿½n")
 			control.SetValue("")
 			control.SetSelection(-1,-1)
 			return
 		if not self.NewFlag:
-			if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+			if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 				self.SaveRecord()
 				self.GetControl(ID_BUTTONMOVTOBANCOAGREGAR).Enable(True)
 				self.GetControl(ID_BUTTONMOVTOBANCOAGREGAR).SetFocus()
@@ -10804,7 +10805,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 		self.LCtrl()
 		if self.eliminado == "S" or self.clasificado == "S":
 			Mensajes().Info(self, u"Recuerde que un registro eliminado o clasificado\n" \
-							u"no puede ser editado.", u"Atención")
+							u"no puede ser editado.", u"Atenciï¿½n")
 		else:
 			if wx.Platform == '__WXMSW__':
 				self.ActiveNoteBook(ID_NOTEBOOKMOVTOBANCOFORM, ID_NOTEBOOKMOVTOBANCOLISTCTRL, 785, 327)
@@ -10917,7 +10918,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 						control.SetBackgroundColour(wx.Colour(153,255,153))
 						control.SetForegroundColour(wx.NamedColour("BLACK"))
 						control.SetValue("0.00")
-						Mensajes().Info(self, u"¡ La Fecha Inicial no debe ser mayor a la Fecha Final !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La Fecha Inicial no debe ser mayor a la Fecha Final !", u"Atenciï¿½n")
 						return
 					else:
 						fechamovto = "and (bm.fechamovto >= %s and bm.fechamovto <= %s)" % (fechainicial, fechafinal)
@@ -11057,8 +11058,8 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 			self.NewFlag = False
 			self.Text(True)
 			if not self.NewFlag:
-				if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?", \
-						    u"Confirmación"):
+				if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?", \
+						    u"Confirmaciï¿½n"):
 					self.SaveRecord()
 					
 		if self.datointernoynombre:
@@ -11071,7 +11072,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 			if self.eliminado == "N" and self.clasificado == "N":
 				self.GetControl(ID_BUTTONMOVTOBANCOELIMINARLISTCTRL).Enable(True)
 		else:
-			Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+			Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		
 	def GetLFRecord(self, what):
 		lctrl = self.GetControl(self.listctrl)
@@ -11113,33 +11114,33 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 			if valor == "" and not self.FillingARecord and not self.NewFlag:
 				self.NewFlag = True
 				if not VengodelaLista:
-					Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 					return
 			if id == ID_TEXTCTRLMOVTOBANCOCANTIDAD:
 				cantidad = control.GetValue().strip()
 				if cantidad != "":
 					if str(cantidad)[-1:] != ".":
 						if not str(cantidad)[-1:].isdigit():
-							Mensajes().Info(self, u"¡ La cantidad debe ser numérica !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ La cantidad debe ser numï¿½rica !", u"Atenciï¿½n")
 							control.SetValue(str(cantidad)[:-1])
 							control.SetSelection(-1,-1)
 							return
 						else:
 							try:
 								if not float(cantidad) > 0 and len(str(cantidad)) > 2:
-									Mensajes().Info(self, u"¡ La cantidad debe ser igual o mayor a .01 !", u"Atención")
+									Mensajes().Info(self, u"ï¿½ La cantidad debe ser igual o mayor a .01 !", u"Atenciï¿½n")
 									control.SetValue("")
 									control.SetSelection(-1,-1)
 									return
 							except:
-								Mensajes().Info(self, u"¡ Digite correctamente la cantidad !", u"Atención")
+								Mensajes().Info(self, u"ï¿½ Digite correctamente la cantidad !", u"Atenciï¿½n")
 								control.SetValue("")
 								control.SetSelection(-1,-1)
 								return
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ La cantidad no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La cantidad no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 
 			if id == ID_TEXTCTRLMOVTOBANCOREFERENCIA:
@@ -11147,7 +11148,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 				valor = ctrl.GetValue().encode("iso8859-1")
 				valornum = str(valor).replace('.','')
 				if valor and not valornum.isdigit():
-					if valor not in (",", ".", "#", "&", "!", "¡", "?", "¿", "/", "(", ")", "$", "'"):
+					if valor not in (",", ".", "#", "&", "!", "ï¿½", "?", "ï¿½", "/", "(", ")", "$", "'"):
 						if not str(valor).isupper():
 							ctrl.SetValue(str(valor).upper())
 							lastposition = ctrl.GetLastPosition()
@@ -11171,7 +11172,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 		self.ChoiceControl(ID_CHOICEMOVTOBANCOESTATUS)
 		
 	def ObtenerEmpresa(self, empresaid):
-		""" Obtener de base de datos la razón social de la empresa
+		""" Obtener de base de datos la razï¿½n social de la empresa
 		"""
 		query = """
 		select RazonSocial + ' - ' + convert(varchar(7), EmpresaID)
@@ -11186,11 +11187,11 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 				self.SetTitle(self.GetStringFromField(row[0]),)
 			else:
 				Mensajes().Info(self, u"No se ha encontrado la empresa de trabajo.\n" \
-								u"Por favor abandone este módulo y verifique.", u"Atención")
+								u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 		except:
 			cu.close()
 			Mensajes().Info(self, u"Se estan experimentando problemas.\n" \
-							u"Por favor abandone este módulo y verifique.\n\n%s" % query, u"Atención")
+							u"Por favor abandone este mï¿½dulo y verifique.\n\n%s" % query, u"Atenciï¿½n")
 		
 	def ObtenerBanco(self, idbanco):
 		""" Obtener de base de datos el nombre del banco
@@ -11335,7 +11336,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 				#self.ObtenerSaldo()
 				self.ReconstruirSaldoCuenta()
 			else:
-				Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+				Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 		else:
 			bienGrabado, self.idrefmovto = self.UpdateRecord()
 			if bienGrabado:
@@ -11343,7 +11344,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 					#self.ObtenerSaldo()
 					self.ReconstruirSaldoCuenta()
 			else:
-				Mensajes().Info(self,u"¡ El Registro no fue actualizado !", u"Atención")
+				Mensajes().Info(self,u"ï¿½ El Registro no fue actualizado !", u"Atenciï¿½n")
 		if bienGrabado:
 			lctrl = self.GetControl(ID_LISTCTRLMOVTOBANCO)
 			lctrl.SetItemState(self.ctrlindex, wx.LIST_STATE_SELECTED, wx.LIST_STATE_SELECTED)
@@ -11364,7 +11365,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 			fechamovto = "'%04d/%02d/%02d'" % (fecha_ano, fecha_mes, fecha_dia)
 			periodo = "'%04d/%02d/01'" % (fecha_ano, fecha_mes)
 		except:
-			Mensajes().Info(self, u"Problemas con la fecha al actualizar movimientos", u"Atención")
+			Mensajes().Info(self, u"Problemas con la fecha al actualizar movimientos", u"Atenciï¿½n")
 			return False, 0
 		
 		tipomovto = self.GetControl(ID_CHOICEMOVTOBANCOTIPOMOVIMIENTO).GetStringSelection()
@@ -11395,9 +11396,9 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
-			""" % (self.BlogGUID, self.usuario, u"Modificación del Movimiento", "", "")
+			""" % (self.BlogGUID, self.usuario, u"Modificaciï¿½n del Movimiento", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal, numero
 		
@@ -11412,7 +11413,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 			fechamovto = "'%04d/%02d/%02d'" % (fecha_ano, fecha_mes, fecha_dia)
 			periodo = "'%04d/%02d/01'" % (fecha_ano, fecha_mes)
 		except:
-			Mensajes().Info(self, u"Problemas con la fecha al agregar movimientos", u"Atención")
+			Mensajes().Info(self, u"Problemas con la fecha al agregar movimientos", u"Atenciï¿½n")
 			return False, 0
 		tipomovto = self.GetControl(ID_CHOICEMOVTOBANCOTIPOMOVIMIENTO).GetStringSelection()
 		if tipomovto == "CARGO":
@@ -11459,7 +11460,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, "Alta del Movimiento", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 
 		return queTal, int(numero)
 	
@@ -11508,7 +11509,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 				""" % (float(totalabonos), float(totalcargos), self.idbanco, periodo)
 				updateok = self.QueryUpdateRecord(sql)
 		except:
-			Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atenciï¿½n")
 			updateok = False
 			
 		updateok = self.UpdateInitialBankBalances(fecha_mes, fecha_ano, saldosiguienteperiodo)
@@ -11557,11 +11558,11 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 						break
 				except:
 					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n%s" \
-							% sql, u"Atención")
+							% sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 			
 		return todobien, saldo
@@ -11614,25 +11615,25 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 							break
 				except:
 					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n%s" \
-							% sql, u"Atención")
+							% sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar último periodo\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar ï¿½ltimo periodo\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 		
 		return todobien
 	
 	def OnDeleteRecord(self, event):
 		id = self.GetControl(ID_TEXTCTRLMOVTOBANCOID).GetValue()
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?" % id, u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?" % id, u"Confirmaciï¿½n") :
 			if self.DeleteRecord():
 				sql = """
 				insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 				values ('%s', getdate(), '%s', '%s', '%s', '%s')
-				""" % (self.BlogGUID, self.usuario, u"Eliminación del Movimiento", "", "")
+				""" % (self.BlogGUID, self.usuario, u"Eliminaciï¿½n del Movimiento", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					
 				fechaanterior = self.originales[ID_TEXTCTRLMOVTOBANCOFECHAMOVTO]
 				dia_anterior, mes_anterior, ano_anterior = fechaanterior.split('/')
@@ -11659,7 +11660,7 @@ class GixMovimientosBancos(wx.Frame, GixBase, GixBaseListCtrl):
 	def DeleteRecord(self):
 		idreferenciamovto = self.idreferenciamovto.GetValue().strip()
 		if idreferenciamovto == "":
-			Mensajes().Info(self, u"No se ha especificado el movimiento", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el movimiento", u"Atenciï¿½n")
 			return False
 		sql = "update %s set eliminado = 'S' where idreferenciamovto = %s" % (self.dbtable, idreferenciamovto)
 		return self.QueryUpdateRecord(sql)
@@ -11812,7 +11813,7 @@ class GixIngresosClasificacion(wx.Frame, GixBase, GixBaseListCtrl):
 			self.SetStatusWidths(anchos)
 			self.SetStatusText(u"Recursos Financieros", 0)
 			self.SetStatusText(u"Ingresos", 1)
-			self.SetStatusText(u"Clasificación", 2)
+			self.SetStatusText(u"Clasificaciï¿½n", 2)
 			
 		def InitialValues(usuario):
 			self.InitialFlags()
@@ -11902,9 +11903,9 @@ class GixIngresosClasificacion(wx.Frame, GixBase, GixBaseListCtrl):
 					cu.execute(str(sql))
 				except:
 					wx.EndBusyCursor()    
-					Mensajes().Info(self, u"Sucedió algo que impidió eliminar este registro.\n" \
-					                u"Quizá se deba a que hay otra información\n" \
-					                u"que depende de este registro.\n\n%s" % sql, u"Atención")
+					Mensajes().Info(self, u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+					                u"Quizï¿½ se deba a que hay otra informaciï¿½n\n" \
+					                u"que depende de este registro.\n\n%s" % sql, u"Atenciï¿½n")
 					wx.BeginBusyCursor()    
 			cu.close()
 		sql = """
@@ -11953,7 +11954,7 @@ class GixIngresosClasificacion(wx.Frame, GixBase, GixBaseListCtrl):
 				""" % (self.idbanco, periodo, float(saldoinicial), float(totalabonos), float(totalcargos))
 				if not self.QueryUpdateRecord(sql):
 					wx.EndBusyCursor()
-					Mensajes().Info(self, u"Problemas al actualizar saldos.\n\n%s" % sql, u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar saldos.\n\n%s" % sql, u"Atenciï¿½n")
 					wx.BeginBusyCursor()    
 		wx.EndBusyCursor()    
 		
@@ -12192,8 +12193,8 @@ class GixIngresosClasificacion(wx.Frame, GixBase, GixBaseListCtrl):
 			finicial = "%s%s%s" % (int(anoi), int(mesi), int(diai))
 			ffinal = "%s%s%s" % (int(anof), int(mesf), int(diaf))
 			if finicial > ffinal:
-				Mensajes().Info(self, u"¡ Por favor revise el rango de fechas !\n\n" \
-								u"La fecha inicial no debe ser mayor a la fecha final.", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Por favor revise el rango de fechas !\n\n" \
+								u"La fecha inicial no debe ser mayor a la fecha final.", u"Atenciï¿½n")
 				bool = False
 				
 		if bool:
@@ -12217,9 +12218,9 @@ class GixIngresosClasificacion(wx.Frame, GixBase, GixBaseListCtrl):
 			cantidad = float(row[0])
 			referencia = str(row[1])
 		else:
-			Mensajes().Info(self,"Problemas con \n%s" % sql, u"Atención")
+			Mensajes().Info(self,"Problemas con \n%s" % sql, u"Atenciï¿½n")
 			return
-		frame = GixIngPersonalizarConciliacion(self, -1, u"Conciliación", wx.Point(20,20), wx.Size(965,420),
+		frame = GixIngPersonalizarConciliacion(self, -1, u"Conciliaciï¿½n", wx.Point(20,20), wx.Size(965,420),
 							empresaid = self.empresaid, idreferenciamovto = self.datointerno,
 							cantidad = cantidad, referencia = referencia, actualizapartidas = True,
 							usuario = self.usuario, refreshlistctrl = self.FillListCtrl)
@@ -12307,8 +12308,8 @@ class GixIngresosClasificacion(wx.Frame, GixBase, GixBaseListCtrl):
 				fechafiltro = ""
 		else:
 			if Mensajes().YesNo(self, u"No ha introducido la fecha de ingreso, por lo tanto,\n" \
-								u"se mostrarán todos los abonos no clasificados.\n\n" \
-								u"¿ Desea continuar ?", u"Confirmación"):
+								u"se mostrarï¿½n todos los abonos no clasificados.\n\n" \
+								u"ï¿½ Desea continuar ?", u"Confirmaciï¿½n"):
 				pass
 			else:
 				sigue = False
@@ -12327,7 +12328,7 @@ class GixIngresosClasificacion(wx.Frame, GixBase, GixBaseListCtrl):
 				w = 490; h = 560
 			else:
 				w = 570; h = 550
-			frame = GixElegirMovimientoBanco(self, -1, u"Clasificación", wx.Point(20,20), wx.Size(w,h),
+			frame = GixElegirMovimientoBanco(self, -1, u"Clasificaciï¿½n", wx.Point(20,20), wx.Size(w,h),
 											 usuario = self.usuario, empresaid = self.empresaid, idbanco = self.idbanco,
 											 fechafiltro = fechafiltro, partidastit = partidastit,
 											 idbancoorigen = idbancoorigen, subsidio = subsidio,
@@ -12456,7 +12457,7 @@ class GixIngresosClasificacion(wx.Frame, GixBase, GixBaseListCtrl):
 		elif self.GetRecord(self.datointerno):
 			pass
 		else:
-			Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+			Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		
 	def GetLFRecord(self, what):
 		lctrl = self.GetControl(self.idlc)
@@ -12494,24 +12495,24 @@ class GixIngresosClasificacion(wx.Frame, GixBase, GixBaseListCtrl):
 		self.GetControl(self.activecontrolafternewrecord).SetFocus()
 			
 	def OnDeleteRecord(self, event):
-		Mensajes().Info(self, u"¡ Opción deshabilitada, no es posible eliminar !", u"Atención")
+		Mensajes().Info(self, u"ï¿½ Opciï¿½n deshabilitada, no es posible eliminar !", u"Atenciï¿½n")
 		return
 		#id = self.idrefmovto
-		#if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?" % id, u"Confirmación") :
+		#if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?" % id, u"Confirmaciï¿½n") :
 			#if self.DeleteRecord(id):
 				#sql = """
 				#insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 				#values ('%s', getdate(), '%s', '%s', '%s', '%s')
-				#""" % (self.BlogGUID, self.usuario, u"Eliminación del Ingreso", "", "")
+				#""" % (self.BlogGUID, self.usuario, u"Eliminaciï¿½n del Ingreso", "", "")
 				#if not self.QueryUpdateRecord(sql):
-					#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 				#self.FillListCtrl()
 				#self.GetControl(self.idbtagregarlc).Enable(True)
 		#self.GetControl(self.idlc).SetFocus()
 				
 	def DeleteRecord(self, id):
 		if id == "" or self.cantidadeliminar > -1:
-			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atenciï¿½n")
 			return False
 
 		if self.DeleteRecordAndBalance(id):
@@ -12566,7 +12567,7 @@ class GixElegirMovimientoBanco(wx.Frame, GixBase, GixBaseListCtrl):
 			self.SetStatusWidths(anchos)
 			self.SetStatusText(u"Recursos Financieros", 0)
 			self.SetStatusText(u"Abonos al Banco", 1)
-			self.SetStatusText(u"Clasificación", 2)
+			self.SetStatusText(u"Clasificaciï¿½n", 2)
 			
 		def InitialValues():
 			self.usuario = usuario
@@ -12694,9 +12695,9 @@ class GixElegirMovimientoBanco(wx.Frame, GixBase, GixBaseListCtrl):
 			self.Bind(wx.EVT_MENU, self.OnPersonalizarConciliacion, id=ID_PERSONALIZARCONCILIACION)
 			self.Bind(wx.EVT_MENU, self.OnViewHelp, id=ID_VIEWHELP)
 		popup = wx.Menu()
-		popup.Append(ID_PERSONALIZARCONCILIACION, u"Personalizar la Afectación de Partidas del Ingreso %s" % self.datointerno)
+		popup.Append(ID_PERSONALIZARCONCILIACION, u"Personalizar la Afectaciï¿½n de Partidas del Ingreso %s" % self.datointerno)
 		popup.AppendSeparator()
-		popup.Append(ID_VIEWHELP, u"¿ Como Elegir Registro(s) ?")
+		popup.Append(ID_VIEWHELP, u"ï¿½ Como Elegir Registro(s) ?")
 		self.PopupMenu(popup)
 		popup.Destroy()
 		
@@ -12712,22 +12713,22 @@ class GixElegirMovimientoBanco(wx.Frame, GixBase, GixBaseListCtrl):
 			cantidad = float(row[0])
 			referencia = str(row[1])
 		else:
-			Mensajes().Info(self,"Problemas con \n%s" % sql, u"Atención")
+			Mensajes().Info(self,"Problemas con \n%s" % sql, u"Atenciï¿½n")
 			return
-		frame = GixIngPersonalizarConciliacion(self, -1, "Conciliación", wx.Point(20,20), wx.Size(965,420),
+		frame = GixIngPersonalizarConciliacion(self, -1, "Conciliaciï¿½n", wx.Point(20,20), wx.Size(965,420),
 											   empresaid = self.empresaid, idreferenciamovto = self.datointerno,
 											   cantidad = cantidad, referencia = referencia, actualizapartidas = False)
 		frame.Centre(wx.BOTH)
 		frame.Show(True)
 		
 	def OnViewHelp(self, event):
-		Mensajes().Info(self, u"Un Registro.- De un clic izquierdo del mouse (ratón) sobre el registro.\n\n" \
+		Mensajes().Info(self, u"Un Registro.- De un clic izquierdo del mouse (ratï¿½n) sobre el registro.\n\n" \
 						u"Varios Registros Continuos.- Elija el primer registro con un clic izquierdo\n" \
-						u"del mouse (ratón), sostenga presionada la tecla shift y de otro clic\n" \
-						u"izquierdo del mouse (ratón) sobre el último registro elegido.\n\n" \
+						u"del mouse (ratï¿½n), sostenga presionada la tecla shift y de otro clic\n" \
+						u"izquierdo del mouse (ratï¿½n) sobre el ï¿½ltimo registro elegido.\n\n" \
 						u"Varios Registros Salteados.- Elija el primer registro con un clic izquierdo\n" \
-						u"del mouse (ratón), sostenga presionada la tecla ctrl y de clic izquierdo\n" \
-						u"del mouse (ratón) sobre los registros deseados.", u"Como Elegir Registro(s)")
+						u"del mouse (ratï¿½n), sostenga presionada la tecla ctrl y de clic izquierdo\n" \
+						u"del mouse (ratï¿½n) sobre los registros deseados.", u"Como Elegir Registro(s)")
 		
 	def CheckSelectedList(self):
 		ctrl1 = self.GetControl(self.applylistctrlbtn)
@@ -12742,13 +12743,13 @@ class GixElegirMovimientoBanco(wx.Frame, GixBase, GixBaseListCtrl):
 		if len(self.selecteditems) > 1: char = "s"
 		else: char = ""
 		if Mensajes().YesNo(self,u"Movimiento%s a clasificar:\n%s\n\n" \
-							u"¿ Desea realmente llevar a cabo la clasificación ?" \
-							% (char, self.selecteditems), u"Confirmación"):
+							u"ï¿½ Desea realmente llevar a cabo la clasificaciï¿½n ?" \
+							% (char, self.selecteditems), u"Confirmaciï¿½n"):
 			self.Apply()
 			self.FillListCtrl()
 			self.GetControl(self.applylistctrlbtn).Enable(False)
 			self.GetControl(self.partidaslistctrlbtn).Enable(False)
-			Mensajes().Info(self, u"Clasificación finalizada", u"Aviso")
+			Mensajes().Info(self, u"Clasificaciï¿½n finalizada", u"Aviso")
 			
 		self.GetControl(self.idlc).SetFocus()
 	
@@ -12839,7 +12840,7 @@ class GixElegirMovimientoBanco(wx.Frame, GixBase, GixBaseListCtrl):
 				sqlencoded = sql.encode("iso8859-1")
 				cu.execute(sqlencoded)
 			except:
-				Mensajes().Info(self,"Problemas con \n%s" % sql, u"Atención")
+				Mensajes().Info(self,"Problemas con \n%s" % sql, u"Atenciï¿½n")
 				return False
 		
 			if not self.UpdateBalance(cu, fechaingreso, cantidad, partidaid = self.PartidaID, tipomovto = 'A'):
@@ -12852,7 +12853,7 @@ class GixElegirMovimientoBanco(wx.Frame, GixBase, GixBaseListCtrl):
 			sqlencoded = sql.encode("iso8859-1")
 			cu.execute(sqlencoded)
 		except:
-			Mensajes().Info(self,"Problemas con\n%s" % sql, u"Atención")
+			Mensajes().Info(self,"Problemas con\n%s" % sql, u"Atenciï¿½n")
 			return False
 		
 		BlogGUID = blogbanco
@@ -12872,7 +12873,7 @@ class GixElegirMovimientoBanco(wx.Frame, GixBase, GixBaseListCtrl):
 			cu.execute(sqlencoded)
 			return True
 		except:
-			Mensajes().Info(self, u"Problemas al actualizar el blog\n%s" % sqlencoded, u"Atención")
+			Mensajes().Info(self, u"Problemas al actualizar el blog\n%s" % sqlencoded, u"Atenciï¿½n")
 			return False
 		
 class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
@@ -12956,7 +12957,7 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 			self.actualizapartidas = actualizapartidas
 			self.usuario = usuario
 			self.refreshlistctrl = refreshlistctrl
-			self.SetTitle(u"Personalizando la Afectación de Partidas del Ingreso %s - Referencia %s" \
+			self.SetTitle(u"Personalizando la Afectaciï¿½n de Partidas del Ingreso %s - Referencia %s" \
 						  % (self.idreferenciamovto, self.referencia.decode("iso8859-1")))
 			self.GetControl(self.idtxempresa).SetLabel(self.ObtenerEmpresa())
 			cantidadaconciliar = u"Ingreso a Clasificar $ %s" % str(amount_and_cents_with_commas(self.cantidadconciliar))
@@ -13016,19 +13017,19 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 			if totalpartidas != cantidadconciliar:
 				totalpartidasaux = str(amount_and_cents_with_commas(self.totalpartidas))
 				cantidadconciliaraux = str(amount_and_cents_with_commas(self.cantidadconciliar))
-				Mensajes().Info(self, u"¡ Por favor cuadre las partidas y el ingreso !\n\n" \
+				Mensajes().Info(self, u"ï¿½ Por favor cuadre las partidas y el ingreso !\n\n" \
 								u"El total de las partidas $ %s no es igual al total del ingreso $ %s" \
-								% (totalpartidasaux, cantidadconciliaraux), u"Atención")
+								% (totalpartidasaux, cantidadconciliaraux), u"Atenciï¿½n")
 				return
 		elif self.actualizapartidas:
 			if self.DesclasificaIngreso():
-				Mensajes().Info(self, u"El ingreso no afecta a ningúna partida, por lo tanto,\n" \
+				Mensajes().Info(self, u"El ingreso no afecta a ningï¿½na partida, por lo tanto,\n" \
 								u"ha quedado desclasificado.\n\n" \
 								u"Si desea volver a clasificar el ingreso, lleve a cabo\n" \
-								u"el procedimiento normal de clasificación.", u"Atención")
+								u"el procedimiento normal de clasificaciï¿½n.", u"Atenciï¿½n")
 				self.refreshlistctrl()
 			else:
-				Mensajes().Info(self, u"¡ Se experimentaron problemas al desclasificar el ingreso !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Se experimentaron problemas al desclasificar el ingreso !", u"Atenciï¿½n")
 		self.Destroy()
 		
 	def DesclasificaIngreso(self):
@@ -13046,16 +13047,16 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 			cu.execute(sqlencoded)
 			cu.close()
 		except:
-			Mensajes().Info(self,"Problemas con\n%s" % sql, u"Atención")
+			Mensajes().Info(self,"Problemas con\n%s" % sql, u"Atenciï¿½n")
 			cu.close()
 			return False
-		contenido = u"Desclasificación"
+		contenido = u"Desclasificaciï¿½n"
 		sql = """
 		insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 		values ('%s', getdate(), '%s', '%s', '%s', '%s')
 		""" % (blog, self.usuario, contenido, "", "")
 		if not self.QueryUpdateRecord(sql):
-			Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+			Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		return True
 		
 	def AgregarPartidas(self):
@@ -13227,10 +13228,10 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 		if not self.NewFlag:
 			if 1 in (self.partidaafectable, self.subpartida1afectable, self.subpartida2afectable, \
 					 self.subpartida3afectable, self.subpartida4afectable, self.subpartida5afectable):
-				if Mensajes().YesNo(self, u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+				if Mensajes().YesNo(self, u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 					return True
 			else:
-				Mensajes().Info(self, u"¡ Por favor revise la partida o subpartida que desea afectar !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Por favor revise la partida o subpartida que desea afectar !", u"Atenciï¿½n")
 				return False
 		return False
 
@@ -13292,20 +13293,20 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 		update gixingresospartidas set %s where idingresopartida = %s
 		""" % (sqllist, self.idingresopartida)
 		if not self.QueryUpdateRecord(sql):
-			Mensajes().Info(self, u"Sucedió algo que impidió actualizar la partida %s\n\n%s" \
-							% (self.idingresopartida, sql), u"Atención")
+			Mensajes().Info(self, u"Sucediï¿½ algo que impidiï¿½ actualizar la partida %s\n\n%s" \
+							% (self.idingresopartida, sql), u"Atenciï¿½n")
 		elif self.actualizapartidas:
 			partidas = [int(self.partida), int(self.subpartida1), int(self.subpartida2), int(self.subpartida3),
 						int(self.subpartida4), int(self.subpartida5)]
 			partidaid = self.ObtenerPartidaUpdate(partidas)
 			self.UpdateBalance(cu, fechaingreso, cantidad, partidaid, tipomovto)
-			contenido = u"Edición de la partida %s" % self.idingresopartida
+			contenido = u"Ediciï¿½n de la partida %s" % self.idingresopartida
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (blog, self.usuario, contenido, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		cu.close()
 		wx.EndBusyCursor()
 	
@@ -13352,7 +13353,7 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 				values ('%s', getdate(), '%s', '%s', '%s', '%s')
 				""" % (blog, self.usuario, contenido, "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 			return True
 		else:
 			return False
@@ -13364,11 +13365,11 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 		row = fetchone(cu)[0]
 		cu.close()
 		if int(row) > 0:
-			if Mensajes().YesNo(self,u"¿ Desea realmente eliminar la partida %s ?" % self.idingresopartida, u"Confirmación"):
+			if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar la partida %s ?" % self.idingresopartida, u"Confirmaciï¿½n"):
 				if self.EliminarPartida():
 					self.FillListCtrlPartidas()
 		else:
-			Mensajes().Info(self, u"¡ No hay partida que afectar !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No hay partida que afectar !", u"Atenciï¿½n")
 			
 	def EliminarPartida(self, update = False):
 		if self.actualizapartidas:
@@ -13396,18 +13397,18 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 			r_cn.commit()
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self, u"Sucedió algo que impidió eliminar la partida %s\n\n%s" \
-							% (self.idingresopartida, sql), u"Atención")
+			Mensajes().Info(self, u"Sucediï¿½ algo que impidiï¿½ eliminar la partida %s\n\n%s" \
+							% (self.idingresopartida, sql), u"Atenciï¿½n")
 			return False
 		
 		if self.actualizapartidas:
-			contenido = u"Eliminación de la partida %s" % self.idingresopartida
+			contenido = u"Eliminaciï¿½n de la partida %s" % self.idingresopartida
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (blog, self.usuario, contenido, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		return True
 	
 	def OnLCtrlPartidas(self, event):
@@ -13443,7 +13444,7 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 				self.EditRecord()
 				self.RevisaCambios()
 		else:
-			Mensajes().Info(self, u"No se encontro la partida elegida\n\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"No se encontro la partida elegida\n\n%s" % sql, u"Atenciï¿½n")
 
 	def FillListCtrlPartidas(self, display = 'first'):
 		wx.BeginBusyCursor()
@@ -13719,7 +13720,7 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 			if valor == "" and not self.FillingARecord and not self.NewFlag and not self.inicio:
 				self.NewFlag = True
 				if not VengodelaLista:
-					Mensajes().Info(self, u"¡ No debe quedar ningún dato requerido * en blanco !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato requerido * en blanco !", u"Atenciï¿½n")
 					return
 			if id == self.idtccantidad:
 				cantidad = control.GetValue().strip()
@@ -13727,14 +13728,14 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 					try:
 						if str(cantidad)[-1:] != ".":
 							if not str(cantidad)[-1:].isdigit():
-								Mensajes().Info(self, u"¡ La cantidad debe ser numérica !", u"Atención")
+								Mensajes().Info(self, u"ï¿½ La cantidad debe ser numï¿½rica !", u"Atenciï¿½n")
 								control.SetValue(str(cantidad)[:-1])
 								control.SetSelection(-1,-1)
 								return
 							else:
 								self.GetControl(self.idtxcantidad).SetLabel(str(c2p(cantidad).texto()))
 					except:
-						Mensajes().Info(self, u"¡ La cantidad debe ser numérica !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La cantidad debe ser numï¿½rica !", u"Atenciï¿½n")
 						control.SetValue("")
 						control.SetSelection(-1,-1)
 						return
@@ -13743,19 +13744,19 @@ class GixIngPersonalizarConciliacion(wx.Frame, GixBase, GixBaseListCtrl):
 					if not self.FillingARecord and not self.NewFlag:
 						self.NewFlag = True
 						if not VengodelaLista:
-							Mensajes().Info(self, u"¡ La cantidad no debe quedar en blanco !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ La cantidad no debe quedar en blanco !", u"Atenciï¿½n")
 							return
 		if id == self.idtcnumeromovimientos:
 			movimientos = control.GetValue().strip()
 			if movimientos != "":
 				try:
 					if not str(movimientos)[-1:].isdigit():
-						Mensajes().Info(self, u"¡ El número de movimientos debe ser numérico !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El nï¿½mero de movimientos debe ser numï¿½rico !", u"Atenciï¿½n")
 						control.SetValue(str(movimientos)[:-1])
 						control.SetSelection(-1,-1)
 						return
 				except:
-					Mensajes().Info(self, u"¡ El número de movimientos debe ser numérico !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ El nï¿½mero de movimientos debe ser numï¿½rico !", u"Atenciï¿½n")
 					control.SetValue("")
 					control.SetSelection(-1,-1)
 					return
@@ -13951,7 +13952,7 @@ class GixElegirFirmantes(wx.Dialog, GixBase):
 						else:
 							contenido += ", " + str(row[0])
 				else:
-					Mensajes().Info(self, u"¡ Problemas al buscar firmantes !\n\n%s" % sql, u"Atención")
+					Mensajes().Info(self, u"ï¿½ Problemas al buscar firmantes !\n\n%s" % sql, u"Atenciï¿½n")
 					continua = False
 			else:
 				sql = """
@@ -13964,10 +13965,10 @@ class GixElegirFirmantes(wx.Dialog, GixBase):
 				if row is not None:
 					contenido = "FIRMA CHEQUE: " + str(row[0])
 				else:
-					Mensajes().Info(self, u"¡ Problemas al buscar firmante !\n\n%s" % sql, u"Atención")
+					Mensajes().Info(self, u"ï¿½ Problemas al buscar firmante !\n\n%s" % sql, u"Atenciï¿½n")
 					continua = False
 		else:
-			Mensajes().Info(self, u"¡ Debe elegir al menos un firmante !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Debe elegir al menos un firmante !", u"Atenciï¿½n")
 			continua = False
 		
 		if continua:
@@ -13988,7 +13989,7 @@ class GixElegirFirmantes(wx.Dialog, GixBase):
 						values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 						""" % (str(row[0]), self.usuario, contenido, "", "", "M")
 						if not self.QueryUpdateRecord(sql):
-							Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+							Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 			else:
 				sql = """
 				select convert(varchar(100), BlogGUID) from gixegresoscheques
@@ -14005,7 +14006,7 @@ class GixElegirFirmantes(wx.Dialog, GixBase):
 					values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 					""" % (str(row[0]), self.usuario, contenido, "", "", "M")
 					if not self.QueryUpdateRecord(sql):
-						Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+						Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 						
 			self.Destroy()
 		
@@ -14015,14 +14016,14 @@ class GixElegirDocumento(wx.Dialog, GixBase):
 		
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		if cliente == None:
-			Mensajes().Info(self, u"¡ Busqueda cancelada !\n\nSe experimentaron problemas al iniciar la busqueda.", \
-							u"Atención")
+			Mensajes().Info(self, u"ï¿½ Busqueda cancelada !\n\nSe experimentaron problemas al iniciar la busqueda.", \
+							u"Atenciï¿½n")
 			self.Destroy()
 		self.DocumentoElegido = documentoelegido
 		self.cliente = cliente
 		self.codigodocumento = []
 		ElegirDocumento(self, True)
-		titulo = u"Elegir Documento para la Devolución de Saldo a Favor del Cliente:  %s" % nombrecliente
+		titulo = u"Elegir Documento para la Devoluciï¿½n de Saldo a Favor del Cliente:  %s" % nombrecliente
 		self.SetTitle(titulo)
 		self.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelected, id = ID_LISTCTRLELEGIRDOCUMENTO)
 		self.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.OnDeselected, id = ID_LISTCTRLELEGIRDOCUMENTO)
@@ -14447,7 +14448,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			self.launch = False
 			self.ToggleMultichequeSolicitud("Multicheque", "Aplicar un Cheque a Varias Solicitudes", False, 1, True)
 			self.launch = True
-			self.ToggleFondeoSolicitud("Fondeo", u"Fondeo y Proyección", False, 1, True)
+			self.ToggleFondeoSolicitud("Fondeo", u"Fondeo y Proyecciï¿½n", False, 1, True)
 			self.GetControl(self.idtxconciliarmovimientosbanco).Show(False)
 			self.GetControl(self.idtxconciliarsolicitudescheques).Show(False)
 			self.GetControl(self.idtcconciliarmovimientosbanco).Show(False)
@@ -14503,9 +14504,9 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 				dlg.CenterOnParent()
 				dlg.Show(True)
 			else:
-				Mensajes().Info(self, u"¡ No se encontro el cliente (beneficiario) !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontro el cliente (beneficiario) !", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"¡ Por favor elija el cliente (beneficiario) !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor elija el cliente (beneficiario) !", u"Aviso")
 	
 	def DocumentoElegido(self, codigodocumento):
 		todook = False; concepto = ""; saldototal = 0; self.codigodocumento = []
@@ -14530,13 +14531,13 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			for row in rows:
 				if row[9]:
 					if self.idcheque != int(row[9]):
-						Mensajes().Info(self, u"¡ El documento %s ya fué asignado a la solicitud %s !"
-										% (int(row[1]), int(row[9])), u"Atención")
+						Mensajes().Info(self, u"ï¿½ El documento %s ya fuï¿½ asignado a la solicitud %s !"
+										% (int(row[1]), int(row[9])), u"Atenciï¿½n")
 						todook = False
 						break
 				if float(row[5]) != 0:
-					Mensajes().Info(self, u"¡ El saldo del documento %s no se encuentra en cero !"
-									% (int(row[1])), u"Atención")
+					Mensajes().Info(self, u"ï¿½ El saldo del documento %s no se encuentra en cero !"
+									% (int(row[1])), u"Atenciï¿½n")
 					todook = False
 					break
 				
@@ -14595,8 +14596,8 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			else:
 				sql = "update %s set estatus = '%s' where idcheque = %s" % (self.dbtable, estatus, idcheque)
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Se experimento un problema al actualizar la solicitud %s !\n\n" \
-						u"Tome nota y revise la solicitud al finalizar el proceso." % idcheque, u"Atención")
+				Mensajes().Info(self, u"ï¿½ Se experimento un problema al actualizar la solicitud %s !\n\n" \
+						u"Tome nota y revise la solicitud al finalizar el proceso." % idcheque, u"Atenciï¿½n")
 			else:
 				sql = "select convert(varchar(50), BlogGUID) from %s where idcheque = %s" % (self.dbtable, idcheque)
 				cu = r_cn.cursor()
@@ -14610,7 +14611,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 				values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 				""" % (BlogGUID, self.usuario, contenido, "", "", estatus)
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					
 		self.FillListCtrl()
 
@@ -14621,15 +14622,15 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			if len(self.selecteditems) > 1: char = "es"
 			else: char = ""
 			if Mensajes().YesNo(self,u"Solicitud%s a cambiar del estatus %s al estatus %s:\n\n%s\n\n" \
-			                    u"¿ Desea continuar ?" \
-			                    % (char, estatusini, estatusfin, self.selecteditems), u"Confirmación"):
+			                    u"ï¿½ Desea continuar ?" \
+			                    % (char, estatusini, estatusfin, self.selecteditems), u"Confirmaciï¿½n"):
 				self.CambiarEstatus(estatus, estatusini, estatusfin)
 				
 		self.GetControl(self.idlc).SetFocus()
 		
 	def OnRecalcularSaldos(self, event):
 		self.RecalculaSaldos()
-		Mensajes().Info(self, u"Recálculo finalizado.", u"Aviso")
+		Mensajes().Info(self, u"Recï¿½lculo finalizado.", u"Aviso")
 		
 	def RecalculaSaldos(self):
 		wx.BeginBusyCursor()
@@ -14780,16 +14781,16 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 		control = self.GetControl(self.idtcmultichequenumerocheque)
 		numerodecheque = control.GetValue().strip()
 		if not numerodecheque:
-			Mensajes().Info(self, u"¡ Por favor digite el número del cheque !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Por favor digite el nï¿½mero del cheque !", u"Atenciï¿½n")
 			control.SetFocus()
 		elif not str(numerodecheque).isdigit():
-			Mensajes().Info(self, u"¡ El número de cheque debe ser numérico !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El nï¿½mero de cheque debe ser numï¿½rico !", u"Atenciï¿½n")
 			control.SetFocus()
 		else:
 			self.selecteditems.sort()
 			if Mensajes().YesNo(self,u"Solicitudes a relacionar con el cheque %s:\n%s\n\n" \
-								u"¿ Desea continuar ?" \
-								% (numerodecheque, self.selecteditems), u"Confirmación"):
+								u"ï¿½ Desea continuar ?" \
+								% (numerodecheque, self.selecteditems), u"Confirmaciï¿½n"):
 				wx.BeginBusyCursor()
 				setListForQuery = "numerochequeorigen = '%s'" % str(numerodecheque)
 				for idcheque in self.selecteditems:
@@ -14800,13 +14801,13 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 					if not queTal:
 						break
 				if queTal:
-					Mensajes().Info(self, u"Ha finalizado la relación del cheque %s\n" \
+					Mensajes().Info(self, u"Ha finalizado la relaciï¿½n del cheque %s\n" \
 									u"con las solicitudes elegidas:\n%s"
-									% (numerodecheque, self.selecteditems), u"Atención")
+									% (numerodecheque, self.selecteditems), u"Atenciï¿½n")
 				else:
-					Mensajes().Info(self, u"Ha sido suspendida la relación del cheque %s\n" \
+					Mensajes().Info(self, u"Ha sido suspendida la relaciï¿½n del cheque %s\n" \
 									u"con las solicitudes elegidas:\n%s"
-									% (numerodecheque, self.selecteditems), u"Atención")
+									% (numerodecheque, self.selecteditems), u"Atenciï¿½n")
 				wx.EndBusyCursor()
 				self.FillListCtrl()
 			else:
@@ -14826,12 +14827,12 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 		self.GetControl(self.idtcbeneficiario).SetValue("")
 		self.GetControl(self.idtcconcepto).SetValue("")
 		if self.GetControl(self.idtgbeneficiariodevolucion).GetValue():
-			self.ToggleBeneficiarioDevolucion(u"Devolución", u"Utilizar esta Solicitud de Cheque para Devolución de " \
+			self.ToggleBeneficiarioDevolucion(u"Devoluciï¿½n", u"Utilizar esta Solicitud de Cheque para Devoluciï¿½n de " \
 			                                  u"Saldo a Favor", True, False)
 			self.ObtenerBeneficiarios(False)
 		else:
 			self.ToggleBeneficiarioDevolucion(u"Solicitud", u"Utilizar esta Solicitud de Cheque por Concepto " \
-			                                  u"Diferente a Devolución de Saldo a Favor", False, True)
+			                                  u"Diferente a Devoluciï¿½n de Saldo a Favor", False, True)
 			self.ObtenerBeneficiarios()
 		wx.EndBusyCursor()
 			
@@ -14904,7 +14905,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 		
 	def OnRecalcularTotalCheque(self, event):
 		self.RecalcularTotalCheque()
-		Mensajes().Info(self, u"Recálculo finalizado.", u"Aviso")
+		Mensajes().Info(self, u"Recï¿½lculo finalizado.", u"Aviso")
 		
 	def RecalcularTotalCheque(self):
 		wx.BeginBusyCursor()
@@ -14957,9 +14958,9 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 							if self.concicilarnumerochequesolicitud != str(row[0]):
 								pass
 								#self.concicilarnumerochequesolicitud = 0
-								#Mensajes().Info(self, u"¡ Inconsistencia en la conciliación !\n\n" \
-												#u"Por favor revise los números de cheque de las solicitudes elegidas.", \
-												#u"Atención")
+								#Mensajes().Info(self, u"ï¿½ Inconsistencia en la conciliaciï¿½n !\n\n" \
+												#u"Por favor revise los nï¿½meros de cheque de las solicitudes elegidas.", \
+												#u"Atenciï¿½n")
 								#break
 				else:
 					row = fetchone(cu)
@@ -14993,13 +14994,13 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 		if self.GetControl(self.idckfondeo).IsChecked():
 			self.ckfondeo = True
 			self.GetControl(self.idtgfondeo).SetLabel("Conciliar")
-			self.GetControl(self.idtgfondeo).SetToolTip(wx.ToolTip(u"Conciliación de Bancos vs. Cheques"))
+			self.GetControl(self.idtgfondeo).SetToolTip(wx.ToolTip(u"Conciliaciï¿½n de Bancos vs. Cheques"))
 			self.GetControl(self.idckfondeo).SetToolTip(wx.ToolTip(u"Fondeo; Afectar Partidas"))
 		else:
 			self.ckfondeo = False
 			self.GetControl(self.idtgfondeo).SetLabel("Fondeo")
-			self.GetControl(self.idtgfondeo).SetToolTip(wx.ToolTip(u"Fondeo y Proyección"))
-			self.GetControl(self.idckfondeo).SetToolTip(wx.ToolTip(u"Conciliar; Conciliación de Bancos vs. Cheques"))
+			self.GetControl(self.idtgfondeo).SetToolTip(wx.ToolTip(u"Fondeo y Proyecciï¿½n"))
+			self.GetControl(self.idckfondeo).SetToolTip(wx.ToolTip(u"Conciliar; Conciliaciï¿½n de Bancos vs. Cheques"))
 			
 	def OnFondeo(self, event):
 		control = self.GetControl(self.idchestatusfiltro)
@@ -15015,7 +15016,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 						self.DespliegueConciliacion()
 					else:
 						control.Append("<Todo>", 0); control.Append("Elaborado", 1)
-						control.Append("Retenido", 2); control.Append(u"Proyección", 3)
+						control.Append("Retenido", 2); control.Append(u"Proyecciï¿½n", 3)
 						if wx.Platform == '__WXMSW__':
 							self.GetControl(self.idlc).SetSize(wx.Size(-1, 385))
 						else:
@@ -15047,9 +15048,9 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			control.Append("Cobrado", 6); control.Append("Retenido", 7); control.Append("Cancelado", 8)
 			self.origenempresaid, self.origenidbanco = 0, 0
 			if self.ckfondeo:
-				self.ToggleFondeoSolicitud("Conciliar", "Conciliación de Bancos vs. Cheques", False, 1, True)
+				self.ToggleFondeoSolicitud("Conciliar", "Conciliaciï¿½n de Bancos vs. Cheques", False, 1, True)
 			else:
-				self.ToggleFondeoSolicitud("Fondeo", "Fondeo y Proyección", False, 1, True)
+				self.ToggleFondeoSolicitud("Fondeo", "Fondeo y Proyecciï¿½n", False, 1, True)
 			self.GetControl(self.idtgmulticheque).Enable(True)
 			self.GetControl(self.idckfondeo).Enable(True)
 			if self.ckfondeo:
@@ -15137,8 +15138,8 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 	def OnConciliarBancosCheques(self, event):
 		if len(self.selecteditems) > 0 and self.selecteditemcargos:
 			if Mensajes().YesNo(self, u"Movimiento(Cargo) del banco: %s\nSolicitud(es): %s\n\n" \
-								u"¿ Desea realmente hacer la conciliación ?" \
-								% (self.selecteditemcargos, self.selecteditems), u"Confirmación"):
+								u"ï¿½ Desea realmente hacer la conciliaciï¿½n ?" \
+								% (self.selecteditemcargos, self.selecteditems), u"Confirmaciï¿½n"):
 				selecteditems = self.selecteditems
 				if len(self.selecteditems) > 1:
 					first = True
@@ -15185,7 +15186,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 							values ('%s', '%s', '%s', '%s', '%s', '%s', '%s')
 							""" % (str(row[1]), str(row[0]), self.usuario, "Cobrado", "", "", "B")
 							if not self.QueryUpdateRecord(sql):
-								Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+								Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 				else:
 					sql = """
 					select convert(varchar(10), b.fechamovto, 111), convert(varchar(100), e.BlogGUID)
@@ -15204,7 +15205,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 						values ('%s', '%s', '%s', '%s', '%s', '%s', '%s')
 						""" % (str(row[1]), str(row[0]), self.usuario, "Cobrado", "", "", "B")
 						if not self.QueryUpdateRecord(sql):
-							Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+							Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 				
 				self.GetControl(self.idlccargos).DeleteItem(self.currentitemcargos)
 				if len(self.currentitemlst) > 1:
@@ -15360,8 +15361,8 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 	def OnClonarSolicitud(self, event):
 		if str(self.currentitem).isdigit():
 			if self.GetCloneRecord(record = self.datointerno):
-				dlg = wx.TextEntryDialog(self, u"¿ Cuantas clonaciones desea ?",
-				                         u"Clonación de la Solicitud %s" % self.datointerno)
+				dlg = wx.TextEntryDialog(self, u"ï¿½ Cuantas clonaciones desea ?",
+				                         u"Clonaciï¿½n de la Solicitud %s" % self.datointerno)
 				dlg.SetValue("1")
 				if dlg.ShowModal() == wx.ID_OK:
 					clonaciones = dlg.GetValue()
@@ -15372,18 +15373,18 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 							if clonaciones > 1:
 								veces = u"veces"; tit = u"Clonaciones"; tit2 = "finalizadas"
 							else:
-								veces = u"vez";	tit = u"Clonación"; tit2 = "finalizada"
+								veces = u"vez";	tit = u"Clonaciï¿½n"; tit2 = "finalizada"
 								
-							dlg = wx.TextEntryDialog(self, u"Motivo de la clonación",
-							                         u"Clonación de la Solicitud %s" % self.datointerno)
+							dlg = wx.TextEntryDialog(self, u"Motivo de la clonaciï¿½n",
+							                         u"Clonaciï¿½n de la Solicitud %s" % self.datointerno)
 							if dlg.ShowModal() == wx.ID_OK:
 								motivo = dlg.GetValue()
 								dlg.Destroy()
 								if motivo:
 									if Mensajes().YesNo(self, u"%s\n\n"
-									                    u"¿ Desea realmente clonar %s %s la solicitud %s ?"
+									                    u"ï¿½ Desea realmente clonar %s %s la solicitud %s ?"
 									                    % (motivo, clonaciones, veces, self.datointerno),
-									                    u"Confirmación"):
+									                    u"Confirmaciï¿½n"):
 										wx.BeginBusyCursor()
 										self.ClonarSolicitud(clonaciones, motivo)
 										sql = """
@@ -15394,10 +15395,10 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 											   % (clonaciones, tit, motivo), "", "")
 										if not self.QueryUpdateRecord(sql):
 											Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s"
-											                % sql, u"Atención")
+											                % sql, u"Atenciï¿½n")
 										wx.EndBusyCursor()
 										self.FillListCtrl()
-										Mensajes().Info(self, u"¡ %s %s %s de la solicitud %s !"
+										Mensajes().Info(self, u"ï¿½ %s %s %s de la solicitud %s !"
 										                % (clonaciones, tit, tit2, self.datointerno), u"Aviso")
 							else:
 								dlg.Destroy()
@@ -15407,9 +15408,9 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 	def ClonarSolicitud(self, clonaciones, motivo):
 		concepto = self.conceptoC
 		if self.devolucionC == "S":
-			Mensajes().Info(self, u"La solicitud a clonar es una devolución de saldo a favor,\n"
-			                u"por lo tanto, una vez terminada la clonación elija el documento\n"
-			                u"que corresponde a la devolución.", "Atención")
+			Mensajes().Info(self, u"La solicitud a clonar es una devoluciï¿½n de saldo a favor,\n"
+			                u"por lo tanto, una vez terminada la clonaciï¿½n elija el documento\n"
+			                u"que corresponde a la devoluciï¿½n.", "Atenciï¿½n")
 			concepto = "DOCUMENTO POR ELEGIR"
 			
 		sqlFields = """ 
@@ -15432,7 +15433,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			queTal, identity = self.QueryUpdateRecord(sql, sqlmax, True)
 			if queTal:
 				if identity is None:
-					Mensajes().Info(self, u"Problemas al buscar nueva solicitud clonada.\n\n%s" % sqlmax, u"Atención")
+					Mensajes().Info(self, u"Problemas al buscar nueva solicitud clonada.\n\n%s" % sqlmax, u"Atenciï¿½n")
 				else:
 					sqly = "select convert(varchar(100), BlogGUID) from %s where idcheque = %s" % (self.dbtable, identity)
 					cursor = r_cn.cursor()
@@ -15440,7 +15441,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 					row = fetchone(cursor)
 					cursor.close()
 					if row is None:
-						Mensajes().Info(self, u"Problemas al buscar blog de solicitud clonada.\n\n%s" % sqly, u"Atención")
+						Mensajes().Info(self, u"Problemas al buscar blog de solicitud clonada.\n\n%s" % sqly, u"Atenciï¿½n")
 					else:
 						BlogGUID = row[0]
 						sqlb = """
@@ -15451,7 +15452,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 							   % (self.datointerno, motivo), "", "", "S")
 						queTal, trash = self.QueryUpdateRecord(sqlb)
 						if not queTal:
-							Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sqlb, u"Atención")
+							Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sqlb, u"Atenciï¿½n")
 							
 					self.ClonarPartidas(identity)
 					
@@ -15479,7 +15480,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 				""" % (identity, self.Clon(row[0]), self.Clon(row[1]), self.Clon(row[2]), self.Clon(row[3]),
 				       self.Clon(row[4]), self.Clon(row[5]), self.Clon(row[6]), float(row[7]))
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar las partidas.\n\n%s" % sql, u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar las partidas.\n\n%s" % sql, u"Atenciï¿½n")
 				
 	def OnImprimirSolicitud(self, event):
 		if str(self.currentitem).isdigit():
@@ -15511,9 +15512,9 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			insert into Blogs 
 			(BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
-			""" % (self.BlogGUID, self.usuario, u"Impresión de la Solicitud de Cheque", "", "")
+			""" % (self.BlogGUID, self.usuario, u"Impresiï¿½n de la Solicitud de Cheque", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atenciï¿½n")
 			wx.EndBusyCursor()
 	
 	def GetHtmlFromGrid(self, html = ""):
@@ -15833,9 +15834,9 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			char1 = "las"; char2 = "es"
 		else:
 			char1 = "la"; char2 = ""
-		if Mensajes().YesNo(self,u"Asignación y Registro de firmantes en %s solicitud%s:\n%s\n\n" \
-							u"¿ Desea continuar ?" \
-							% (char1, char2, self.selecteditems), u"Confirmación"):
+		if Mensajes().YesNo(self,u"Asignaciï¿½n y Registro de firmantes en %s solicitud%s:\n%s\n\n" \
+							u"ï¿½ Desea continuar ?" \
+							% (char1, char2, self.selecteditems), u"Confirmaciï¿½n"):
 			dlg = GixElegirFirmantes(self, usuario = self.usuario, idbanco = self.origenidbanco,
 									 selecteditems = self.selecteditems)
 			dlg.CenterOnScreen()
@@ -15845,17 +15846,17 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 		
 	def OnFondear(self, event):
 		#if self.saldofinaldisponible < 0:
-			#Mensajes().Info(self, u"¡ Petición de fondeo de cheques cancelada !\n\n" \
+			#Mensajes().Info(self, u"ï¿½ Peticiï¿½n de fondeo de cheques cancelada !\n\n" \
 							#u"No es posible llevar a cabo el fondeo de cheques mientras el\n" \
-							#u"saldo final se encuentre en rojo (saldo negativo).", u"Atención")
+							#u"saldo final se encuentre en rojo (saldo negativo).", u"Atenciï¿½n")
 		#else:
-		# lo que sigue va dentro del else. Adaptación para el fondeo inicial
+		# lo que sigue va dentro del else. Adaptaciï¿½n para el fondeo inicial
 		self.selecteditems.sort()
 		if len(self.selecteditems) > 1: char = "es"
 		else: char = ""
 		if Mensajes().YesNo(self,u"Solicitud%s a fondear:\n%s\n\n" \
-							u"¿ Desea continuar ?" \
-							% (char, self.selecteditems), u"Confirmación"):
+							u"ï¿½ Desea continuar ?" \
+							% (char, self.selecteditems), u"Confirmaciï¿½n"):
 			self.Fondear()
 		self.GetControl(self.idlc).SetFocus()
 
@@ -15866,20 +15867,20 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 		row = fetchone(cu)
 		cu.close()
 		defaultvalue = u"Fondeo elaborado el %s" % str(row[0])
-		dlg = wx.TextEntryDialog(self, u"Descripción", u"Elaboración del Fondeo", "%s" % defaultvalue)
+		dlg = wx.TextEntryDialog(self, u"Descripciï¿½n", u"Elaboraciï¿½n del Fondeo", "%s" % defaultvalue)
 		while True:
 			if dlg.ShowModal() == wx.ID_OK:
 				descripcion = dlg.GetValue()
 				if descripcion:
 					dlg.Destroy()
-					if Mensajes().YesNo(self,u"Recuerde que al llevar a cabo el fondeo, se afectarán " \
+					if Mensajes().YesNo(self,u"Recuerde que al llevar a cabo el fondeo, se afectarï¿½n " \
 										u"las partidas y/o subpartidas que se\nincluyan en las solicitudes " \
 										u"elegidas a ser fondeadas.\n\n" \
 										# (aa).- Actualmente no se afecta el banco.
-										#u"También serán generados los movimientos de cargo, los cuales, " \
-										#u"afectarán directamente\na las cuentas del banco origen (emisoras del egreso), " \
+										#u"Tambiï¿½n serï¿½n generados los movimientos de cargo, los cuales, " \
+										#u"afectarï¿½n directamente\na las cuentas del banco origen (emisoras del egreso), " \
 										#u"asi como al saldo de las mismas.\n\n" \
-										u"¿ Desea realmente llevar a cabo el fondeo ?", u"Confirmación"):
+										u"ï¿½ Desea realmente llevar a cabo el fondeo ?", u"Confirmaciï¿½n"):
 						biengrabado, idfondeo = self.AgregaFondeo(descripcion)
 						if biengrabado:
 							self.AplicaFondeo(idfondeo)
@@ -15892,7 +15893,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 							self.GetControl(self.idbtcambiarestatus).Enable(False)
 							Mensajes().Info(self, u"Fondeo finalizado", u"Aviso")
 						else:
-							Mensajes().Info(self, u"¡ No fué posible llevar a cabo el fondeo !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ No fuï¿½ posible llevar a cabo el fondeo !", u"Atenciï¿½n")
 						self.GetControl(self.idlc).SetFocus()
 						break
 					else:
@@ -15900,7 +15901,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 						break
 				else:
 					Mensajes().Info(self, u"Para continuar es necesario que digite\n" \
-									u"la Descripción del Fondeo.", u"Atención")
+									u"la Descripciï¿½n del Fondeo.", u"Atenciï¿½n")
 					dlg.SetValue(defaultvalue)
 			else:
 				dlg.Destroy()
@@ -15952,7 +15953,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 				values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 				""" % (blogcheque, self.usuario, u"Fondeo", "", "", "F")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 				totalcheque = self.ActualizaPartidas(idcheque, fechaprogramada)
 				# (aa).- Lo siguiente genera el movimiento (cargo) afectando la cuenta-banco y el saldo.
 				# Actualmente no se afecta el banco.
@@ -15961,10 +15962,10 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 						  #self.AgregaMovimientoBanco(idcheque, fechaprogramada, cantidad,\
 													 #especificaciones, referencia = concepto)
 					#if not todook:
-						#Mensajes().Info(self, u"¡ Se detectaron problemas al actualizar bancos !\n\n" \
+						#Mensajes().Info(self, u"ï¿½ Se detectaron problemas al actualizar bancos !\n\n" \
 										#u"Solicitud: %s, Fecha Programada: %s, Total Cheque: %s" \
-										#u", Movimiento de Banco: %s\n\n¡ Tome nota y revise !" \
-										#% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atención")
+										#u", Movimiento de Banco: %s\n\nï¿½ Tome nota y revise !" \
+										#% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atenciï¿½n")
 		wx.EndBusyCursor()
 	
 	def ActualizaPartidas(self, idcheque, fechaprogramada, sumaoresta = 1, totalcheque = 0):
@@ -15986,10 +15987,10 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 					if partidaid < 0:
 						break
 					elif not self.ActualizaSaldoPartida(idcheque, partidaid, fechaprogramada, cantidad):
-							Mensajes().Info(self, u"¡ Se detectaron problemas al actualizar partidas !\n\n" \
+							Mensajes().Info(self, u"ï¿½ Se detectaron problemas al actualizar partidas !\n\n" \
 											u"Solicitud: %s, Partida: %s, Fecha Programada: %s, Cantidad: %s\n\n" \
-											u"¡ Tome nota y revise !" \
-											% (idcheque, partidaid, fechaprogramada, cantidad), u"Atención")
+											u"ï¿½ Tome nota y revise !" \
+											% (idcheque, partidaid, fechaprogramada, cantidad), u"Atenciï¿½n")
 		return totalcheque
 	
 	def ActualizaSaldoPartida(self, idcheque, partidaid, fechaprogramada, cantidad, periodo = "", updateok = True):
@@ -16000,8 +16001,8 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 		except:
 			Mensajes().Info(self, u"Problemas con la fecha al actualizar saldos.\n" \
 							u"Solicitud: %s, Partida: %s, Fecha: %s, Periodo: %s\n\n" \
-							u"¡ No fué afectada la partida, tome nota y revise !" \
-							% (idcheque, partidaid, fechaprogramada, periodo), u"Atención")
+							u"ï¿½ No fuï¿½ afectada la partida, tome nota y revise !" \
+							% (idcheque, partidaid, fechaprogramada, periodo), u"Atenciï¿½n")
 			return False
 		
 		sql = """
@@ -16034,7 +16035,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 				""" % (float(totalcargos), partidaid, periodo)
 				updateok = self.QueryUpdateRecord(sql)
 		except:
-			Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atenciï¿½n")
 			return False
 		
 		if updateok:
@@ -16081,11 +16082,11 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 						saldo = float(row[0])
 						break
 				except:
-					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n\n%s" % sql, u"Atención")
+					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n\n%s" % sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 			
 		return todobien, saldo
@@ -16136,11 +16137,11 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 							break
 				except:
 					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n%s" \
-							% sql, u"Atención")
+							% sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar último periodo\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar ï¿½ltimo periodo\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 		
 		return todobien
@@ -16156,7 +16157,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			fechamovto = "'%04d/%02d/%02d'" % (fecha_ano, fecha_mes, fecha_dia)
 			periodo = "'%04d/%02d/01'" % (fecha_ano, fecha_mes)
 		except:
-			Mensajes().Info(self, u"Problemas con la fecha al agregar movimientos", u"Atención")
+			Mensajes().Info(self, u"Problemas con la fecha al agregar movimientos", u"Atenciï¿½n")
 			return False, 0
 		tipomovto = "C"
 		estatus = "F"
@@ -16195,7 +16196,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comentario, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 
 		return queTal, int(numero)
 	
@@ -16243,7 +16244,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 				""" % (float(totalabonos), float(totalcargos), idbanco, periodo)
 				updateok = self.QueryUpdateRecord(sql)
 		except:
-			Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atenciï¿½n")
 			updateok = False
 			
 		updateok = self.ActualizaSaldosInicialesBanco(idbanco, fecha_mes, fecha_ano, saldosiguienteperiodo)
@@ -16290,11 +16291,11 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 						break
 				except:
 					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n%s" \
-							% sql, u"Atención")
+							% sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 			
 		return todobien, saldo
@@ -16350,22 +16351,22 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 							break
 				except:
 					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n%s" \
-					                % sql, u"Atención")
+					                % sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar último periodo\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar ï¿½ltimo periodo\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 		
 		return todobien
 	
 	def OnChoiceFiltroLocal(self, event):
 		estatus = self.GetControl(self.idchestatusfiltro).GetStringSelection()
-		if estatus == u"Proyección":
-			Mensajes().Info(self, u"La proyección incluye todas las solicitudes con estatus de solicitud,\n" \
+		if estatus == u"Proyecciï¿½n":
+			Mensajes().Info(self, u"La proyecciï¿½n incluye todas las solicitudes con estatus de solicitud,\n" \
 							u"revisado, autorizado, elaborado y retenido.\n" \
 							u"No se incluyen las solicitudes canceladas, fondeadas y cobradas.\n\n" \
-							u"Nota.- Desde la proyección no es posible llevar a cabo el fondeo.", u"Aviso")
+							u"Nota.- Desde la proyecciï¿½n no es posible llevar a cabo el fondeo.", u"Aviso")
 		elif estatus == "<Todo>":
 			if self.GetControl(self.idtgfondeo).GetValue():
 				Mensajes().Info(self, u"El estatus <Todo> incluye unicamente las solicitudes candidatas\n" \
@@ -16584,7 +16585,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 			else:
 				self.EnviaMail(comment)
 			
@@ -16663,10 +16664,10 @@ Estatus de la solicitud: %s
 			aborta = True
 			
 		if aborta:
-			Mensajes().Info(self, u"¡ Su participación en el blog no pudo ser notificada por e-mail !\n\n" \
+			Mensajes().Info(self, u"ï¿½ Su participaciï¿½n en el blog no pudo ser notificada por e-mail !\n\n" \
 							u"Usuario: %s\nNombre: %s\nArea: %s\nE-mail: %s\n\n" \
-							u"Por favor verifique la información anterior." \
-							% (self.usuario, usuarionombreblog, areablog, emailblog), "Atención")
+							u"Por favor verifique la informaciï¿½n anterior." \
+							% (self.usuario, usuarionombreblog, areablog, emailblog), "Atenciï¿½n")
 			return "", "", "", True
 		
 	def OnAceptarDetalle(self, event):
@@ -16692,7 +16693,7 @@ Estatus de la solicitud: %s
 					self.modoedicion = False
 					self.GetControl(self.idbbagregarpartida).SetFocus()
 			elif self.AceptarDetalle():
-				Mensajes().Info(self, u"¡ Cambio de estatus exitoso !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Cambio de estatus exitoso !", u"Atenciï¿½n")
 				self.SalirDetalle()
 				
 	def CantidadDecimal(self, cantidad):
@@ -16721,10 +16722,10 @@ Estatus de la solicitud: %s
 			if q1 != q2:
 				totalpartidas = str(amount_and_cents_with_commas(cantidad))
 				totalcheque = str(amount_and_cents_with_commas(cantidadcheque))
-				Mensajes().Info(self, u"¡ Por favor revise las partidas y el cheque !\n\n" \
+				Mensajes().Info(self, u"ï¿½ Por favor revise las partidas y el cheque !\n\n" \
 								u"El total de las partidas $ %s no es igual a la cantidad\n" \
-								u"con la que se elaboró el cheque $ %s" \
-								% (totalpartidas, totalcheque), u"Atención")
+								u"con la que se elaborï¿½ el cheque $ %s" \
+								% (totalpartidas, totalcheque), u"Atenciï¿½n")
 				return False
 		if salirdetalle:
 			return True
@@ -16738,13 +16739,13 @@ Estatus de la solicitud: %s
 					control = self.GetControl(self.idtcclavebancariadestino)
 					clavebancariadestino = control.GetValue().strip()
 					if not str(clavebancariadestino).isdigit():
-						Mensajes().Info(self, u"¡ Por favor revise la clave bancaria !\n\n" \
-										u"Esta debe ser numerica.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ Por favor revise la clave bancaria !\n\n" \
+										u"Esta debe ser numerica.", u"Atenciï¿½n")
 						control.SetFocus()
 						return False
 					elif len(clavebancariadestino) != 18:
-						Mensajes().Info(self, u"¡ Por favor revise la clave bancaria !\n\n" \
-										u"Esta se debe componer de 18 digitos.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ Por favor revise la clave bancaria !\n\n" \
+										u"Esta se debe componer de 18 digitos.", u"Atenciï¿½n")
 						control.SetFocus()
 						return False
 				else:
@@ -16755,20 +16756,20 @@ Estatus de la solicitud: %s
 						if bancoorigen:
 							if numerochequeorigen:
 								if not str(numerochequeorigen).isdigit():
-									Mensajes().Info(self, u"¡ Por favor revise el número de cheque !\n\n" \
-													u"Este debe ser numerico.", u"Atención")
+									Mensajes().Info(self, u"ï¿½ Por favor revise el nï¿½mero de cheque !\n\n" \
+													u"Este debe ser numerico.", u"Atenciï¿½n")
 									control.SetFocus()
 									return False
 						elif numerochequeorigen:
 							if not str(numerochequeorigen).isdigit():
 								Mensajes().Info(self, u"Por favor elija el banco origen y\n" \
-												u"revise el número de cheque.\n\n"
-												u"El cheque debe ser numerico.", u"Atención")
+												u"revise el nï¿½mero de cheque.\n\n"
+												u"El cheque debe ser numerico.", u"Atenciï¿½n")
 								control.SetFocus()
 								return False
 							else:
 								Mensajes().Info(self, u"Por favor elija el banco origen\n" \
-												u"al que pertenece el cheque.", u"Atención")
+												u"al que pertenece el cheque.", u"Atenciï¿½n")
 								self.GetControl(self.idchbancoorigen).SetFocus()
 								return False
 				continua, self.idbeneficiario = self.RevisaBeneficiario()
@@ -16776,7 +16777,7 @@ Estatus de la solicitud: %s
 					if self.agregar:
 						if Mensajes().YesNo(self, u"Recuerde haber elegido correctamente la Empresa Emisora,\n" \
 											u"ya que no podra modificarse posteriormente.\n\n" \
-											u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+											u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 							self.SaveRecord()
 							return True
 					else:
@@ -16786,7 +16787,7 @@ Estatus de la solicitud: %s
 					self.SaveRecord()
 					return True
 			else:
-				Mensajes().Info(self, u"¡ Por favor revise la partida o subpartida que desea afectar !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Por favor revise la partida o subpartida que desea afectar !", u"Atenciï¿½n")
 				return False
 		
 		return False
@@ -16847,7 +16848,7 @@ Estatus de la solicitud: %s
 				   self.GetString(plazadestino) != self.Clr(row[3]) or self.GetString(clavebancariadestino) != self.Clr(row[4]):
 					if Mensajes().YesNo(self, u"Se han encontrado cambios en las especificaciones (spei, transferencias o traspasos)\n" \
 										u"del beneficiario (banco, sucursal, plaza, clave bancaria).\n\n" \
-										u"¿ Desea conservar los cambios en el registro personal del beneficiario ?", u"Confirmación"):
+										u"ï¿½ Desea conservar los cambios en el registro personal del beneficiario ?", u"Confirmaciï¿½n"):
 						columnas = """
 						banco = '%s', sucursal = '%s', plaza = '%s', clavebancaria = '%s'
 						""" % (bancodestino, sucursaldestino, plazadestino, clavebancariadestino)
@@ -16866,7 +16867,7 @@ Estatus de la solicitud: %s
 				   self.GetString(plazadestino) != self.Clr(row[7]) or self.GetString(clavebancariadestino) != self.Clr(row[8]):
 					if Mensajes().YesNo(self, u"Se han encontrado cambios en las especificaciones (cuenta de cheque)\n" \
 										u"del beneficiario (banco, sucursal, plaza, cuenta).\n\n" \
-										u"¿ Desea conservar los cambios en el registro personal del beneficiario ?", u"Confirmación"):
+										u"ï¿½ Desea conservar los cambios en el registro personal del beneficiario ?", u"Confirmaciï¿½n"):
 						columnas = """
 						bancocheque = '%s', sucursalcheque = '%s', plazacheque = '%s', cuentacheque = '%s'
 						""" % (bancodestino, sucursaldestino, plazadestino, clavebancariadestino)
@@ -16884,13 +16885,13 @@ Estatus de la solicitud: %s
 				return 1, int(row[0])
 		elif devolucion:
 			Mensajes().Info(self, u"No se encuentra registrado el cliente:\n%s\n" \
-							u"Para solicitar la devolución es necesario\n" \
+							u"Para solicitar la devoluciï¿½n es necesario\n" \
 							u"que se encuentre registrado." % nombre)
 			return 0, 0
 		elif Mensajes().YesNo(self, u"No se encuentra registrado el beneficiario:\n%s\n" \
 							u"Para continuar es necesario registrarlo.\n\n"
-							u"¿ Desea realmente registrar al nuevo beneficiario y grabar la información ?" \
-							% nombre, u"Confirmación"):
+							u"ï¿½ Desea realmente registrar al nuevo beneficiario y grabar la informaciï¿½n ?" \
+							% nombre, u"Confirmaciï¿½n"):
 			columnas = """
 			nombre, banco, sucursal, plaza, clavebancaria, bancocheque, sucursalcheque, plazacheque, cuentacheque
 			"""
@@ -16977,14 +16978,14 @@ Estatus de la solicitud: %s
 		if self.devolucionsaldo:
 			self.GetControl(self.idtgbeneficiariodevolucion).SetValue(True)
 			self.GetControl(self.idtgbeneficiariodevolucion).Enable(False)
-			self.ToggleBeneficiarioDevolucion(u"Devolución", u"Utilizar esta Solicitud de Cheque para Devolución de " \
+			self.ToggleBeneficiarioDevolucion(u"Devoluciï¿½n", u"Utilizar esta Solicitud de Cheque para Devoluciï¿½n de " \
 			                                  u"Saldo a Favor", True, False)
 			self.ObtenerBeneficiarios(False)
 		else:
 			self.GetControl(self.idtgbeneficiariodevolucion).SetValue(False)
 			self.GetControl(self.idtgbeneficiariodevolucion).Enable(True)
 			self.ToggleBeneficiarioDevolucion(u"Solicitud", u"Utilizar esta Solicitud de Cheque por Concepto " \
-			                                  u"Diferente a Devolución de Saldo a Favor", False, True)
+			                                  u"Diferente a Devoluciï¿½n de Saldo a Favor", False, True)
 			self.ObtenerBeneficiarios()
 		wx.EndBusyCursor()
 		self.CalculaFechaCaptura()
@@ -17003,9 +17004,9 @@ Estatus de la solicitud: %s
 		control.SetFocus()
 		if self.usuario == "ELIZABETH" and not self.devolucionsaldo:
 			Mensajes().Info(self, u"Eli, si esta solicitud de cheque es para una\n" \
-			                u"devolución de saldo a favor, recuerda que\n" \
-			                u"debe ser elaborada en el módulo de ventas,\n" \
-			                u"Solicitud de Devolución de Saldo a Favor.", u"Recordatorio para Elizabeth")
+			                u"devoluciï¿½n de saldo a favor, recuerda que\n" \
+			                u"debe ser elaborada en el mï¿½dulo de ventas,\n" \
+			                u"Solicitud de Devoluciï¿½n de Saldo a Favor.", u"Recordatorio para Elizabeth")
 		
 	def CalculaFechaCaptura(self):
 		sql = "select convert(varchar(10), getdate(), 103)"
@@ -17182,7 +17183,7 @@ Estatus de la solicitud: %s
 					lctrl = self.GetControl(self.idlc)
 					lctrl.SetItemState(self.currentitem, wx.LIST_STATE_SELECTED, wx.LIST_STATE_SELECTED)
 				else:
-					Mensajes().Info(self, u"Problemas al actualizar el total del cheque", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el total del cheque", u"Atenciï¿½n")
 		self.SalirDetalle()
 			
 	def SalirDetalle(self):
@@ -17264,14 +17265,14 @@ Estatus de la solicitud: %s
 				estatusch = self.GetControl(self.idchestatus).GetStringSelection()
 				if estatusch in ("Fondeado", "Cobrado"):
 					Mensajes().Info(self, u"La solicitud se encuentra en estatus de %s, por lo tanto,\n" \
-									u"se han afectado los saldos de las partidas." % estatusch, u"Atención")
-				contenido = u"Edición de la partida %s" % self.idpartida
+									u"se han afectado los saldos de las partidas." % estatusch, u"Atenciï¿½n")
+				contenido = u"Ediciï¿½n de la partida %s" % self.idpartida
 				sql = """
 				insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 				values ('%s', getdate(), '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, contenido, "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 	
 	def AddPartida(self, update = False):
 		partida = asignaMenosUno(int(self.partida)); subpartida1 = asignaMenosUno(int(self.subpartida1))
@@ -17292,7 +17293,7 @@ Estatus de la solicitud: %s
 			if not queTal:
 				return False
 			elif not idchequepartida:
-				Mensajes().Info(self, u"Problemas al buscar la nueva partida.\n\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al buscar la nueva partida.\n\n%s" % sql, u"Atenciï¿½n")
 				return False
 		else:
 			sql = """
@@ -17303,7 +17304,7 @@ Estatus de la solicitud: %s
 			       asignaMenosUno(self.subpartida2), asignaMenosUno(self.subpartida3),
 			       asignaMenosUno(self.subpartida4), asignaMenosUno(self.subpartida5), float(cantidad), self.idpartida)
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar la partida.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar la partida.", u"Atenciï¿½n")
 				return False
 		
 		estatusch = self.GetControl(self.idchestatus).GetStringSelection()
@@ -17315,20 +17316,20 @@ Estatus de la solicitud: %s
 			except:
 				Mensajes().Info(self, u"Problemas con la fecha al actualizar saldos.\n\n" \
 								u"Solicitud: %s, Fecha Programada: %s\n\n" \
-								u"¡ No fué afectada la partida, tome nota y revise !" \
-								% (self.idcheque, self.fechaprogramada), u"Atención")
+								u"ï¿½ No fuï¿½ afectada la partida, tome nota y revise !" \
+								% (self.idcheque, self.fechaprogramada), u"Atenciï¿½n")
 				return False
 			if not update:
 				Mensajes().Info(self, u"La solicitud se encuentra en estatus de %s, por lo tanto,\n" \
-								u"se afectará el saldo de la partida agregada." % estatusch, u"Atención")
+								u"se afectarï¿½ el saldo de la partida agregada." % estatusch, u"Atenciï¿½n")
 			for partidaid in (partida, subpartida1, subpartida2, subpartida3, subpartida4, subpartida5):
 				if partidaid < 0:
 					break
 				elif not self.ActualizaSaldoPartida(self.idcheque, partidaid, fechaprogramada, cantidad):
-						Mensajes().Info(self, u"¡ Se detectaron problemas al actualizar partidas !\n\n" \
+						Mensajes().Info(self, u"ï¿½ Se detectaron problemas al actualizar partidas !\n\n" \
 										u"Solicitud: %s, Partida: %s, Fecha Programada: %s, Cantidad: %s\n\n" \
-										u"¡ Tome nota y revise !" \
-										% (idcheque, partidaid, fechaprogramada, cantidad), u"Atención")
+										u"ï¿½ Tome nota y revise !" \
+										% (idcheque, partidaid, fechaprogramada, cantidad), u"Atenciï¿½n")
 		if not update:
 			contenido = u"Se agrega nueva partida %s" % idchequepartida
 			sql = """
@@ -17336,7 +17337,7 @@ Estatus de la solicitud: %s
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return True
 				
@@ -17347,15 +17348,15 @@ Estatus de la solicitud: %s
 		row = fetchone(cu)[0]
 		cu.close()
 		if int(row) > 1:
-			if Mensajes().YesNo(self,u"¿ Desea realmente eliminar la partida %s ?" % self.idpartida, u"Confirmación"):
+			if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar la partida %s ?" % self.idpartida, u"Confirmaciï¿½n"):
 				if self.EliminarPartida():
 					self.FillListCtrlPartidas()
 		elif int(row) == 1:
 			Mensajes().Info(self, u"No es posible eliminar la partida, recuerde que la solicitud\n" \
 							u"debe al menos afectar a una partida.\n" \
-							u"Si la partida no es la correcta, entonces modifiquela.", u"Atención")
+							u"Si la partida no es la correcta, entonces modifiquela.", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"¡ No hay partida que afectar !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No hay partida que afectar !", u"Atenciï¿½n")
 			
 	def EliminarPartida(self, update = False):
 		estatusch = self.GetControl(self.idchestatus).GetStringSelection()
@@ -17367,8 +17368,8 @@ Estatus de la solicitud: %s
 			except:
 				Mensajes().Info(self, u"Problemas con la fecha al actualizar saldos.\n\n" \
 								u"Solicitud: %s, Fecha Programada: %s\n\n" \
-								u"¡ No fué afectada la partida, tome nota y revise !" \
-								% (self.idcheque, self.fechaprogramada), u"Atención")
+								u"ï¿½ No fuï¿½ afectada la partida, tome nota y revise !" \
+								% (self.idcheque, self.fechaprogramada), u"Atenciï¿½n")
 				return False
 			sql = """
 			select partida, subpartida1, subpartida2, subpartida3, subpartida4, subpartida5, cantidad
@@ -17383,15 +17384,15 @@ Estatus de la solicitud: %s
 			cantidad = float(row[6]) * float(-1)
 			if not update:
 				Mensajes().Info(self, u"La solicitud se encuentra en estatus de %s, por lo tanto,\n" \
-								u"se afectará el saldo de la partida eliminada." % estatusch, u"Atención")
+								u"se afectarï¿½ el saldo de la partida eliminada." % estatusch, u"Atenciï¿½n")
 			for partidaid in (partida, subpartida1, subpartida2, subpartida3, subpartida4, subpartida5):
 				if partidaid < 0:
 					break
 				elif not self.ActualizaSaldoPartida(self.idcheque, partidaid, fechaprogramada, cantidad):
-						Mensajes().Info(self, u"¡ Se detectaron problemas al actualizar partidas !\n\n" \
+						Mensajes().Info(self, u"ï¿½ Se detectaron problemas al actualizar partidas !\n\n" \
 										u"Solicitud: %s, Partida: %s, Fecha Programada: %s, Cantidad: %s\n\n" \
-										u"¡ Tome nota y revise !" \
-										% (self.idcheque, partidaid, fechaprogramada, cantidad), u"Atención")
+										u"ï¿½ Tome nota y revise !" \
+										% (self.idcheque, partidaid, fechaprogramada, cantidad), u"Atenciï¿½n")
 		if not update:
 			try:
 				sql = "delete from gixegresoschequespartidas where idchequepartida = %s" % self.idpartida
@@ -17401,17 +17402,17 @@ Estatus de la solicitud: %s
 				r_cn.commit()
 			except:
 				r_cn.rollback()
-				Mensajes().Info(self, u"Sucedió algo que impidió eliminar la partida %s\n\n%s" \
-								% (self.idpartida, sql), u"Atención")
+				Mensajes().Info(self, u"Sucediï¿½ algo que impidiï¿½ eliminar la partida %s\n\n%s" \
+								% (self.idpartida, sql), u"Atenciï¿½n")
 				return False
 			
-			contenido = u"Eliminación de la partida %s" % self.idpartida
+			contenido = u"Eliminaciï¿½n de la partida %s" % self.idpartida
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText,
 			ContenidoBinario, Extension) values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return True
 	
@@ -17445,7 +17446,7 @@ Estatus de la solicitud: %s
 				self.EditRecord()
 				self.RevisaCambios()
 		else:
-			Mensajes().Info(self, u"No se encontro la partida elegida\n\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"No se encontro la partida elegida\n\n%s" % sql, u"Atenciï¿½n")
 		event.Skip()
 
 	def FillListCtrlPartidas(self, display = 'first'):
@@ -17614,13 +17615,13 @@ Estatus de la solicitud: %s
 				self.GetControl(self.idtgbeneficiariodevolucion).SetValue(True)
 				if self.devolucionsaldo:
 					self.GetControl(self.idtgbeneficiariodevolucion).Enable(False)
-				self.ToggleBeneficiarioDevolucion(u"Devolución", u"Utilizar esta Solicitud de Cheque para Devolución de " \
+				self.ToggleBeneficiarioDevolucion(u"Devoluciï¿½n", u"Utilizar esta Solicitud de Cheque para Devoluciï¿½n de " \
 				                                  u"Saldo a Favor", True, False)
 				self.ObtenerBeneficiarios(False)
 			else:
 				self.GetControl(self.idtgbeneficiariodevolucion).SetValue(False)
 				self.ToggleBeneficiarioDevolucion(u"Solicitud", u"Utilizar esta Solicitud de Cheque por Concepto " \
-												  u"Diferente a Devolución de Saldo a Favor", False, True)
+												  u"Diferente a Devoluciï¿½n de Saldo a Favor", False, True)
 				self.ObtenerBeneficiarios()
 			self.DespliegaCombo(self.idcbbeneficiario, self.idbeneficiario)
 			wx.EndBusyCursor()
@@ -17883,10 +17884,10 @@ Estatus de la solicitud: %s
 			   str(plazadestino) != row[4].strip() or str(clavebancariadestino) != row[5].strip():
 				if Mensajes().YesNo(self, u"Especificaciones del beneficiario:\n%s\n\n" \
 									u"Banco: %s\nSucursal: %s\nPlaza: %s\nClave Bancaria: %s\n\n" \
-									u"¿ Desea utilizar las especificaciones registradas del beneficiario\n" \
+									u"ï¿½ Desea utilizar las especificaciones registradas del beneficiario\n" \
 									u"para spei, transferencias o traspasos ?" \
 									% (nombre.strip(), row[2].strip(), row[3].strip(), row[4].strip(), row[5].strip()), \
-									u"Confirmación"):
+									u"Confirmaciï¿½n"):
 					self.GetControl(self.idtcbancodestino).SetValue(str(row[2]))
 					self.GetControl(self.idtcsucursaldestino).SetValue(str(row[3]))
 					self.GetControl(self.idtcplazadestino).SetValue(str(row[4]))
@@ -17895,7 +17896,7 @@ Estatus de la solicitud: %s
 				Mensajes().Info(self, u"Especificaciones del beneficiario:\n%s\n\n" \
 								u"Banco: %s\nSucursal: %s\nPlaza: %s\nClave Bancaria: %s" \
 								% (nombre.strip(), row[2].strip(), row[3].strip(), row[4].strip(), row[5].strip()), \
-								u"Información")
+								u"Informaciï¿½n")
 		else:
 			self.GetControl(self.idtcbancodestino).SetValue("")
 			self.GetControl(self.idtcsucursaldestino).SetValue("")
@@ -17930,10 +17931,10 @@ Estatus de la solicitud: %s
 			   str(plazadestino) != row[4].strip() or str(clavebancariadestino) != row[5].strip():
 				if Mensajes().YesNo(self, u"Especificaciones del beneficiario:\n%s\n\n" \
 									u"Banco: %s\nSucursal: %s\nPlaza: %s\nCuenta: %s\n\n" \
-									u"¿ Desea utilizar las especificaciones registradas del beneficiario\n" \
+									u"ï¿½ Desea utilizar las especificaciones registradas del beneficiario\n" \
 									u"para deposito en cuenta de cheques ?" \
 									% (nombre.strip(), row[2].strip(), row[3].strip(), row[4].strip(), row[5].strip()), \
-									u"Confirmación"):
+									u"Confirmaciï¿½n"):
 					self.GetControl(self.idtcbancodestino).SetValue(str(row[2]))
 					self.GetControl(self.idtcsucursaldestino).SetValue(str(row[3]))
 					self.GetControl(self.idtcplazadestino).SetValue(str(row[4]))
@@ -17942,7 +17943,7 @@ Estatus de la solicitud: %s
 				Mensajes().Info(self, u"Especificaciones del beneficiario:\n%s\n\n" \
 								u"Banco: %s\nSucursal: %s\nPlaza: %s\nCuenta: %s" \
 								% (nombre.strip(), row[2].strip(), row[3].strip(), row[4].strip(), row[5].strip()), \
-								u"Información")
+								u"Informaciï¿½n")
 		else:
 			self.GetControl(self.idtcbancodestino).SetValue("")
 			self.GetControl(self.idtcsucursaldestino).SetValue("")
@@ -18075,8 +18076,8 @@ Estatus de la solicitud: %s
 						control.SetBackgroundColour(wx.Colour(153,255,153))
 						control.SetForegroundColour(wx.NamedColour("BLACK"))
 						control.SetValue("0.00")
-						Mensajes().Info(self, u"¡ La fecha inicial no debe ser mayor a la fecha final !", \
-										u"Atención: Revise el rango de la fecha de captura")
+						Mensajes().Info(self, u"ï¿½ La fecha inicial no debe ser mayor a la fecha final !", \
+										u"Atenciï¿½n: Revise el rango de la fecha de captura")
 						return
 					else:
 						self.fechacapturafiltro = "(ch.fechacaptura >= %s and ch.fechacaptura <= %s)" \
@@ -18102,8 +18103,8 @@ Estatus de la solicitud: %s
 						control.SetBackgroundColour(wx.Colour(153,255,153))
 						control.SetForegroundColour(wx.NamedColour("BLACK"))
 						control.SetValue("0.00")
-						Mensajes().Info(self, u"¡ La fecha inicial no debe ser mayor a la fecha final !", \
-										u"Atención: Revise el rango de la fecha programada")
+						Mensajes().Info(self, u"ï¿½ La fecha inicial no debe ser mayor a la fecha final !", \
+										u"Atenciï¿½n: Revise el rango de la fecha programada")
 						return
 					else:
 						if countfiltros > 0: y = "and"
@@ -18132,7 +18133,7 @@ Estatus de la solicitud: %s
 				self.beneficiariofiltro = "%s be.nombre like '%s%s%s'" % (y, "%%", beneficiario, "%%")
 				countfiltros += 1
 		estatus = self.GetControl(self.idchestatusfiltro).GetStringSelection()
-		if estatus == u"Proyección":
+		if estatus == u"Proyecciï¿½n":
 			filtro = "ch.estatus in ('S', 'R', 'A', 'E', 'T')"
 		else:
 			if estatus == "<Todo>":
@@ -18318,7 +18319,7 @@ Estatus de la solicitud: %s
 				self.RecalculaSaldos()
 				if self.selecteditems:
 					estatus = self.GetControl(self.idchestatusfiltro).GetStringSelection()
-					if estatus == u"Proyección":
+					if estatus == u"Proyecciï¿½n":
 						self.GetControl(self.idbtfirmanteslistctrl).Enable(False)
 						self.GetControl(self.idbtfondearlistctrl).Enable(False)
 					else:
@@ -18406,8 +18407,8 @@ Estatus de la solicitud: %s
 			self.NewFlag = False
 			self.Text(True)
 			if not self.NewFlag:
-				if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?", \
-						    u"Confirmación"):
+				if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?", \
+						    u"Confirmaciï¿½n"):
 					self.AceptarDetalle()
 					
 		if self.datointernoynombre:
@@ -18438,7 +18439,7 @@ Estatus de la solicitud: %s
 				self.GetControl(self.idbtcambiarestatus).Enable(False)
 			self.editable = True
 		else:
-			Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+			Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		
 	def GetLFRecord(self, what):
 		lctrl = self.GetControl(self.idlc)
@@ -18477,7 +18478,7 @@ Estatus de la solicitud: %s
 		valor = ctrl.GetValue().encode("iso8859-1")
 		valornum = str(valor).replace('.','')
 		if valor and not valornum.isdigit():
-			if valor not in (",", ".", "#", "&", "!", "¡", "?", "¿", "/", "(", ")", "$", "'"):
+			if valor not in (",", ".", "#", "&", "!", "ï¿½", "?", "ï¿½", "/", "(", ")", "$", "'"):
 				if not str(valor).isupper():
 					ctrl.SetValue(str(valor).upper())
 					lastposition = ctrl.GetLastPosition()
@@ -18563,11 +18564,11 @@ Estatus de la solicitud: %s
 						self.ValidaBeneficiario(id, texto)
 					else:
 						if spei and not self.estoyenobtenerbancobeneficiario:
-							Mensajes().Info(self, u"¡ No debe quedar ningún dato requerido * en blanco !\n\n" \
-											u"Revise también las especificaciones de %s,\n" \
-											u"recuerde que también son requeridas." % especificacion, u"Atención")
+							Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato requerido * en blanco !\n\n" \
+											u"Revise tambiï¿½n las especificaciones de %s,\n" \
+											u"recuerde que tambiï¿½n son requeridas." % especificacion, u"Atenciï¿½n")
 						else:
-							Mensajes().Info(self, u"¡ No debe quedar ningún dato requerido * en blanco !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato requerido * en blanco !", u"Atenciï¿½n")
 					return
 			if id == self.idtccantidad:
 				cantidad = control.GetValue().strip()
@@ -18575,14 +18576,14 @@ Estatus de la solicitud: %s
 					try:
 						if str(cantidad)[-1:] != ".":
 							if not str(cantidad)[-1:].isdigit():
-								Mensajes().Info(self, u"¡ La cantidad debe ser numérica !", u"Atención")
+								Mensajes().Info(self, u"ï¿½ La cantidad debe ser numï¿½rica !", u"Atenciï¿½n")
 								control.SetValue(str(cantidad)[:-1])
 								control.SetSelection(-1,-1)
 								return
 							else:
 								self.GetControl(self.idtxcantidad).SetLabel(str(c2p(cantidad).texto()))
 					except:
-						Mensajes().Info(self, u"¡ La cantidad debe ser numérica !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La cantidad debe ser numï¿½rica !", u"Atenciï¿½n")
 						control.SetValue("")
 						control.SetSelection(-1,-1)
 						return
@@ -18591,7 +18592,7 @@ Estatus de la solicitud: %s
 					if not self.FillingARecord and not self.NewFlag:
 						self.NewFlag = True
 						if not VengodelaLista:
-							Mensajes().Info(self, u"¡ La cantidad no debe quedar en blanco !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ La cantidad no debe quedar en blanco !", u"Atenciï¿½n")
 							return
 		if not self.FillingARecord:
 			id = self.controlactual
@@ -18888,7 +18889,7 @@ Estatus de la solicitud: %s
 				except:
 					pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 		
 	def PreparaQuery(self, sql):
 		sqlx = sql.replace('\t', ' '); sql = sqlx.replace('\n', ' ')
@@ -18915,7 +18916,7 @@ Estatus de la solicitud: %s
 		concepto = self.GetControl(self.idtcconcepto).GetValue().strip()
 		if len(concepto) > 100:
 			concepto = concepto[0:100]
-			Mensajes().Info(self, u"¡ Intente abreviar !\n\nHa sido recortado el concepto\n\n%s" % concepto, u"Atención")
+			Mensajes().Info(self, u"ï¿½ Intente abreviar !\n\nHa sido recortado el concepto\n\n%s" % concepto, u"Atenciï¿½n")
 		cantidad = float(self.totalcheque)
 		querycantidadcheque = ""
 		if (estatus != self.estatus and estatus == "E"):
@@ -18928,9 +18929,9 @@ Estatus de la solicitud: %s
 		anexoadicional = self.GetControl(self.idtcanexoadicional).GetValue().strip()
 		if len(anexoadicional) > 50:
 			anexoadicional = anexoadicional[0:50]
-			Mensajes().Info(self, u"¡ Intente abreviar !\n\n" \
+			Mensajes().Info(self, u"ï¿½ Intente abreviar !\n\n" \
 							u"Han sido recortadas las observaciones adicionales del anexo\n\n%s"
-							% anexoadicional, u"Atención")
+							% anexoadicional, u"Atenciï¿½n")
 		especificaciones = self.GetControl(self.idchespecificaciones).GetStringSelection()
 		if especificaciones == "Cheque": especificaciones = "N"
 		elif especificaciones == "Cheque Certificado": especificaciones = "E"
@@ -18950,8 +18951,8 @@ Estatus de la solicitud: %s
 		observaciones = self.GetControl(self.idtcobservaciones).GetValue().strip()
 		if len(observaciones) > 100:
 			observaciones = observaciones[0:100]
-			Mensajes().Info(self, u"¡ Intente abreviar !\n\n" \
-							u"Han sido recortadas las observaciones\n\n%s" % observaciones, u"Atención")
+			Mensajes().Info(self, u"ï¿½ Intente abreviar !\n\n" \
+							u"Han sido recortadas las observaciones\n\n%s" % observaciones, u"Atenciï¿½n")
 		devolucion = "N"
 		if self.GetControl(self.idtgbeneficiariodevolucion).GetValue():
 			devolucion = "S"
@@ -18969,23 +18970,23 @@ Estatus de la solicitud: %s
 		queTal = self.QueryUpdateRecord(sql)
 		if queTal:
 			if self.originales[self.idchestatus] != estatusch:
-				contenido = u"%s, edición del registro" % estatusch
+				contenido = u"%s, ediciï¿½n del registro" % estatusch
 				if queryfondeo and self.idfondeo > 0:
 					wx.BeginBusyCursor()
 					todook = self.LiberarRecursos(cantidad, fechaprogramada)
 					wx.EndBusyCursor()
 					if todook:
 						# (aa).- Actualmente no se afecta el banco.
-						#Mensajes().Info(self,u"¡ Ha retenido la solicitud, por lo tanto, ha liberado recursos !\n\n" \
+						#Mensajes().Info(self,u"ï¿½ Ha retenido la solicitud, por lo tanto, ha liberado recursos !\n\n" \
 										#u"Fueron afectadas las partidas y/o subpartidas que se incluyen\n" \
 										#u"en la solicitud y eliminado el movimiento de cargo de la cuenta\n" \
-										#u"origen, afectando por consecuencia, el saldo de la misma.", u"Atención")
-						Mensajes().Info(self,u"¡ Ha retenido la solicitud, por lo tanto, ha liberado recursos !\n\n" \
+										#u"origen, afectando por consecuencia, el saldo de la misma.", u"Atenciï¿½n")
+						Mensajes().Info(self,u"ï¿½ Ha retenido la solicitud, por lo tanto, ha liberado recursos !\n\n" \
 										u"Fueron afectadas las partidas y/o subpartidas que se incluyen\n" \
-										u"en la solicitud.", u"Atención")
+										u"en la solicitud.", u"Atenciï¿½n")
 			else:
 				estatus = ""
-				contenido = u"Edición del registro"
+				contenido = u"Ediciï¿½n del registro"
 				
 			if devolucion == "N":
 				if self.codigodocumentooriginal:
@@ -18993,7 +18994,7 @@ Estatus de la solicitud: %s
 					update DOCUMENTO set idcheque = 0 where codigo in (%s)
 					""" % (",".join(map(str, self.codigodocumentooriginal)),)
 					if not self.QueryUpdateRecord(sql):
-						Mensajes().Info(self, u"Problemas al actualizar el documento.\n\n%s" % sql, u"Atención-A")
+						Mensajes().Info(self, u"Problemas al actualizar el documento.\n\n%s" % sql, u"Atenciï¿½n-A")
 			else:
 				if self.codigodocumentooriginal:
 					if self.codigodocumento:
@@ -19001,25 +19002,25 @@ Estatus de la solicitud: %s
 						update DOCUMENTO set idcheque = 0 where codigo in (%s)
 						""" % (",".join(map(str, self.codigodocumentooriginal)),)
 						if not self.QueryUpdateRecord(sql):
-							Mensajes().Info(self, u"Problemas al actualizar el documento.\n\n%s" % sql, u"Atención-B")
+							Mensajes().Info(self, u"Problemas al actualizar el documento.\n\n%s" % sql, u"Atenciï¿½n-B")
 						sql = """
 						update DOCUMENTO set idcheque = %s where codigo in (%s)
 						""" % (self.idcheque, ",".join(map(str, self.codigodocumento)),)
 						if not self.QueryUpdateRecord(sql):
-							Mensajes().Info(self, u"Problemas al actualizar el documento.\n\n%s" % sql, u"Atención-C")
+							Mensajes().Info(self, u"Problemas al actualizar el documento.\n\n%s" % sql, u"Atenciï¿½n-C")
 				else:
 					sql = """
 					update DOCUMENTO set idcheque = %s where codigo in (%s)
 					""" % (self.idcheque, ",".join(map(str, self.codigodocumento)),)
 					if not self.QueryUpdateRecord(sql):
-						Mensajes().Info(self, u"Problemas al actualizar el documento.\n\n%s" % sql, u"Atención-D")
+						Mensajes().Info(self, u"Problemas al actualizar el documento.\n\n%s" % sql, u"Atenciï¿½n-D")
 			
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "", estatus)
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -19034,7 +19035,7 @@ Estatus de la solicitud: %s
 			fechamovto = "'%04d/%02d/%02d'" % (fecha_ano, fecha_mes, fecha_dia)
 			periodo = "'%04d/%02d/01'" % (fecha_ano, fecha_mes)
 		except:
-			Mensajes().Info(self, u"Problemas con la fecha al agregar movimientos", u"Atención")
+			Mensajes().Info(self, u"Problemas con la fecha al agregar movimientos", u"Atenciï¿½n")
 			return False
 		self.ActualizaFondeos()
 		totalchequedummy = self.ActualizaPartidas(idcheque, fechaprogramada, sumaoresta = -1)
@@ -19047,15 +19048,15 @@ Estatus de la solicitud: %s
 			#r_cn.commit()
 		#except:
 			#r_cn.rollback()
-			#Mensajes().Info(self,u"Sucedió algo que impidió eliminar el movimiento de banco.\n%s" \
-							#% sql, u"Atención")
+			#Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar el movimiento de banco.\n%s" \
+							#% sql, u"Atenciï¿½n")
 		
 		#todook = self.ActualizarSaldoBanco(idbanco, periodo, cantidad, fecha_mes, fecha_ano, tipomovto)
 		#if not todook:
-			#Mensajes().Info(self, u"¡ Se detectaron problemas al actualizar bancos !\n\n" \
+			#Mensajes().Info(self, u"ï¿½ Se detectaron problemas al actualizar bancos !\n\n" \
 							#u"Solicitud: %s, Fecha Programada: %s, Total Cheque: %s" \
-							#u", Movimiento de Banco: %s\n\n¡ Tome nota y revise !" \
-							#% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atención")
+							#u", Movimiento de Banco: %s\n\nï¿½ Tome nota y revise !" \
+							#% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atenciï¿½n")
 		return todook
 	
 	def ActualizaFondeos(self):
@@ -19073,8 +19074,8 @@ Estatus de la solicitud: %s
 				r_cn.commit()
 			except:
 				r_cn.rollback()
-				Mensajes().Info(self,u"Sucedió algo que impidió eliminar el registro de fondeos.\n%s" \
-				                % sql, u"Atención")
+				Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar el registro de fondeos.\n%s" \
+				                % sql, u"Atenciï¿½n")
 		
 	def AddRecord(self):
 		f_dia, f_mes, f_ano = self.GetControl(self.idtcfechacaptura).GetValue().split('/')
@@ -19087,7 +19088,7 @@ Estatus de la solicitud: %s
 		concepto = self.GetControl(self.idtcconcepto).GetValue().strip()
 		if len(concepto) > 100:
 			concepto = concepto[0:100]
-			Mensajes().Info(self, u"¡ Intente abreviar !\n\nHa sido recortado el concepto\n\n%s" % concepto, u"Atención")
+			Mensajes().Info(self, u"ï¿½ Intente abreviar !\n\nHa sido recortado el concepto\n\n%s" % concepto, u"Atenciï¿½n")
 		cantidad = self.GetControl(self.idtccantidad).GetValue()
 		anexo = self.GetControl(self.idchanexo).GetStringSelection()
 		if anexo == "Factura": anexo = "F"
@@ -19097,9 +19098,9 @@ Estatus de la solicitud: %s
 		anexoadicional = self.GetControl(self.idtcanexoadicional).GetValue().strip()
 		if len(anexoadicional) > 50:
 			anexoadicional = anexoadicional[0:50]
-			Mensajes().Info(self, u"¡ Intente abreviar !\n\n" \
+			Mensajes().Info(self, u"ï¿½ Intente abreviar !\n\n" \
 							u"Han sido recortadas las observaciones adicionales del anexo\n\n%s"
-							% anexoadicional, u"Atención")
+							% anexoadicional, u"Atenciï¿½n")
 		especificaciones = self.GetControl(self.idchespecificaciones).GetStringSelection()
 		if especificaciones == "Cheque": especificaciones = "N"
 		elif especificaciones == "Cheque Certificado": especificaciones = "E"
@@ -19118,8 +19119,8 @@ Estatus de la solicitud: %s
 		observaciones = self.GetControl(self.idtcobservaciones).GetValue().strip()
 		if len(observaciones) > 100:
 			observaciones = observaciones[0:100]
-			Mensajes().Info(self, u"¡ Intente abreviar !\n\n" \
-							u"Han sido recortadas las observaciones\n\n%s" % observaciones, u"Atención")
+			Mensajes().Info(self, u"ï¿½ Intente abreviar !\n\n" \
+							u"Han sido recortadas las observaciones\n\n%s" % observaciones, u"Atenciï¿½n")
 		devolucion = "N"
 		if self.GetControl(self.idtgbeneficiariodevolucion).GetValue():
 			devolucion = "S"
@@ -19145,7 +19146,7 @@ Estatus de la solicitud: %s
 			if identity is not None:
 				numero = identity
 			else:
-				Mensajes().Info(self, u"Problemas al buscar nueva solicitud.\n\n%s" % sqlmax, u"Atención")
+				Mensajes().Info(self, u"Problemas al buscar nueva solicitud.\n\n%s" % sqlmax, u"Atenciï¿½n")
 				
 			if devolucion == "S":
 				if self.codigodocumento:
@@ -19153,9 +19154,9 @@ Estatus de la solicitud: %s
 					update DOCUMENTO set idcheque = %s where codigo in (%s)
 					""" % (numero, ",".join(map(str, self.codigodocumento)),)
 					if not self.QueryUpdateRecord(sql):
-						Mensajes().Info(self, u"Problemas al actualizar el documento.\n\n%s" % sql, u"Atención")
+						Mensajes().Info(self, u"Problemas al actualizar el documento.\n\n%s" % sql, u"Atenciï¿½n")
 				else:
-					Mensajes().Info(self, u"Elija el documento para la devolución.", u"Atención")
+					Mensajes().Info(self, u"Elija el documento para la devoluciï¿½n.", u"Atenciï¿½n")
 			
 			self.GetControl(self.idtcidcheque).SetValue(str(numero))
 			sqly = "select convert(varchar(100), BlogGUID) from %s where idcheque = %s" % (self.dbtable, numero)
@@ -19172,27 +19173,27 @@ Estatus de la solicitud: %s
 			""" % (numero, self.centrocostoid, self.partida, self.subpartida1, self.subpartida2,
 				   self.subpartida3, self.subpartida4, self.subpartida5, float(cantidad))
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar las partidas.\n\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar las partidas.\n\n%s" % sql, u"Atenciï¿½n")
 			sql = """
 			insert into Blogs 
 			(BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, "Solicitud de Cheque", "", "", "S")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atenciï¿½n")
 
 		return queTal, int(numero)
 	
 	def OnDeleteRecord(self, event):
 		id = self.GetControl(self.idtcid).GetValue()
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?" % id, u"Confirmación"):
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?" % id, u"Confirmaciï¿½n"):
 			if self.DeleteRecord():
 				sql = """
 				insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 				values ('%s', getdate(), '%s', '%s', '%s', '%s')
-				""" % (self.BlogGUID, self.usuario, u"Eliminación del Registro", "", "")
+				""" % (self.BlogGUID, self.usuario, u"Eliminaciï¿½n del Registro", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 				self.FillListCtrl()
 				self.GetControl(self.saveformbtn).Enable(False)
 				self.GetControl(self.addlistctrlbtn).Enable(True)
@@ -19203,7 +19204,7 @@ Estatus de la solicitud: %s
 	def DeleteRecord(self):
 		idreferenciadetalle = self.idreferenciadetalle.GetValue().strip()
 		if idreferenciadetalle == "":
-			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atenciï¿½n")
 			return False
 		sql = "update %s set eliminado = 'S' where idreferenciadetalle = %s" % (self.dbtable, idreferenciadetalle)
 		return self.QueryUpdateRecord(sql)
@@ -19661,17 +19662,17 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 	
 	def OnFondear(self, event):
 		#if self.saldofinaldisponible < 0:
-			#Mensajes().Info(self, u"¡ Petición de fondeo de cheques cancelada !\n\n" \
+			#Mensajes().Info(self, u"ï¿½ Peticiï¿½n de fondeo de cheques cancelada !\n\n" \
 							#u"No es posible llevar a cabo el fondeo de cheques mientras el\n" \
-							#u"saldo final se encuentre en rojo (saldo negativo).", u"Atención")
+							#u"saldo final se encuentre en rojo (saldo negativo).", u"Atenciï¿½n")
 		#else:
-		# lo que sigue va dentro del else. Adaptación para el fondeo inicial
+		# lo que sigue va dentro del else. Adaptaciï¿½n para el fondeo inicial
 		self.selecteditems.sort()
 		if len(self.selecteditems) > 1: char = "s"
 		else: char = ""
 		if Mensajes().YesNo(self,u"Egreso%s a Aplicar:\n%s\n\n" \
-							u"¿ Desea continuar ?" \
-							% (char, self.selecteditems), u"Confirmación"):
+							u"ï¿½ Desea continuar ?" \
+							% (char, self.selecteditems), u"Confirmaciï¿½n"):
 			self.Fondear()
 		self.GetControl(self.idlc).SetFocus()
 
@@ -19682,19 +19683,19 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 		row = fetchone(cu)
 		cu.close()
 		defaultvalue = u"Egreso aplicado el %s" % str(row[0])
-		dlg = wx.TextEntryDialog(self, u"Descripción", u"Aplicación del Egreso", "%s" % defaultvalue)
+		dlg = wx.TextEntryDialog(self, u"Descripciï¿½n", u"Aplicaciï¿½n del Egreso", "%s" % defaultvalue)
 		while True:
 			if dlg.ShowModal() == wx.ID_OK:
 				descripcion = dlg.GetValue()
 				if descripcion:
 					dlg.Destroy()
-					if Mensajes().YesNo(self,u"Recuerde que al llevar a cabo la aplicación, se afectarán " \
+					if Mensajes().YesNo(self,u"Recuerde que al llevar a cabo la aplicaciï¿½n, se afectarï¿½n " \
 					                        u"las partidas y/o subpartidas que se\nincluyan en los egresos " \
 					                        u"elegidos a ser aplicados.\n\n" \
-					                        u"También serán generados los movimientos de cargo, los cuales, " \
-					                        u"afectarán directamente\na las cuentas del banco (emisoras del egreso), " \
+					                        u"Tambiï¿½n serï¿½n generados los movimientos de cargo, los cuales, " \
+					                        u"afectarï¿½n directamente\na las cuentas del banco (emisoras del egreso), " \
 					                        u"asi como al saldo de las mismas.\n\n" \
-					                        u"¿ Desea realmente llevar a cabo la aplicación del egreso ?", u"Confirmación"):
+					                        u"ï¿½ Desea realmente llevar a cabo la aplicaciï¿½n del egreso ?", u"Confirmaciï¿½n"):
 						biengrabado, idfondeo = self.AgregaFondeo(descripcion)
 						if biengrabado:
 							self.AplicaFondeo(idfondeo)
@@ -19702,9 +19703,9 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 							self.GetControl(self.idbtfondearlistctrl).Enable(False)
 							self.GetControl(self.idbteditarlistctrl).Enable(False)
 							self.GetControl(self.idbtcancelarlistctrl).Enable(False)
-							Mensajes().Info(self, u"Aplicación del egreso finalizada", u"Aviso")
+							Mensajes().Info(self, u"Aplicaciï¿½n del egreso finalizada", u"Aviso")
 						else:
-							Mensajes().Info(self, u"¡ No fué posible llevar a cabo la aplicación del egreso !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ No fuï¿½ posible llevar a cabo la aplicaciï¿½n del egreso !", u"Atenciï¿½n")
 						self.GetControl(self.idlc).SetFocus()
 						break
 					else:
@@ -19712,7 +19713,7 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 						break
 				else:
 					Mensajes().Info(self, u"Para continuar es necesario que digite\n" \
-									u"la descripción de la aplicación del egreso.", u"Atención")
+									u"la descripciï¿½n de la aplicaciï¿½n del egreso.", u"Atenciï¿½n")
 					dlg.SetValue(defaultvalue)
 			else:
 				dlg.Destroy()
@@ -19763,9 +19764,9 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 				insert into Blogs
 				(BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 				values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
-				""" % (blogcheque, self.usuario, u"Aplicación del Egreso", "", "", "P")
+				""" % (blogcheque, self.usuario, u"Aplicaciï¿½n del Egreso", "", "", "P")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 				totalcheque = self.ActualizaPartidas(idcheque, fechaprogramada)
 				# (aa).- Lo siguiente genera el movimiento (cargo) afectando la cuenta-banco y el saldo.
 				if totalcheque:
@@ -19773,10 +19774,10 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 						  self.AgregaMovimientoBanco(idcheque, fechaprogramada, cantidad,\
 													 especificaciones, referencia = concepto)
 					if not todook:
-						Mensajes().Info(self, u"¡ Se detectaron problemas al actualizar bancos !\n\n" \
+						Mensajes().Info(self, u"ï¿½ Se detectaron problemas al actualizar bancos !\n\n" \
 										u"Egreso: %s, Fecha del Movimiento: %s, Total del Egreso: %s" \
-										u", Movimiento de Banco: %s\n\n¡ Tome nota y revise !" \
-										% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atención")
+										u", Movimiento de Banco: %s\n\nï¿½ Tome nota y revise !" \
+										% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atenciï¿½n")
 					elif idreferenciamovto > 0:
 						setList = "idreferenciamovto = %s" % (idreferenciamovto)
 						sqlQuery = """
@@ -19784,15 +19785,15 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 						""" % (self.dbtable, setList, idcheque)
 						queTal = self.QueryUpdateRecord(sqlQuery)
 						if not queTal:
-							Mensajes().Info(self, u"¡ Se detectaron problemas al empatar bancos y egresos!\n\n" \
+							Mensajes().Info(self, u"ï¿½ Se detectaron problemas al empatar bancos y egresos!\n\n" \
 											u"Egreso: %s, Fecha del Movimiento: %s, Total del Egreso: %s" \
-											u", Movimiento de Banco: %s\n\n¡ Tome nota y revise !" \
-											% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atención")
+											u", Movimiento de Banco: %s\n\nï¿½ Tome nota y revise !" \
+											% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atenciï¿½n")
 					else:
-						Mensajes().Info(self, u"¡ Se detectaron problemas al empatar bancos y egresos!\n\n" \
+						Mensajes().Info(self, u"ï¿½ Se detectaron problemas al empatar bancos y egresos!\n\n" \
 										u"Egreso: %s, Fecha del Movimiento: %s, Total del Egreso: %s" \
-										u", Movimiento de Banco: %s\n\n¡ Tome nota y revise !" \
-										% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atención")
+										u", Movimiento de Banco: %s\n\nï¿½ Tome nota y revise !" \
+										% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atenciï¿½n")
 						
 		wx.EndBusyCursor()
 	
@@ -19815,10 +19816,10 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 					if partidaid < 0:
 						break
 					elif not self.ActualizaSaldoPartida(idcheque, partidaid, fechaprogramada, cantidad):
-							Mensajes().Info(self, u"¡ Se detectaron problemas al actualizar partidas !\n\n" \
+							Mensajes().Info(self, u"ï¿½ Se detectaron problemas al actualizar partidas !\n\n" \
 											u"Egreso: %s, Partida: %s, Fecha del Movimiento: %s, Cantidad: %s\n\n" \
-											u"¡ Tome nota y revise !" \
-											% (idcheque, partidaid, fechaprogramada, cantidad), u"Atención")
+											u"ï¿½ Tome nota y revise !" \
+											% (idcheque, partidaid, fechaprogramada, cantidad), u"Atenciï¿½n")
 		return totalcheque
 	
 	def ActualizaSaldoPartida(self, idcheque, partidaid, fechaprogramada, cantidad, periodo = "", updateok = True):
@@ -19829,8 +19830,8 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 		except:
 			Mensajes().Info(self, u"Problemas con la fecha al actualizar saldos.\n" \
 							u"Egreso: %s, Partida: %s, Fecha del Movimiento: %s, Periodo: %s\n\n" \
-							u"¡ No fué afectada la partida, tome nota y revise !" \
-							% (idcheque, partidaid, fechaprogramada, periodo), u"Atención")
+							u"ï¿½ No fuï¿½ afectada la partida, tome nota y revise !" \
+							% (idcheque, partidaid, fechaprogramada, periodo), u"Atenciï¿½n")
 			return False
 		
 		sql = """
@@ -19863,7 +19864,7 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 				""" % (float(totalcargos), partidaid, periodo)
 				updateok = self.QueryUpdateRecord(sql)
 		except:
-			Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atenciï¿½n")
 			return False
 		
 		if updateok:
@@ -19910,11 +19911,11 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 						saldo = float(row[0])
 						break
 				except:
-					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n\n%s" % sql, u"Atención")
+					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n\n%s" % sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 			
 		return todobien, saldo
@@ -19965,11 +19966,11 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 							break
 				except:
 					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n%s" \
-							% sql, u"Atención")
+							% sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar último periodo\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar ï¿½ltimo periodo\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 		
 		return todobien
@@ -19985,7 +19986,7 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 			fechamovto = "'%04d/%02d/%02d'" % (fecha_ano, fecha_mes, fecha_dia)
 			periodo = "'%04d/%02d/01'" % (fecha_ano, fecha_mes)
 		except:
-			Mensajes().Info(self, u"Problemas con la fecha al agregar movimientos", u"Atención")
+			Mensajes().Info(self, u"Problemas con la fecha al agregar movimientos", u"Atenciï¿½n")
 			return False, 0
 		tipomovto = "C"
 		estatus = "F"
@@ -20017,7 +20018,7 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 			cu.close()
 			if row is not None:
 				self.BlogGUID = row[0]
-			comentario = u"Aplicación del Egreso No. %s" % idcheque
+			comentario = u"Aplicaciï¿½n del Egreso No. %s" % idcheque
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura,
 			ContenidoText, ContenidoBinario, Extension)
@@ -20025,7 +20026,7 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 			""" % (self.BlogGUID, self.usuario, comentario, "", "")
 			biengrabado, trash = self.QueryUpdateRecord(sql)
 			if not biengrabado:
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 
 		return queTal, int(numero)
 	
@@ -20073,7 +20074,7 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 				""" % (float(totalabonos), float(totalcargos), idbanco, periodo)
 				updateok = self.QueryUpdateRecord(sql)
 		except:
-			Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atenciï¿½n")
 			updateok = False
 			
 		updateok = self.ActualizaSaldosInicialesBanco(idbanco, fecha_mes, fecha_ano, saldosiguienteperiodo)
@@ -20120,11 +20121,11 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 						break
 				except:
 					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n%s" \
-							% sql, u"Atención")
+							% sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 			
 		return todobien, saldo
@@ -20177,11 +20178,11 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 							break
 				except:
 					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n%s" \
-							% sql, u"Atención")
+							% sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar último periodo\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar ï¿½ltimo periodo\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 		
 		return todobien
@@ -20306,7 +20307,7 @@ class GixEgresosOtros(wx.Frame, GixBase, GixBaseListCtrl):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 			else:
 				self.EnviaMail(comment)
 			
@@ -20379,10 +20380,10 @@ Estatus del egreso: %s
 			aborta = True
 			
 		if aborta:
-			Mensajes().Info(self, u"¡ Su participación en el blog no pudo ser notificada por e-mail !\n\n" \
+			Mensajes().Info(self, u"ï¿½ Su participaciï¿½n en el blog no pudo ser notificada por e-mail !\n\n" \
 							u"Usuario: %s\nNombre: %s\nArea: %s\nE-mail: %s\n\n" \
-							u"Por favor verifique la información anterior." \
-							% (self.usuario, usuarionombreblog, areablog, emailblog), "Atención")
+							u"Por favor verifique la informaciï¿½n anterior." \
+							% (self.usuario, usuarionombreblog, areablog, emailblog), "Atenciï¿½n")
 			return "", "", "", True
 		
 	def OnAceptarDetalle(self, event):
@@ -20413,10 +20414,10 @@ Estatus del egreso: %s
 			if q1 != q2:
 				totalpartidas = str(amount_and_cents_with_commas(cantidad))
 				totalcheque = str(amount_and_cents_with_commas(cantidadcheque))
-				Mensajes().Info(self, u"¡ Por favor revise las partidas !\n\n" \
+				Mensajes().Info(self, u"ï¿½ Por favor revise las partidas !\n\n" \
 								u"El total de las partidas $ %s no es igual a la cantidad\n" \
-								u"con la que se aplicó el egreso $ %s" \
-								% (totalpartidas, totalcheque), u"Atención")
+								u"con la que se aplicï¿½ el egreso $ %s" \
+								% (totalpartidas, totalcheque), u"Atenciï¿½n")
 				return False
 		if salirdetalle:
 			return True
@@ -20434,7 +20435,7 @@ Estatus del egreso: %s
 						if self.agregar:
 							if Mensajes().YesNo(self, u"Recuerde haber elegido correctamente la Empresa,\n" \
 												u"ya que no podra modificarse posteriormente.\n\n" \
-												u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+												u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 								self.SaveRecord()
 								return True
 						else:
@@ -20444,7 +20445,7 @@ Estatus del egreso: %s
 						self.SaveRecord()
 						return True
 			else:
-				Mensajes().Info(self, u"¡ Por favor revise la partida o subpartida que desea afectar !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Por favor revise la partida o subpartida que desea afectar !", u"Atenciï¿½n")
 				return False
 		
 		return False
@@ -20467,8 +20468,8 @@ Estatus del egreso: %s
 		else:
 			if Mensajes().YesNo(self, u"No se encuentra registrado el concepto:\n%s\n" \
 								u"Para continuar es necesario registrarlo.\n\n"
-								u"¿ Desea realmente registrar el nuevo concepto y grabar la información ?" \
-								% concepto, u"Confirmación"):
+								u"ï¿½ Desea realmente registrar el nuevo concepto y grabar la informaciï¿½n ?" \
+								% concepto, u"Confirmaciï¿½n"):
 				sql = "insert into gixegresosotros (descripcion) values ('%s')" % concepto
 				sqlmax = "select max(idreferenciaotros) from gixegresosotros"
 				queTal, identity =  self.QueryUpdateRecord(sql, sqlmax, True)
@@ -20498,8 +20499,8 @@ Estatus del egreso: %s
 			else:
 				if Mensajes().YesNo(self, u"No se encuentra registrado el beneficiario:\n%s\n" \
 									u"Para continuar es necesario registrarlo.\n\n"
-									u"¿ Desea realmente registrar el nuevo beneficiario y grabar la información ?" \
-									% beneficiario, u"Confirmación"):
+									u"ï¿½ Desea realmente registrar el nuevo beneficiario y grabar la informaciï¿½n ?" \
+									% beneficiario, u"Confirmaciï¿½n"):
 					sql = "insert into gixbeneficiarios (nombre) values ('%s')" % beneficiario
 					sqlmax = "select max(idbeneficiario) from gixbeneficiarios"
 					queTal, identity =  self.QueryUpdateRecord(sql, sqlmax, True)
@@ -20646,7 +20647,7 @@ Estatus del egreso: %s
 					lctrl = self.GetControl(self.idlc)
 					lctrl.SetItemState(self.currentitem, wx.LIST_STATE_SELECTED, wx.LIST_STATE_SELECTED)
 				else:
-					Mensajes().Info(self, u"Problemas al actualizar el total del cheque", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el total del cheque", u"Atenciï¿½n")
 		self.SalirDetalle()
 			
 	def SalirDetalle(self):
@@ -20728,14 +20729,14 @@ Estatus del egreso: %s
 			if self.AddPartida(update = True):
 				if self.estatus == "P":
 					Mensajes().Info(self, u"El egreso se encuentra en estatus de aplicado, por lo tanto,\n" \
-									u"se han afectado los saldos de las partidas.", u"Atención")
-				contenido = u"Edición de la partida %s" % self.idpartida
+									u"se han afectado los saldos de las partidas.", u"Atenciï¿½n")
+				contenido = u"Ediciï¿½n de la partida %s" % self.idpartida
 				sql = """
 				insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 				values ('%s', getdate(), '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, contenido, "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 	
 	def AddPartida(self, update = False):
 		partida = int(self.partida); subpartida1 = int(self.subpartida1); subpartida2 = int(self.subpartida2)
@@ -20753,7 +20754,7 @@ Estatus del egreso: %s
 			if not queTal:
 				return False
 			elif not idchequepartida:
-				Mensajes().Info(self, u"Problemas al buscar la nueva partida.\n\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al buscar la nueva partida.\n\n%s" % sql, u"Atenciï¿½n")
 				return False
 		else:
 			sql = """
@@ -20763,7 +20764,7 @@ Estatus del egreso: %s
 			""" % (int(self.centrocostoid), self.partida, self.subpartida1, self.subpartida2, self.subpartida3,
 				   self.subpartida4, self.subpartida5, float(cantidad), self.idpartida)
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar la partida.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar la partida.", u"Atenciï¿½n")
 				return False
 		
 		if self.estatus == "P":
@@ -20774,20 +20775,20 @@ Estatus del egreso: %s
 			except:
 				Mensajes().Info(self, u"Problemas con la fecha al actualizar saldos.\n\n" \
 								u"Egreso: %s, Fecha del Movimiento: %s\n\n" \
-								u"¡ No fué afectada la partida, tome nota y revise !" \
-								% (self.idcheque, self.fechaprogramada), u"Atención")
+								u"ï¿½ No fuï¿½ afectada la partida, tome nota y revise !" \
+								% (self.idcheque, self.fechaprogramada), u"Atenciï¿½n")
 				return False
 			if not update:
 				Mensajes().Info(self, u"El egreso se encuentra en estatus de aplicado, por lo tanto,\n" \
-								u"se afectará el saldo de la partida agregada.", u"Atención")
+								u"se afectarï¿½ el saldo de la partida agregada.", u"Atenciï¿½n")
 			for partidaid in (partida, subpartida1, subpartida2, subpartida3, subpartida4, subpartida5):
 				if partidaid < 0:
 					break
 				elif not self.ActualizaSaldoPartida(self.idcheque, partidaid, fechaprogramada, cantidad):
-						Mensajes().Info(self, u"¡ Se detectaron problemas al actualizar partidas !\n\n" \
+						Mensajes().Info(self, u"ï¿½ Se detectaron problemas al actualizar partidas !\n\n" \
 										u"Egreso: %s, Partida: %s, Fecha del Movimiento: %s, Cantidad: %s\n\n" \
-										u"¡ Tome nota y revise !" \
-										% (idcheque, partidaid, fechaprogramada, cantidad), u"Atención")
+										u"ï¿½ Tome nota y revise !" \
+										% (idcheque, partidaid, fechaprogramada, cantidad), u"Atenciï¿½n")
 		if not update:
 			contenido = u"Se agrega nueva partida %s" % idchequepartida
 			sql = """
@@ -20795,7 +20796,7 @@ Estatus del egreso: %s
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return True
 				
@@ -20806,15 +20807,15 @@ Estatus del egreso: %s
 		row = fetchone(cu)[0]
 		cu.close()
 		if int(row) > 1:
-			if Mensajes().YesNo(self,u"¿ Desea realmente eliminar la partida %s ?" % self.idpartida, u"Confirmación"):
+			if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar la partida %s ?" % self.idpartida, u"Confirmaciï¿½n"):
 				if self.EliminarPartida():
 					self.FillListCtrlPartidas()
 		elif int(row) == 1:
 			Mensajes().Info(self, u"No es posible eliminar la partida, recuerde que el egreso\n" \
 							u"debe al menos afectar a una partida.\n" \
-							u"Si la partida no es la correcta, entonces modifiquela.", u"Atención")
+							u"Si la partida no es la correcta, entonces modifiquela.", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"¡ No hay partida que afectar !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No hay partida que afectar !", u"Atenciï¿½n")
 			
 	def EliminarPartida(self, update = False):
 		if self.estatus == "P":
@@ -20825,8 +20826,8 @@ Estatus del egreso: %s
 			except:
 				Mensajes().Info(self, u"Problemas con la fecha al actualizar saldos.\n\n" \
 								u"Egreso: %s, Fecha del Movimiento: %s\n\n" \
-								u"¡ No fué afectada la partida, tome nota y revise !" \
-								% (self.idcheque, self.fechaprogramada), u"Atención")
+								u"ï¿½ No fuï¿½ afectada la partida, tome nota y revise !" \
+								% (self.idcheque, self.fechaprogramada), u"Atenciï¿½n")
 				return False
 			sql = """
 			select partida, subpartida1, subpartida2, subpartida3, subpartida4, subpartida5, cantidad
@@ -20841,15 +20842,15 @@ Estatus del egreso: %s
 			cantidad = float(row[6]) * float(-1)
 			if not update:
 				Mensajes().Info(self, u"El egreso se encuentra en estatus de aplicado, por lo tanto,\n" \
-								u"se afectará el saldo de la partida eliminada.", u"Atención")
+								u"se afectarï¿½ el saldo de la partida eliminada.", u"Atenciï¿½n")
 			for partidaid in (partida, subpartida1, subpartida2, subpartida3, subpartida4, subpartida5):
 				if partidaid < 0:
 					break
 				elif not self.ActualizaSaldoPartida(self.idcheque, partidaid, fechaprogramada, cantidad):
-						Mensajes().Info(self, u"¡ Se detectaron problemas al actualizar partidas !\n\n" \
+						Mensajes().Info(self, u"ï¿½ Se detectaron problemas al actualizar partidas !\n\n" \
 										u"Egreso: %s, Partida: %s, Fecha del Movimiento: %s, Cantidad: %s\n\n" \
-										u"¡ Tome nota y revise !" \
-										% (self.idcheque, partidaid, fechaprogramada, cantidad), u"Atención")
+										u"ï¿½ Tome nota y revise !" \
+										% (self.idcheque, partidaid, fechaprogramada, cantidad), u"Atenciï¿½n")
 		if not update:
 			try:
 				sql = "delete from gixegresoschequespartidas where idchequepartida = %s" % self.idpartida
@@ -20859,17 +20860,17 @@ Estatus del egreso: %s
 				r_cn.commit()
 			except:
 				r_cn.rollback()
-				Mensajes().Info(self, u"Sucedió algo que impidió eliminar la partida %s\n\n%s" \
-								% (self.idpartida, sql), u"Atención")
+				Mensajes().Info(self, u"Sucediï¿½ algo que impidiï¿½ eliminar la partida %s\n\n%s" \
+								% (self.idpartida, sql), u"Atenciï¿½n")
 				return False
 			
-			contenido = u"Eliminación de la partida %s" % self.idpartida
+			contenido = u"Eliminaciï¿½n de la partida %s" % self.idpartida
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText,
 			ContenidoBinario, Extension) values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return True
 	
@@ -20898,7 +20899,7 @@ Estatus del egreso: %s
 				self.EditRecord()
 				self.RevisaCambios()
 		else:
-			Mensajes().Info(self, u"No se encontro la partida elegida\n\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"No se encontro la partida elegida\n\n%s" % sql, u"Atenciï¿½n")
 		event.Skip()
 
 	def FillListCtrlPartidas(self, display = 'first'):
@@ -20954,30 +20955,30 @@ Estatus del egreso: %s
 			self.EditRecord()
 			self.modoedicion = False
 			if self.estatus == "P":
-				if Mensajes().YesNo(self, u"El egreso elegido a ser cancelado ya fué aplicado, por lo tanto, " \
-									u"recuerde\nque al llevar a cabo la cancelación, se afectarán " \
+				if Mensajes().YesNo(self, u"El egreso elegido a ser cancelado ya fuï¿½ aplicado, por lo tanto, " \
+									u"recuerde\nque al llevar a cabo la cancelaciï¿½n, se afectarï¿½n " \
 									u"las partidas y/o\nsubpartidas que se incluyen en el egreso.\n\n" \
-									u"También será eliminado el movimiento de cargo, el cual, " \
+									u"Tambiï¿½n serï¿½ eliminado el movimiento de cargo, el cual, " \
 									u"afecta directamente\na la cuenta del banco (emisora del egreso), " \
 									u"asi como al saldo de la misma.\n\n" \
-									u"¿ Desea realmente llevar a cabo la cancelación del egreso no. %s ?" \
-									% self.idcheque, u"Confirmación"):
+									u"ï¿½ Desea realmente llevar a cabo la cancelaciï¿½n del egreso no. %s ?" \
+									% self.idcheque, u"Confirmaciï¿½n"):
 					wx.BeginBusyCursor()
 					querycancelar = ", estatus = 'N', idfondeo = 0, cantidadcheque = 0"
 					bienGrabado = self.UpdateRecord(querycancelar)
 					wx.EndBusyCursor()
 					if not bienGrabado:
-						Mensajes().Info(self, u"¡ No fué posible cancelar el egreso !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No fuï¿½ posible cancelar el egreso !", u"Atenciï¿½n")
 					self.PreparaSalida()
 			else:
-				if Mensajes().YesNo(self, u"¿ Desea realmente llevar a cabo la cancelación del egreso no. %s ?" \
-									% self.idcheque, u"Confirmación"):
+				if Mensajes().YesNo(self, u"ï¿½ Desea realmente llevar a cabo la cancelaciï¿½n del egreso no. %s ?" \
+									% self.idcheque, u"Confirmaciï¿½n"):
 					wx.BeginBusyCursor()
 					querycancelar = ", estatus = 'N'"
 					bienGrabado = self.UpdateRecord(querycancelar)
 					wx.EndBusyCursor()
 					if not bienGrabado:
-						Mensajes().Info(self, u"¡ No fué posible cancelar el egreso !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No fuï¿½ posible cancelar el egreso !", u"Atenciï¿½n")
 					self.PreparaSalida()
 						
 			self.SalirDetalle()
@@ -20994,7 +20995,7 @@ Estatus del egreso: %s
 				lctrl = self.GetControl(self.idlc)
 				lctrl.SetItemState(self.currentitem, wx.LIST_STATE_SELECTED, wx.LIST_STATE_SELECTED)
 			else:
-				Mensajes().Info(self, u"Problemas al actualizar el total del cheque", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el total del cheque", u"Atenciï¿½n")
 
 	def OnEditRecord(self, event):
 		self.GetControl(self.idtcbeneficiario).SetValue("")
@@ -21407,8 +21408,8 @@ Estatus del egreso: %s
 						control.SetBackgroundColour(wx.Colour(153,255,153))
 						control.SetForegroundColour(wx.NamedColour("BLACK"))
 						control.SetValue("0.00")
-						Mensajes().Info(self, u"¡ La fecha inicial no debe ser mayor a la fecha final !", \
-										u"Atención: Revise el rango de la fecha de captura")
+						Mensajes().Info(self, u"ï¿½ La fecha inicial no debe ser mayor a la fecha final !", \
+										u"Atenciï¿½n: Revise el rango de la fecha de captura")
 						return
 					else:
 						self.fechacapturafiltro = "(ch.fechacaptura >= %s and ch.fechacaptura <= %s)" \
@@ -21434,8 +21435,8 @@ Estatus del egreso: %s
 						control.SetBackgroundColour(wx.Colour(153,255,153))
 						control.SetForegroundColour(wx.NamedColour("BLACK"))
 						control.SetValue("0.00")
-						Mensajes().Info(self, u"¡ La fecha inicial no debe ser mayor a la fecha final !", \
-										u"Atención: Revise el rango de la fecha programada")
+						Mensajes().Info(self, u"ï¿½ La fecha inicial no debe ser mayor a la fecha final !", \
+										u"Atenciï¿½n: Revise el rango de la fecha programada")
 						return
 					else:
 						if countfiltros > 0: y = "and"
@@ -21641,8 +21642,8 @@ Estatus del egreso: %s
 			self.NewFlag = False
 			self.Text(True)
 			if not self.NewFlag:
-				if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?", \
-						    u"Confirmación"):
+				if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?", \
+						    u"Confirmaciï¿½n"):
 					self.AceptarDetalle()
 					
 		if self.datointernoynombre:
@@ -21658,7 +21659,7 @@ Estatus del egreso: %s
 			self.GetControl(self.idbtcancelarlistctrl).Enable(True)
 			self.editable = True
 		else:
-			Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+			Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		
 	#def GetLFRecord(self, what):
 		#lctrl = self.GetControl(self.idlc)
@@ -21728,7 +21729,7 @@ Estatus del egreso: %s
 					elif id == self.idcbbeneficiario:
 						self.ValidaBeneficiario(id, texto)
 					else:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato requerido * en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato requerido * en blanco !", u"Atenciï¿½n")
 					return
 			if id == self.idtccantidad:
 				cantidad = control.GetValue().strip()
@@ -21736,14 +21737,14 @@ Estatus del egreso: %s
 					try:
 						if str(cantidad)[-1:] != ".":
 							if not str(cantidad)[-1:].isdigit():
-								Mensajes().Info(self, u"¡ La cantidad debe ser numérica !", u"Atención")
+								Mensajes().Info(self, u"ï¿½ La cantidad debe ser numï¿½rica !", u"Atenciï¿½n")
 								control.SetValue(str(cantidad)[:-1])
 								control.SetSelection(-1,-1)
 								return
 							else:
 								self.GetControl(self.idtxcantidad).SetLabel(str(c2p(cantidad).texto()))
 					except:
-						Mensajes().Info(self, u"¡ La cantidad debe ser numérica !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La cantidad debe ser numï¿½rica !", u"Atenciï¿½n")
 						control.SetValue("")
 						control.SetSelection(-1,-1)
 						return
@@ -21752,7 +21753,7 @@ Estatus del egreso: %s
 					if not self.FillingARecord and not self.NewFlag:
 						self.NewFlag = True
 						if not VengodelaLista:
-							Mensajes().Info(self, u"¡ La cantidad no debe quedar en blanco !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ La cantidad no debe quedar en blanco !", u"Atenciï¿½n")
 							return
 		if not self.FillingARecord:
 			id = self.controlactual
@@ -22045,7 +22046,7 @@ Estatus del egreso: %s
 				except:
 					pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord(self, querycancelar = ""):
 		f_dia, f_mes, f_ano = self.GetControl(self.idtcfechamovimiento).GetValue().split('/')
@@ -22054,7 +22055,7 @@ Estatus del egreso: %s
 		if len(concepto) > 50:
 			concepto = concepto[0:50]
 			self.GetControl(self.idcbconcepto).SetValue(str(concepto))
-			Mensajes().Info(self, u"¡ Intente abreviar !\n\nHa sido recortado el concepto\n\n%s" % concepto, u"Atención")
+			Mensajes().Info(self, u"ï¿½ Intente abreviar !\n\nHa sido recortado el concepto\n\n%s" % concepto, u"Atenciï¿½n")
 			return False, 0
 		cantidad = self.GetControl(self.idtccantidad).GetValue()
 		observaciones = self.GetControl(self.idtcobservaciones).GetValue().strip()
@@ -22072,24 +22073,24 @@ Estatus del egreso: %s
 		if queTal:
 			if querycancelar:
 				estatus = "N"
-				contenido = u"Cancelación del Egreso"
+				contenido = u"Cancelaciï¿½n del Egreso"
 				if self.idfondeo > 0:
 					todook = self.LiberarRecursos(float(cantidad), fechaprogramada)
 					if todook:
-						Mensajes().Info(self,u"¡ Ha cancelado el egreso, por lo tanto, ha liberado recursos !\n\n" \
+						Mensajes().Info(self,u"ï¿½ Ha cancelado el egreso, por lo tanto, ha liberado recursos !\n\n" \
 										u"Fueron afectadas las partidas y/o subpartidas que se incluyen\n" \
 										u"en el egreso y eliminado el movimiento de cargo de la cuenta\n" \
-										u"origen, afectando por consecuencia, el saldo de la misma.", u"Atención")
+										u"origen, afectando por consecuencia, el saldo de la misma.", u"Atenciï¿½n")
 			else:
 				estatus = ""
-				contenido = u"Edición del registro"
+				contenido = u"Ediciï¿½n del registro"
 				
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "", estatus)
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -22105,7 +22106,7 @@ Estatus del egreso: %s
 			fechamovto = "'%04d/%02d/%02d'" % (fecha_ano, fecha_mes, fecha_dia)
 			periodo = "'%04d/%02d/01'" % (fecha_ano, fecha_mes)
 		except:
-			Mensajes().Info(self, u"Problemas con la fecha al agregar movimientos", u"Atención")
+			Mensajes().Info(self, u"Problemas con la fecha al agregar movimientos", u"Atenciï¿½n")
 			return False
 		self.ActualizaFondeos()
 		totalchequedummy = self.ActualizaPartidas(idcheque, fechaprogramada, sumaoresta = -1)
@@ -22117,15 +22118,15 @@ Estatus del egreso: %s
 			r_cn.commit()
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar el movimiento de banco.\n%s" \
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar el movimiento de banco.\n%s" \
+							% sql, u"Atenciï¿½n")
 		
 		todook = self.ActualizarSaldoBanco(idbanco, periodo, cantidad, fecha_mes, fecha_ano, tipomovto)
 		if not todook:
-			Mensajes().Info(self, u"¡ Se detectaron problemas al actualizar bancos !\n\n" \
+			Mensajes().Info(self, u"ï¿½ Se detectaron problemas al actualizar bancos !\n\n" \
 							u"Solicitud: %s, Fecha Programada: %s, Total Cheque: %s" \
-							u", Movimiento de Banco: %s\n\n¡ Tome nota y revise !" \
-							% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atención")
+							u", Movimiento de Banco: %s\n\nï¿½ Tome nota y revise !" \
+							% (idcheque, fechaprogramada, totalcheque, idreferenciamovto), u"Atenciï¿½n")
 		return todook
 	
 	def ActualizaFondeos(self):
@@ -22143,8 +22144,8 @@ Estatus del egreso: %s
 				r_cn.commit()
 			except:
 				r_cn.rollback()
-				Mensajes().Info(self,u"Sucedió algo que impidió eliminar el registro de fondeos.\n%s" \
-								% sql, u"Atención")
+				Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar el registro de fondeos.\n%s" \
+								% sql, u"Atenciï¿½n")
 		
 	def AddRecord(self):
 		f_dia, f_mes, f_ano = self.GetControl(self.idtcfechacaptura).GetValue().split('/')
@@ -22159,7 +22160,7 @@ Estatus del egreso: %s
 		if len(concepto) > 50:
 			concepto = concepto[0:50]
 			self.GetControl(self.idcbconcepto).SetValue(str(concepto))
-			Mensajes().Info(self, u"¡ Intente abreviar !\n\nHa sido recortado el concepto\n\n%s" % concepto, u"Atención")
+			Mensajes().Info(self, u"ï¿½ Intente abreviar !\n\nHa sido recortado el concepto\n\n%s" % concepto, u"Atenciï¿½n")
 			return False, 0
 		concepto = "OTRO EGRESO"
 		cantidad = self.GetControl(self.idtccantidad).GetValue()
@@ -22194,7 +22195,7 @@ Estatus del egreso: %s
 			if identity is not None:
 				numero = identity
 			else:
-				Mensajes().Info(self, u"Problemas al buscar nueva solicitud.\n\n%s" % sqlx, u"Atención")
+				Mensajes().Info(self, u"Problemas al buscar nueva solicitud.\n\n%s" % sqlx, u"Atenciï¿½n")
 			self.GetControl(self.idtcidcheque).SetValue(str(numero))
 			sqly = "select convert(varchar(100), BlogGUID) from %s where idcheque = %s" % (self.dbtable, numero)
 			cursor = r_cn.cursor()
@@ -22210,27 +22211,27 @@ Estatus del egreso: %s
 			""" % (numero, self.centrocostoid, self.partida, self.subpartida1, self.subpartida2,
 				   self.subpartida3, self.subpartida4, self.subpartida5, float(cantidad))
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar las partidas.\n\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar las partidas.\n\n%s" % sql, u"Atenciï¿½n")
 			sql = """
 			insert into Blogs 
 			(BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, "Registro del Egreso (Sin Aplicar)", "", "", "O")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atenciï¿½n")
 
 		return queTal, int(numero)
 	
 	def OnDeleteRecord(self, event):
 		id = self.GetControl(self.idtcid).GetValue()
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?" % id, u"Confirmación"):
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?" % id, u"Confirmaciï¿½n"):
 			if self.DeleteRecord():
 				sql = """
 				insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 				values ('%s', getdate(), '%s', '%s', '%s', '%s')
-				""" % (self.BlogGUID, self.usuario, u"Eliminación del Registro", "", "")
+				""" % (self.BlogGUID, self.usuario, u"Eliminaciï¿½n del Registro", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 				self.FillListCtrl()
 				self.GetControl(self.saveformbtn).Enable(False)
 				self.GetControl(self.addlistctrlbtn).Enable(True)
@@ -22241,7 +22242,7 @@ Estatus del egreso: %s
 	def DeleteRecord(self):
 		idreferenciadetalle = self.idreferenciadetalle.GetValue().strip()
 		if idreferenciadetalle == "":
-			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atenciï¿½n")
 			return False
 		sql = "update %s set eliminado = 'S' where idreferenciadetalle = %s" % (self.dbtable, idreferenciadetalle)
 		return self.QueryUpdateRecord(sql)
@@ -22405,7 +22406,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 		self.UsuarioConsulta()
 		
 	def UsuarioConsulta(self):
-		Mensajes().Error(self, u"¡ Permiso Denegado !\n\nNo puede alterar el catálogo de partidas.", u"Atención")
+		Mensajes().Error(self, u"ï¿½ Permiso Denegado !\n\nNo puede alterar el catï¿½logo de partidas.", u"Atenciï¿½n")
 		
 	def OnMoveFirst(self, event):
 
@@ -22563,7 +22564,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 			self.SetFocus()
 			if Mensajes().YesNo(self, u"El detalle de la partida incluye unicamente movimientos\n" \
 			                    u"cobrados, es decir, conciliados.\n\n" \
-			                    u"¿ Desea incluir los movimientos aún no cobrados (conciliados) ?", u"Confirmación"):
+			                    u"ï¿½ Desea incluir los movimientos aï¿½n no cobrados (conciliados) ?", u"Confirmaciï¿½n"):
 				estatus = "estatus <> 'C'"
 			else:
 				estatus = "estatus = 'B'"
@@ -22679,7 +22680,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 			self.SetFocus()
 			if Mensajes().YesNo(self, u"El detalle de la partida incluye unicamente movimientos\n" \
 			                    u"cobrados, es decir, conciliados.\n\n" \
-			                    u"¿ Desea incluir los movimientos aún no cobrados (conciliados) ?", u"Confirmación"):
+			                    u"ï¿½ Desea incluir los movimientos aï¿½n no cobrados (conciliados) ?", u"Confirmaciï¿½n"):
 				estatus = "estatus <> 'C'"
 			else:
 				estatus = "estatus = 'B'"
@@ -22773,7 +22774,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 				wx.EndBusyCursor()
 				Mensajes().Info(self, u"Envio a Excel finalizado.", u"Aviso")
 			else:
-				Mensajes().Info(self, u"¡ No hay nada que enviar a Excel !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay nada que enviar a Excel !", u"Atenciï¿½n")
 				self.SetFocus()
 		else:
 			dlg.Destroy()
@@ -22869,7 +22870,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 			if valor == "" and self.ValidarControles and not self.NewFlag:
 				self.NewFlag = True
 				if not VengodelArbol:
-					Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 					return
 					
 			if self.controlactual == ID_TEXTCTRLCATPAREGRDESCRIPCION:
@@ -22877,7 +22878,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 				valor = ctrl.GetValue().encode("iso8859-1")
 				valornum = str(valor).replace('.','')
 				if valor and not valornum.isdigit():
-					if valor not in (",", ".", "#", "&", "!", "¡", "?", "¿", "/", "(", ")", "$", "'"):
+					if valor not in (",", ".", "#", "&", "!", "ï¿½", "?", "ï¿½", "/", "(", ")", "$", "'"):
 						if not str(valor).isupper():
 							ctrl.SetValue(str(valor).upper())
 							lastposition = ctrl.GetLastPosition()
@@ -22908,7 +22909,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 			self.MenuSetter(ID_MENUGRABARTREE, False)
 		self.GetControl(ID_TEXTCTRLCATPAREGRCENTROCOSTO).SetEditable(False)
 
-		id = self.GetControl(ID_CHECKBOXCATPAREGRAFECTABLE)                  # revisión de checkbox
+		id = self.GetControl(ID_CHECKBOXCATPAREGRAFECTABLE)                  # revisiï¿½n de checkbox
 		if id.GetValue() <> self.originales[ID_CHECKBOXCATPAREGRAFECTABLE]:
 			id.SetBackgroundColour(wx.CYAN)
 			id.Refresh()
@@ -22918,7 +22919,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 			id.SetBackgroundColour(wx.NullColour)
 			id.Refresh()
 			
-		id = self.GetControl(ID_RADIOBUTTONCATPAREGRNATURALEZAINGRESO)       # revisión de radiobutton ingreso
+		id = self.GetControl(ID_RADIOBUTTONCATPAREGRNATURALEZAINGRESO)       # revisiï¿½n de radiobutton ingreso
 		if id.GetValue() <> self.originales[ID_RADIOBUTTONCATPAREGRNATURALEZAINGRESO]:
 			id.SetBackgroundColour(wx.CYAN)
 			id.Refresh()
@@ -22928,7 +22929,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 			id.SetBackgroundColour(wx.NullColour)
 			id.Refresh()
 			
-			id = self.GetControl(ID_RADIOBUTTONCATPAREGRNATURALEZAEGRESO)       # revisión de radiobutton egreso
+			id = self.GetControl(ID_RADIOBUTTONCATPAREGRNATURALEZAEGRESO)       # revisiï¿½n de radiobutton egreso
 		if id.GetValue() <> self.originales[ID_RADIOBUTTONCATPAREGRNATURALEZAEGRESO]:
 			id.SetBackgroundColour(wx.CYAN)
 			id.Refresh()
@@ -22980,7 +22981,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 				
 				Mensajes().Info(self, u"No puede agregar una subpartida a la partida '%s %s'\n" \
 								u"ya que esta se afecta directamente."
-								% (self.dicNodeInfo['C'][5], self.dicNodeInfo['C'][4]), u"Atención")
+								% (self.dicNodeInfo['C'][5], self.dicNodeInfo['C'][4]), u"Atenciï¿½n")
 				return
 			
 			else:
@@ -23039,7 +23040,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 			
 			Mensajes().Info(self, u"No puede eliminar la partida '%s %s'\n" \
 							u"ya que esta no se afecta directamente."
-							% (self.dicNodeInfo['C'][5], self.dicNodeInfo['C'][4]), u"Atención")
+							% (self.dicNodeInfo['C'][5], self.dicNodeInfo['C'][4]), u"Atenciï¿½n")
 			return
 		
 		else:
@@ -23058,10 +23059,10 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 				
 				Mensajes().Info(self, u"No puede eliminar la partida '%s %s'\n" \
 								u"ya que esta tiene subpartidas."
-								% (self.dicNodeInfo['C'][5], self.dicNodeInfo['C'][4]), u"Atención")
+								% (self.dicNodeInfo['C'][5], self.dicNodeInfo['C'][4]), u"Atenciï¿½n")
 				return
 			
-			elif Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación"):
+			elif Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n"):
 			
 				sql = "delete from gixpartidasegresos where PartidaID = %s" % partidaid
 		
@@ -23075,9 +23076,9 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 				
 				except:
 					r_cn.rollback()
-					Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-									u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s" \
-									% sql, u"Atención")
+					Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+									u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s" \
+									% sql, u"Atenciï¿½n")
 					queTal = False
 			else:
 				
@@ -23136,7 +23137,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 					
 			self.VengoDeDelete = False
 			
-			#Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+			#Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 			
 		return
 
@@ -23169,7 +23170,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 			
 		else:
 
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 		return bienGrabado
 	
@@ -23190,7 +23191,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 			if rowscount:
 				Mensajes().Info(self, u"No puede afectar directamente la partida '%s %s'\n" \
 								u"ya que esta tiene subpartidas."
-								% (self.dicNodeInfo['C'][5], self.dicNodeInfo['C'][4]), u"Atención")
+								% (self.dicNodeInfo['C'][5], self.dicNodeInfo['C'][4]), u"Atenciï¿½n")
 				self.GetControl(ID_CHECKBOXCATPAREGRAFECTABLE).SetValue(False)
 				self.GetControl(ID_CHECKBOXCATPAREGRAFECTABLE).SetBackgroundColour(wx.NullColour)
 				self.GetControl(ID_CHECKBOXCATPAREGRAFECTABLE).Refresh()
@@ -23258,7 +23259,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 					tree.SetItemHasChildren(item)
 					if self.OriginalDistinto(ID_TEXTCTRLCATPAREGRCENTROCOSTO):
 						Mensajes().Info(self,u"Ha modificado el centro de costo, por lo tanto,\n" \
-										u"se afectarán todas las subpartidas.", u"Aviso")
+										u"se afectarï¿½n todas las subpartidas.", u"Aviso")
 						sqlhijas = """
 						select PartidaID, ClavePartida, Descripcion from gixpartidasegresos where HijaDePartidaID = %s
 						""" % partidaid
@@ -23273,7 +23274,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 								if not self.QueryUpdateRecord(sql):
 									Mensajes().Info(self,u"La subpartida '%s - %s'\n" \
 													u"no pudo ser modificada en el centro de costo." \
-													% (str(row[1]), str(row[2])), u"Atención")
+													% (str(row[1]), str(row[2])), u"Atenciï¿½n")
 						refresca = True
 				else:
 					tree.SetItemHasChildren(item, 0)
@@ -23507,7 +23508,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 	
 	def ObtenCentroCosto(self, CentroCostoID):
 		""" 
-		Obtener de la base de datos la descripción del centro de costo
+		Obtener de la base de datos la descripciï¿½n del centro de costo
 		"""
 		sql = "select Descripcion from gixcentroscostos where CentroCostoID = '%s'" % CentroCostoID
 		
@@ -23670,7 +23671,7 @@ class GixCatalogoPartidasEgresos(wx.Frame, GixBase):
 					if self.usuario in self.usuariosconsulta:
 						self.UsuarioConsulta()
 					else:
-						if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?",u"Confirmación"):
+						if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?",u"Confirmaciï¿½n"):
 							self.VengoDelSelect = True
 							if self.SaveRecord():
 								data = self.dataprev
@@ -23984,7 +23985,7 @@ class GixProductos(wx.Frame, GixBase):
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
 		
 		# Se agrego este bloque para permitir seleccionar optativamente una categoria y no tener que ver todos los productos
-		if Mensajes().YesNo(self,u"¿ Desea trabajar con una sola categoría ?", u"Atención"):
+		if Mensajes().YesNo(self,u"ï¿½ Desea trabajar con una sola categorï¿½a ?", u"Atenciï¿½n"):
 			lCatNombres = []
 			lCats = []
 			sql = """
@@ -24002,7 +24003,7 @@ class GixProductos(wx.Frame, GixBase):
 				lCatNombres.append(self.GetStringFromField(row[1]) + "                                        ")
 			cursor.close()
 			if len(lCats) > 0:
-				cual = wx.GetSingleChoiceIndex( "Elija", u"Categoría", lCatNombres)
+				cual = wx.GetSingleChoiceIndex( "Elija", u"Categorï¿½a", lCatNombres)
 				if cual > -1:
 					self.FiltroCategoria = lCats[cual]
 
@@ -24020,16 +24021,16 @@ class GixProductos(wx.Frame, GixBase):
 	def OnBuscarCategoria(self,event):
 		
 		query = "select idcategoria, idcategoria + ' - ' + descripcion_ampliada from gixcategorias order by descripcion_ampliada" 
-		self.RelatedFieldSearch(u"Búsqueda de Categoría", query, ID_TEXTCTRLPRODUCTOSCATEGORIA)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Categorï¿½a", query, ID_TEXTCTRLPRODUCTOSCATEGORIA)
 		
 	def OnBuscarUnidad(self,event):
 		
 		query = "select idunidad, idunidad + '   ' from gixunidades order by idunidad" 
-		self.RelatedFieldSearch(u"Búsqueda de Unidad de Compra", query, ID_TEXTCTRLPRODUCTOSUNIDAD)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Unidad de Compra", query, ID_TEXTCTRLPRODUCTOSUNIDAD)
 		
 	def OnCalcularExistencia(self, event):
 		
-		if Mensajes().YesNo(self,u"¿ Desea realmente calcular la existencia del producto ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente calcular la existencia del producto ?", u"Confirmaciï¿½n") :
 			
 			wx.BeginBusyCursor()
 			producto = self.GetControl(ID_TEXTCTRLPRODUCTOSPRODUCTO).GetValue()
@@ -24072,7 +24073,7 @@ class GixProductos(wx.Frame, GixBase):
 						cu.close()
 						self.SaveRecord()
 						wx.EndBusyCursor()      
-						Mensajes().Info(self, u"¡ El calculo de la existencia a finalizado !", u"Aviso")
+						Mensajes().Info(self, u"ï¿½ El calculo de la existencia a finalizado !", u"Aviso")
 						return
 					
 					sql = """
@@ -24085,7 +24086,7 @@ class GixProductos(wx.Frame, GixBase):
 					if row is None:
 						cu.close()
 						wx.EndBusyCursor()      
-						Mensajes().Info(self, u" Se ha presentado una inconsistencia:\n%s\nNo existe el factor de conversión de la unidad del producto." % sql, u"Aviso")
+						Mensajes().Info(self, u" Se ha presentado una inconsistencia:\n%s\nNo existe el factor de conversiï¿½n de la unidad del producto." % sql, u"Aviso")
 						return
 					
 					factorconversion = row[0]
@@ -24097,7 +24098,7 @@ class GixProductos(wx.Frame, GixBase):
 			cu.close()
 			self.SaveRecord()
 			wx.EndBusyCursor()      
-			Mensajes().Info(self, u"¡ El calculo de la existencia a finalizado !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ El calculo de la existencia a finalizado !", u"Aviso")
 		
 	def FillListBox(self, display = 'first'):
 		
@@ -24128,7 +24129,7 @@ class GixProductos(wx.Frame, GixBase):
 		
 	def OnPrint(self,event):
 		tabla = self.dbtable
-		meta = (( 14, u"Id Producto") , (100, u"Descripción"), (100,u"Categoría"), (100,u"Marca"), (100,u"Módelo"), (100,u"Unidad"), (100,u"Existencia"))
+		meta = (( 14, u"Id Producto") , (100, u"Descripciï¿½n"), (100,u"Categorï¿½a"), (100,u"Marca"), (100,u"Mï¿½delo"), (100,u"Unidad"), (100,u"Existencia"))
 		
 		if self.FiltroCategoria:
 			query = """
@@ -24182,7 +24183,7 @@ class GixProductos(wx.Frame, GixBase):
 			if valor == "" and not self.FillingARecord and not self.NewFlag:
 				self.NewFlag = True
 				if not VengodelaLista:
-					Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 					return
 		
 		self.EndOfOnText(self.controlactual)    
@@ -24219,7 +24220,7 @@ class GixProductos(wx.Frame, GixBase):
 			
 		else:
 
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 	
 	def UpdateRecord( self ):
 		
@@ -24275,7 +24276,7 @@ class GixProductos(wx.Frame, GixBase):
 
 		if producto  == "":
 			
-			Mensajes().Info(self, u"No se ha especificado el producto", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el producto", u"Atenciï¿½n")
 			return False
 		
 		
@@ -24292,7 +24293,7 @@ class GixProductos(wx.Frame, GixBase):
 		
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\nQuizá se deba a que hay otra información\nque depende de este registro\n%s" % sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\nQuizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro\n%s" % sql, u"Atenciï¿½n")
 			return False
 	
 	def GetAnotherRecord(self, comparison):
@@ -24417,12 +24418,12 @@ class GixUnidadesFactores(wx.Frame, GixBase):
 	def BuscarProducto(self,event):
 		
 		query = "select id_producto, id_producto + ' - ' + descripcion from gixproductos order by descripcion" 
-		self.RelatedFieldSearch(u"Búsqueda del Producto", query, ID_TEXTCTRLFACTORPRODUCTO)
+		self.RelatedFieldSearch(u"Bï¿½squeda del Producto", query, ID_TEXTCTRLFACTORPRODUCTO)
 		
 	def BuscarUnidad(self,event):
 		
 		query = "select idunidad, idunidad from gixunidades order by idunidad" 
-		self.RelatedFieldSearch(u"Búsqueda de Unidad para Requisición", query, ID_TEXTCTRLFACTORUNIDAD)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Unidad para Requisiciï¿½n", query, ID_TEXTCTRLFACTORUNIDAD)
 		
 	def FillListBox(self, display = 'first'):
 		
@@ -24450,10 +24451,10 @@ class GixUnidadesFactores(wx.Frame, GixBase):
 	def OnPrint(self,event):
 		
 		tabla = self.dbtable
-		meta = (( 200, "Id Producto") , (200, u"Unidad para Requisición"), (150,u"Factor de conversión"))
+		meta = (( 200, "Id Producto") , (200, u"Unidad para Requisiciï¿½n"), (150,u"Factor de conversiï¿½n"))
 		query = "select id_producto, unidadrequisicion, factorconversion from gixunidadesfactores order by id_producto"
 		
-		titulo = u"Consulta de Factores de Conversión para Requisiciones " 
+		titulo = u"Consulta de Factores de Conversiï¿½n para Requisiciones " 
 		self.DisplayGrid(tabla, meta, query, titulo)
 		
 	def OnSearch(self, event):
@@ -24497,15 +24498,15 @@ class GixUnidadesFactores(wx.Frame, GixBase):
 				if producto == "" and not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ El producto no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El producto no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 				elif producto !="":
 					descripcion, unidad = self.ObtenDescripcion(producto)
 					if descripcion == "":
-						Mensajes().Info(self, u"¡ El producto no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El producto no existe !", u"Atenciï¿½n")
 						return
 					if unidad == "":
-						Mensajes().Info(self, u"¡ La unidad de compra no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La unidad de compra no existe !", u"Atenciï¿½n")
 						return
 					self.GetControl(ID_FACTORPRODUCTODESCRIPCION).SetLabel(descripcion)
 					self.GetControl(ID_FACTORPRODUCTOUNIDAD).SetLabel("Unidad de compra: " + unidad)
@@ -24515,24 +24516,24 @@ class GixUnidadesFactores(wx.Frame, GixBase):
 				if unidadreq != "":
 					unidadfactor = self.ObtenUnidad(unidadreq)
 					if unidadfactor == "":
-						Mensajes().Info(self, u"¡ La unidad para requisición no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La unidad para requisiciï¿½n no existe !", u"Atenciï¿½n")
 						return
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡  La unidad para requisición no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½  La unidad para requisiciï¿½n no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 				
 			if id == ID_TEXTCTRLFACTORCONVERSION:
 				factorconversion = control.GetValue().strip()
 				if factorconversion != "":
 					if not factorconversion.isdigit():
-						Mensajes().Info(self, u"¡ El factor de conversión debe ser numérico !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El factor de conversiï¿½n debe ser numï¿½rico !", u"Atenciï¿½n")
 						return
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ El factor de conversión no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El factor de conversiï¿½n no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 		
 		self.EndOfOnText(self.controlactual)            
@@ -24605,7 +24606,7 @@ class GixUnidadesFactores(wx.Frame, GixBase):
 			
 		else:
 
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 
 	def UpdateRecord( self ):
 		
@@ -24643,7 +24644,7 @@ class GixUnidadesFactores(wx.Frame, GixBase):
 	
 	def OnDeleteRecord( self, event):
 
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n") :
 
 			if self.DeleteRecord():
 
@@ -24652,7 +24653,7 @@ class GixUnidadesFactores(wx.Frame, GixBase):
 				
 				self.MoveOneStep("PREVIOUS")
 				lbx.Delete(pos)
-				Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+				Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 				#self.LimpiaControles()
 				self.tb.EnableTool( ID_TOOLSAV, False)
 				self.tb.EnableTool( ID_TOOLDEL, True)
@@ -24667,11 +24668,11 @@ class GixUnidadesFactores(wx.Frame, GixBase):
 		unidad = self.GetControl(ID_TEXTCTRLFACTORUNIDAD).GetValue().strip()
 		
 		if producto  == "":
-			Mensajes().Info(self, u"No se ha especificado el producto", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el producto", u"Atenciï¿½n")
 			return False
 		
 		if unidad  == "":
-			Mensajes().Info(self, u"No se ha especificado la unidad", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado la unidad", u"Atenciï¿½n")
 			return False
 		
 		sql = "delete from %s where id_producto = '%s' and unidadrequisicion = '%s'" % ( self.dbtable, producto, unidad ) 
@@ -24686,7 +24687,7 @@ class GixUnidadesFactores(wx.Frame, GixBase):
 		
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\nQuizá se deba a que hay otra información\nque depende de este registro\n%s" % sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\nQuizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro\n%s" % sql, u"Atenciï¿½n")
 			return False
 		
 	def GetAnotherRecord(self, comparison):
@@ -24812,14 +24813,14 @@ class GixCategorias(wx.Frame, GixBase):
 		query = """select idpuesto, descripcion + ' - ' + convert(varchar(7), idpuesto)
 		from gixpuestos order by descripcion
 		"""
-		self.RelatedFieldSearch(u"Búsqueda de Autorizador", query, ID_TEXTCTRLCATEGORIASAUTORIZADOR)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Autorizador", query, ID_TEXTCTRLCATEGORIASAUTORIZADOR)
 		
 	def OnBuscarSurtidor(self,event):
 		
 		query = """select idpuesto, descripcion + ' - ' + convert(varchar(7), idpuesto)
 		from gixpuestos order by descripcion
 		"""
-		self.RelatedFieldSearch(u"Búsqueda de Surtidor", query, ID_TEXTCTRLCATEGORIASSURTIDOR)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Surtidor", query, ID_TEXTCTRLCATEGORIASSURTIDOR)
 		
 	def AdditionalStuff(self):
 		
@@ -24851,7 +24852,7 @@ class GixCategorias(wx.Frame, GixBase):
 		
 	def OnPrint(self,event):
 		tabla = self.dbtable
-		meta = (( 14, "Id Categoría") , (100, u"Descripción"), (200,u"Descripción Ampliada"),(20,u"Autorizador"),
+		meta = (( 14, "Id Categorï¿½a") , (100, u"Descripciï¿½n"), (200,u"Descripciï¿½n Ampliada"),(20,u"Autorizador"),
 			(60,u"Password Autorizador"), (20,"Surtidor"),(60,u"Password Surtidor"))
 		
 		query = """
@@ -24859,7 +24860,7 @@ class GixCategorias(wx.Frame, GixBase):
 		surtidor_puesto, surtidor_password
 		from gixcategorias order by idcategoria
 		"""
-		titulo = u"Consulta de Categorías " 
+		titulo = u"Consulta de Categorï¿½as " 
 		self.DisplayGrid(tabla, meta, query, titulo)
 		
 	def OnSearch(self, event):
@@ -24925,41 +24926,41 @@ class GixCategorias(wx.Frame, GixBase):
 				if valor == "" and not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 						return
 				
 			if id == ID_TEXTCTRLCATEGORIASAUTORIZADOR:
 				puesto = control.GetValue().strip()
 				if puesto != "":
 					if not puesto.isdigit():
-						Mensajes().Info(self, u"¡ El autorizador debe ser numérico !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El autorizador debe ser numï¿½rico !", u"Atenciï¿½n")
 						return
 					nombre = self.ObtenPuesto(puesto)
 					if nombre == "":
-						Mensajes().Info(self, u"¡ El autorizador no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El autorizador no existe !", u"Atenciï¿½n")
 						return
 					self.GetControl(ID_CATEGORIASAUTORIZADOR).SetLabel(nombre)
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡  El autorizador no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½  El autorizador no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 					
 			if id == ID_TEXTCTRLCATEGORIASSURTIDOR:
 				puesto = control.GetValue().strip()
 				if puesto != "":
 					if not puesto.isdigit():
-						Mensajes().Info(self, u"¡ El surtidor debe ser numérico !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El surtidor debe ser numï¿½rico !", u"Atenciï¿½n")
 						return
 					nombre = self.ObtenPuesto(puesto)
 					if nombre == "":
-						Mensajes().Info(self, u"¡ El surtidor no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El surtidor no existe !", u"Atenciï¿½n")
 						return
 					self.GetControl(ID_CATEGORIASSURTIDOR).SetLabel(nombre)
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡  El surtidor no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½  El surtidor no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 		
 		self.EndOfOnText(self.controlactual)    
@@ -24975,7 +24976,7 @@ class GixCategorias(wx.Frame, GixBase):
 				#ID_TEXTCTRLCATEGORIASSURTIDOR, ID_TEXTCTRLCATEGORIASPASSWORDSURTIDOR):
 			#valor = control.GetValue().strip()
 			#if valor == "" and not self.FillingARecord and not self.NewFlag:
-				#Mensajes().Info(self, u"¡ No debe quedar en blanco !", u"Atención")
+				#Mensajes().Info(self, u"ï¿½ No debe quedar en blanco !", u"Atenciï¿½n")
 				#return
 			
 			
@@ -25019,7 +25020,7 @@ class GixCategorias(wx.Frame, GixBase):
 			
 		else:
 
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 		
 			
@@ -25075,7 +25076,7 @@ class GixCategorias(wx.Frame, GixBase):
 	
 	def OnDeleteRecord( self, event):
 
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n") :
 
 			if self.DeleteRecord():
 
@@ -25084,7 +25085,7 @@ class GixCategorias(wx.Frame, GixBase):
 				
 				self.MoveOneStep("PREVIOUS")
 				lbx.Delete(pos)
-				Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+				Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 				#self.LimpiaControles()
 				self.tb.EnableTool( ID_TOOLSAV, False)
 				self.tb.EnableTool( ID_TOOLDEL, True)
@@ -25098,7 +25099,7 @@ class GixCategorias(wx.Frame, GixBase):
 
 		if categoria  == "":
 			
-			Mensajes().Info(self, u"No se ha especificado la categoría", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado la categorï¿½a", u"Atenciï¿½n")
 			return False
 
 		sql = "delete from %s where idcategoria = '%s'" % ( self.dbtable, categoria ) 
@@ -25113,7 +25114,7 @@ class GixCategorias(wx.Frame, GixBase):
 		
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\nQuizá se deba a que hay otra información\nque depende de este registro\n%s" % sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\nQuizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro\n%s" % sql, u"Atenciï¿½n")
 			return False
 	
 	def GetAnotherRecord(self, comparison):
@@ -25259,7 +25260,7 @@ class GixEmpleados(wx.Frame,GixBase):
 	def OnPrint(self,event):
 		tabla = self.dbtable
 		meta = (( 14, "Id Empleado") , (100, u"Nombre"), (100,u"Apellido Paterno"),(100,u"Apellido Materno"),
-			(50,u"Usuario"), (100,"Email"),(20,u"Teléfono"),
+			(50,u"Usuario"), (100,"Email"),(20,u"Telï¿½fono"),
 			(30,u"Fecha Nacimiento"), (30,"Fecha In. Vacaciones"),(30,"Fecha Fin. Vacaciones"))
 		query = """
 		select idempleado, nombre, apellido_paterno, apellido_materno, usuario, email, telefono,
@@ -25305,7 +25306,7 @@ class GixEmpleados(wx.Frame,GixBase):
 			if valor == "" and not self.FillingARecord and not self.NewFlag:
 				self.NewFlag = True
 				if not VengodelaLista:
-					Mensajes().Info(self, u"No deben quedar en blanco:\nEl nombre y apellido paterno del empleado", u"Atención")
+					Mensajes().Info(self, u"No deben quedar en blanco:\nEl nombre y apellido paterno del empleado", u"Atenciï¿½n")
 					return
 		
 		self.EndOfOnText(self.controlactual)    
@@ -25343,7 +25344,7 @@ class GixEmpleados(wx.Frame,GixBase):
 			
 		else:
 
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord( self ):
 		
@@ -25438,7 +25439,7 @@ class GixEmpleados(wx.Frame,GixBase):
 	
 	def OnDeleteRecord( self, event):
 
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n") :
 
 			if self.DeleteRecord():
 
@@ -25447,7 +25448,7 @@ class GixEmpleados(wx.Frame,GixBase):
 				
 				self.MoveOneStep("PREVIOUS")
 				lbx.Delete(pos)
-				Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+				Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 				#self.LimpiaControles()
 				self.tb.EnableTool( ID_TOOLSAV, False)
 				self.tb.EnableTool( ID_TOOLDEL, True)
@@ -25461,7 +25462,7 @@ class GixEmpleados(wx.Frame,GixBase):
 
 		if empleado  == "":
 			
-			Mensajes().Info(self, u"No se ha especificado el empleado", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el empleado", u"Atenciï¿½n")
 			return False
 		
 		sql = "delete from %s where idempleado = %s" % ( self.dbtable, empleado ) 
@@ -25476,7 +25477,7 @@ class GixEmpleados(wx.Frame,GixBase):
 		
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\nQuizá se deba a que hay otra información\nque depende de este registro\n%s" % sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\nQuizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro\n%s" % sql, u"Atenciï¿½n")
 			return False
 	
 	def GetAnotherRecord(self, comparison):
@@ -25621,8 +25622,8 @@ class GixProveedores(wx.Frame,GixBase):
 		
 	def OnPrint(self,event):
 		tabla = self.dbtable
-		meta = (( 14, "Id Proveedor") , (300, u"Razón Social"), (100,u"Email"),(20,u"Teléfono"),
-			(100,u"Nombre del Contacto"), (100,"Email del Contacto"),(20,u"Teléfono del Contacto"))
+		meta = (( 14, "Id Proveedor") , (300, u"Razï¿½n Social"), (100,u"Email"),(20,u"Telï¿½fono"),
+			(100,u"Nombre del Contacto"), (100,"Email del Contacto"),(20,u"Telï¿½fono del Contacto"))
 		query = """
 		select idproveedor, razonsocial, email, telefono, contactonombre, contactoemail, contactotelefono
 		from gixproveedores order by razonsocial
@@ -25666,7 +25667,7 @@ class GixProveedores(wx.Frame,GixBase):
 			if valor == "" and not self.FillingARecord and not self.NewFlag:
 				self.NewFlag = True
 				if not VengodelaLista:
-					Mensajes().Info(self, u"No deben quedar en blanco la razón social y el nombre del contacto", u"Atención")
+					Mensajes().Info(self, u"No deben quedar en blanco la razï¿½n social y el nombre del contacto", u"Atenciï¿½n")
 					return
 		
 		self.EndOfOnText(self.controlactual)    
@@ -25704,7 +25705,7 @@ class GixProveedores(wx.Frame,GixBase):
 			
 		else:
 
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord( self ):
 		
@@ -25771,7 +25772,7 @@ class GixProveedores(wx.Frame,GixBase):
 	
 	def OnDeleteRecord( self, event):
 
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n") :
 
 			if self.DeleteRecord():
 
@@ -25780,7 +25781,7 @@ class GixProveedores(wx.Frame,GixBase):
 				
 				self.MoveOneStep("PREVIOUS")
 				lbx.Delete(pos)
-				Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+				Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 				#self.LimpiaControles()
 				self.tb.EnableTool( ID_TOOLSAV, False)
 				self.tb.EnableTool( ID_TOOLDEL, True)
@@ -25794,7 +25795,7 @@ class GixProveedores(wx.Frame,GixBase):
 
 		if proveedor  == "":
 			
-			Mensajes().Info(self, u"No se ha especificado el proveedor", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el proveedor", u"Atenciï¿½n")
 			return False
 		
 		sql = "delete from %s where idproveedor = %s" % ( self.dbtable, proveedor ) 
@@ -25809,7 +25810,7 @@ class GixProveedores(wx.Frame,GixBase):
 		
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\nQuizá se deba a que hay otra información\nque depende de este registro\n%s" % sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\nQuizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro\n%s" % sql, u"Atenciï¿½n")
 			return False
 	
 	def GetAnotherRecord(self, comparison):
@@ -26066,7 +26067,7 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 
 	def OnPrintExcel(self, event):
 		tabla = "RECIBO"
-		meta = ((14,"Recibo") , (70,u"Captura"), (70,u"Emisión"), (20,u"Abono"), (20,u"Interes"),
+		meta = ((14,"Recibo") , (70,u"Captura"), (70,u"Emisiï¿½n"), (20,u"Abono"), (20,u"Interes"),
 				(20, "Total"), (100, "Nombre"), (70,u"Lote"), (70,u"Manzana"), (100,u"Etapa"), (100,u"Desarrollo"))
 		query = self.FillListCtrl(printexcel = True)
 		titulo = u"Reporte de Recibos Elaborados"
@@ -26089,7 +26090,7 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 					fechafinal = "'%s/%02d/%02d'" % (rango_ano, int(rango_mes), int(rango_dia))
 					if fechainicial > fechafinal:
 						Mensajes().Info(self, u"La Fecha Inicial de Captura no debe ser mayor a la Fecha Final.\n\n" \
-										u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+										u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLRECIBOSELABORADOSFECHAFINALCAPTURA).SetValue("")
 						return
 					else:
@@ -26114,8 +26115,8 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 							 self.GetControl(ID_TEXTCTRLRECIBOSELABORADOSFECHAFINAL).GetValue().split('/')
 					fechafinal = "'%s/%02d/%02d'" % (rango_ano, int(rango_mes), int(rango_dia))
 					if fechainicial > fechafinal:
-						Mensajes().Info(self, u"La Fecha Inicial de Emisión no debe ser mayor a la Fecha Final.\n\n" \
-										u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						Mensajes().Info(self, u"La Fecha Inicial de Emisiï¿½n no debe ser mayor a la Fecha Final.\n\n" \
+										u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLRECIBOSELABORADOSFECHAFINAL).SetValue("")
 						return
 					else:
@@ -26196,7 +26197,7 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 		if rows:
 			lctrl.InsertColumn(0, u"%sRecibo" % self.lstctrlorder[0][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(1, u"%sCaptura" % self.lstctrlorder[1][2], wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(2, u"%sEmisión" % self.lstctrlorder[2][2], wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(2, u"%sEmisiï¿½n" % self.lstctrlorder[2][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(3, u"%sAbono" % self.lstctrlorder[3][2], wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(4, u"%sInteres" % self.lstctrlorder[4][2], wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(5, u"%sTotal" % self.lstctrlorder[5][2], wx.LIST_FORMAT_RIGHT)
@@ -26291,15 +26292,15 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 	def OnImprimeRecibo(self, evt):
 		if self.estatus == "A":
 			if self.usuario in self.specialuser:
-				if Mensajes().YesNo(self, u"¿ Desea imprimir el recibo %s ?\n\n%s" % (self.recibo, self.nombrecliente),
-					            u"Confirmación de Impresión"):
+				if Mensajes().YesNo(self, u"ï¿½ Desea imprimir el recibo %s ?\n\n%s" % (self.recibo, self.nombrecliente),
+					            u"Confirmaciï¿½n de Impresiï¿½n"):
 					self.ImprimeRecibo(codigorecibo = self.recibo)
 					
 	def ImprimeRecibo(self, codigorecibo):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		wx.BeginBusyCursor()
 		try:
@@ -26323,9 +26324,9 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 						#pid, sts = os.waitpid(p.pid, 0)						
 						
 			else:
-				Mensajes().Info(self, u"¡ No se encontró información referente al recibo !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente al recibo !", u"Atenciï¿½n")
 		except:
-			Mensajes().Info(self, u"¡ Se presento un problema al generar el recibo !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al generar el recibo !", u"Atenciï¿½n")
 			
 		wx.EndBusyCursor()
 		
@@ -26362,7 +26363,7 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if row is not None:
-			a = u"á"; e = u"é"; i = u"í"; o = u"ó"; u = u"ú"
+			a = u"ï¿½"; e = u"ï¿½"; i = u"ï¿½"; o = u"ï¿½"; u = u"ï¿½"
 			meses = ("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
 			         "Septiembre", "Octubre", "Noviembre", "Diciembre")
 			dia, mes, ano = row[0].split("/")
@@ -26617,15 +26618,15 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 		
 	def OnCancelarRecibo(self, evt):
 		if self.usuario in self.specialuser:
-			if Mensajes().YesNo(self, u"¿ Desea realmente cancelar el recibo %s ?\n\n%s" % (self.recibo, self.nombrecliente),
-			                    u"Confirmación de Cancelación"):
+			if Mensajes().YesNo(self, u"ï¿½ Desea realmente cancelar el recibo %s ?\n\n%s" % (self.recibo, self.nombrecliente),
+			                    u"Confirmaciï¿½n de Cancelaciï¿½n"):
 				self.ImprimeCancelacion(codigorecibo = self.recibo)
-				if Mensajes().YesNo(self, u"¿ Se imprimio correctamente el documento ?", u"Confirmación"):
+				if Mensajes().YesNo(self, u"ï¿½ Se imprimio correctamente el documento ?", u"Confirmaciï¿½n"):
 					self.CancelaRecibo(codigorecibo = self.recibo)
 					self.FillListCtrl()
 				else:
-					Mensajes().Info(self, u"¡ No se cancelo el recibo !\n\n" \
-					                u"Para cancelar es necesario imprimir correctamente el recibo.", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No se cancelo el recibo !\n\n" \
+					                u"Para cancelar es necesario imprimir correctamente el recibo.", u"Atenciï¿½n")
 					
 	def CancelaRecibo(self, codigorecibo):
 		try:
@@ -26664,21 +26665,21 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 				cu.execute(str(sql))
 				cu.close()
 				r_cn.commit()
-				Mensajes().Info(self, u"¡ El recibo %s ha sido cancelado !" % codigorecibo, u"Atención")
+				Mensajes().Info(self, u"ï¿½ El recibo %s ha sido cancelado !" % codigorecibo, u"Atenciï¿½n")
 			else:
-				Mensajes().Info(self, u"¡ No se cancelo el recibo !\n\n" \
-				                u"No se encontraron movimientos del recibo", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se cancelo el recibo !\n\n" \
+				                u"No se encontraron movimientos del recibo", u"Atenciï¿½n")
 				cu.close()
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self, u"¡ No se cancelo el recibo !\n\n" \
-		                        u"Se experimentaron problemas con el coordinador central.", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se cancelo el recibo !\n\n" \
+		                        u"Se experimentaron problemas con el coordinador central.", u"Atenciï¿½n")
 			
 	def ImprimeCancelacion(self, codigorecibo):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		wx.BeginBusyCursor()
 		try:
@@ -26702,9 +26703,9 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 						#pid, sts = os.waitpid(p.pid, 0)						
 						
 			else:
-				Mensajes().Info(self, u"¡ No se encontró información referente al recibo !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente al recibo !", u"Atenciï¿½n")
 		except:
-			Mensajes().Info(self, u"¡ Se presento un problema al generar la cancelación !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al generar la cancelaciï¿½n !", u"Atenciï¿½n")
 			
 		wx.EndBusyCursor()
 		
@@ -26730,7 +26731,7 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if row is not None:
-			a = u"á"; e = u"é"; i = u"í"; o = u"ó"; u = u"ú"
+			a = u"ï¿½"; e = u"ï¿½"; i = u"ï¿½"; o = u"ï¿½"; u = u"ï¿½"
 			meses = ("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
 			         "Septiembre", "Octubre", "Noviembre", "Diciembre")
 			dia, mes, ano = row[0].split("/")
@@ -27136,7 +27137,7 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 		
 	def OnPrintExcel(self, event):
 		tabla = "RECIBO"
-		meta = ((14,"Recibo") , (70,u"Aplicación"), (70,u"Emisión"), (20,u"Abono"), (20,u"Interes"),
+		meta = ((14,"Recibo") , (70,u"Aplicaciï¿½n"), (70,u"Emisiï¿½n"), (20,u"Abono"), (20,u"Interes"),
 				(20, "Total"), (70,u"Lote"), (70,u"Manzana"), (100, "Nombre"), (100,u"Etapa"), (100,u"Desarrollo"))
 		query = self.FillListCtrl(printexcel = True)
 		titulo = u"Reporte de Recibos Elaborados - Pinares Tapalpa"
@@ -27145,8 +27146,8 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 		cu.close()
 		
 		#tabla = "CLIENTE"   # reporte clientes pinares
-		#meta = ((14,u"Código") , (70,u"Nombre"), (70,u"Domicilio"), (20,u"Colonia"), (20,u"Código Postal"),
-		        #(20, "Ciudad"), (70,u"Estado"), (70,u"Teléfono Casa"), (100, u"Teléfono Trabajo"))
+		#meta = ((14,u"Cï¿½digo") , (70,u"Nombre"), (70,u"Domicilio"), (20,u"Colonia"), (20,u"Cï¿½digo Postal"),
+		        #(20, "Ciudad"), (70,u"Estado"), (70,u"Telï¿½fono Casa"), (100, u"Telï¿½fono Trabajo"))
 		#query = """
 		#select codigo, nombre, domicilio, colonia, cp, ciudad, estado, telefonocasa, telefonotrabajo
 		#from CLIENTE order by nombre
@@ -27180,7 +27181,7 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 		return todobien
 
 	def GenerateExcelWithXle(self, rows = None):
-		columnas = ((2000, u"Recibo") , (3000, u"Aplicación"), (3000, u"Emisión"), (3500, u"Abono"), (3500, u"Interes"),
+		columnas = ((2000, u"Recibo") , (3000, u"Aplicaciï¿½n"), (3000, u"Emisiï¿½n"), (3500, u"Abono"), (3500, u"Interes"),
 		            (3500, u"Total"), (2000, u"Lote"), (2000, u"Manzana"), (12000, u"Nombre"), (5000, u"Etapa"),
 		            (5000, u"Desarrollo"))
 
@@ -27248,7 +27249,7 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 					xle
 				except:
 					continua = False
-					Mensajes().Info(self, u"Por favor instale el módulo pyExcelerator", u"Atención")
+					Mensajes().Info(self, u"Por favor instale el mï¿½dulo pyExcelerator", u"Atenciï¿½n")
 					
 				if continua:
 					wx.BeginBusyCursor()
@@ -27260,7 +27261,7 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 					self.dlgProgreso.Destroy()
 					wx.EndBusyCursor()
 		else:
-			Mensajes().Info(self, u"No hay nada que enviar a Excel", u"Atención")
+			Mensajes().Info(self, u"No hay nada que enviar a Excel", u"Atenciï¿½n")
 			
 	def FillListCtrl(self, printexcel = False):
 		if not self.Fill:
@@ -27279,7 +27280,7 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 					fechafinal = "'%s/%02d/%02d'" % (rango_ano, int(rango_mes), int(rango_dia))
 					if fechainicial > fechafinal:
 						Mensajes().Info(self, u"La Fecha Inicial de Captura no debe ser mayor a la Fecha Final.\n\n" \
-										u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+										u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLRECIBOSPINARESFECHAFINALCAPTURA).SetValue("")
 						return
 					else:
@@ -27304,8 +27305,8 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 							 self.GetControl(ID_TEXTCTRLRECIBOSPINARESFECHAFINAL).GetValue().split('/')
 					fechafinal = "'%s/%02d/%02d'" % (rango_ano, int(rango_mes), int(rango_dia))
 					if fechainicial > fechafinal:
-						Mensajes().Info(self, u"La Fecha Inicial de Emisión no debe ser mayor a la Fecha Final.\n\n" \
-										u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						Mensajes().Info(self, u"La Fecha Inicial de Emisiï¿½n no debe ser mayor a la Fecha Final.\n\n" \
+										u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLRECIBOSPINARESFECHAFINAL).SetValue("")
 						return
 					else:
@@ -27393,7 +27394,7 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 			wx.BeginBusyCursor()
 			lctrl.InsertColumn(0, u"%sRecibo" % self.lstctrlorder[0][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(1, u"%sCaptura" % self.lstctrlorder[1][2], wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(2, u"%sEmisión" % self.lstctrlorder[2][2], wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(2, u"%sEmisiï¿½n" % self.lstctrlorder[2][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(3, u"%sAbono" % self.lstctrlorder[3][2], wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(4, u"%sInteres" % self.lstctrlorder[4][2], wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(5, u"%sTotal" % self.lstctrlorder[5][2], wx.LIST_FORMAT_RIGHT)
@@ -27483,14 +27484,14 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 			self.GetControl(ID_BUTTONRECIBOSPINARESIMPRESION).Enable(excelbool)
 	
 	def OnImprimirRecibo(self, evt):
-		if Mensajes().YesNo(self, u"¿ Desea realmente imprimir el recibo no. %s ?" % self.consecutivorecibo, u"Confirmación"):
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente imprimir el recibo no. %s ?" % self.consecutivorecibo, u"Confirmaciï¿½n"):
 			self.ImprimeRecibo()
 			
 	def ImprimeRecibo(self):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		try:
 			gridcontenthtml = self.GetHtmlReciboFromGrid(consecutivorecibo = self.consecutivorecibo)
@@ -27515,10 +27516,10 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 						
 				wx.EndBusyCursor()
 			else:
-				Mensajes().Info(self, u"¡ No se encontró información referente al recibo !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente al recibo !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al generar el recibo !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al generar el recibo !", u"Atenciï¿½n")
 
 	def GetHtmlReciboFromGrid(self, consecutivorecibo = 0):
 		sql = """
@@ -27539,7 +27540,7 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if row is not None:
-			a = u"á"; e = u"é"; i = u"í"; o = u"ó"; u = u"ú"
+			a = u"ï¿½"; e = u"ï¿½"; i = u"ï¿½"; o = u"ï¿½"; u = u"ï¿½"
 			meses = ("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
 			         "Septiembre", "Octubre", "Noviembre", "Diciembre")
 			dia, mes, ano = row[0].split("/")
@@ -27953,7 +27954,7 @@ class GixReporteHijosClientes(wx.Dialog, GixBase):
 		
 	def OnPrintExcel(self, event):
 		tabla = "hijos"
-		meta = ((14,"Oferta"), (14,"Cuenta"), (70,u"Fecha"), (70,u"Años"), (70,u"Meses"), (70,u"Sexo"),
+		meta = ((14,"Oferta"), (14,"Cuenta"), (70,u"Fecha"), (70,u"Aï¿½os"), (70,u"Meses"), (70,u"Sexo"),
 		        (100,u"Cliente"), (100,u"Etapa"), (100,u"Desarrollo"))
 		query = self.FillListCtrl(printexcel = True)
 		titulo = u"Hijos de Clientes"
@@ -27978,7 +27979,7 @@ class GixReporteHijosClientes(wx.Dialog, GixBase):
 					fechafinal = "'%s/%02d/%02d'" % (rango_ano, int(rango_mes), int(rango_dia))
 					if fechainicial > fechafinal:
 						Mensajes().Info(self, u"La Fecha Inicial de no debe ser mayor a la Fecha Final.\n\n" \
-						                u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						                u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLHIJOSCLIENTESFECHAFINALCUENTA).SetValue("")
 						return
 					else:
@@ -28002,7 +28003,7 @@ class GixReporteHijosClientes(wx.Dialog, GixBase):
 					edadfinal = "%s" % int(edadaux)
 					if edadinicial > edadfinal:
 						Mensajes().Info(self, u"La Edad Inicial no debe ser mayor a la Edad Final.\n\n" \
-						                u"Se tomará en cuenta unicamente la edad inicial.", u"Atención")
+						                u"Se tomarï¿½ en cuenta unicamente la edad inicial.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLHIJOSCLIENTESEDADFINAL).SetValue("")
 						return
 					else:
@@ -28079,7 +28080,7 @@ class GixReporteHijosClientes(wx.Dialog, GixBase):
 			lctrl.InsertColumn(0, u"%sOferta" % self.lstctrlorder[0][2], wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"%sCuenta" % self.lstctrlorder[1][2], wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(2, u"%sFecha" % self.lstctrlorder[2][2], wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(3, u"%sAños" % self.lstctrlorder[3][2], wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(3, u"%sAï¿½os" % self.lstctrlorder[3][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(4, u"%sMeses" % self.lstctrlorder[4][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(5, u"%sSexo" % self.lstctrlorder[5][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(6, u"%sCliente" % self.lstctrlorder[6][2])
@@ -28308,7 +28309,7 @@ class GixReporteGuardiasAsignadas(wx.Dialog, GixBase):
 
 	def OnPrintExcel(self, event):
 		tabla = "gixguardiasrolldetalle"
-		meta = ((14,"Guardia"), (100,"Vendedor"), (70,u"Fecha"), (70,u"De"), (70,u"A"), (100,u"Descripción / Ubicación"))
+		meta = ((14,"Guardia"), (100,"Vendedor"), (70,u"Fecha"), (70,u"De"), (70,u"A"), (100,u"Descripciï¿½n / Ubicaciï¿½n"))
 		query = self.FillListCtrl(printexcel = True)
 		titulo = u"Reporte de Guardias Asignadas"
 		self.DisplayGrid(tabla, meta, query, titulo)
@@ -28338,7 +28339,7 @@ class GixReporteGuardiasAsignadas(wx.Dialog, GixBase):
 					fechafinal = "'%s/%02d/%02d'" % (rango_ano, int(rango_mes), int(rango_dia))
 					if fechainicial > fechafinal:
 						Mensajes().Info(self, u"La Fecha Inicial de la Guardia no debe ser mayor a la Fecha Final.\n\n" \
-										u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+										u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLGUARDIAASIGNADAFILTROFECHAFINAL).SetValue("")
 						return
 					else:
@@ -28420,7 +28421,7 @@ class GixReporteGuardiasAsignadas(wx.Dialog, GixBase):
 			lctrl.InsertColumn(1, u"%sFecha" % self.lstctrlorder[1][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(2, u"%sDe" % self.lstctrlorder[2][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(3, u"%sA" % self.lstctrlorder[3][2], wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(4, u"%sDescripción / Ubicación" % self.lstctrlorder[4][2])
+			lctrl.InsertColumn(4, u"%sDescripciï¿½n / Ubicaciï¿½n" % self.lstctrlorder[4][2])
 			lctrl.InsertColumn(5, u"%sRecurrencia" % self.lstctrlorder[5][2])
 			if self.vendedor:
 				lctrl.InsertColumn(6, u"Vendedor")
@@ -28565,7 +28566,7 @@ class GixReporteGuardiasAsignadas(wx.Dialog, GixBase):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 			
 class GixMediosPublicitarios(wx.Frame, GixBase):
 	dbtable = "gixmediospublicitarios"
@@ -28646,7 +28647,7 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 		
 	def OnEliminar(self, event):
 		if self.idmediopublicitario == "":
-			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atenciï¿½n")
 			return
 		sql = "select count(*) from gixprospectos where idmediopublicitario = %s" % self.idmediopublicitario
 		cu = r_cn.cursor()
@@ -28654,12 +28655,12 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if int(row[0]) > 0:
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n\n" \
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n\n" \
 							u"Esto se debe a que hay %s prospectos que\ndependen de este medio publicitario."
-							% int(row[0]), u"Atención")
+							% int(row[0]), u"Atenciï¿½n")
 		else:
-			if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?"
-								% self.idmediopublicitario, u"Confirmación"):
+			if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?"
+								% self.idmediopublicitario, u"Confirmaciï¿½n"):
 				if self.DeleteRecord():
 					self.FillListCtrl()
 					self.FillingARecord = True
@@ -28670,9 +28671,9 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 					#sql = """
 					#insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 					#values ('%s', getdate(), '%s', '%s', '%s', '%s')
-					#""" % (self.BlogGUID, self.usuario, u"Eliminación del Registro", "", "")
+					#""" % (self.BlogGUID, self.usuario, u"Eliminaciï¿½n del Registro", "", "")
 					#if not self.QueryUpdateRecord(sql):
-						#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+						#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					
 		event.Skip()
 				
@@ -28686,9 +28687,9 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+							% sql, u"Atenciï¿½n")
 			return False
 		
 	def OnText(self, event):
@@ -28712,7 +28713,7 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 		if valor == "" and not self.FillingARecord and not self.NewFlag:
 			self.NewFlag = True
 			if not VengodelaLista:
-				Mensajes().Info(self, u"¡ No debe quedar la descripción en blanco !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No debe quedar la descripciï¿½n en blanco !", u"Atenciï¿½n")
 				return False
 			
 		if not self.FillingARecord:
@@ -28780,10 +28781,10 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 			self.Text(True)
 			if not self.NewFlag:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle(onguardar)
 				else:
-					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle()
 					
 				self.GetControl(ID_TEXTCTRLMEDIOSPUBLICITARIOSDESCRIPCION).SetBackgroundColour(wx.WHITE)
@@ -28803,7 +28804,7 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 			self.GetControl(ID_RADIOBOXMEDIOSPUBLICITARIOSESTATUS).Enable(True)
 			self.editable = True
 		else:
-			Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+			Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 					
 	def GetRecord(self, record):
 		try:
@@ -28877,7 +28878,7 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord(self, querycancelar = ""):
 		descripcion = self.GetControl(ID_TEXTCTRLMEDIOSPUBLICITARIOSDESCRIPCION).GetValue()
@@ -28890,13 +28891,13 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 		sql = "update %s set %s where idmediopublicitario = %s" % (self.dbtable, setListForQuery, self.idmediopublicitario)
 		queTal = self.QueryUpdateRecord(sql)
 		if queTal:
-			contenido = u"Edición del registro"
+			contenido = u"Ediciï¿½n del registro"
 			#sql = """
 			#insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			#values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			#""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 			#if not self.QueryUpdateRecord(sql):
-				#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -28919,7 +28920,7 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 			if identity is not None:
 				numero = identity
 			else:
-				Mensajes().Info(self, u"Problemas al buscar nuevo medio publicitario.\n\n%s" % sqlmax, u"Atención")
+				Mensajes().Info(self, u"Problemas al buscar nuevo medio publicitario.\n\n%s" % sqlmax, u"Atenciï¿½n")
 			#self.GetControl(self.idtcidcheque).SetValue(str(numero))
 			#sqly = "select convert(varchar(100), BlogGUID) from %s where idmediopublicitario = %s" % (self.dbtable, numero)
 			#cursor = r_cn.cursor()
@@ -28934,7 +28935,7 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 			#values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			#""" % (self.BlogGUID, self.usuario, "Alta del Medio Publicitario", "", "", "A")
 			#if not self.QueryUpdateRecord(sql):
-				#Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atención")
+				#Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atenciï¿½n")
 
 		return queTal, int(numero)
 	
@@ -28951,7 +28952,7 @@ class GixMediosPublicitarios(wx.Frame, GixBase):
 		fila = 0
 		if rows:
 			lctrl.InsertColumn(0, u"Id", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(1, u"Descripción")
+			lctrl.InsertColumn(1, u"Descripciï¿½n")
 			for row in rows:
 				if str(row[2]) == "D":
 					bgcolor = [255,153,153]
@@ -29089,7 +29090,7 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 	
 	def OnAgregar(self, event):
 		self.agregar, self.NewFlag, self.FillingARecord = True, True, True
@@ -29115,25 +29116,25 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 		
 	def OnEliminar(self, event):
 		if self.idconceptoestimacion == "":
-			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atenciï¿½n")
 			return
 		
-		# Lo siguiente se usará para la relacion con estimaciones (Detalle de Facturación)
+		# Lo siguiente se usarï¿½ para la relacion con estimaciones (Detalle de Facturaciï¿½n)
 		#sql = "select count(*) from gixprospectos where idmediopublicitario = %s" % self.idmediopublicitario
 		#cu = r_cn.cursor()
 		#cu.execute(str(sql))
 		#row = fetchone(cu)
 		#cu.close()
 		#if int(row[0]) > 0:
-			#Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n\n" \
+			#Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n\n" \
 							#u"Esto se debe a que hay %s prospectos que\ndependen de este medio publicitario."
-							#% int(row[0]), u"Atención")
+							#% int(row[0]), u"Atenciï¿½n")
 		#else:
 		#
 		# Lo que sigue va dentro del anterior else
 		
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?"
-							% self.idconceptoestimacion, u"Confirmación"):
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?"
+							% self.idconceptoestimacion, u"Confirmaciï¿½n"):
 			if self.DeleteRecord():
 				self.FillListCtrl()
 				self.FillingARecord = True
@@ -29144,9 +29145,9 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 				#sql = """
 				#insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 				#values ('%s', getdate(), '%s', '%s', '%s', '%s')
-				#""" % (self.BlogGUID, self.usuario, u"Eliminación del Registro", "", "")
+				#""" % (self.BlogGUID, self.usuario, u"Eliminaciï¿½n del Registro", "", "")
 				#if not self.QueryUpdateRecord(sql):
-					#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					
 		event.Skip()
 				
@@ -29160,9 +29161,9 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+							% sql, u"Atenciï¿½n")
 			return False
 		
 	def OnText(self, event):
@@ -29186,7 +29187,7 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 		if valor == "" and not self.FillingARecord and not self.NewFlag:
 			self.NewFlag = True
 			if not VengodelaLista:
-				Mensajes().Info(self, u"¡ No debe quedar la descripción en blanco !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No debe quedar la descripciï¿½n en blanco !", u"Atenciï¿½n")
 				return False
 			
 		if not self.FillingARecord:
@@ -29254,10 +29255,10 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 			self.Text(True)
 			if not self.NewFlag:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle(onguardar)
 				else:
-					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle()
 					
 				self.GetControl(ID_TEXTCTRLCONCEPTOESTIMACIONDESCRIPCION).SetBackgroundColour(wx.WHITE)
@@ -29277,7 +29278,7 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 			self.GetControl(ID_RADIOBOXCONCEPTOESTIMACIONESTATUS).Enable(True)
 			self.editable = True
 		else:
-			Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+			Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 					
 	def GetRecord(self, record):
 		try:
@@ -29351,7 +29352,7 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord(self, querycancelar = ""):
 		descripcion = self.GetControl(ID_TEXTCTRLCONCEPTOESTIMACIONDESCRIPCION).GetValue()
@@ -29364,13 +29365,13 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 		sql = "update %s set %s where idconceptoestimacion = %s" % (self.dbtable, setListForQuery, self.idconceptoestimacion)
 		queTal = self.QueryUpdateRecord(sql)
 		if queTal:
-			contenido = u"Edición del registro"
+			contenido = u"Ediciï¿½n del registro"
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -29393,7 +29394,7 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 			if identity is not None:
 				numero = identity
 			else:
-				Mensajes().Info(self, u"Problemas al buscar nuevo concepto de estimación.\n\n%s" % sqlmax, u"Atención")
+				Mensajes().Info(self, u"Problemas al buscar nuevo concepto de estimaciï¿½n.\n\n%s" % sqlmax, u"Atenciï¿½n")
 			self.GetControl(ID_TEXTCTRLCONCEPTOESTIMACIONID).SetValue(str(numero))
 			sqly = "select convert(varchar(100), BlogGUID) from %s where idconceptoestimacion = %s" % (self.dbtable, numero)
 			cursor = r_cn.cursor()
@@ -29406,9 +29407,9 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 			insert into Blogs 
 			(BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
-			""" % (self.BlogGUID, self.usuario, u"Alta del Concepto de Estimación", "", "", "")
+			""" % (self.BlogGUID, self.usuario, u"Alta del Concepto de Estimaciï¿½n", "", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atenciï¿½n")
 
 		return queTal, int(numero)
 	
@@ -29425,7 +29426,7 @@ class GixConceptosEstimacion(wx.Frame, GixBase):
 		fila = 0
 		if rows:
 			lctrl.InsertColumn(0, u"Id", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(1, u"Descripción")
+			lctrl.InsertColumn(1, u"Descripciï¿½n")
 			for row in rows:
 				if str(row[2]) == "D":
 					if fila %2 != 0: bgcolor = [255,153,153]
@@ -29563,7 +29564,7 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 	
 	def ObtenerEtapas(self):
 		control = self.GetControl(ID_CHOICEPRECIOSUSTENTABLEETAPA); control.Clear()
@@ -29602,9 +29603,9 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 		
 	def OnEliminar(self, event):
 		if self.fketapa == "":
-			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atención")
-		elif Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?"
-							  % self.fketapa, u"Confirmación"):
+			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atenciï¿½n")
+		elif Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?"
+							  % self.fketapa, u"Confirmaciï¿½n"):
 			if self.DeleteRecord():
 				self.FillListCtrl()
 				self.FillingARecord = True
@@ -29615,9 +29616,9 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 				#sql = """
 				#insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 				#values ('%s', getdate(), '%s', '%s', '%s', '%s')
-				#""" % (self.BlogGUID, self.usuario, u"Eliminación del Registro", "", "")
+				#""" % (self.BlogGUID, self.usuario, u"Eliminaciï¿½n del Registro", "", "")
 				#if not self.QueryUpdateRecord(sql):
-					#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					
 		event.Skip()
 				
@@ -29633,9 +29634,9 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+							% sql, u"Atenciï¿½n")
 			return False
 		
 	def OnChoice(self, event):
@@ -29668,7 +29669,7 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 			if valor == "" and not self.FillingARecord and not self.NewFlag:
 				self.NewFlag = True
 				if not VengodelaLista:
-					Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 					return False
 			
 		if not self.FillingARecord:
@@ -29748,10 +29749,10 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 			self.Text(True)
 			if not self.NewFlag:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle(onguardar)
 				else:
-					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle()
 					
 				self.GetControl(ID_CHOICEPRECIOSUSTENTABLEETAPA).SetBackgroundColour(wx.WHITE)
@@ -29771,7 +29772,7 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 			self.GetControl(ID_TEXTCTRLPRECIOSUSTENTABLELETRA).Enable(True)
 			self.editable = True
 		else:
-			Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+			Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 					
 	def DespliegaChoice(self, id, valor):
 		choice = self.GetControl(id)
@@ -29858,7 +29859,7 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord(self, querycancelar = ""):
 		queTal = False
@@ -29870,13 +29871,13 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 			sql = "update %s set %s where fk_etapa = %s" % (self.dbtable, setListForQuery, self.fketapa)
 			queTal = self.QueryUpdateRecord(sql)
 			if queTal:
-				contenido = u"Edición del registro"
+				contenido = u"Ediciï¿½n del registro"
 				sql = """
 				insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 				values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -29892,9 +29893,9 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 			cu.execute(str(sql))
 			row = fetchone(cu)
 			cu.close()
-			Mensajes().Info(self,u"¡ Sucedió algo que impidió %s este registro !\n\n" \
+			Mensajes().Info(self,u"ï¿½ Sucediï¿½ algo que impidiï¿½ %s este registro !\n\n" \
 			                u"Ya existe el precio sustentable para la etapa %s:\n%s"
-			                % (situacion, int(fketapa), self.GetString(row[0])), u"Atención")
+			                % (situacion, int(fketapa), self.GetString(row[0])), u"Atenciï¿½n")
 			return False
 		
 		return True
@@ -29926,7 +29927,7 @@ class GixPreciosSustentables(wx.Frame, GixBase):
 				values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, u"Alta de Precio Sustentable", "", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atenciï¿½n")
 
 		return queTal, int(numero)
 	
@@ -30125,7 +30126,7 @@ class GixTablasAmortizacionFunc2(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Nombre")
 			for fila, row in enumerate(rows):
 				if fila %2 != 0: bgcolor = [150,204,150]
@@ -30220,7 +30221,7 @@ class GixTablasAmortizacionFunc2Ant(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Nombre")
 			for fila, row in enumerate(rows):
 				rfc = self.GetString(row[1])
@@ -30319,7 +30320,7 @@ class GixTablasAmortizacionFunc3(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Nombre")
 			for fila, row in enumerate(rows):
 				rfc = self.GetString(row[1])
@@ -30405,7 +30406,7 @@ class GixTablasAmortizacionFunc4(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(1, u"Lote", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(2, u"Superficie", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(3, u"Precio M2", wx.LIST_FORMAT_RIGHT)
@@ -30478,7 +30479,7 @@ class GixTablasAmortizacionFunc5(wx.Dialog, GixBase):
 			self.EndModal(1)
 			self.Destroy()
 		except:
-			Mensajes().Error(self, u"¡ Valor mal introducido !")
+			Mensajes().Error(self, u"ï¿½ Valor mal introducido !")
 			self.GetControl(ID_TEXTCTRLAMORFUNC5VALOR).SetValue("")
 			
 class GixTablasAmortizacionFunc6(wx.Dialog, GixBase):
@@ -30537,7 +30538,7 @@ class GixTablasAmortizacionFunc6(wx.Dialog, GixBase):
 				else:
 					self.GetControl(idctrl).SetValue("0")
 			except:
-				Mensajes().Error(self, u"¡ %s mal introducido !" % dato)
+				Mensajes().Error(self, u"ï¿½ %s mal introducido !" % dato)
 				self.GetControl(idctrl).SetValue("")
 				self.GetControl(idctrl).SetFocus()
 				todook = False
@@ -30560,7 +30561,7 @@ class GixTablasAmortizacionFunc6(wx.Dialog, GixBase):
 			sql = self.PreparaQuery(sql)
 			todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 			if not todook:
-				Mensajes().Info(self, u"¡ No se actualizaron los valores predeterminados !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se actualizaron los valores predeterminados !", u"Atenciï¿½n")
 				
 			self.EndModal(1)
 			self.Destroy()
@@ -30623,7 +30624,7 @@ class GixTablasAmortizacionFunc7(wx.Dialog, GixBase):
 		return eval("self.lindero%s" % lindero)
 
 class GixTablasAmortizacionFunc8(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Elegir Tabla de Amortización", pos = wx.DefaultPosition, size = wx.DefaultSize,
+	def __init__(self, parent, id = -1, title = u"Elegir Tabla de Amortizaciï¿½n", pos = wx.DefaultPosition, size = wx.DefaultSize,
 	             style = wx.DEFAULT_DIALOG_STYLE, tablaamortizacionelegida = None):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.TablaAmortizacionElegida = tablaamortizacionelegida
@@ -30706,7 +30707,7 @@ class GixTablasAmortizacionFunc8(wx.Dialog, GixBase):
 		cu.close()
 		if rows:
 			lctrl.InsertColumn(0, u"Id", wx.LIST_FORMAT_RIGHT)
-			lctrl.InsertColumn(1, u"Elaboración", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(1, u"Elaboraciï¿½n", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(2, u"Lote", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(3, u"Etapa")
 			lctrl.InsertColumn(4, u"Cliente")
@@ -30729,7 +30730,7 @@ class GixTablasAmortizacionFunc8(wx.Dialog, GixBase):
 			lctrl.SetItemState(0, wx.LIST_STATE_SELECTED, wx.LIST_STATE_SELECTED)
 			lctrl.EnsureVisible(0)
 		else:
-			lctrl.InsertColumn(0, "       No se Encontraron Tablas de Amortización", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(0, "       No se Encontraron Tablas de Amortizaciï¿½n", wx.LIST_FORMAT_CENTER)
 			lctrl.SetColumnWidth(0, 200)
 			self.GetControl(ID_BUTTONAMORFUNC8ELEGIR).Enable(False)
 		lctrl.Enable(True)
@@ -30781,7 +30782,7 @@ class GixTablasAmortizacionFunc9(wx.Dialog, GixBase):
 				else:
 					self.GetControl(idctrl).SetValue("0.00")
 			except:
-				Mensajes().Error(self, u"¡ %s mal introducido !" % dato)
+				Mensajes().Error(self, u"ï¿½ %s mal introducido !" % dato)
 				self.GetControl(idctrl).SetValue("")
 				self.GetControl(idctrl).SetFocus()
 				todook = False
@@ -30802,7 +30803,7 @@ class GixTablasAmortizacionFunc9(wx.Dialog, GixBase):
 				self.EndModal(1)
 				self.Destroy()
 			else:
-				Mensajes().Info(self, u"¡ Datos insuficientes para insertar el pago !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Datos insuficientes para insertar el pago !", u"Atenciï¿½n")
 				self.GetControl(ID_TEXTCTRLAMORFUNC9ABONOCAPITAL).SetValue("")
 				self.GetControl(ID_TEXTCTRLAMORFUNC9INTERES).SetValue("")
 				
@@ -30951,7 +30952,7 @@ class GixTablasAmortizacionFunc12(wx.Dialog, GixBase):
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 		if not todook:
-			Mensajes().Info(self, u"¡ No se grabó la información !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se grabï¿½ la informaciï¿½n !", u"Atenciï¿½n")
 			
 		self.FillGridCtrl("desde, hasta, tasa, descuento, enganche")
 		
@@ -30960,7 +30961,7 @@ class GixTablasAmortizacionFunc12(wx.Dialog, GixBase):
 		pkamortizaciondefault = int(self.grid.GetCellValue(fila, 0))
 		desde = int(self.grid.GetCellValue(fila, 1))
 		hasta = int(self.grid.GetCellValue(fila, 2))
-		if Mensajes().YesNo(self, u"¿ Desea realmente eliminar el plazo de %s a %s meses ?" % (desde, hasta), u"Confirmación"):
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente eliminar el plazo de %s a %s meses ?" % (desde, hasta), u"Confirmaciï¿½n"):
 			cu = r_cngcmex.cursor()
 			cu.execute("delete from gixamortizaciondefaults where pkamortizaciondefault = %s" % pkamortizaciondefault)
 			cu.close()
@@ -30968,7 +30969,7 @@ class GixTablasAmortizacionFunc12(wx.Dialog, GixBase):
 				r_cngcmex.commit()
 			except:
 				r_cngcmex.rollback()
-				Mensajes().Info(self, u"¡ No se eliminó la información !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se eliminï¿½ la informaciï¿½n !", u"Atenciï¿½n")
 	
 			self.FillGridCtrl()
 		
@@ -31013,7 +31014,7 @@ class GixTablasAmortizacionFunc12(wx.Dialog, GixBase):
 			sql = (query.replace('\n',' ')).replace('\t',' ')
 			todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 			if not todook:
-				Mensajes().Info(self, u"¡ No se grabó la información !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se grabï¿½ la informaciï¿½n !", u"Atenciï¿½n")
 				
 	def FillGridCtrl(self, orden = "desde, hasta"):
 		metapiece = ((10, u"", wx.ALIGN_RIGHT), (70, u"Desde\nMeses", wx.ALIGN_RIGHT),
@@ -31104,7 +31105,7 @@ class GixTablasAmortizacionFunc13(wx.Dialog, GixBase):
 			self.EndModal(1)
 			self.Destroy()
 		else:
-			Mensajes().Info(self, u"¡ Debe elegir la fecha del enganche !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Debe elegir la fecha del enganche !", u"Atenciï¿½n")
 
 class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def __init__(self, parent, id, title, pos = wx.DefaultPosition, size = wx.DefaultSize, style = wx.DEFAULT_FRAME_STYLE, usuario = None):
@@ -31159,7 +31160,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		self.CreateStatusBar(3)
 		self.SetStatusWidths(anchos)
 		self.SetStatusText(u"          Arcadia - Pinares Tapalpa", 1)
-		self.SetStatusText(u"Tabla de Pagos/Amortización, Contratos y Cuentas", 2)
+		self.SetStatusText(u"Tabla de Pagos/Amortizaciï¿½n, Contratos y Cuentas", 2)
 		if wx.Platform == '__WXMSW__':
 			self.GetControl(ID_LISTCTRLAMORFUNC1).SetSize(wx.Size(950, 340))
 		else:
@@ -31170,7 +31171,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def OnSalir(self, event):
 		if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 			if self.cambio:
-				if Mensajes().YesNo(self, u"¿ Desea guardar la información ?", u"Confirmación"):
+				if Mensajes().YesNo(self, u"ï¿½ Desea guardar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 					self.Guardar()
 		self.Destroy()
 		
@@ -31197,7 +31198,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		if row is not None:
 			defaults = [int(row[0]), int(row[1]), int(row[2]), float(row[3]), float(row[4]), float(row[5]), plazo]
 		else:
-			Mensajes().Error(self, u"¡ No hay plazo a %s meses !" % plazo, u"Atención")
+			Mensajes().Error(self, u"ï¿½ No hay plazo a %s meses !" % plazo, u"Atenciï¿½n")
 			
 		return defaults
 		
@@ -31399,7 +31400,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def VistaTabla(self):
 		if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 			if self.cambio:
-				if Mensajes().YesNo(self, u"¿ Desea guardar la información ?", u"Confirmación"):
+				if Mensajes().YesNo(self, u"ï¿½ Desea guardar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 					self.Guardar()
 
 		self.ObtenerFkamortizacion()
@@ -31450,7 +31451,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				xdia = lafecha.day
 				xmes = lafecha.month
 				xano = lafecha.year
-				Mensajes().Info(self, u"Fecha mal usaré la de hoy", u"Atención")
+				Mensajes().Info(self, u"Fecha mal usarï¿½ la de hoy", u"Atenciï¿½n")
 				
 			dlg = CalenDlg(self, xmes, xdia, xano)
 			
@@ -31465,7 +31466,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				datofin = self.GetControl(self.DicDatesAndTxt[id]).GetValue()
 				self.ValidaCambio(datoini, datofin)
 			except:
-				Mensajes().Warn(self, "Escoja una fecha", u"Atención")
+				Mensajes().Warn(self, "Escoja una fecha", u"Atenciï¿½n")
 				
 	def OnNuevaTabla(self, evt):
 		index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
@@ -31475,7 +31476,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 			if codigolote:
 				if self.cambio:
-					if Mensajes().YesNo(self, u"¿ Desea guardar la información ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"ï¿½ Desea guardar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 						self.Guardar()
 					
 				self.NuevaTabla()
@@ -31521,7 +31522,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def OnAbrir(self, evt):
 		if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 			if self.cambio:
-				if Mensajes().YesNo(self, u"¿ Desea guardar la información ?", u"Confirmación"):
+				if Mensajes().YesNo(self, u"ï¿½ Desea guardar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 					self.Guardar()
 				
 		cu = r_cngcmex.cursor()
@@ -31533,7 +31534,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			dlg.CenterOnParent()
 			dlg.ShowModal()
 		else:
-			Mensajes().Info(self, u"¡ No se encontraron tablas de amortización !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se encontraron tablas de amortizaciï¿½n !", u"Atenciï¿½n")
 			
 	def TablaAmortizacionElegida(self, pkamortizacion):
 		wx.BeginBusyCursor()
@@ -31750,14 +31751,14 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def OnGuardar(self, evt):
 		index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 		if index < 0:
-			Mensajes().Info(self, u"¡ No hay nada que guardar !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No hay nada que guardar !", u"Atenciï¿½n")
 		else:
 			codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 			if codigolote:
 				self.Guardar()
 				self.ValidaToolBar()
 			else:
-				Mensajes().Info(self, u"¡ No hay nada que guardar !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay nada que guardar !", u"Atenciï¿½n")
 				
 	def Guardar(self):
 		wx.BeginBusyCursor()
@@ -31822,7 +31823,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			sql = (query.replace('\n',' ')).replace('\t',' ')
 			todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 			if not todook:
-				Mensajes().Info(self, u"¡ No se grabó la información !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se grabï¿½ la informaciï¿½n !", u"Atenciï¿½n")
 		else:
 			query = """
 			insert into gixamortizacion
@@ -31839,7 +31840,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			if todook:
 				self.GetControl(ID_TEXTCTRLAMORFUNC1ID).SetValue(" Id %s" % str(identity))
 			else:
-				Mensajes().Info(self, u"¡ No se grabó la información !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se grabï¿½ la informaciï¿½n !", u"Atenciï¿½n")
 				
 		sql = """
 		delete from gixamortizaciondetalle where fkamortizacion = %s and pagado = 0 and insertado = 0 and eliminado = 0
@@ -31879,7 +31880,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					sql = (query.replace('\n',' ')).replace('\t',' ')
 					todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 					if not todook:
-						Mensajes().Info(self, u"¡ No se grabó la tabla de amortización !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No se grabï¿½ la tabla de amortizaciï¿½n !", u"Atenciï¿½n")
 				
 		#self.RefrescaTablaAmortizacion(identity)
 		self.cambio = False
@@ -31889,11 +31890,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def OnEliminar(self, evt):
 		index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 		if index < 0:
-			Mensajes().Info(self, u"¡ No hay nada que eliminar !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No hay nada que eliminar !", u"Atenciï¿½n")
 		else:
 			codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 			if codigolote or self.GetControl(ID_TEXTCTRLAMORFUNC1ID).GetValue():
-				if Mensajes().YesNo(self, u"¿ Desea realmente eliminar la información ?", u"Confirmación"):
+				if Mensajes().YesNo(self, u"ï¿½ Desea realmente eliminar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 					identity = self.GetIdentity()
 					if identity:
 						self.Eliminar(identity)
@@ -31901,7 +31902,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					else:
 						self.NuevaTabla()
 			else:
-				Mensajes().Info(self, u"¡ No hay nada que eliminar !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay nada que eliminar !", u"Atenciï¿½n")
 				
 	def Eliminar(self, identity):
 		try:
@@ -31912,8 +31913,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			r_cngcmex.commit()
 		except:
 			r_cngcmex.rollback()
-			Mensajes().Info(self, u"Sucedió algo que impidió eliminar este registro.\n" \
-			                u"Quizá se deba a que hay otra información\nque depende de este registro.", u"Atención")
+			Mensajes().Info(self, u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+			                u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.", u"Atenciï¿½n")
 				
 	def OnEditarPredeterminados(self, evt):
 		dlg = GixTablasAmortizacionFunc12(self)
@@ -31923,19 +31924,19 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def OnAplicarPredeterminados(self, evt):
 		index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 		if index < 0:
-			Mensajes().Info(self, u"¡ Por favor elija la etapa !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Por favor elija la etapa !", u"Atenciï¿½n")
 		else:
 			codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 			if codigolote:
-				if Mensajes().YesNo(self, u"¿ Desea realmente aplicar los valores predeterminados ?", u"Confirmación"):
+				if Mensajes().YesNo(self, u"ï¿½ Desea realmente aplicar los valores predeterminados ?", u"Confirmaciï¿½n"):
 					self.LoteElegido(codigolote = int(codigolote))
 			else:
-				Mensajes().Info(self, u"¡ Por favor elija el lote !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Por favor elija el lote !", u"Atenciï¿½n")
 				
 	def OnGenerarTabla(self, evt):
 		index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 		if index < 0:
-			Mensajes().Info(self, u"¡ Por favor elija la etapa !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Por favor elija la etapa !", u"Atenciï¿½n")
 		else:
 			codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 			if codigolote:
@@ -31944,11 +31945,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 						self.CreceFrame()
 						self.GenerarTabla(True)
 					else:
-						Mensajes().Info(self, u"¡ No hay plazo en meses !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No hay plazo en meses !", u"Atenciï¿½n")
 				else:
-					Mensajes().Info(self, u"¡ No hay saldo a financiar !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No hay saldo a financiar !", u"Atenciï¿½n")
 			else:
-				Mensajes().Info(self, u"¡ Por favor elija el lote !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Por favor elija el lote !", u"Atenciï¿½n")
 			
 	def GenerarTabla(self, evento = False):
 		if self.plazomeses:
@@ -31969,15 +31970,15 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					if len(rows) < self.plazomeses:
 						if evento:
 							msg1 = u"Se detecto un pago aplicado, este"
-							msg2 = u"permanecerá en la tabla."
+							msg2 = u"permanecerï¿½ en la tabla."
 							if len(rows) > 1:
 								msg1 = u"Se han detectado pagos aplicados, estos"
-								msg2 = u"permanecerán en la tabla."
+								msg2 = u"permanecerï¿½n en la tabla."
 								
 							sigue = False
 							if Mensajes().YesNo(self, u"%s\n%s\n\n" \
-								            u"¿ Desea realmente generar la tabla ?" % (msg1, msg2),
-							                    u"Confirmación"):
+								            u"ï¿½ Desea realmente generar la tabla ?" % (msg1, msg2),
+							                    u"Confirmaciï¿½n"):
 								sigue = True
 							else:
 								self.RefrescaTablaAmortizacion(fkamortizacion)
@@ -32100,7 +32101,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 	def OnGenerarCuenta(self, evt):
 		if self.cambio:
-			Mensajes().Info(self, u"¡ Antes de generar la cuenta guarde la información !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Antes de generar la cuenta guarde la informaciï¿½n !", u"Atenciï¿½n")
 		else:
 			aux = self.GetIdentity()
 			pkamortizacion = int(aux)
@@ -32125,31 +32126,31 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			continua = True
 			if self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection() == 0:
 				if not rows:
-					Mensajes().Info(self, u"Si la forma de pago es a crédito genere la tabla\n" \
-					                u"de pagos/amortización.\n\nSi es de contado cambie la forma de pago.",
+					Mensajes().Info(self, u"Si la forma de pago es a crï¿½dito genere la tabla\n" \
+					                u"de pagos/amortizaciï¿½n.\n\nSi es de contado cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					continua = False
 					
 				if plazo < 1:
-					Mensajes().Info(self, u"Si la forma de pago es a crédito revise el plazo.\n" \
+					Mensajes().Info(self, u"Si la forma de pago es a crï¿½dito revise el plazo.\n" \
 					                u"Si es de contado cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					continua = False
 			else:
 				if rows:
 					Mensajes().Info(self, u"Si la forma de pago es de contado elimine la tabla\n" \
-					                u"de pagos/amortización.\n\nSi es a crédito cambie la forma de pago.",
+					                u"de pagos/amortizaciï¿½n.\n\nSi es a crï¿½dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					continua = False
 				
 				if plazo > 0:
 					Mensajes().Info(self, u"Si la forma de pago es de contado revise el plazo.\n" \
-					                u"Si es a crédito cambie la forma de pago.",
+					                u"Si es a crï¿½dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					continua = False
 
 			if continua:
-				if Mensajes().YesNo(self, u"¿ Desea realmente generar la cuenta del cliente ?", u"Confirmación"):
+				if Mensajes().YesNo(self, u"ï¿½ Desea realmente generar la cuenta del cliente ?", u"Confirmaciï¿½n"):
 					d, m, a = self.GetControl(ID_TEXTCTRLAMORFUNC1FECHAELABORACION).GetValue().split("/")
 					fechadeelaboracion = "%04d/%02d/%02d" % (int(a), int(m), int(d))
 					if rows:
@@ -32174,12 +32175,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					""" % (cuenta, fechadeelaboracion, saldo, codigocliente, codigoinmueble)
 					todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cngcmex)
 					if not todook:
-						Mensajes().Info(self, u"¡ No se generó la cuenta %s !" % cuenta, u"Notifique a Sistemas")
+						Mensajes().Info(self, u"ï¿½ No se generï¿½ la cuenta %s !" % cuenta, u"Notifique a Sistemas")
 					else:
 						query = "update gixamortizacion set cuenta = %s where pkamortizacion = %s" % (cuenta, pkamortizacion)
 						todook, trash = self.QueryUpdateRecord(query, conexion = r_cngcmex)
 						if not todook:
-							Mensajes().Info(self, u"¡ No se actualizo la cuenta (A) %s !" % cuenta, u"Atención")
+							Mensajes().Info(self, u"ï¿½ No se actualizo la cuenta (A) %s !" % cuenta, u"Atenciï¿½n")
 						else:
 							self.DisplayCuenta(cuenta)
 							d, m, a = self.GetControl(ID_TEXTCTRLAMORFUNC1FECHAPRIMERPAGO).GetValue().split("/")
@@ -32199,7 +32200,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 							""" % (documento, fechadeelaboracion, fechaenganche, fechaenganche, enganche, enganche, cuenta)
 							todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cngcmex)
 							if not todook:
-								Mensajes().Info(self, u"¡ No se generó el documento (E) %s -> cuenta %s !" % (documento, cuenta),
+								Mensajes().Info(self, u"ï¿½ No se generï¿½ el documento (E) %s -> cuenta %s !" % (documento, cuenta),
 									        u"Notifique a Sistemas")
 							else:
 								cu = r_cngcmex.cursor()
@@ -32214,7 +32215,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 								""" % (movimiento, enganche, fechadeelaboracion, documento)
 								todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cngcmex)
 								if not todook:
-									Mensajes().Info(self, u"¡ No se generó el movimiento (E) %s -> cuenta %s !"
+									Mensajes().Info(self, u"ï¿½ No se generï¿½ el movimiento (E) %s -> cuenta %s !"
 										        % (movimiento, cuenta), u"Notifique a Sistemas")
 								else:
 									aux = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOVENDEDOR).GetValue()
@@ -32237,7 +32238,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 									       codigoinmueble, codigovendedor)
 									todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cngcmex)
 									if not todook:
-										Mensajes().Info(self, u"¡ No se generó la comisión %s -> cuenta %s !"
+										Mensajes().Info(self, u"ï¿½ No se generï¿½ la comisiï¿½n %s -> cuenta %s !"
 											        % (comision, cuenta), u"Notifique a Sistemas")
 									else:
 										query = """
@@ -32246,7 +32247,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 										""" % (cantidad, fechadeelaboracion, codigoinmueble)
 										todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cngcmex)
 										if not todook:
-											Mensajes().Info(self, u"¡ No se actualizó el inmueble %s -> cuenta %s !"
+											Mensajes().Info(self, u"ï¿½ No se actualizï¿½ el inmueble %s -> cuenta %s !"
 												        % (codigoinmueble, cuenta), u"Notifique a Sistemas")
 									
 										elif self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection() == 0:
@@ -32272,7 +32273,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 												todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cngcmex)
 												if not todook:
 													inconsistencia = True
-													Mensajes().Info(self, u"¡ No se generó el documento (M) %s -> cuenta %s !"
+													Mensajes().Info(self, u"ï¿½ No se generï¿½ el documento (M) %s -> cuenta %s !"
 														        % (documento, cuenta), u"Notifique a Sistemas")
 												else:
 													cu = r_cngcmex.cursor()
@@ -32290,20 +32291,20 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 													todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cngcmex)
 													if not todook:
 														inconsistencia = True
-														Mensajes().Info(self, u"¡ No se generó el movimiento (M) %s -> cuenta %s !"
+														Mensajes().Info(self, u"ï¿½ No se generï¿½ el movimiento (M) %s -> cuenta %s !"
 															        % (movimiento, cuenta), u"Notifique a Sistemas")
 													
 											if inconsistencia:
-												Mensajes().Error(self, u"La generación de la cuenta %s\n" \
+												Mensajes().Error(self, u"La generaciï¿½n de la cuenta %s\n" \
 													         u"presento inconsistencias.\n\n" \
-													         u"¡ Notifiquelo a sistemas !" % cuenta,
-													         u"Atención")
+													         u"ï¿½ Notifiquelo a sistemas !" % cuenta,
+													         u"Atenciï¿½n")
 											else:
-												Mensajes().Info(self, u"¡ Generación de cuenta exitosa !", u"Aviso")
+												Mensajes().Info(self, u"ï¿½ Generaciï¿½n de cuenta exitosa !", u"Aviso")
 												
 											self.ValidaToolBar()
 										else:
-											Mensajes().Info(self, u"¡ Generación de cuenta exitosa !", u"Aviso")
+											Mensajes().Info(self, u"ï¿½ Generaciï¿½n de cuenta exitosa !", u"Aviso")
 											self.ValidaToolBar()
 											
 	def OnImprimirPagareEnganche(self, evt):
@@ -32330,10 +32331,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				dlg.CenterOnParent()
 				dlg.ShowModal()
 				if self.fechaenganche:
-					if Mensajes().YesNo(self, u"¿ Desea imprimir el pagaré del enganche ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"ï¿½ Desea imprimir el pagarï¿½ del enganche ?", u"Confirmaciï¿½n"):
 						self.ImprimirPagareEngancheValida()
 		else:
-			Mensajes().Info(self, u"¡ Guarde la información antes de imprimir el pagaré !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Guarde la informaciï¿½n antes de imprimir el pagarï¿½ !", u"Atenciï¿½n")
 			
 	def ObtenerFechaEnganche(self, pkamortizacion, fechaenganche = ""):
 		self.fechaenganche = fechaenganche
@@ -32344,41 +32345,41 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 			if not todook:
 				self.fechaenganche = ""
-				Mensajes().Info(self, u"¡ Problemas al actualizar la fecha del enganche !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar la fecha del enganche !", u"Atenciï¿½n")
 		
 	def ImprimirPagareEngancheValida(self):
 		self.pkamortizacion = self.GetIdentity()
 		if self.pkamortizacion:
 			if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 				if self.cambio:
-					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la información.\n\n" \
-					                    u"¿ Desea guardar la información ahora ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaciï¿½n.\n\n" \
+					                    u"ï¿½ Desea guardar la informaciï¿½n ahora ?", u"Confirmaciï¿½n"):
 						self.Guardar()
 						self.ImprimirPagareEnganche()
 				else:
 					self.ImprimirPagareEnganche()
 			else:
-				Mensajes().Info(self, u"¡ Asigne un inmueble !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Asigne un inmueble !", u"Atenciï¿½n")
 		else:
 			index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 			if index < 0:
-				Mensajes().Info(self, u"¡ No hay nada que imprimir !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay nada que imprimir !", u"Atenciï¿½n")
 			else:
 				codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 				if codigolote:
-					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la información.\n\n" \
-						            u"¿ Desea guardar la información ahora ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaciï¿½n.\n\n" \
+						            u"ï¿½ Desea guardar la informaciï¿½n ahora ?", u"Confirmaciï¿½n"):
 						self.Guardar()
 						self.pkamortizacion = self.GetIdentity()
 						self.ImprimirPagareEnganche()
 				else:
-					Mensajes().Info(self, u"¡ No hay nada que imprimir !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No hay nada que imprimir !", u"Atenciï¿½n")
 					
 	def ImprimirPagareEnganche(self):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo xhtml2pdf (pisa) !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo xhtml2pdf (pisa) !", u"Aviso")
 			return
 		try:
 			aux = self.GetIdentity()
@@ -32398,26 +32399,26 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			continua = True
 			if self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection() == 0:
 				if not rows:
-					Mensajes().Info(self, u"Si la forma de pago es a crédito genere la tabla\n" \
-					                u"de pagos/amortización.\n\nSi es de contado cambie la forma de pago.",
+					Mensajes().Info(self, u"Si la forma de pago es a crï¿½dito genere la tabla\n" \
+					                u"de pagos/amortizaciï¿½n.\n\nSi es de contado cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 					
 				if plazo < 1:
-					Mensajes().Info(self, u"Si la forma de pago es a crédito revise el plazo.\n" \
+					Mensajes().Info(self, u"Si la forma de pago es a crï¿½dito revise el plazo.\n" \
 					                u"Si es de contado cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 			else:
 				if rows:
 					Mensajes().Info(self, u"Si la forma de pago es de contado elimine la tabla\n" \
-					                u"de pagos/amortización.\n\nSi es a crédito cambie la forma de pago.",
+					                u"de pagos/amortizaciï¿½n.\n\nSi es a crï¿½dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 				
 				if plazo > 0:
 					Mensajes().Info(self, u"Si la forma de pago es de contado revise el plazo.\n" \
-					                u"Si es a crédito cambie la forma de pago.",
+					                u"Si es a crï¿½dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 
@@ -32444,10 +32445,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				wx.EndBusyCursor()
 			else:
 				wx.EndBusyCursor()
-				Mensajes().Info(self, u"¡ No hay nada que imprimir !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay nada que imprimir !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al imprimir el pagaré !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al imprimir el pagarï¿½ !", u"Atenciï¿½n")
 			
 	def GetHtmlPagareEnganche(self):
 		mes = {1:"Enero", 2:"Febrero", 3:"Marzo", 4:"Abril", 5:"Mayo", 6:"Junio", 7:"Julio",
@@ -32496,33 +32497,33 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		<br>
 		<div style="text-align: justify;"><big><big><span
 		style="font-family: Arial;">Por
-		medio de este pagaré reconozco(emos) deber y me(nos) obligo(amos) a
+		medio de este pagarï¿½ reconozco(emos) deber y me(nos) obligo(amos) a
 		pagar incondicionalmente a la orden de Arcadia Promotora S. de R.L. de
 		C.V., la cantidad total de <span style="font-weight: bold;">${$IMPORTE}
 		({$IMPORTEL})</span>, en el domicilio de Av. Hidalgo 1443 Piso 9 al
-		día <span style="font-weight: bold;">{$FECHAPAGO}</span>.</span><br>
+		dï¿½a <span style="font-weight: bold;">{$FECHAPAGO}</span>.</span><br>
 		<br>
 		<span style="font-family: Arial;">En caso de mora en el principal, la
-		suma de que se trate causará intereses moratorios iguales al
+		suma de que se trate causarï¿½ intereses moratorios iguales al
 		25 por ciento anual.<br>
 		<br>
-		<span style="font-family: Arial;">Este pagaré queda relevado de
+		<span style="font-family: Arial;">Este pagarï¿½ queda relevado de
 		protesto.<br>
 		<br>
-		Para todo lo relacionado con este pagaré, incluyendo su interpretación
+		Para todo lo relacionado con este pagarï¿½, incluyendo su interpretaciï¿½n
 		y cumplimiento, me someto expresamente a las leyes y tribunales
 		vigentes y competentes en la ciudad de Guadalajara, Jalisco,
 		renunciando al fuero que por cualquier otra causa pudiera corresponder.<br>
 		<br>
-		Suscribo el presente pagaré en la ciudad de Guadalajara, Jalisco a los <span
-		style="font-weight: bold;">{$DIA} días del mes de {$MES} del {$ANIO}.</span><br>
+		Suscribo el presente pagarï¿½ en la ciudad de Guadalajara, Jalisco a los <span
+		style="font-weight: bold;">{$DIA} dï¿½as del mes de {$MES} del {$ANIO}.</span><br>
 		<br>
 		<br>
 		<small>Nombre del Suscriptor:</small><br>
 		<span style="font-weight: bold;">{$NOMBRE}<small><br>
 		</small></span><small>Domicilio:</small><br>
 		<span style="font-weight: bold;">{$DOMICILIO}</span><br>
-		<small>Teléfono:</small><br>
+		<small>Telï¿½fono:</small><br>
 		<span style="font-weight: bold;">{$TELEFONO}</span><br>
 		<small>Ciudad y Estado:</small><br>
 		<span style="font-weight: bold;">{$CDEDO}</span></span></span></big></big><br>
@@ -32565,34 +32566,34 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		if self.pkamortizacion:
 			if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 				if self.cambio:
-					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la información.\n\n" \
-					                    u"¿ Desea guardar la información ahora ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaciï¿½n.\n\n" \
+					                    u"ï¿½ Desea guardar la informaciï¿½n ahora ?", u"Confirmaciï¿½n"):
 						self.Guardar()
 						self.ImprimirPagarePagos()
 				else:
 					self.ImprimirPagarePagos()
 			else:
-				Mensajes().Info(self, u"¡ Asigne un inmueble !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Asigne un inmueble !", u"Atenciï¿½n")
 		else:
 			index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 			if index < 0:
-				Mensajes().Info(self, u"¡ No hay nada que imprimir !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay nada que imprimir !", u"Atenciï¿½n")
 			else:
 				codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 				if codigolote:
-					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la información.\n\n" \
-						            u"¿ Desea guardar la información ahora ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaciï¿½n.\n\n" \
+						            u"ï¿½ Desea guardar la informaciï¿½n ahora ?", u"Confirmaciï¿½n"):
 						self.Guardar()
 						self.pkamortizacion = self.GetIdentity()
 						self.ImprimirPagarePagos()
 				else:
-					Mensajes().Info(self, u"¡ No hay nada que imprimir !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No hay nada que imprimir !", u"Atenciï¿½n")
 					
 	def ImprimirPagarePagos(self):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo xhtml2pdf (pisa) !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo xhtml2pdf (pisa) !", u"Aviso")
 			return
 		try:
 			aux = self.GetIdentity()
@@ -32612,26 +32613,26 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			continua = True
 			if self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection() == 0:
 				if not rows:
-					Mensajes().Info(self, u"Si la forma de pago es a crédito genere la tabla\n" \
-					                u"de pagos/amortización.\n\nSi es de contado cambie la forma de pago.",
+					Mensajes().Info(self, u"Si la forma de pago es a crï¿½dito genere la tabla\n" \
+					                u"de pagos/amortizaciï¿½n.\n\nSi es de contado cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 					
 				if plazo < 1:
-					Mensajes().Info(self, u"Si la forma de pago es a crédito revise el plazo.\n" \
+					Mensajes().Info(self, u"Si la forma de pago es a crï¿½dito revise el plazo.\n" \
 					                u"Si es de contado cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 			else:
 				if rows:
 					Mensajes().Info(self, u"Si la forma de pago es de contado elimine la tabla\n" \
-					                u"de pagos/amortización.\n\nSi es a crédito cambie la forma de pago.",
+					                u"de pagos/amortizaciï¿½n.\n\nSi es a crï¿½dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 				
 				if plazo > 0:
 					Mensajes().Info(self, u"Si la forma de pago es de contado revise el plazo.\n" \
-					                u"Si es a crédito cambie la forma de pago.",
+					                u"Si es a crï¿½dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 				
@@ -32676,10 +32677,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				wx.EndBusyCursor()
 			else:
 				wx.EndBusyCursor()
-				Mensajes().Info(self, u"¡ No hay nada que imprimir !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay nada que imprimir !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al imprimir el pagaré !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al imprimir el pagarï¿½ !", u"Atenciï¿½n")
 			
 	def GetHtmlPagarePagos(self):
 		mes = {1:"Enero", 2:"Febrero", 3:"Marzo", 4:"Abril", 5:"Mayo", 6:"Junio", 7:"Julio",
@@ -32696,7 +32697,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		cu.close()
 		if rows:
 			if not self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection() == 0:
-				Mensajes().Info(self, u"No puede imprimir el pagaré si la forma de pago es de contado", u"Atención")
+				Mensajes().Info(self, u"No puede imprimir el pagarï¿½ si la forma de pago es de contado", u"Atenciï¿½n")
 				return ""
 			
 			plazotabla = len(rows)
@@ -32768,12 +32769,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		<br>
 		<div style="text-align: justify;"><big><big><span
 		style="font-family: Arial;">Por
-		medio de este pagaré reconozco(emos) deber y me(nos) obligo(amos) a
+		medio de este pagarï¿½ reconozco(emos) deber y me(nos) obligo(amos) a
 		pagar incondicionalmente a la orden de Arcadia Promotora S. de R.L. de
 		C.V., la cantidad total de <span style="font-weight: bold;">${$TOTALTABLAC}
 		({$TOTALTABLAL})</span>, en el domicilio de Av. Hidalgo 1443 Piso 9,
 		mediante <span style="font-weight: bold;">{$PLAZOTABLA}</span> pagos
-		mensuales consecutivos sin intereses del día <span
+		mensuales consecutivos sin intereses del dï¿½a <span
 		style="font-weight: bold;">{$FECHAINICIAL}</span><span
 		style="font-weight: bold;"></span><span style="font-weight: bold;"></span>
 		al <span style="font-weight: bold;">{$FECHAFINAL}</span><span
@@ -32782,31 +32783,31 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		({$PAGOFIJOL})</span>.</span><br>
 		<br>
 		<span style="font-family: Arial;">En caso de mora en el principal, la
-		suma de que se trate causará intereses moratorios del 
+		suma de que se trate causarï¿½ intereses moratorios del 
 		25 por ciento anual.<br>
 		<br>
 		<span style="font-family: Arial;">La falta de pago oportuno del capital
-		de por los menos dos mensualidades, traerá como consecuencia que sea
+		de por los menos dos mensualidades, traerï¿½ como consecuencia que sea
 		exigible en su totalidad el saldo insoluto de la cantidad que ampara el
-		presente pagaré, aún cuando las mensualidades que sucedan a dicha
+		presente pagarï¿½, aï¿½n cuando las mensualidades que sucedan a dicha
 		mensualidad, no se encuentren vencidas.<br>
 		<br>
-		Este pagaré queda relevado de protesto.<br>
+		Este pagarï¿½ queda relevado de protesto.<br>
 		<br>
-		Para todo lo relacionado con este pagaré, incluyendo su interpretación
+		Para todo lo relacionado con este pagarï¿½, incluyendo su interpretaciï¿½n
 		y cumplimiento, me someto expresamente a las leyes y tribunales
 		vigentes y competentes en la ciudad de Guadalajara, Jalisco,
 		renunciando al fuero que por cualquier otra causa pudiera corresponder.<br>
 		<br>
-		Suscribo el presente pagaré en la ciudad de Guadalajara, Jalisco a los <span
-		style="font-weight: bold;">{$DIA} días del mes de {$MES} del {$ANIO}.</span><br>
+		Suscribo el presente pagarï¿½ en la ciudad de Guadalajara, Jalisco a los <span
+		style="font-weight: bold;">{$DIA} dï¿½as del mes de {$MES} del {$ANIO}.</span><br>
 		<br>
 		<br>
 		<small>Nombre del Suscriptor:</small><br>
 		<span style="font-weight: bold;">{$NOMBRE}<small><br>
 		</small></span><small>Domicilio:</small><br>
 		<span style="font-weight: bold;">{$DOMICILIO}</span><br>
-		<small>Teléfono:</small><br>
+		<small>Telï¿½fono:</small><br>
 		<span style="font-weight: bold;">{$TELEFONO}</span><br>
 		<small>Ciudad y Estado:</small><br>
 		<span style="font-weight: bold;">{$CDEDO}</span></span></span></big></big><br>
@@ -32862,7 +32863,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		cu.close()
 		if rows:
 			if not self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection() == 0:
-				Mensajes().Info(self, u"No puede imprimir el pagaré si la forma de pago es de contado", u"Atención")
+				Mensajes().Info(self, u"No puede imprimir el pagarï¿½ si la forma de pago es de contado", u"Atenciï¿½n")
 				return ""
 			
 			plazotabla = len(rows)
@@ -32928,7 +32929,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		<br>
 		<div style="text-align: justify;"><big><big><span
 		style="font-family: Arial;">Por
-		medio de este pagaré reconozco(emos) deber y me(nos) obligo(amos) a
+		medio de este pagarï¿½ reconozco(emos) deber y me(nos) obligo(amos) a
 		pagar incondicionalmente a la orden de Arcadia Promotora S. de R.L. de
 		C.V., la cantidad total de <span style="font-weight: bold;">${$TOTALTABLAC}
 		({$TOTALTABLAL})</span>, en el domicilio de Av. Hidalgo 1443 Piso 9,
@@ -32993,30 +32994,30 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		h2 = u"""
 		<br>
 		<span style="font-family: Arial;">En caso de mora en el principal, la
-		suma de que se trate causará intereses moratorios por todo el tiempo que se mantenga insoluto dicho pago a una tasa del 25 % anual.<br>
+		suma de que se trate causarï¿½ intereses moratorios por todo el tiempo que se mantenga insoluto dicho pago a una tasa del 25 % anual.<br>
 		<br>
 		<span style="font-family: Arial;">La falta de pago oportuno del capital
-		de por los menos dos mensualidades, traerá como consecuencia que sea
+		de por los menos dos mensualidades, traerï¿½ como consecuencia que sea
 		exigible en su totalidad el saldo insoluto de la cantidad que ampara el
-		presente pagaré, aún cuando las mensualidades que sucedan a dicha
+		presente pagarï¿½, aï¿½n cuando las mensualidades que sucedan a dicha
 		mensualidad, no se encuentren vencidas.<br>
 		<br>
-		Este pagaré queda relevado de protesto.<br>
+		Este pagarï¿½ queda relevado de protesto.<br>
 		<br>
-		Para todo lo relacionado con este pagaré, incluyendo su interpretación
+		Para todo lo relacionado con este pagarï¿½, incluyendo su interpretaciï¿½n
 		y cumplimiento, me someto expresamente a las leyes y tribunales
 		vigentes y competentes en la ciudad de Guadalajara, Jalisco,
 		renunciando al fuero que por cualquier otra causa pudiera corresponder.<br>
 		<br>
-		Suscribo el presente pagaré en la ciudad de Guadalajara, Jalisco a los <span
-		style="font-weight: bold;">{$DIA} días del mes de {$MES} del {$ANIO}.</span><br>
+		Suscribo el presente pagarï¿½ en la ciudad de Guadalajara, Jalisco a los <span
+		style="font-weight: bold;">{$DIA} dï¿½as del mes de {$MES} del {$ANIO}.</span><br>
 		<br>
 		<br>
 		<small>Nombre del Suscriptor:</small><br>
 		<span style="font-weight: bold;">{$NOMBRE}<small><br>
 		</small></span><small>Domicilio:</small><br>
 		<span style="font-weight: bold;">{$DOMICILIO}</span><br>
-		<small>Teléfono:</small><br>
+		<small>Telï¿½fono:</small><br>
 		<span style="font-weight: bold;">{$TELEFONO}</span><br>
 		<small>Ciudad y Estado:</small><br>
 		<span style="font-weight: bold;">{$CDEDO}</span></span></span></big></big><br>
@@ -33060,34 +33061,34 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		if self.pkamortizacion:
 			if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 				if self.cambio:
-					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la información.\n\n" \
-					                    u"¿ Desea guardar la información ahora ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaciï¿½n.\n\n" \
+					                    u"ï¿½ Desea guardar la informaciï¿½n ahora ?", u"Confirmaciï¿½n"):
 						self.Guardar()
 						self.ImprimirContrato()
 				else:
 					self.ImprimirContrato()
 			else:
-				Mensajes().Info(self, u"¡ Asigne un inmueble !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Asigne un inmueble !", u"Atenciï¿½n")
 		else:
 			index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 			if index < 0:
-				Mensajes().Info(self, u"¡ No hay nada que imprimir !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay nada que imprimir !", u"Atenciï¿½n")
 			else:
 				codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 				if codigolote:
-					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la información.\n\n" \
-						            u"¿ Desea guardar la información ahora ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaciï¿½n.\n\n" \
+						            u"ï¿½ Desea guardar la informaciï¿½n ahora ?", u"Confirmaciï¿½n"):
 						self.Guardar()
 						self.pkamortizacion = self.GetIdentity()
 						self.ImprimirContrato()
 				else:
-					Mensajes().Info(self, u"¡ No hay nada que imprimir !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No hay nada que imprimir !", u"Atenciï¿½n")
 					
 	def ImprimirContrato(self):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo xhtml2pdf (pisa) !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo xhtml2pdf (pisa) !", u"Aviso")
 			return
 		try:
 			aux = self.GetIdentity()
@@ -33107,26 +33108,26 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			continua = True
 			if self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection() == 0:
 				if not rows:
-					Mensajes().Info(self, u"Si la forma de pago es a crédito genere la tabla\n" \
-					                u"de pagos/amortización.\n\nSi es de contado cambie la forma de pago.",
+					Mensajes().Info(self, u"Si la forma de pago es a crï¿½dito genere la tabla\n" \
+					                u"de pagos/amortizaciï¿½n.\n\nSi es de contado cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 					
 				if plazo < 1:
-					Mensajes().Info(self, u"Si la forma de pago es a crédito revise el plazo.\n" \
+					Mensajes().Info(self, u"Si la forma de pago es a crï¿½dito revise el plazo.\n" \
 					                u"Si es de contado cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 			else:
 				if rows:
 					Mensajes().Info(self, u"Si la forma de pago es de contado elimine la tabla\n" \
-					                u"de pagos/amortización.\n\nSi es a crédito cambie la forma de pago.",
+					                u"de pagos/amortizaciï¿½n.\n\nSi es a crï¿½dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 				
 				if plazo > 0:
 					Mensajes().Info(self, u"Si la forma de pago es de contado revise el plazo.\n" \
-					                u"Si es a crédito cambie la forma de pago.",
+					                u"Si es a crï¿½dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 
@@ -33168,10 +33169,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				wx.EndBusyCursor()
 			else:
 				wx.EndBusyCursor()
-				Mensajes().Info(self, u"¡ Verifique la forma de pago y el plazo (tabla) !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Verifique la forma de pago y el plazo (tabla) !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al imprimir el contrato !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al imprimir el contrato !", u"Atenciï¿½n")
 			
 	def GetHtmlContrato(self):
 		cu = r_cngcmex.cursor()
@@ -33277,13 +33278,13 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				sql = "update desarrollo set contrato = %s where codigo = 5" % (contrato + 1)
 				todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 				if not todook:
-					Mensajes().Info(self, u"¡ Problemas al actualizar el contrato (1) !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Problemas al actualizar el contrato (1) !", u"Atenciï¿½n")
 					return ""
 			
 				sql = "update gixamortizacion set contrato = %s where pkamortizacion = %s" % (contrato, self.pkamortizacion)
 				todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 				if not todook:
-					Mensajes().Info(self, u"¡ Problemas al actualizar el contrato (2) !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Problemas al actualizar el contrato (2) !", u"Atenciï¿½n")
 					return ""
 				
 				self.DisplayContrato(contrato)
@@ -33341,11 +33342,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					c2p1 = u"""
 					<div style="text-align: justify;"><br>1.- La cantidad de $%s,
 					(%s), que manifiesta "LA PROMITENTE VENDEDORA" recibir en
-					este acto a su entera satisfacción, sirviendo el presente contrato de
+					este acto a su entera satisfacciï¿½n, sirviendo el presente contrato de
 					formal recibo por la entrega de dicha cantidad.<br>
 					</div>
-					<div style="text-align: justify;"><br>2.- El resto de la contraprestación o
-					sea la cantidad de $%s, (%s) la deberá pagar
+					<div style="text-align: justify;"><br>2.- El resto de la contraprestaciï¿½n o
+					sea la cantidad de $%s, (%s) la deberï¿½ pagar
 					"EL(LOS) PROMITENTE(S) COMPRADOR(ES)" mediante %s amortizaciones
 					de la siguiente forma:<br><br>
 					</div>
@@ -33402,48 +33403,48 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 					c2p1 += u"""
 					<div style="text-align: justify;"><br>3.- Las amortizaciones a
-					que se refiere el punto No. 2 de la presente cláusula se documentan
-					mediante pagaré(s) que en este acto suscribe "EL(LOS) PROMITENTE(S)
-					COMPRADOR(ES)" quien(es) está(n) de acuerdo en que dicho(s) título(s)
-					de crédito sea(n) descontado(s) con terceras personas físicas o morales
-					a elección de "LA PROMITENTE VENDEDORA".<br>
+					que se refiere el punto No. 2 de la presente clï¿½usula se documentan
+					mediante pagarï¿½(s) que en este acto suscribe "EL(LOS) PROMITENTE(S)
+					COMPRADOR(ES)" quien(es) estï¿½(n) de acuerdo en que dicho(s) tï¿½tulo(s)
+					de crï¿½dito sea(n) descontado(s) con terceras personas fï¿½sicas o morales
+					a elecciï¿½n de "LA PROMITENTE VENDEDORA".<br>
 					</div>
 					<div style="text-align: justify;"><br>4.- En caso de que "EL(LOS)
 					PROMITENTE(S) COMPRADOR(ES)" incurra(n) en mora en el pago de las
-					amortizaciones se causarán intereses moratorios por todo el tiempo que
+					amortizaciones se causarï¿½n intereses moratorios por todo el tiempo que
 					se mantenga insoluto dicho pago a una tasa igual al 25 %% anual.<br>
 					</div>
 					<div style="text-align: justify;"><br>
 					Si "LA PROMITENTE VENDEDORA" incurre
 					en gastos judiciales o extrajudiciales para realizar la cobranza de los
 					pagos vencidos en su caso, "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
-					estará(n) obligado(s) a reembolsarle éstos gastos a "LA PROMITENTE
+					estarï¿½(n) obligado(s) a reembolsarle ï¿½stos gastos a "LA PROMITENTE
 					VENDEDORA".<br>
 					</div>
 					<div style="text-align: justify;"><br>TERCERA.- La falta de pago puntual de
-					dos de las amortizaciones mensuales, se considerará como incumplimiento
+					dos de las amortizaciones mensuales, se considerarï¿½ como incumplimiento
 					por parte de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" al presente
-					contrato, por lo que "LA PROMITENTE VENDEDORA" tendrá la opción de
-					rescindirlo en los términos que se establecen en la
-					cláusula séptima del mismo.<br>
+					contrato, por lo que "LA PROMITENTE VENDEDORA" tendrï¿½ la opciï¿½n de
+					rescindirlo en los tï¿½rminos que se establecen en la
+					clï¿½usula sï¿½ptima del mismo.<br>
 					</div>
 					<div style="text-align: justify;"><br>"EL(LOS) PROMITENTE(S)
 					COMPRADOR(ES)", se obliga(n) a contribuir con los gastos generales, que
-					se originen en la conservación y buen funcionamiento de las áreas de
-					uso común, en la proporción que le corresponda, tal como lo establece
-					el reglamento del desarrollo. Dicha obligación la adquiere(n) a partir de
+					se originen en la conservaciï¿½n y buen funcionamiento de las ï¿½reas de
+					uso comï¿½n, en la proporciï¿½n que le corresponda, tal como lo establece
+					el reglamento del desarrollo. Dicha obligaciï¿½n la adquiere(n) a partir de
 					la firma del presente documento. La falta de pago puntual de por lo
 					menos dos de los pagos mensuales que anteriormente se detallan, se
-					considerará como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
-					COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendrá la
-					opción de rescindir el presente contrato en los términos que se
-					establecen en la cláusula séptima de este contrato.<br><br><br>
+					considerarï¿½ como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
+					COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendrï¿½ la
+					opciï¿½n de rescindir el presente contrato en los tï¿½rminos que se
+					establecen en la clï¿½usula sï¿½ptima de este contrato.<br><br><br>
 					</div><div style="text-align:justify;><span style="font-weight: bold;">CUARTA.- PRECIO PACTADO<br></div>
 					
 					
 					<div style="text-align: justify;"><br>"LAS PARTES" manifiestan que
-					el precio pactado en esta operación, es justo y válido, por lo tanto en
-					este contrato no existe error, ni enriquecimiento ilegítimo de alguna
+					el precio pactado en esta operaciï¿½n, es justo y vï¿½lido, por lo tanto en
+					este contrato no existe error, ni enriquecimiento ilegï¿½timo de alguna
 					de las partes.<br>
 					</div>
 					"""
@@ -33454,27 +33455,27 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					c2p1 = u"""
 					<div style="text-align: justify;"><br>1.- La cantidad de $%s,
 					(%s), manifiesta "LA PROMITENTE VENDEDORA" quien la recibe en
-					este acto a su entera satisfacción, sirviendo el presente contrato de
+					este acto a su entera satisfacciï¿½n, sirviendo el presente contrato de
 					formal recibo por la entrega de dicha cantidad.<br>
 					</div>
-					<div style="text-align: justify;"><br>2.- El resto de la contraprestación o
-					sea la cantidad de $%s, (%s) la deberá(n) pagar
+					<div style="text-align: justify;"><br>2.- El resto de la contraprestaciï¿½n o
+					sea la cantidad de $%s, (%s) la deberï¿½(n) pagar
 					"EL(LOS) PROMITENTE(S) COMPRADOR(ES)" mediante %s amortizaciones
-					mensuales, consecutivas sin intereses del día %s de
-					%s de %s al día %s de %s de
+					mensuales, consecutivas sin intereses del dï¿½a %s de
+					%s de %s al dï¿½a %s de %s de
 					%s, cada una por la cantidad de $%s,
 					(%s).<br>
 					</div>
 					<div style="text-align: justify;"><br>3.- Las amortizaciones mensuales a
-					que se refiere el punto anterior, se documentan mediante pagaré(s) que en 
+					que se refiere el punto anterior, se documentan mediante pagarï¿½(s) que en 
 					este acto suscribe "EL(LOS) PROMITENTE(S)
-					COMPRADOR(ES)" quien(es) está(n) de acuerdo en que dicho(s) título(s)
-					de crédito sea(n) descontado(s) con terceras personas físicas o morales
-					a elección de "LA PROMITENTE VENDEDORA".<br>
+					COMPRADOR(ES)" quien(es) estï¿½(n) de acuerdo en que dicho(s) tï¿½tulo(s)
+					de crï¿½dito sea(n) descontado(s) con terceras personas fï¿½sicas o morales
+					a elecciï¿½n de "LA PROMITENTE VENDEDORA".<br>
 					</div>
 					<div style="text-align: justify;"><br>4.- En caso de que "EL(LOS)
 					PROMITENTE(S) COMPRADOR(ES)" incurra(n) en mora en el pago de las
-					amortizaciones se causarán intereses moratorios por todo el tiempo que
+					amortizaciones se causarï¿½n intereses moratorios por todo el tiempo que
 					se mantenga insoluto dicho pago a una tasa del 25 %% anual.<br>
 					</div>
 					
@@ -33482,33 +33483,33 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					Si "LA PROMITENTE VENDEDORA" incurre
 					en gastos judiciales o extrajudiciales para realizar la cobranza de los
 					pagos vencidos en su caso, "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
-					estará(n) obligado(s) a reembolsarle éstos gastos a "LA PROMITENTE
+					estarï¿½(n) obligado(s) a reembolsarle ï¿½stos gastos a "LA PROMITENTE
 					VENDEDORA".<br><br><br>
 					</div>
 					<div style="text-align:justify;><span style="font-weight: bold;">TERCERA.- INCUMPLIMIENTO.<br></div>
 					<div style="text-align: justify;">La falta de pago puntual de
-					dos de las amortizaciones mensuales, se considerará como incumplimiento
+					dos de las amortizaciones mensuales, se considerarï¿½ como incumplimiento
 					por parte de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" al presente
-					contrato, por lo que "LA PROMITENTE VENDEDORA" tendrá la opción de
-					rescindirlo en los términos que se establecen en la
-					cláusula séptima del mismo.<br>
+					contrato, por lo que "LA PROMITENTE VENDEDORA" tendrï¿½ la opciï¿½n de
+					rescindirlo en los tï¿½rminos que se establecen en la
+					clï¿½usula sï¿½ptima del mismo.<br>
 					</div>
 					<div style="text-align: justify;"><br>"EL(LOS) PROMITENTE(S)
 					COMPRADOR(ES)", se obliga(n) a contribuir con los gastos generales, que
-					se originen en la conservación y buen funcionamiento de las áreas de
-					uso común, en la proporción que le corresponda, tal como lo establece
-					el reglamento del desarrollo. Dicha obligación la adquiere a partir de
+					se originen en la conservaciï¿½n y buen funcionamiento de las ï¿½reas de
+					uso comï¿½n, en la proporciï¿½n que le corresponda, tal como lo establece
+					el reglamento del desarrollo. Dicha obligaciï¿½n la adquiere a partir de
 					la firma del presente documento. La falta de pago puntual de por lo
 					menos dos de los pagos mensuales que anteriormente se detallan, se
-					considerará como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
-					COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendrá la
-					opción de rescindir el presente contrato en los términos que se
-					establecen en la cláusula séptima de este contrato.<br>
+					considerarï¿½ como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
+					COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendrï¿½ la
+					opciï¿½n de rescindir el presente contrato en los tï¿½rminos que se
+					establecen en la clï¿½usula sï¿½ptima de este contrato.<br>
 					</div>
 					<div style="text-align:justify;><span style="font-weight: bold;">CUARTA.- PRECIO PACTADO.<br></div>
 					<div style="text-align: justify;">Las partes manifiestan que
-					el precio pactado en esta operación, es justo y válido, por lo tanto en
-					este contrato no existe error, ni enriquecimiento ilegítimo de alguna
+					el precio pactado en esta operaciï¿½n, es justo y vï¿½lido, por lo tanto en
+					este contrato no existe error, ni enriquecimiento ilegï¿½timo de alguna
 					de las partes.<br>
 					</div>
 					""" % (engancheq, enganchel, restoq, restol, plazomeses, int(di), meses[int(mi)], int(ai),
@@ -33523,24 +33524,24 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				<div><h1></div>
 				<br><br><br><br><br><br><br><br><br><br>
 				<div style="text-align: justify;"><br>1.- La cantidad de $%s,
-				(%s), la deberá pagar "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
-				mediante un pago único el día %s.<br>
+				(%s), la deberï¿½ pagar "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
+				mediante un pago ï¿½nico el dï¿½a %s.<br>
 				</div>
 				<div style="text-align: justify;"><br>TERCERA.- "EL(LOS) PROMITENTE(S)
 				COMPRADOR(ES)", se obliga(n) a contribuir con los gastos generales, que
-				se originen en la conservación y buen funcionamiento de las áreas de
-				uso común, en la proporción que le corresponda, tal como lo establece
-				el reglamento del desarrollo. Dicha obligación la adquiere a partir de
+				se originen en la conservaciï¿½n y buen funcionamiento de las ï¿½reas de
+				uso comï¿½n, en la proporciï¿½n que le corresponda, tal como lo establece
+				el reglamento del desarrollo. Dicha obligaciï¿½n la adquiere a partir de
 				la firma del presente documento. La falta de pago puntual de por lo
 				menos dos de los pagos mensuales que anteriormente se detallan, se
-				considerará como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
-				COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendrá la
-				opción de rescindir el presente contrato en los términos que se
-				establecen en la cláusula séptima de este contrato.<br><br>
+				considerarï¿½ como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
+				COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendrï¿½ la
+				opciï¿½n de rescindir el presente contrato en los tï¿½rminos que se
+				establecen en la clï¿½usula sï¿½ptima de este contrato.<br><br>
 				</div>
 				<div style="text-align: justify;"><br>CUARTA.- Las partes manifiestan que
-				el precio pactado en esta operación, es justo y válido, por lo tanto en
-				este contrato no existe error, ni enriquecimiento ilegítimo de alguna
+				el precio pactado en esta operaciï¿½n, es justo y vï¿½lido, por lo tanto en
+				este contrato no existe error, ni enriquecimiento ilegï¿½timo de alguna
 				de las partes.<br>
 				</div>
 				""" % (engancheq, enganchel, fechaenganche)
@@ -33554,12 +33555,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</div>
 			<div style="text-align: justify;">
 			CONTRATO DE PROMESA DE COMPRA VENTA
-			QUE CELEBRAN POR UNA PARTE %s REPRESENTADA EN ESTE ACTO POR EL SEÑOR
+			QUE CELEBRAN POR UNA PARTE %s REPRESENTADA EN ESTE ACTO POR EL SEï¿½OR
 			%s, A QUIEN EN LO SUCESIVO SE LE
-			DENOMINARÁ "LA PROMITENTE VENDEDORA", Y POR OTRA PARTE, EL(LOS) SEÑOR(ES)
-			%s, POR SU PROPIO DERECHO, A QUIEN(ES) EN LO SUCESIVO SE LE(S) DENOMINARÁ "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", A AMBOS EN SU CONJUNTO SE LES DENOMINARÁ "LAS PARTES",
-			EL CUAL SUJETAN AL CONTENIDO DE LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:
+			DENOMINARï¿½ "LA PROMITENTE VENDEDORA", Y POR OTRA PARTE, EL(LOS) SEï¿½OR(ES)
+			%s, POR SU PROPIO DERECHO, A QUIEN(ES) EN LO SUCESIVO SE LE(S) DENOMINARï¿½ "EL(LOS) PROMITENTE(S)
+			COMPRADOR(ES)", A AMBOS EN SU CONJUNTO SE LES DENOMINARï¿½ "LAS PARTES",
+			EL CUAL SUJETAN AL CONTENIDO DE LAS SIGUIENTES DECLARACIONES Y CLï¿½USULAS:
 			<br>
 			</div>
 			<div style="text-align: center;"><span style="font-weight: bold;"><br>DECLARACIONES:</span><br>
@@ -33567,11 +33568,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<br>
 			I.- Declara el representante de "LA PROMITENTE VENDEDORA", por conducto de su representante:<br>
 			<div style="text-align: justify;">a) Que su representada es una sociedad
-			mercantil legalmente constituida mediante escritura pública número
-			43,065, otorgada el día 16 de agosto de 1991, ante la fé del Licenciado
-			Felipe Ignacio Vázquez Aldana Sauza, Notario Público Suplente Adscrito
-			y Asociado número 2 de Tlaquepaque, Jalisco, la cual se registró bajo
-			inscripción 311-312 del tomo 410 del Libro Primero del Registro Público
+			mercantil legalmente constituida mediante escritura pï¿½blica nï¿½mero
+			43,065, otorgada el dï¿½a 16 de agosto de 1991, ante la fï¿½ del Licenciado
+			Felipe Ignacio Vï¿½zquez Aldana Sauza, Notario Pï¿½blico Suplente Adscrito
+			y Asociado nï¿½mero 2 de Tlaquepaque, Jalisco, la cual se registrï¿½ bajo
+			inscripciï¿½n 311-312 del tomo 410 del Libro Primero del Registro Pï¿½blico
 			de Comercio de Guadalajara, Jalisco.<br>
 			</div>
 			<div style="text-align: justify;"><br>b)Que su representante cuenta con las facultades
@@ -33582,11 +33583,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<div style="text-align: justify;"><br>c) Que su representada se encuentra inscrita
 			en el Registro Federal de Contribuyentes bajo la Clave: APR910816FJ3.<br>
 			</div>
-			<div style="text-align: justify;"><br>d) Que tiene interés en vender a "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", 
-			el inmueble que acontinuación se describe:<br>
+			<div style="text-align: justify;"><br>d) Que tiene interï¿½s en vender a "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", 
+			el inmueble que acontinuaciï¿½n se describe:<br>
 			</div>
 			<div style="text-align: justify;"><br>Lote marcado con la Letra %s del
-			Módulo %s, perteneciente al Desarrollo Campestre Recreativo
+			Mï¿½dulo %s, perteneciente al Desarrollo Campestre Recreativo
 			conocido como "%s", ubicado en el municipio de %s,
 			%s, dicho inmueble tiene una Superficie de %s m2.
 			y las siguientes medidas y linderos:<br>
@@ -33601,17 +33602,17 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<br>
 			e) Que "EL INMUEBLE" se encuentra libre de todo gravamen, limitacion
 			de dominio y de cualquier responsabilidad, al corriente en el pago del impuesto predial y demas
-			contribuciones que le corresponden, así como de los servicios con que cuentan.<br>
+			contribuciones que le corresponden, asï¿½ como de los servicios con que cuentan.<br>
 			</div>
 			<div style="text-align: justify;"><br>f) Que ha ofrecido en venta "EL INMUEBLE", y que "EL(LOS)
-			PROMITENTE(S) COMPRADOR(ES)" ha(n) tomado y aceptado en todos sus términos, la oferta realizada
+			PROMITENTE(S) COMPRADOR(ES)" ha(n) tomado y aceptado en todos sus tï¿½rminos, la oferta realizada
 			de conformidad con los dispuesto en el presente Contrato.
 			<br></div>			
 			AQUIESTABA
 			<div style="text-align: justify;"><br>II.- Declara "El(LOS) RPOMINENTE(S) COMPRADOR(ES)":
 			</div>
-			<div style="text-align:justify;">a) Ser persona(s), física(s), de nacionalidad mexicana, mayor(es) de edad,
-			y que cuenta(n) con la capacidad jurídica para contratarse en términos del presente instrumento.
+			<div style="text-align:justify;">a) Ser persona(s), fï¿½sica(s), de nacionalidad mexicana, mayor(es) de edad,
+			y que cuenta(n) con la capacidad jurï¿½dica para contratarse en tï¿½rminos del presente instrumento.
 			<br></div>
 			<div style="text-align:justify;"><br>b) Que se encuentra(n) inscrito(s) en el Registro Federal de Contribuyentes
 			bajo Clave(s) %s:
@@ -33619,7 +33620,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			JUMP3
 			JUMP3
 			<div style="text-align:justify;"><br>c) Que en su deseo de adquirir de "LA PROMITENTE VENDEDORA" "EL INMUEBLE",
-			bajo los términos y condiciones que más adelante se establecen.
+			bajo los tï¿½rminos y condiciones que mï¿½s adelante se establecen.
 			<br></div>
 			<div style="text-align:justify;"><br>III.- Declaran "LAS PARTES", la primera por conducto de su representante:
 			<br></div>
@@ -33629,101 +33630,101 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</div>
 			<div style="text-align: justify;"><br>c) Que comparecen en este acto al otorgar su consentimiento,
 			manifestando conocer plenamente el sentido del presente Contrato, no existiendo dolo, mala fe, enriquecimiento ilegitimo,
-			lesión o error que pudiera invalidarlo.
+			lesiï¿½n o error que pudiera invalidarlo.
 			<br></div>
 			<div style="text-align: justify;"><br>En base a las Declaraciones que anteceden, "LAS PARTES" convienen en celebrar el presente
 			CONTRATO de Promesa de Compraventa, de conformidad con las siguientes,
 			<br></div>
 			<br>
-			<div style="text-align: center;"><span style="font-weight: bold;">CLÁUSULAS:<br></span>
+			<div style="text-align: center;"><span style="font-weight: bold;">CLï¿½USULAS:<br></span>
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">PRIMERA.-OBJETO<br></div>
 			<div style="text-align:justify;">Por virtud del presente Instrumento "LA PROMITENTE VENDEDORA" promete vender "EL INMUEBLE" "ad corpus" a
-			"EL(LOS) PROMITENTE(S) COMPRADOR(ES)" quien(es) se obliga(n) a comprarlo, y pagar el precio acordado por "LAS PARTES", bajo los términos
-			y condiciones que más adelante se establecen. 
+			"EL(LOS) PROMITENTE(S) COMPRADOR(ES)" quien(es) se obliga(n) a comprarlo, y pagar el precio acordado por "LAS PARTES", bajo los tï¿½rminos
+			y condiciones que mï¿½s adelante se establecen. 
 			<br></div>
 			<div style="text-align:justify;><span style="font-weight: bold;">SEGUNDA.- PRECIO Y FORMA DE PAGO<br></div>
 			
 			<div style="text-align: justify;">El precio que "LAS PARTES"
-			han pactado por concepto de contraprestación asciende a la cantidad de
+			han pactado por concepto de contraprestaciï¿½n asciende a la cantidad de
 			$%s, (%s), el cual se establece por todo
-			el "INMUEBLE" materia de Contrato, ya que la presente operación se
+			el "INMUEBLE" materia de Contrato, ya que la presente operaciï¿½n se
 			realiza "ad corpus", por lo que en el supuesto de que al verificarse la
-			medición del mismo, éste resulte de mayor o menor superficie, el
-			precio no sufrirá alteración, tal como disponen los artículos 1858 y
-			1860 del Código Civil para el estado de Jalisco. "LAS PARTES" convienen en que el precio será pagado de la siguiente forma:<br>
+			mediciï¿½n del mismo, ï¿½ste resulte de mayor o menor superficie, el
+			precio no sufrirï¿½ alteraciï¿½n, tal como disponen los artï¿½culos 1858 y
+			1860 del Cï¿½digo Civil para el estado de Jalisco. "LAS PARTES" convienen en que el precio serï¿½ pagado de la siguiente forma:<br>
 			</div>
 			
 			    %s
 			    
 			
 			<div><br><br></div>
-			<div style="text-align:justify;><span style="font-weight: bold;">QUINTA.- ESCRITURACIÓN<br></div>
+			<div style="text-align:justify;><span style="font-weight: bold;">QUINTA.- ESCRITURACIï¿½N<br></div>
 			<div style="text-align: justify;">"LA PROMITENTE VENDEDORA" se obliga a escriturar a "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
 			"EL INMUEBLE", una vez que este(os) haya(n) liquidado
-			la totalidad del precio de venta, y serán a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" 
-			todos los gastos que genera dicha transmisión de propiedad,
+			la totalidad del precio de venta, y serï¿½n a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" 
+			todos los gastos que genera dicha transmisiï¿½n de propiedad,
 			tanto en el otorgamiento del presente Contrato como en la escritura
-			pública correspondiente, como son Impuesto Sobre Transmisión
-			Patrimonial, derechos del Registro Público de la Propiedad, Avalúo y
+			pï¿½blica correspondiente, como son Impuesto Sobre Transmisiï¿½n
+			Patrimonial, derechos del Registro Pï¿½blico de la Propiedad, Avalï¿½o y
 			honorarios notariales o cualquier otro gasto, impuesto o derecho que se
-			cause con la propia escritura, siendo únicamente a cargo de "LA PROMITENTE
+			cause con la propia escritura, siendo ï¿½nicamente a cargo de "LA PROMITENTE
 			VENDEDORA" &nbsp;el impuesto &nbsp;sobre la &nbsp;Renta &nbsp;que &nbsp;
 			se &nbsp;llegase &nbsp;a causar por la
 			venta &nbsp;de &nbsp;"EL INMUEBLE"; &nbsp;asimismo "EL(LOS) PROMITENTE(S) COMPRADOR((ES)",
-			en su caso,deberá(n) estar al
+			en su caso,deberï¿½(n) estar al
 			corriente en las cuotas condominales y se obliga(n) a entregar toda la
-			documentación que sea necesaria al Fedatario Público correspondiente
+			documentaciï¿½n que sea necesaria al Fedatario Pï¿½blico correspondiente
 			para el otorgamiento de la referida escritura.<br></div>
 			<div style="text-align: justify;"><br>"LA PROMITENTE VENDEDORA"
-			girará instrucción al Notario Público de su elección 30 (treinta) días
-			naturales después de liquidado el precio de operación, misma que tendrá
-			una vigencia de 45 (cuarenta y cinco) días naturales para que "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES) acuda(n) ante Dicho Notario, presente(n) su documentación y firme(n)
+			girarï¿½ instrucciï¿½n al Notario Pï¿½blico de su elecciï¿½n 30 (treinta) dï¿½as
+			naturales despuï¿½s de liquidado el precio de operaciï¿½n, misma que tendrï¿½
+			una vigencia de 45 (cuarenta y cinco) dï¿½as naturales para que "EL(LOS) PROMITENTE(S)
+			COMPRADOR(ES) acuda(n) ante Dicho Notario, presente(n) su documentaciï¿½n y firme(n)
 			la escritura correspondiente.&nbsp; En caso de no formalizar la
-			escritura pública de que se trata en el plazo de la vigencia de la
-			instrucción, "LA PROMITENTE VENDEDORA" podrá girar nueva instrucción con un
+			escritura pï¿½blica de que se trata en el plazo de la vigencia de la
+			instrucciï¿½n, "LA PROMITENTE VENDEDORA" podrï¿½ girar nueva instrucciï¿½n con un
 			costo administrativo a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" de $ 100.00 ( CIEN
-			PESOS 00/100 M.N.) por cada día transcurrido desde la fecha de
-			caducidad de la primera instrucción y hasta la fecha de la nueva
-			instrucción.<br><br>
+			PESOS 00/100 M.N.) por cada dï¿½a transcurrido desde la fecha de
+			caducidad de la primera instrucciï¿½n y hasta la fecha de la nueva
+			instrucciï¿½n.<br><br>
 			</div>			
 			JUMP1
-			<div style="text-align:justify;><span style="font-weight: bold;">SEXTA.- ENTREGA DE LA POSESIÓN DE "EL INMUEBLE".<br></div>
-			<div style="text-align: justify;">La posesión material de "EL
+			<div style="text-align:justify;><span style="font-weight: bold;">SEXTA.- ENTREGA DE LA POSESIï¿½N DE "EL INMUEBLE".<br></div>
+			<div style="text-align: justify;">La posesiï¿½n material de "EL
 			INMUEBLE", la entrega en este acto "LA PROMITENTE VENDEDORA" a "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", a su entera satisfacción. En caso de rescisión del
-			presente contrato "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", deberá(n)
-			restituir la posesión de dicho inmueble a "LA PROMITENTE VENDEDORA",
-			dentro de un plazo no mayor a 5 días contados a partir de la fecha en
-			que ocurra la rescisión. "LAS PARTES" convienen expresamente que en caso
+			COMPRADOR(ES)", a su entera satisfacciï¿½n. En caso de rescisiï¿½n del
+			presente contrato "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", deberï¿½(n)
+			restituir la posesiï¿½n de dicho inmueble a "LA PROMITENTE VENDEDORA",
+			dentro de un plazo no mayor a 5 dï¿½as contados a partir de la fecha en
+			que ocurra la rescisiï¿½n. "LAS PARTES" convienen expresamente que en caso
 			de incumplimiento de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" en cuanto a
-			la restitución de la posesión dentro del plazo convenido, pagará(n) a
+			la restituciï¿½n de la posesiï¿½n dentro del plazo convenido, pagarï¿½(n) a
 			"LA PROMITENTE VENDEDORA" por concepto de pena convencional una
-			cantidad equivalente a 9 veces el salario mínimo vigente en esta
-			ciudad de Guadalajara, Jalisco, por cada día de retraso en la entrega de dicha posesión.<br><br><br><br>
+			cantidad equivalente a 9 veces el salario mï¿½nimo vigente en esta
+			ciudad de Guadalajara, Jalisco, por cada dï¿½a de retraso en la entrega de dicha posesiï¿½n.<br><br><br><br>
 			</div>
 			JUMP2
 			<div style="text-align:justify;><span style="font-weight: bold;">SEPTIMA.- PENA CONVENCIONAL.<br></div>
 			<div style="textrm-align: justify;">En caso de incumplimiento
 			de alguna de las obligaciones que asumen "LAS PARTES" en el presente
-			Contrato, la parte que incumpla pagará a la otra por concepto de pena
+			Contrato, la parte que incumpla pagarï¿½ a la otra por concepto de pena
 			convencional una cantidad equivalente al 25%s calculado sobre el monto
 			total del precio pactado. En caso de que el incumplimiento fuere por
 			parte de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", "LA PROMITENTE
-			VENDEDORA" podrá optar por rescindir el presente contrato sin necesidad
-			de declaración judicial previa, mediante simple notificación hecha por
+			VENDEDORA" podrï¿½ optar por rescindir el presente contrato sin necesidad
+			de declaraciï¿½n judicial previa, mediante simple notificaciï¿½n hecha por
 			escrito.<br><br><br><br>
 			</div>
 			JUMP3
-			<div style="text-align:justify;><span style="font-weight: bold;">OCTAVA.- CESIÓN.<br></div>
+			<div style="text-align:justify;><span style="font-weight: bold;">OCTAVA.- CESIï¿½N.<br></div>
 			<div style="text-align: justify;">En caso de que "EL(LOS)
 			PROMITENTE(S) COMPRADOR(ES)", quisiere(n) ceder los derechos del
-			presente contrato, deberá de notificarlo por escrito a "LA PROMITENTE
-			VENDEDORA" y además se obliga(n) a pagarle a esta, una cantidad
-			equivalente al 5%s sobre el valor total de la correspondiente cesión de
+			presente contrato, deberï¿½ de notificarlo por escrito a "LA PROMITENTE
+			VENDEDORA" y ademï¿½s se obliga(n) a pagarle a esta, una cantidad
+			equivalente al 5%s sobre el valor total de la correspondiente cesiï¿½n de
 			derechos. Sin el consentimiento expreso por escrito de "LA PROMITENTE
-			VENDEDORA", la cesión de derechos no surtirá efecto legal alguno.<br><br><br><br>
+			VENDEDORA", la cesiï¿½n de derechos no surtirï¿½ efecto legal alguno.<br><br><br><br>
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">NOVENA.- IMPUESTOS PREDIAL DE "EL INMUEBLE".<br></div>
 			<div style="text-align: justify;">"EL(LOS) PROMITENTE(S)
@@ -33733,69 +33734,69 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA.- CONSTRUCCION DE "EL INMUEBLE".<br></div>
 			<div style="text-align: justify;">"EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", se obliga(n) a acatar las características de obra que
-			señale la Dirección de Obras Públicas del
+			COMPRADOR(ES)", se obliga(n) a acatar las caracterï¿½sticas de obra que
+			seï¿½ale la Direcciï¿½n de Obras Pï¿½blicas del
 			H. Ayuntamiento respectivo,
-			así como las limitaciones que señala el
+			asï¿½ como las limitaciones que seï¿½ala el
 			reglamento del Desarrollo,
-			respecto a la construcción que edifiquen sobre "EL INMUEBLE" misma que
-			deberá ser recreativa campestres.<br><br><br><br><br><br>
+			respecto a la construcciï¿½n que edifiquen sobre "EL INMUEBLE" misma que
+			deberï¿½ ser recreativa campestres.<br><br><br><br><br><br>
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">DECIMO PRIMERA.- REGIMEN DE PROPIEDAD EN CONDOMINIO.<br></div>
 			<div style="text-align: justify;">"LAS PARTES" convienen
-			en que "LA PROMITENTE VENDEDORA" podrá, sin requerir el consentimiento
+			en que "LA PROMITENTE VENDEDORA" podrï¿½, sin requerir el consentimiento
 			de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", sujetar "EL INMUEBLE" al Regimen de Propiedad y Condominio.
-			En caso de que "EL INMUEBLE" se afecte al Régimen de Propiedad y Condominio "LA
+			En caso de que "EL INMUEBLE" se afecte al Rï¿½gimen de Propiedad y Condominio "LA
 			PROMITENTE VENDEDORA", se obliga a transmitir a "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", el mismo conjuntamente con la acción de dominio
-			indivisa sobre las áreas comunes que corresponda al lote condominal.
+			COMPRADOR(ES)", el mismo conjuntamente con la acciï¿½n de dominio
+			indivisa sobre las ï¿½reas comunes que corresponda al lote condominal.
 			&nbsp; por su cuenta "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" se obliga(n) a cumplir y acatar
-			en todos sus términos el
-			reglamento de administración del condominio.
-			"El inmueble" deberá estar libre de gravamen, al corriente de sus
-			obligaciones fiscales y "LA PROMITENTE VENDEDORA" se obligará al
-			saneamiento para el caso de evicción en los términos de Ley.<br><br><br>
+			en todos sus tï¿½rminos el
+			reglamento de administraciï¿½n del condominio.
+			"El inmueble" deberï¿½ estar libre de gravamen, al corriente de sus
+			obligaciones fiscales y "LA PROMITENTE VENDEDORA" se obligarï¿½ al
+			saneamiento para el caso de evicciï¿½n en los tï¿½rminos de Ley.<br><br><br>
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA SEGUNDA.- GASTOS.<br></div>
 			<div style="text-align: justify;">Los gastos
-			ocasionados por el presente contrato, así como los gastos, impuestos,
+			ocasionados por el presente contrato, asï¿½ como los gastos, impuestos,
 			derechos y honorarios ocasionados por la escritura de compra venta
-			definitiva serán a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)". El
-			impuesto sobre la renta será pagado por "LA PROMITENTE VENDEDORA".<br><br><br>
+			definitiva serï¿½n a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)". El
+			impuesto sobre la renta serï¿½ pagado por "LA PROMITENTE VENDEDORA".<br><br><br>
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA TERCERA.- TRIBUNALES COMPETENTES<br></div>
 			<div style="text-align: justify;">Para la
-			interpretación y cumplimiento del presente contrato "LAS PARTES" se
+			interpretaciï¿½n y cumplimiento del presente contrato "LAS PARTES" se
 			someten expresamente a los Tribunales de esta ciudad de Guadalajara,
 			Jalisco, renunciando al fuero presente o futuro que por cualquier causa
 			pudiere corresponderles.<br><br><br><br><br>
 			</div>
-			<div style="text-align:justify;><span style="font-weight: bold;">DÉCIMA CUARTA.- DEPOSITARIO DE "EL INMUEBLE".<br></div>
+			<div style="text-align:justify;><span style="font-weight: bold;">Dï¿½CIMA CUARTA.- DEPOSITARIO DE "EL INMUEBLE".<br></div>
 			<div style="text-align: justify;">En el caso de que "LA
 			PROMITENTE VENDEDORA" exigiere judicialmente, el cumplimiento de las
-			obligaciones a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", éste(os)
-			conviene(n) en que no será(n) depositario(s) de "EL INMUEBLE" objeto de este
+			obligaciones a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", ï¿½ste(os)
+			conviene(n) en que no serï¿½(n) depositario(s) de "EL INMUEBLE" objeto de este
 			contrato, y por lo tanto se obliga a entregar a "LA PROMITENTE
-			VENDEDORA" al depositario que ésta nombre dicho inmueble; siendo
-			responsable(s) de cualquier daño o perjuicio que el inmueble sufra
-			mientras el depositario no tome posesión de su cargo.<br>
+			VENDEDORA" al depositario que ï¿½sta nombre dicho inmueble; siendo
+			responsable(s) de cualquier daï¿½o o perjuicio que el inmueble sufra
+			mientras el depositario no tome posesiï¿½n de su cargo.<br>
 			</div>
 			JUMP1
 			<div style="text-align: justify;"><br>Todas las prestaciones derivadas de
-			este contrato, deberá pagarlas y cumplirlas "EL(LOS) PROMITENTE(S)
+			este contrato, deberï¿½ pagarlas y cumplirlas "EL(LOS) PROMITENTE(S)
 			COMPRADOR(ES)" en la Ciudad de %s, %s, en las oficinas de
 			la empresa ubicadas en %s, o en las que designe con
 			posterioridad, mediante aviso dado por escrito a "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)". El cambio de domicilio, los emplazamientos y demás diligencias judiciales o extrajudiciales
-			, se practicarán en el domicilio señalado en la presente cláusula<br><br><br><br><br>
+			COMPRADOR(ES)". El cambio de domicilio, los emplazamientos y demï¿½s diligencias judiciales o extrajudiciales
+			, se practicarï¿½n en el domicilio seï¿½alado en la presente clï¿½usula<br><br><br><br><br>
 			</div>
 			<br>
 			JUMP1
 			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA QUINTA.- <br></div>
 			<div style="text-align: justify;">Para todos los efectos judiciales relativos al presente contrato, el acreditado
-			señala como su domicilio %s en la Ciudad de %s, %s.  Mientras 
+			seï¿½ala como su domicilio %s en la Ciudad de %s, %s.  Mientras 
 			"EL(LOS) PROMINENTES COMPRADOR(ES)" no notifiquen por escrito a la "PROMINENTE VENDEDORA" el cambio de domicilio, 
-			los emplazamientos y demas diligencias judiciales o extrajudiciales, se practicarán en el domicilio señalado en la presente cláusula.
+			los emplazamientos y demas diligencias judiciales o extrajudiciales, se practicarï¿½n en el domicilio seï¿½alado en la presente clï¿½usula.
 			<br><br>
 			</div>
 			JUMP2
@@ -33805,7 +33806,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Enteradas "LAS PARTES" del valor,
 			alcances y consecuencias legales del presente contrato, lo ratifican y
 			firman por duplicado en la Ciudad de Guadalajara, Jalisco, a los
-			%s días del mes de %s de %s.<br><br><br>
+			%s dï¿½as del mes de %s de %s.<br><br><br>
 			</div>
 			<div style="text-align: center;"><br>"LA PROMITENTE VENDEDORA"<br>
 			<br><br>
@@ -33883,34 +33884,34 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		if self.pkamortizacion:
 			if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 				if self.cambio:
-					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la información.\n\n" \
-					                    u"¿ Desea guardar la información ahora ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaciï¿½n.\n\n" \
+					                    u"ï¿½ Desea guardar la informaciï¿½n ahora ?", u"Confirmaciï¿½n"):
 						self.Guardar()
 						self.ImprimirTabla()
 				else:
 					self.ImprimirTabla()
 			else:
-				Mensajes().Info(self, u"¡ Asigne un inmueble !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Asigne un inmueble !", u"Atenciï¿½n")
 		else:
 			index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 			if index < 0:
-				Mensajes().Info(self, u"¡ No hay nada que imprimir !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay nada que imprimir !", u"Atenciï¿½n")
 			else:
 				codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 				if codigolote:
-					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la información.\n\n" \
-						            u"¿ Desea guardar la información ahora ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaciï¿½n.\n\n" \
+						            u"ï¿½ Desea guardar la informaciï¿½n ahora ?", u"Confirmaciï¿½n"):
 						self.Guardar()
 						self.pkamortizacion = self.GetIdentity()
 						self.ImprimirTabla()
 				else:
-					Mensajes().Info(self, u"¡ No hay nada que imprimir !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No hay nada que imprimir !", u"Atenciï¿½n")
 
 	def ImprimirTabla(self):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo xhtml2pdf (pisa) !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo xhtml2pdf (pisa) !", u"Aviso")
 			return
 		try:
 			aux = self.GetIdentity()
@@ -33930,32 +33931,32 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			continua = True
 			if self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection() == 0:
 				if not rows:
-					Mensajes().Info(self, u"Si la forma de pago es a crédito genere la tabla\n" \
-					                u"de pagos/amortización.\n\nSi es de contado cambie la forma de pago.",
+					Mensajes().Info(self, u"Si la forma de pago es a crï¿½dito genere la tabla\n" \
+					                u"de pagos/amortizaciï¿½n.\n\nSi es de contado cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 					
 				if plazo < 1:
-					Mensajes().Info(self, u"Si la forma de pago es a crédito revise el plazo.\n" \
+					Mensajes().Info(self, u"Si la forma de pago es a crï¿½dito revise el plazo.\n" \
 					                u"Si es de contado cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 			else:
 				if rows:
 					Mensajes().Info(self, u"Si la forma de pago es de contado elimine la tabla\n" \
-					                u"de pagos/amortización.\n\nSi es a crédito cambie la forma de pago.",
+					                u"de pagos/amortizaciï¿½n.\n\nSi es a crï¿½dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 				
 				if plazo > 0:
 					Mensajes().Info(self, u"Si la forma de pago es de contado revise el plazo.\n" \
-					                u"Si es a crédito cambie la forma de pago.",
+					                u"Si es a crï¿½dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
 				
-				Mensajes().Info(self, u"No puede imprimir una tabla de pagos/amortización\n" \
+				Mensajes().Info(self, u"No puede imprimir una tabla de pagos/amortizaciï¿½n\n" \
 				                u"cuando la forma de pago es de contado.\n\n"
-			                        u"Si es a crédito cambie la forma de pago.",
+			                        u"Si es a crï¿½dito cambie la forma de pago.",
 			                        u"Verifique la forma de pago")
 				return
 			
@@ -33993,11 +33994,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				wx.EndBusyCursor()
 			else:
 				wx.EndBusyCursor()
-				Mensajes().Info(self, u"¡ No hay tabla de pagos/amortización !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay tabla de pagos/amortizaciï¿½n !", u"Atenciï¿½n")
 				
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al imprimir la tabla !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al imprimir la tabla !", u"Atenciï¿½n")
 
 	def GetHtmlTabla(self):
 		query = """
@@ -34026,7 +34027,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if row is not None:
-			a = u"á"; e = u"é"; i = u"í"; o = u"ó"; u = u"ú"
+			a = u"ï¿½"; e = u"ï¿½"; i = u"ï¿½"; o = u"ï¿½"; u = u"ï¿½"
 			meses = ("", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic")
 			lote = self.GetString(row[0]); enganche = str(amount_and_cents_with_commas(float(row[1])))
 			superficie = str(amount_and_cents_with_commas(float(row[2])))
@@ -34186,7 +34187,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			#sql = (query.replace('\n',' ')).replace('\t',' ')
 			#todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 			#if not todook:
-				#Mensajes().Info(self, u"¡ No se grabó la información !", u"Cuenta")
+				#Mensajes().Info(self, u"ï¿½ No se grabï¿½ la informaciï¿½n !", u"Cuenta")
 		
 		
 		#d, m, a = 3, 6, 2012; cuenta = 2173; relacion = 0; pagos = 48; cantidad = 2387.48
@@ -34214,7 +34215,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			#sql = (query.replace('\n',' ')).replace('\t',' ')
 			#todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 			#if not todook:
-				#Mensajes().Info(self, u"¡ No se grabó la información !", u"Documentos")
+				#Mensajes().Info(self, u"ï¿½ No se grabï¿½ la informaciï¿½n !", u"Documentos")
 
 			#movimiento += 1; relacion += 1
 			#relaciondepago = "%s/%s" % (relacion, pagos)
@@ -34226,7 +34227,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			#sql = (query.replace('\n',' ')).replace('\t',' ')
 			#todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 			#if not todook:
-				#Mensajes().Info(self, u"¡ No se grabó la información !", u"Atención")
+				#Mensajes().Info(self, u"ï¿½ No se grabï¿½ la informaciï¿½n !", u"Atenciï¿½n")
 
 	def OnElegirCliente(self, evt):
 		cu = r_cngcmex.cursor()
@@ -34238,7 +34239,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			dlg.CenterOnParent()
 			dlg.ShowModal()
 		else:
-			Mensajes().Info(self, u"¡ No se encontraron clientes !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se encontraron clientes !", u"Atenciï¿½n")
 			
 	def ClienteElegido(self, codigocliente, nombrecliente):
 		datoini = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOCLIENTE).GetValue()
@@ -34264,7 +34265,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			dlg.CenterOnParent()
 			dlg.ShowModal()
 		else:
-			Mensajes().Info(self, u"¡ No se encontraron vendedores !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se encontraron vendedores !", u"Atenciï¿½n")
 			
 	def VendedorElegido(self, codigovendedor, nombrevendedor):
 		datoini = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOVENDEDOR).GetValue()
@@ -34281,13 +34282,13 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		self.ValidaCambio(datoini, datofin)
 		
 	def OnCambiarFormaDePago(self, evt):
-		pagos = {0:u"crédito", 1:u"contado"}
+		pagos = {0:u"crï¿½dito", 1:u"contado"}
 		formadepago = self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection()
 		if self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection() > -1:
 			codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 			if codigolote:
-				if Mensajes().YesNo(self, u"¿ Desea aplicar los valores predeterminados de %s ?" \
-				                    % pagos[formadepago], u"Confirmación"):
+				if Mensajes().YesNo(self, u"ï¿½ Desea aplicar los valores predeterminados de %s ?" \
+				                    % pagos[formadepago], u"Confirmaciï¿½n"):
 					self.GetControl(ID_TEXTCTRLAMORFUNC1PLAZOMESES).SetValue("")
 					self.LoteElegido(codigolote = int(codigolote))
 					
@@ -34296,12 +34297,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def EtapaSeleccionada(self, validalote = False):
 		index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 		if index < 0:
-			Mensajes().Info(self, u"¡ Por favor elija la etapa !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Por favor elija la etapa !", u"Atenciï¿½n")
 		elif not validalote:
 			lote = self.GetControl(ID_TEXTCTRLAMORFUNC1LOTE).GetValue()
 			if lote == "":
 				index = -1
-				Mensajes().Info(self, u"¡ Por favor elija el lote !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Por favor elija el lote !", u"Atenciï¿½n")
 			
 		return index
 	
@@ -34341,7 +34342,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		index = self.EtapaSeleccionada(True)
 		if index >= 0:
 			etapa = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetClientData(index)
-			Mensajes().Info(self,u"Index es %s. La etapa es %s" % (index,etapa),u"Atención")
+			Mensajes().Info(self,u"Index es %s. La etapa es %s" % (index,etapa),u"Atenciï¿½n")
 			cu = r_cngcmex.cursor()
 			cu.execute(str("select * from INMUEBLE where fk_etapa = %s and fechadeventa is null" % etapa))
 			rows = fetchall(cu)
@@ -34352,7 +34353,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				dlg.CenterOnParent()
 				dlg.ShowModal()
 			else:
-				Mensajes().Info(self, u"¡ No se encontraron lotes !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontraron lotes !", u"Atenciï¿½n")
 			
 	def LoteElegido(self, codigolote, notifica = False):
 		datoini = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
@@ -34408,7 +34409,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		self.GetControl(ID_TEXTCTRLAMORFUNC1PRECIOCONTADO).SetValue(str(amount_and_cents_with_commas(self.preciocontado)))
 		self.ValidaGenerarTabla()
 		if cambio:
-			Mensajes().Info(self, u"¡ Se han aplicado los valores predeterminados al lote elegido !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se han aplicado los valores predeterminados al lote elegido !", u"Atenciï¿½n")
 			
 		self.ValidaToolBar()
 		datofin = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
@@ -34465,9 +34466,9 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 							
 						break
 					else:
-						Mensajes().Info(self, u"¡ No puede introducir cantidades en negativo !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No puede introducir cantidades en negativo !", u"Atenciï¿½n")
 				except:
-					Mensajes().Error(self, u"¡ Cantidad mal introducida >> %s !" % self.valor, u"Error")
+					Mensajes().Error(self, u"ï¿½ Cantidad mal introducida >> %s !" % self.valor, u"Error")
 			else:
 				break
 			
@@ -34522,7 +34523,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					self.GetControl(ID_TEXTCTRLAMORFUNC1TASAANUAL).SetValue(str(amount_and_cents_with_commas(self.tasainteresanual)))
 					self.GetControl(ID_TEXTCTRLAMORFUNC1PLAZOMESES).SetValue(str(self.plazomeses))
 					self.ValidaGenerarTabla()
-					Mensajes().Info(self, u"¡ Se han aplicado los valores predeterminados al lote elegido !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Se han aplicado los valores predeterminados al lote elegido !", u"Atenciï¿½n")
 					self.ValidaToolBar()
 					datofin = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 					self.ValidaCambio(datoini, datofin)
@@ -34568,9 +34569,9 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				datofin = self.GetControl(ID_TEXTCTRLAMORFUNC1DESCUENTO).GetValue()
 				self.ValidaCambio(datoini, datofin)
 			else:
-				Mensajes().Info(self, u"¡ No hay precio de contado para aplicar el descuento !")
+				Mensajes().Info(self, u"ï¿½ No hay precio de contado para aplicar el descuento !")
 		except:
-			Mensajes().Info(self, u"¡ Revise el precio de contado !")
+			Mensajes().Info(self, u"ï¿½ Revise el precio de contado !")
 		
 	def OnCambiarEnganche(self, evt):
 		if self.EtapaSeleccionada() >= 0:
@@ -34601,9 +34602,9 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				datofin = self.GetControl(ID_TEXTCTRLAMORFUNC1ENGANCHE).GetValue()
 				self.ValidaCambio(datoini, datofin)
 			else:
-				Mensajes().Info(self, u"¡ No hay precio para aplicar el enganche !")
+				Mensajes().Info(self, u"ï¿½ No hay precio para aplicar el enganche !")
 		except:
-			Mensajes().Info(self, u"¡ Revise el precio menos descuento !")
+			Mensajes().Info(self, u"ï¿½ Revise el precio menos descuento !")
 			
 	def OnCambiarPagoFijo(self, evt):
 		if self.EtapaSeleccionada() >= 0:
@@ -34640,20 +34641,20 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if row is None:
-			if Mensajes().YesNo(self, u"La tabla de amortización aún no ha sido registrada.\n\n" \
-			                    u"¿ Desea guardarla en este momento ?", u"Confirmación"):
+			if Mensajes().YesNo(self, u"La tabla de amortizaciï¿½n aï¿½n no ha sido registrada.\n\n" \
+			                    u"ï¿½ Desea guardarla en este momento ?", u"Confirmaciï¿½n"):
 				self.Guardar()
 				self.ValidaToolBar()
 				self.ObtenerFkamortizacion()
 		else:
 			if self.GetControl(ID_CHOICEAMORFUNC1VISTA).GetSelection() != 0:
-				Mensajes().Info(self, u"Para alterar la tabla es necesario que cambie a vista normal.", u"Atención")
+				Mensajes().Info(self, u"Para alterar la tabla es necesario que cambie a vista normal.", u"Atenciï¿½n")
 			else:
 				contrato, cuenta = self.ObtenerCuenta()
 				if cuenta:
 					Mensajes().Info(self, u"Recuerde que una vez generada la cuenta\n" \
 					                u"del cliente no puede alterar la tabla\n" \
-					                u"de pagos/amortización.", u"Atención")
+					                u"de pagos/amortizaciï¿½n.", u"Atenciï¿½n")
 				else:
 					if not hasattr(self, "ID_POPUPINSERTAR"):
 						self.ID_POPUPINSERTAR = wx.NewId(); self.ID_POPUPEDITAR = wx.NewId()
@@ -34697,7 +34698,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 		if not todook:
-			Mensajes().Info(self, u"¡ No se grabó el pago !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se grabï¿½ el pago !", u"Atenciï¿½n")
 		else:
 			self.PopupRenumerar()
 
@@ -34717,7 +34718,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 		if not todook:
-			Mensajes().Info(self, u"¡ No se grabó el pago !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se grabï¿½ el pago !", u"Atenciï¿½n")
 		else:
 			self.RefrescaTablaAmortizacion(fkamortizacion)
 
@@ -34732,11 +34733,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		cu.close()
 		if row is not None:
 			if row[0]:
-				Mensajes().Info(self, u"¡ No puede eliminar el pago No. %s !\n\n" \
-				                u"El pago ya afecto la cuenta del cliente." % self.numerodepago, u"Atención")
+				Mensajes().Info(self, u"ï¿½ No puede eliminar el pago No. %s !\n\n" \
+				                u"El pago ya afecto la cuenta del cliente." % self.numerodepago, u"Atenciï¿½n")
 			else:
-				if Mensajes().YesNo(self, u"Recuerde que el pago quedará permanentemente eliminado.\n\n" \
-				                    u"¿ Desea realmente eliminar el pago No. %s ?" % self.numerodepago, u"Confirmación"):
+				if Mensajes().YesNo(self, u"Recuerde que el pago quedarï¿½ permanentemente eliminado.\n\n" \
+				                    u"ï¿½ Desea realmente eliminar el pago No. %s ?" % self.numerodepago, u"Confirmaciï¿½n"):
 					query = """
 					update gixamortizaciondetalle set eliminado = 1 where pkamortizaciondetalle = %s
 					""" % self.pkamortizaciondetalle
@@ -34746,10 +34747,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 						self.RenumeraPagos()
 						self.RefrescaTablaAmortizacion(self.fkamortizacion)
 					else:
-						Mensajes().Info(self, u"¡ No se grabó la información !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No se grabï¿½ la informaciï¿½n !", u"Atenciï¿½n")
 		else:
 			Mensajes().Info(self, u"Sucedio algo que impide eliminar el pago No. %s\n\n" \
-			                u"¡ Quizá ya fué eliminado !" % self.numerodepago, u"Atención")
+			                u"ï¿½ Quizï¿½ ya fuï¿½ eliminado !" % self.numerodepago, u"Atenciï¿½n")
 			
 	def RenumeraPagos(self):
 		query = """
@@ -34760,7 +34761,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		cu.execute(str("select count(*) from gixamortizaciondetalle where fkamortizacion = %s and pagado = 1" % self.fkamortizacion))
 		pagos = fetchone(cu)
 		if int(pagos[0]) > 0:
-			if Mensajes().YesNo(self, u"¿ Desea incluir los pagos en la renumeración de la tabla ?", u"Confirmación"):
+			if Mensajes().YesNo(self, u"ï¿½ Desea incluir los pagos en la renumeraciï¿½n de la tabla ?", u"Confirmaciï¿½n"):
 				query = """
 				select pkamortizaciondetalle from gixamortizaciondetalle
 				where fkamortizacion = %s and eliminado = 0 order by fechadepago, numerodepago
@@ -34778,8 +34779,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				sql = (query.replace('\n',' ')).replace('\t',' ')
 				todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 				if not todook:
-					Mensajes().Info(self, u"¡ Problemas al regenerar secuencia de pagos !\n\n" \
-					                u"%s" % sql, u"Atención")
+					Mensajes().Info(self, u"ï¿½ Problemas al regenerar secuencia de pagos !\n\n" \
+					                u"%s" % sql, u"Atenciï¿½n")
 					
 	def OnPopupRenumerar(self, evt):
 		self.PopupRenumerar()
@@ -34791,8 +34792,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			self.RefrescaTablaAmortizacion(self.fkamortizacion)
 			
 	def OnPopupRecalcularSaldos(self, evt):
-		if Mensajes().YesNo(self, u"No serán tomados en cuenta los pagos ya aplicados.\n\n" \
-		                    u"¿ Desea realmente recalcular los saldos ?", u"Confirmación"):
+		if Mensajes().YesNo(self, u"No serï¿½n tomados en cuenta los pagos ya aplicados.\n\n" \
+		                    u"ï¿½ Desea realmente recalcular los saldos ?", u"Confirmaciï¿½n"):
 			self.PopupRecalcularSaldos()
 		
 	def PopupRecalcularSaldos(self):
@@ -34809,7 +34810,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			saldoinicial = 0.00
 			
 		if not saldoinicial:
-			Mensajes().Info(self, u"¡ No hay saldo a financiar !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No hay saldo a financiar !", u"Atenciï¿½n")
 		else:
 			fkamortizacion = int(self.GetIdentity())
 			query = """
@@ -34822,7 +34823,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			rows = fetchall(cu)
 			cu.close()
 			if not rows:
-				Mensajes().Info(self, u"¡ No existen pagos sin aplicar !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No existen pagos sin aplicar !", u"Atenciï¿½n")
 			else:
 				for row in rows:
 					if saldoinicial > 0:
@@ -34841,8 +34842,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 						sql = (query.replace('\n',' ')).replace('\t',' ')
 						todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 						if not todook:
-							Mensajes().Info(self, u"¡ Problemas al recalcular saldos (1) !\n\n" \
-						                        u"%s" % sql, u"Atención")
+							Mensajes().Info(self, u"ï¿½ Problemas al recalcular saldos (1) !\n\n" \
+						                        u"%s" % sql, u"Atenciï¿½n")
 						saldoinicial = saldofinal
 					else:
 						query = """
@@ -34851,13 +34852,13 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 						sql = (query.replace('\n',' ')).replace('\t',' ')
 						todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 						if not todook:
-							Mensajes().Info(self, u"¡ Problemas al recalcular saldos (2) !\n\n" \
-						                        u"%s" % sql, u"Atención")
+							Mensajes().Info(self, u"ï¿½ Problemas al recalcular saldos (2) !\n\n" \
+						                        u"%s" % sql, u"Atenciï¿½n")
 					
 				self.RefrescaTablaAmortizacion(fkamortizacion)
 				
 class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Impresión de Instrucción de Escritura", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Impresiï¿½n de Instrucciï¿½n de Escritura", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, inmueble = 0):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.inmueble = inmueble
@@ -34914,7 +34915,7 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 				self.GetControl(ID_TEXTCTRLESCRITURAFUNC2NOTARIA).\
 				    SetValue(u"NOTARIA PUBLICA NUMERO %s" % self.numeronotaria)
 		else:
-			Mensajes().Info(self, u"¡ No hay notarios registrados !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No hay notarios registrados !", u"Atenciï¿½n")
 		
 	def GetString(self, valor):
 		dato = ""
@@ -34967,12 +34968,12 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 				fk_notario = "fk_notario = %s" % fknotaria
 				fechaescriturado = "fechaescriturado = '%s'" % fechainstruccion
 			else:
-				if not Mensajes().YesNo(self, u"Al omitir al notario, el inmueble quedará como no escriturado.\n\n" \
-					                u"¿ Desea continuar ?\n", u"Atención"):
+				if not Mensajes().YesNo(self, u"Al omitir al notario, el inmueble quedarï¿½ como no escriturado.\n\n" \
+					                u"ï¿½ Desea continuar ?\n", u"Atenciï¿½n"):
 					return False
 		else:
-			if not Mensajes().YesNo(self, u"Al omitir la fecha, el inmueble quedará como no escriturado.\n\n" \
-			                        u"¿ Desea continuar ?\n", u"Atención"):
+			if not Mensajes().YesNo(self, u"Al omitir la fecha, el inmueble quedarï¿½ como no escriturado.\n\n" \
+			                        u"ï¿½ Desea continuar ?\n", u"Atenciï¿½n"):
 				return False
 
 		query = """
@@ -34981,7 +34982,7 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 		sql = (query.replace('\t', ' ')).replace('\n', ' ')
 		todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 		if not todook:
-			Mensajes().Info(self, u"¡ No se actualizó la instrucción de escritura !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se actualizï¿½ la instrucciï¿½n de escritura !", u"Atenciï¿½n")
 			
 		return todook
 		
@@ -35039,7 +35040,7 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 
 		if row is not None:
 			ec = {0:"Soltero", 1:"Casado", 2:"Viudo", 3:"Divorciado"}
-			rm = {0:"", 1:"Sociedad Legal", 2:"Sociedad Conyugal", 3:u"Separación de Bienes"}
+			rm = {0:"", 1:"Sociedad Legal", 2:"Sociedad Conyugal", 3:u"Separaciï¿½n de Bienes"}
 			oc = {0:"", 1:"Empleado", 2:"Profesionista", 3:"Otro"}
 			meses = ("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
 			         "Septiembre", "Octubre", "Noviembre", "Diciembre")
@@ -35239,7 +35240,7 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 			<br>
 			<div style="text-align: justify;"><big><span style="font-family: Arial;">LINDEROS.-
 			<span style="font-weight: bold;">Los que se consignan en Escritura de
-			Constitución de Régimen de Condominio PINARES TAPALPA {$ETAPA}.</span></span></big><br>
+			Constituciï¿½n de Rï¿½gimen de Condominio PINARES TAPALPA {$ETAPA}.</span></span></big><br>
 			<br>
 			<br>
 			<table
@@ -35307,7 +35308,7 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		try:
 			gridcontenthtml = self.GetHtmlInstruccion()
@@ -35328,10 +35329,10 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 						
 				wx.EndBusyCursor()
 			else:
-				Mensajes().Info(self, u"¡ No se encontró información referente a la instrucción !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente a la instrucciï¿½n !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al generar la instrucción !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al generar la instrucciï¿½n !", u"Atenciï¿½n")
 		
 	def OnImprimirInstruccion(self, evt):
 		fecha =  self.GetControl(ID_TEXTCTRLESCRITURAFUNC2FECHAINSTRUCCION).GetValue()
@@ -35342,14 +35343,14 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 					if self.ValidaOk():
 						self.ImprimeInstruccion()
 				else:
-					Mensajes().Info(self, u"¡ Por favor revise al notario !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Por favor revise al notario !", u"Atenciï¿½n")
 			else:
-				Mensajes().Info(self, u"¡ Por favor revise al notario !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Por favor revise al notario !", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"¡ Por favor revise la fecha !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Por favor revise la fecha !", u"Atenciï¿½n")
 				
 class GixInstruccionEscrituraFunc1(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Impresión de Instrucción de Escritura", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Impresiï¿½n de Instrucciï¿½n de Escritura", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.inmueble, self.clientefiltro = 0, ""
@@ -35515,7 +35516,7 @@ class GixInstruccionEscrituraFunc1(wx.Dialog, GixBase):
 			lctrl.SetItemState(0, wx.LIST_STATE_SELECTED, wx.LIST_STATE_SELECTED)
 			lctrl.EnsureVisible(0)
 		else:
-			lctrl.InsertColumn(0, "       No se Encontró Información", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(0, "       No se Encontrï¿½ Informaciï¿½n", wx.LIST_FORMAT_CENTER)
 			lctrl.SetColumnWidth(0, 200)
 			self.GetControl(ID_BUTTONESCRITURAFUNC1ELEGIR).Enable(False)
 
@@ -35602,7 +35603,7 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 		control = self.GetControl(ID_TEXTESTADOCUENTAPINARESFUNC2ENCABEZADO)
 		control.Enable(False)
 		control.Show(False)
-		control.SetLabel(u"Error, no se localizó información de la cuenta")
+		control.SetLabel(u"Error, no se localizï¿½ informaciï¿½n de la cuenta")
 		sql = """
 		select i.iden1, i.iden2, e.descripcion, t.nombre from CUENTA c
 		join INMUEBLE i on c.fk_inmueble = i.codigo
@@ -35679,7 +35680,7 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 			lctrl.InsertColumn(1, u"Fecha", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(2, u"Documento", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(3, u"Recibo", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(4, u"Relación", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(4, u"Relaciï¿½n", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(5, u"Cargo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(6, u"Abono", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(7, u"Saldo Documento", wx.LIST_FORMAT_RIGHT)
@@ -35792,7 +35793,7 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 
 	def GenerateExcelWithXle(self, rows = None):
 		columnas = ((3000, u"Movimiento"), (3000, u"Fecha"), (3000, u"Documento"), (3500, u"Recibo"),
-		        (6000, u"Relación"), (3000, u"Cargo"), (3000, u"Abono"), (4000, u"Saldo Documento"),
+		        (6000, u"Relaciï¿½n"), (3000, u"Cargo"), (3000, u"Abono"), (4000, u"Saldo Documento"),
 		        (5000, u"Saldo de la Cuenta"), (4000, u"Interes Moratorio"))
 		workbook = xle.Workbook()
 		worksheet = workbook.add_sheet("EstadoCuenta")
@@ -35888,7 +35889,7 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 					xle
 				except:
 					continua = False
-					Mensajes().Info(self, u"Por favor instale el módulo pyExcelerator", u"Atención")
+					Mensajes().Info(self, u"Por favor instale el mï¿½dulo pyExcelerator", u"Atenciï¿½n")
 					
 				if continua:
 					wx.BeginBusyCursor()
@@ -35900,13 +35901,13 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 					self.dlgProgreso.Destroy()
 					wx.EndBusyCursor()
 		else:
-			Mensajes().Info(self, u"No hay nada que enviar a Excel", u"Atención")
+			Mensajes().Info(self, u"No hay nada que enviar a Excel", u"Atenciï¿½n")
 						
 	def ImprimirEstadoCuenta(self, rows):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		    
 		try:
@@ -35931,10 +35932,10 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 				wx.EndBusyCursor()
 			else:
 				wx.EndBusyCursor()
-				Mensajes().Info(self, u"¡ No se encontró información referente al estado de cuenta !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente al estado de cuenta !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al imprimir el estado de cuenta !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al imprimir el estado de cuenta !", u"Atenciï¿½n")
 			
 	def GetHtmlEstadoCuenta(self, rows):
 		if rows:
@@ -35996,7 +35997,7 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 			style="vertical-align: middle; text-align: center; font-weight: bold;">Recibo<br>
 			</td>
 			<td
-			style="vertical-align: middle; text-align: center; font-weight: bold;">Relación<br>
+			style="vertical-align: middle; text-align: center; font-weight: bold;">Relaciï¿½n<br>
 			</td>
 			<td
 			style="vertical-align: middle; text-align: right; font-weight: bold;">Cargo<br>
@@ -36124,7 +36125,7 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 			self.ImprimirEstadoCuenta(rows)
 			self.dlgProgreso.Destroy()
 		else:
-			Mensajes().Info(self, u"No hay nada que imprimir", u"Atención")
+			Mensajes().Info(self, u"No hay nada que imprimir", u"Atenciï¿½n")
 			
 class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 	def __init__(self, parent, id = -1, title = "", pos = wx.DefaultPosition, size = wx.DefaultSize,
@@ -36193,7 +36194,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 	def OnRClick( self, evt ):
 		menu = wx.Menu()
 		self.Bind(wx.EVT_MENU, self.OnCancelar, menu.Append( -1, u"Cancelar cuenta"))
-		self.Bind(wx.EVT_MENU, self.OnInfoCliente, menu.Append( -1, u"Más sobre cliente..."))
+		self.Bind(wx.EVT_MENU, self.OnInfoCliente, menu.Append( -1, u"Mï¿½s sobre cliente..."))
 		self.PopupMenu( menu )
 		
 	def OnCancelar( self, evt ):
@@ -36217,7 +36218,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		sql2 = sql2.replace("\n", " " )
 		sql3 = "delete documento where fk_cuenta = %s " % ( self.cuenta , )
 		sql4 = "exec Cancela_CuentaSP %s, %s" % ( self.cuenta, row[3])
-		if row and Mensajes().YesNo(self,u"¿ Desea cancelar la cuenta %s \n del terreno %s %s etapa %s ?" %(self.cuenta, row[0],row[1], etapa), u"Cancelación"):
+		if row and Mensajes().YesNo(self,u"ï¿½ Desea cancelar la cuenta %s \n del terreno %s %s etapa %s ?" %(self.cuenta, row[0],row[1], etapa), u"Cancelaciï¿½n"):
 			cu = r_cngcmex.cursor()
 			cu.execute(str(sql1))
 			cu.execute(str(sql2))
@@ -36226,13 +36227,13 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 			cu.close()
 			r_cngcmex.commit()
 			
-			Mensajes().Info(self, u"La cuenta ha sido eliminada", u"Atención")
-			#Mensajes().Info(self, u"Cuando esta opción funcione la cuenta %s será cancelada\n y se hará un repoblamiento del listview" % ( self.cuenta ), u"Atención")
+			Mensajes().Info(self, u"La cuenta ha sido eliminada", u"Atenciï¿½n")
+			#Mensajes().Info(self, u"Cuando esta opciï¿½n funcione la cuenta %s serï¿½ cancelada\n y se harï¿½ un repoblamiento del listview" % ( self.cuenta ), u"Atenciï¿½n")
 			self.FillListCtrl()
 		return
 		
 	def OnInfoCliente( self, evt):
-		Mensajes().Info(self,u"En construcción", u"Atención")
+		Mensajes().Info(self,u"En construcciï¿½n", u"Atenciï¿½n")
 		
 		
 	def ObtenerEtapas(self):
@@ -36366,7 +36367,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 					fechafinal = "'%s/%02d/%02d'" % (rango_ano, int(rango_mes), int(rango_dia))
 					if fechainicial > fechafinal:
 						Mensajes().Info(self, u"La Fecha Inicial no debe ser mayor a la Fecha Final.\n\n" \
-						                u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						                u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1FECHAFINALFILTRO).SetValue("")
 						return
 					else:
@@ -36435,7 +36436,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 			
 		if rows:
 			lctrl.InsertColumn(0, u"%sCuenta" % self.lstctrlorder[0][2], wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(1, u"%sCreación" % self.lstctrlorder[1][2], wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(1, u"%sCreaciï¿½n" % self.lstctrlorder[1][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(2, u"%sManzana" % self.lstctrlorder[2][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(3, u"%sLote" % self.lstctrlorder[3][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(4, u"%sSaldo" % self.lstctrlorder[4][2], wx.LIST_FORMAT_RIGHT)
@@ -36497,7 +36498,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		self.GetControl(ID_BITMAPBUTTONESTADOCUENTAPINARESFUNC1FECHAFINALLIMPIAR).Enable(sw)
 
 class GixReporteOfertasAsignacionesFunc1(wx.Frame, GixBase):
-	def __init__(self, parent, id = -1, title = u"Reporte de Ofertas de Compra y Asignación de Inmuebles", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Reporte de Ofertas de Compra y Asignaciï¿½n de Inmuebles", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE):
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
 		#self.tb = self.CreateToolBar(wx.TB_HORIZONTAL | wx.NO_BORDER | wx.TB_FLAT | wx.TB_TEXT )
@@ -36582,7 +36583,7 @@ class GixReporteOfertasAsignacionesFunc1(wx.Frame, GixBase):
 
 	def GenerateExcelWithXle(self, rows = None):
 		columnas = ((2000, u"Oferta"), (3000, u"Fecha"), (3000, u"Cuenta"), (3000, u"Preinmueble"),
-		        (3000, u"Asignación"), (3000, u"Cliente"), (12000, u"Nombre del Cliente"), (4000, u"Subvendedor"),
+		        (3000, u"Asignaciï¿½n"), (3000, u"Cliente"), (12000, u"Nombre del Cliente"), (4000, u"Subvendedor"),
 		        (12000, u"Nombre del Subvendedor"), (3000, u"Vendedor"), (12000, u"Nombre del Vendedor"),
 		        (5000, u"Referencia RAP"))
 		workbook = xle.Workbook()
@@ -36643,7 +36644,7 @@ class GixReporteOfertasAsignacionesFunc1(wx.Frame, GixBase):
 					xle
 				except:
 					continua = False
-					Mensajes().Info(self, u"Por favor instale el módulo pyExcelerator", u"Atención")
+					Mensajes().Info(self, u"Por favor instale el mï¿½dulo pyExcelerator", u"Atenciï¿½n")
 					
 				if continua:
 					wx.BeginBusyCursor()
@@ -36655,7 +36656,7 @@ class GixReporteOfertasAsignacionesFunc1(wx.Frame, GixBase):
 					self.dlgProgreso.Destroy()
 					wx.EndBusyCursor()
 		else:
-			Mensajes().Info(self, u"No hay nada que enviar a Excel", u"Atención")
+			Mensajes().Info(self, u"No hay nada que enviar a Excel", u"Atenciï¿½n")
 
 	def OnChoiceEtapa(self, evt):
 		ctrl = self.GetControl(ID_CHOICEOFERTASASIGNACIONESFUNC1TBETAPA)
@@ -36820,7 +36821,7 @@ class GixReporteOfertasAsignacionesFunc1(wx.Frame, GixBase):
 			lctrl.InsertColumn(1, u"Fecha", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(2, u"Cuenta", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(3, u"Preinmueble", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(4, u"Asignación", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(4, u"Asignaciï¿½n", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(5, u"Cliente", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(6, u"Nombre del Cliente")
 			lctrl.InsertColumn(7, u"Subvendedor", wx.LIST_FORMAT_CENTER)
@@ -36899,7 +36900,7 @@ class GixReporteOfertasAsignacionesFunc1(wx.Frame, GixBase):
 		wx.EndBusyCursor()
 		
 class GixAsignacionPreciosInmueblesFunc2(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Asignación de Precio", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Asignaciï¿½n de Precio", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, fecha = "", inmuebles = [], etapa = {}, filllistctrl = None):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.inmuebles = inmuebles
@@ -36982,7 +36983,7 @@ class GixAsignacionPreciosInmueblesFunc2(wx.Dialog, GixBase):
 		if inx > -1:
 			self.idprecioetapa = ctrl.GetClientData(inx)
 		else:
-			Mensajes().Error(self, u"¡ Por Favor Elija el Precio !", u"Atención")
+			Mensajes().Error(self, u"ï¿½ Por Favor Elija el Precio !", u"Atenciï¿½n")
 			todook = False
 			
 		return todook
@@ -37014,15 +37015,15 @@ class GixAsignacionPreciosInmueblesFunc2(wx.Dialog, GixBase):
 					
 				todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql), conexion = r_cn)
 				if not todook:
-					Mensajes().Info(self, u"¡ Problemas en la asignación de precio !\n\n" \
-					                u"Inmueble: %s" % int(inmueble), u"Atención")
+					Mensajes().Info(self, u"ï¿½ Problemas en la asignaciï¿½n de precio !\n\n" \
+					                u"Inmueble: %s" % int(inmueble), u"Atenciï¿½n")
 					
 			self.FillListCtrl()
 			self.EndDialog(1)
 			self.Destroy()
 
 class GixAsignacionPreciosInmueblesFunc1(wx.Frame, GixBase):
-	def __init__(self, parent, id = -1, title = u"Asignación de Precios a Inmuebles", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Asignaciï¿½n de Precios a Inmuebles", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE):
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
 		panel = wx.Panel(self, -1)
@@ -37247,7 +37248,7 @@ class GixAsignacionPreciosInmueblesFunc1(wx.Frame, GixBase):
 		wx.EndBusyCursor()
 		
 class GixPreciosEtapaFunc3(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Agregando Característica del Inmueble", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Agregando Caracterï¿½stica del Inmueble", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, idprecioetapa = 0, filllistctrlcaracteristicas = None):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.idprecioetapa = idprecioetapa
@@ -37303,7 +37304,7 @@ class GixPreciosEtapaFunc3(wx.Dialog, GixBase):
 		todook = True
 		inx = self.GetControl(ID_CHOICEPRECIOSETAPAFUNC3CARACTERISTICA).GetSelection()
 		if inx < 0:
-			Mensajes().Error(self, u"¡ Seleccione la característica !", u"Atención")
+			Mensajes().Error(self, u"ï¿½ Seleccione la caracterï¿½stica !", u"Atenciï¿½n")
 			todook = False
 
 		if todook:
@@ -37314,13 +37315,13 @@ class GixPreciosEtapaFunc3(wx.Dialog, GixBase):
 					cantidad = float(valor.replace(",",""))
 					
 				if not cantidad:
-					Mensajes().Error(self, u"¡ Introduzca la cantidad !", u"Atención")
+					Mensajes().Error(self, u"ï¿½ Introduzca la cantidad !", u"Atenciï¿½n")
 					ctrl.SetValue("")
 					ctrl.SetFocus()
 					todook = False
 					
 			except:
-				Mensajes().Error(self, u"¡ Cantidad mal introducida !", u"Atención")
+				Mensajes().Error(self, u"ï¿½ Cantidad mal introducida !", u"Atenciï¿½n")
 				ctrl.SetValue("")
 				ctrl.SetFocus()
 				todook = False
@@ -37345,7 +37346,7 @@ class GixPreciosEtapaFunc3(wx.Dialog, GixBase):
 				self.EndModal(1)
 				self.Destroy()
 			else:
-				Mensajes().Info(self, u"¡ No se actualizó la característica !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se actualizï¿½ la caracterï¿½stica !", u"Atenciï¿½n")
 				
 class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 	def __init__(self, parent, id = -1, title = u"Editando Precio", pos = wx.DefaultPosition,
@@ -37486,7 +37487,7 @@ class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 		if rows:
 			lctrl.InsertColumn(0, u"Id", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(1, u"Cantidad", wx.LIST_FORMAT_RIGHT)
-			lctrl.InsertColumn(2, u"Descripción")
+			lctrl.InsertColumn(2, u"Descripciï¿½n")
 			for fila, row in enumerate(rows):
 				if fila %2 != 0: bgcolor = [255,255,255]
 				else:            bgcolor = [230,230,255]
@@ -37504,7 +37505,7 @@ class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 			lctrl.SetItemState(0, wx.LIST_STATE_SELECTED, wx.LIST_STATE_SELECTED)
 			#lctrl.EnsureVisible(self.currentitem)
 		else:
-			lctrl.InsertColumn(0, u"  No se Encontraron Características", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(0, u"  No se Encontraron Caracterï¿½sticas", wx.LIST_FORMAT_CENTER)
 			lctrl.SetColumnWidth(0, 250)
 			self.GetControl(ID_BUTTONPRECIOSETAPAFUNC2ELIMINAR).Enable(False)
 			
@@ -37530,7 +37531,7 @@ class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 		todook = True
 		inx = self.GetControl(ID_CHOICEPRECIOSETAPAFUNC2ETAPA).GetSelection()
 		if inx < 0:
-			Mensajes().Error(self, u"¡ Seleccione la etapa !", u"Atención")
+			Mensajes().Error(self, u"ï¿½ Seleccione la etapa !", u"Atenciï¿½n")
 			todook = False
 
 		if todook:
@@ -37541,13 +37542,13 @@ class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 					precio = float(valor.replace(",",""))
 					
 				if not precio:
-					Mensajes().Error(self, u"¡ Introduzca el precio !", u"Atención")
+					Mensajes().Error(self, u"ï¿½ Introduzca el precio !", u"Atenciï¿½n")
 					ctrl.SetValue("")
 					ctrl.SetFocus()
 					todook = False
 					
 			except:
-				Mensajes().Error(self, u"¡ Precio mal introducido !", u"Atención")
+				Mensajes().Error(self, u"ï¿½ Precio mal introducido !", u"Atenciï¿½n")
 				ctrl.SetValue("")
 				ctrl.SetFocus()
 				todook = False
@@ -37555,7 +37556,7 @@ class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 		if todook:
 			ctrl = self.GetControl(ID_TEXTCTRLPRECIOSETAPAFUNC2DESCRIPCION)
 			if not ctrl.GetValue():
-				Mensajes().Error(self, u"¡ Introduzca la descripción !", u"Atención")
+				Mensajes().Error(self, u"ï¿½ Introduzca la descripciï¿½n !", u"Atenciï¿½n")
 				ctrl.SetValue("")
 				ctrl.SetFocus()
 				todook = False
@@ -37605,7 +37606,7 @@ class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 		if todook:
 			self.FillListCtrl()
 		else:
-			Mensajes().Info(self, u"¡ No se actualizó la lista de precios !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se actualizï¿½ la lista de precios !", u"Atenciï¿½n")
 			
 		return todook
 			
@@ -37638,7 +37639,7 @@ class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 		self.FillListCtrlCaracteristicas()
 
 class GixPreciosEtapaFunc1(wx.Frame, GixBase):
-	def __init__(self, parent, id = -1, title = u"Catálogo de Precios", pos = wx.DefaultPosition, size = wx.DefaultSize,
+	def __init__(self, parent, id = -1, title = u"Catï¿½logo de Precios", pos = wx.DefaultPosition, size = wx.DefaultSize,
 	             style = wx.DEFAULT_FRAME_STYLE, usuario = None):
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
 		self.usuario = usuario
@@ -37767,11 +37768,11 @@ class GixPreciosEtapaFunc1(wx.Frame, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(1, u"Etapa")
 			lctrl.InsertColumn(2, u"Precio", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(3, u"Tipo", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(4, u"Descripción")
+			lctrl.InsertColumn(4, u"Descripciï¿½n")
 			lctrl.InsertColumn(5, u"Sustentable", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(6, u"Visible", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(7, u"Activo", wx.LIST_FORMAT_CENTER)
@@ -37846,7 +37847,7 @@ class GixClientesVentasFunc3(wx.Dialog, GixBase):
 				self.anios = int(valora)
 		except:
 			todook = False
-			Mensajes().Error(self, u"¡ Años mal introducidos !", u"Atención")
+			Mensajes().Error(self, u"ï¿½ Aï¿½os mal introducidos !", u"Atenciï¿½n")
 			ctrla.SetValue(""); ctrla.SetFocus()
 			
 		if todook:
@@ -37855,13 +37856,13 @@ class GixClientesVentasFunc3(wx.Dialog, GixBase):
 					self.meses = int(valorm)
 			except:
 				todook = False
-				Mensajes().Error(self, u"¡ Meses mal introducidos !", u"Atención")
+				Mensajes().Error(self, u"ï¿½ Meses mal introducidos !", u"Atenciï¿½n")
 				ctrlm.SetValue(""); ctrlm.SetFocus()
 				
 			if todook:
 				if not valora and not valorm:
 					todook = False
-					Mensajes().Info(self, u"¡ Revise los años y meses !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Revise los aï¿½os y meses !", u"Atenciï¿½n")
 				
 		return todook
 
@@ -37884,7 +37885,7 @@ class GixClientesVentasFunc3(wx.Dialog, GixBase):
 				self.EndModal(1)
 				self.Destroy()
 			else:
-				Mensajes().Info(self, u"¡ No se actualizó hijo(a) !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se actualizï¿½ hijo(a) !", u"Atenciï¿½n")
 		
 class GixClientesVentasFunc2(wx.Dialog, GixBase):
 	def __init__(self, parent, id = -1, title = u"Editando Cliente", pos = wx.DefaultPosition,
@@ -38069,7 +38070,7 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 			self.FillListCtrlRapDisponible()
 			self.FillListCtrlRapCliente()
 		else:
-			Mensajes().Error(self, u"¡ Problemas al accesar cliente %s !" % self.codigocliente, u"Error")
+			Mensajes().Error(self, u"ï¿½ Problemas al accesar cliente %s !" % self.codigocliente, u"Error")
 		
 	def PreparaAgregar(self):
 		self.GetControl(ID_TEXTCTRLCLIENTEFUNC2NOMBRE).SetValue("")
@@ -38147,7 +38148,7 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 		cu.close()
 		if rows:
 			lctrl.InsertColumn(0, u"Id", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(1, u"Años", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(1, u"Aï¿½os", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(2, u"Meses", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(3, u"Sexo", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(4, u"Fecha", wx.LIST_FORMAT_CENTER)
@@ -38191,7 +38192,7 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 			dlg.ShowModal()
 			
 	def OnEliminarHijo(self, evt):
-		if Mensajes().YesNo(self, u"¿ Desea realmente eliminar hijo(a) ?", u"Confirmación"):
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente eliminar hijo(a) ?", u"Confirmaciï¿½n"):
 			cu = r_cn.cursor()
 			cu.execute("delete from hijos where codigo = %s" % self.codigohijo)
 			cu.close()
@@ -38271,15 +38272,15 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 			cu.close()
 			cliente = int(row[0])
 			if cliente:
-				Mensajes().Info(self, u"La referencia %s que eligió acaba de ser asignada a\n" \
-				                u"otro cliente, por favor elija otra referencia RAP." % self.rapdisponible, u"Atención")
+				Mensajes().Info(self, u"La referencia %s que eligiï¿½ acaba de ser asignada a\n" \
+				                u"otro cliente, por favor elija otra referencia RAP." % self.rapdisponible, u"Atenciï¿½n")
 				self.FillListCtrlRapDisponible()
 				self.FillListCtrlRapCliente()
 			else:
 				sql = "update referencias_rap set cliente = %s where referencia = '%s'" % (self.codigocliente, self.rapdisponible)
 				todook, trash = self.QueryUpdateRecord(sql)
 				if not todook:
-					Mensajes().Info(self, u"¡ No se agrego al cliente la referencia RAP %s !" % self.rapdisponible, u"Atención")
+					Mensajes().Info(self, u"ï¿½ No se agrego al cliente la referencia RAP %s !" % self.rapdisponible, u"Atenciï¿½n")
 				else:
 					self.FillListCtrlRapDisponible()
 					self.FillListCtrlRapCliente()
@@ -38355,7 +38356,7 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 		sql = "update referencias_rap set cliente = 0 where referencia = '%s'" % self.rapcliente
 		todook, trash = self.QueryUpdateRecord(sql)
 		if not todook:
-			Mensajes().Info(self, u"¡ No se elimino la referencia RAP %s del cliente !" % self.rapcliente, u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se elimino la referencia RAP %s del cliente !" % self.rapcliente, u"Atenciï¿½n")
 		else:
 			self.FillListCtrlRapCliente()
 			self.FillListCtrlRapDisponible()
@@ -38364,13 +38365,13 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 		if self.rapcliente:
 			self.ImprimirRapCliente()
 		else:
-			Mensajes().Info(self, u"¡ Elija la referencia RAP a imprimir !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Elija la referencia RAP a imprimir !", u"Atenciï¿½n")
 			
 	def ImprimirRapCliente(self):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		    
 		try:
@@ -38397,10 +38398,10 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 				wx.EndBusyCursor()
 			else:
 				wx.EndBusyCursor()
-				Mensajes().Info(self, u"¡ No se encontró información referente a la referencia RAP !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente a la referencia RAP !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al imprimir la referencia RAP !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al imprimir la referencia RAP !", u"Atenciï¿½n")
 			
 	def GetHtmlRapCliente(self):
 		desarrollo, etapa, manzana, lote = "", 0, "", ""
@@ -38647,16 +38648,16 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 				todook, trash = self.QueryUpdateRecord(sql)
 			
 				if not todook:
-					Mensajes().Info(self, u"¡ No se actualizó la estadística de hijos !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No se actualizï¿½ la estadï¿½stica de hijos !", u"Atenciï¿½n")
 			
 	def ValidacionOk(self):
 		todook = True
 		campos = {"NOMBRE":u"el nombre del cliente", "FECHANACIMIENTO":u"la fecha de nacimiento",
-		          "IMSS":u"el número de afiliación al IMSS"}
+		          "IMSS":u"el nï¿½mero de afiliaciï¿½n al IMSS"}
 		
 		for campo in campos.keys():
 			if not self.GetControl(eval("ID_TEXTCTRLCLIENTEFUNC2%s" % campo)).GetValue():
-				Mensajes().Info(self, u"¡ Introduzca %s !" % campos[campo], u"Atención")
+				Mensajes().Info(self, u"ï¿½ Introduzca %s !" % campos[campo], u"Atenciï¿½n")
 				self.GetControl(eval("ID_TEXTCTRLCLIENTEFUNC2%s" % campo)).SetFocus()
 				todook = False
 				break
@@ -38665,11 +38666,11 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 				try:
 					imss = int(valor)
 					if len(str(valor)) != 11:
-						Mensajes().Info(self, u"¡ Revise el número del IMSS !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ Revise el nï¿½mero del IMSS !", u"Atenciï¿½n")
 						todook = False
 						break
 				except:
-					Mensajes().Info(self, u"¡ El número del IMSS debe ser numerico !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ El nï¿½mero del IMSS debe ser numerico !", u"Atenciï¿½n")
 					todook = False
 					break
 			
@@ -38782,7 +38783,7 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 			todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql))
 			
 		if not todook:
-			Mensajes().Info(self, u"¡ No se actualizó el cliente !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se actualizï¿½ el cliente !", u"Atenciï¿½n")
 			
 		return todook
 			
@@ -38930,7 +38931,7 @@ class GixClientesVentasFunc1(wx.Frame, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Nombre")
 			for fila, row in enumerate(rows):
 				if fila %2 != 0: bgcolor = [230,230,255]
@@ -39097,7 +39098,7 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 				self.GetControl(ID_CHOICECLIENTEPINARESFUNC4OCUPACION).SetSelection(0)
 			
 		else:
-			Mensajes().Error(self, u"¡ Problemas al accesar cliente %s !" % self.codigocliente, u"Error")
+			Mensajes().Error(self, u"ï¿½ Problemas al accesar cliente %s !" % self.codigocliente, u"Error")
 		
 	def PreparaAgregar(self):
 		self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2NOMBRE).SetValue("")
@@ -39135,7 +39136,7 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		
 		for campo in campos.keys():
 			if not self.GetControl(eval("ID_TEXTCTRLCLIENTEPINARESFUNC2%s" % campo)).GetValue():
-				Mensajes().Info(self, u"¡ Introduzca %s !" % campos[campo], u"Atención")
+				Mensajes().Info(self, u"ï¿½ Introduzca %s !" % campos[campo], u"Atenciï¿½n")
 				self.GetControl(eval("ID_TEXTCTRLCLIENTEPINARESFUNC2%s" % campo)).SetFocus()
 				todook = False
 				break
@@ -39218,7 +39219,7 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 			todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql), conexion = r_cngcmex)
 			
 		if not todook:
-			Mensajes().Info(self, u"¡ No se actualizó el cliente !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se actualizï¿½ el cliente !", u"Atenciï¿½n")
 			
 		return todook
 			
@@ -39365,7 +39366,7 @@ class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Nombre")
 			for fila, row in enumerate(rows):
 				if fila %2 != 0: bgcolor = [230,230,255]
@@ -39482,7 +39483,7 @@ class GixVendedoresVentasPinaresFunc2(wx.Dialog, GixBase):
 			self.GetControl(ID_RADIOBOXVENDEDORPINARESFUNC2ESTATUS).SetStringSelection(estatus)
 
 		else:
-			Mensajes().Error(self, u"¡ Problemas al accesar vendedor %s !" % self.codigovendedor, u"Error")
+			Mensajes().Error(self, u"ï¿½ Problemas al accesar vendedor %s !" % self.codigovendedor, u"Error")
 		
 	def PreparaAgregar(self):
 		self.GetControl(ID_TEXTCTRLVENDEDORPINARESFUNC2ID).SetValue("")
@@ -39499,11 +39500,11 @@ class GixVendedoresVentasPinaresFunc2(wx.Dialog, GixBase):
 			
 	def ValidacionOk(self):
 		todook = True
-		campos = {"NOMBRE":u"el nombre del vendedor", "TELEFONO":u"el teléfono del vendedor"}
+		campos = {"NOMBRE":u"el nombre del vendedor", "TELEFONO":u"el telï¿½fono del vendedor"}
 		
 		for campo in campos.keys():
 			if not self.GetControl(eval("ID_TEXTCTRLVENDEDORPINARESFUNC2%s" % campo)).GetValue():
-				Mensajes().Info(self, u"¡ Introduzca %s !" % campos[campo], u"Atención")
+				Mensajes().Info(self, u"ï¿½ Introduzca %s !" % campos[campo], u"Atenciï¿½n")
 				self.GetControl(eval("ID_TEXTCTRLVENDEDORPINARESFUNC2%s" % campo)).SetFocus()
 				todook = False
 				break
@@ -39548,7 +39549,7 @@ class GixVendedoresVentasPinaresFunc2(wx.Dialog, GixBase):
 			todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql), conexion = r_cngcmex)
 			
 		if not todook:
-			Mensajes().Info(self, u"¡ No se actualizó el vendedor !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se actualizï¿½ el vendedor !", u"Atenciï¿½n")
 			
 		return todook
 			
@@ -39697,7 +39698,7 @@ class GixVendedoresVentasPinaresFunc1(wx.Frame, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Nombre")
 			for fila, row in enumerate(rows):
 				if not row[2]:
@@ -39863,7 +39864,7 @@ class GixOfertasDeCompraFunc2(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Nombre")
 			for fila, row in enumerate(rows):
 				if fila %2 != 0: bgcolor = [150,204,150]
@@ -40030,7 +40031,7 @@ class GixOfertasDeCompraFunc3(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Paterno")
 			lctrl.InsertColumn(2, u"Materno")
 			lctrl.InsertColumn(3, u"Nombre")
@@ -40142,7 +40143,7 @@ class GixOfertasDeCompraFunc4(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(2, u"Nombre")
 			for fila, row in enumerate(rows):
 				if fila %2 != 0: bgcolor = [150,204,150]
@@ -40167,7 +40168,7 @@ class GixOfertasDeCompraFunc4(wx.Dialog, GixBase):
 		wx.EndBusyCursor()
 		
 class GixOfertasDeCompraFunc5(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Características del Inmueble", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Caracterï¿½sticas del Inmueble", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, etapa = 0, oferta = 0, row = None):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.etapa = etapa; self.oferta = oferta
@@ -40245,7 +40246,7 @@ class GixOfertasDeCompraFunc5(wx.Dialog, GixBase):
 		        self.caracteristicas = rows
 			lctrl.InsertColumn(0, u"Id", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(1, u"Cantidad", wx.LIST_FORMAT_RIGHT)
-			lctrl.InsertColumn(2, u"Descripción")
+			lctrl.InsertColumn(2, u"Descripciï¿½n")
 			for fila, row in enumerate(rows):
 				if fila %2 != 0: bgcolor = [255,255,255]
 				else:            bgcolor = [230,230,255]
@@ -40262,7 +40263,7 @@ class GixOfertasDeCompraFunc5(wx.Dialog, GixBase):
 			lctrl.SetColumnWidth(2, wx.LIST_AUTOSIZE)
 			self.GetControl(ID_BUTTONOFERTASCOMPRAFUNC5IMPRIMIR).Enable(True)
 		else:
-			lctrl.InsertColumn(0, u"  No se Encontraron Características", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(0, u"  No se Encontraron Caracterï¿½sticas", wx.LIST_FORMAT_CENTER)
 			lctrl.SetColumnWidth(0, 250)
 			
 	def OnElegirPrecio(self, evt):
@@ -40288,7 +40289,7 @@ class GixOfertasDeCompraFunc5(wx.Dialog, GixBase):
 				self.GetControl(ID_TEXTCTRLOFERTASCOMPRAFUNC5PRECIO).\
 				    SetValue(str(amount_and_cents_with_commas(self.precioasignacion)))
 		else:
-			Mensajes().Info(self, u"¡ No hay precios registrados para la etapa %s !" % self.etapa, u"Atención")
+			Mensajes().Info(self, u"ï¿½ No hay precios registrados para la etapa %s !" % self.etapa, u"Atenciï¿½n")
 			
 	def GetFecha(self):
 	        d, m, a = self.fechaasignacion.split("/")
@@ -40305,7 +40306,7 @@ class GixOfertasDeCompraFunc5(wx.Dialog, GixBase):
 		if todook:
 		        return True
 		else:
-			Mensajes().Info(self, u"¡ No se actualizó la asignación del inmueble !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se actualizï¿½ la asignaciï¿½n del inmueble !", u"Atenciï¿½n")
 			return False
 
 	#def ActualizaAsignacion(self):
@@ -40326,7 +40327,7 @@ class GixOfertasDeCompraFunc5(wx.Dialog, GixBase):
 				#""" % (int(row[1]), int(row[0]))
 				#todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cn)
 				#if not todook:
-					#Mensajes().Info(self, u"¡ No se actualizó la asignación del inmueble !", u"Atención")
+					#Mensajes().Info(self, u"ï¿½ No se actualizï¿½ la asignaciï¿½n del inmueble !", u"Atenciï¿½n")
 					#return False
 
 	def OnImprimir(self, evt):
@@ -40334,7 +40335,7 @@ class GixOfertasDeCompraFunc5(wx.Dialog, GixBase):
 		        if self.caracteristicas:
 				self.ImprimirCaracteristicas()
 			else:
-				Mensajes().Info(self, u"¡ La oferta no tiene características del inmueble !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ La oferta no tiene caracterï¿½sticas del inmueble !", u"Atenciï¿½n")
 				
 			self.EndModal(1)
 			self.Destroy()
@@ -40343,7 +40344,7 @@ class GixOfertasDeCompraFunc5(wx.Dialog, GixBase):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		    
 		try:
@@ -40370,10 +40371,10 @@ class GixOfertasDeCompraFunc5(wx.Dialog, GixBase):
 				wx.EndBusyCursor()
 			else:
 				wx.EndBusyCursor()
-				Mensajes().Info(self, u"¡ No se encontró información referente a las características !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente a las caracterï¿½sticas !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al imprimir las características !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al imprimir las caracterï¿½sticas !", u"Atenciï¿½n")
 			
 	def GetHtmlCaracteristicas(self):
 	        rows = self.caracteristicas
@@ -40700,7 +40701,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 			self.GetControl(ID_TEXTOFERTASCOMPRAFUNC1EMPRESADESARROLLO).SetLabel(" %s - %s " % (self.GetString(row[3]), self.GetString(row[1])))
 		else:
 			Mensajes().Info(self, u"Por favor revise el desarrollo y la empresa\n" \
-			                u"a la que pertenece la etapa.\n\n", u"Atención")
+			                u"a la que pertenece la etapa.\n\n", u"Atenciï¿½n")
 
 		self.FillOfertasCompra()
 		self.GetControl(ID_BUTTONOFERTASCOMPRAFUNC1NUEVA).Enable(True)
@@ -40967,7 +40968,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 			lctrl.InsertColumn(8, u"Vendedor", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(9, u"Nombre del Vendedor")
 			lctrl.InsertColumn(10, u"Referencia RAP", wx.LIST_FORMAT_CENTER)
-			#lctrl.InsertColumn(11, u"¿ Reactivar ?", wx.LIST_FORMAT_CENTER)
+			#lctrl.InsertColumn(11, u"ï¿½ Reactivar ?", wx.LIST_FORMAT_CENTER)
 			for fila, row in enumerate(rows):
 				if not row[8]:
 					if row[13]:
@@ -41109,37 +41110,37 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 					self.GetControl(ID_TEXTCTRLOFERTASCOMPRAFUNC1APARTADO).SetValue(str(float(row[3])))
 					self.GetControl(ID_TEXTCTRLOFERTASCOMPRAFUNC1ANTICIPOCOMISION).SetValue(str(float(row[4])))
 			else:
-				Mensajes().Info(self, u"¡ No se puede agregar la nueva oferta !\n\n" \
-				                u"La etapa no cuenta con lista de precios.", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se puede agregar la nueva oferta !\n\n" \
+				                u"La etapa no cuenta con lista de precios.", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"Ya no se pueden ingresar más ofertas, se rebasó\n" \
-			                u"el tope máximo para este Desarrollo.", "Atención")
+			Mensajes().Info(self, u"Ya no se pueden ingresar mï¿½s ofertas, se rebasï¿½\n" \
+			                u"el tope mï¿½ximo para este Desarrollo.", "Atenciï¿½n")
 			
 	def OnGenerarOfertaCuenta(self, evt):
 		todook = True
 		campos = [("el prospecto", ID_TEXTCTRLOFERTASCOMPRAFUNC1PROSPECTO), ("el cliente", ID_TEXTCTRLOFERTASCOMPRAFUNC1CLIENTE),
 		          ("el no. del IMSS del cliente", ID_TEXTCTRLOFERTASCOMPRAFUNC1IMSS), ("el subvendedor", ID_TEXTCTRLOFERTASCOMPRAFUNC1SUBVENDEDOR),
-		          (u"el monto del crédito", ID_TEXTCTRLOFERTASCOMPRAFUNC1MONTOCREDITO),
+		          (u"el monto del crï¿½dito", ID_TEXTCTRLOFERTASCOMPRAFUNC1MONTOCREDITO),
 		          (u"los gastos administrativos", ID_TEXTCTRLOFERTASCOMPRAFUNC1GASTOS),
 		          (u"el apartado", ID_TEXTCTRLOFERTASCOMPRAFUNC1APARTADO),
-		          (u"el anticipo de la comisión", ID_TEXTCTRLOFERTASCOMPRAFUNC1ANTICIPOCOMISION)]
+		          (u"el anticipo de la comisiï¿½n", ID_TEXTCTRLOFERTASCOMPRAFUNC1ANTICIPOCOMISION)]
 		for pos, campo in enumerate(campos):
 			dato = self.GetControl(campo[1]).GetValue()
 			if not dato:
-				Mensajes().Error(self, u"Por favor revise %s." % campo[0], u"Información Incompleta")
+				Mensajes().Error(self, u"Por favor revise %s." % campo[0], u"Informaciï¿½n Incompleta")
 				todook = False
 				break
 			
 			if pos == 2:
 				if not str(dato).isdigit() or len(str(dato)) <> 11:
-					Mensajes().Info(self, u"Por favor revise %s." % campo[0], u"Información mal Introducida")
+					Mensajes().Info(self, u"Por favor revise %s." % campo[0], u"Informaciï¿½n mal Introducida")
 					todook = False
 					break
 			elif pos in (4,5,6,7):
 				try:
 					valor = float(str(dato))
 					if pos in (4,6,7) and valor <= 0:
-						Mensajes().Info(self, u"Por favor revise %s." % campo[0], u"Información Incompleta")
+						Mensajes().Info(self, u"Por favor revise %s." % campo[0], u"Informaciï¿½n Incompleta")
 						todook = False
 						break
 				except:
@@ -41148,12 +41149,12 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 					break
 				
 				if self.GetControl(ID_COMBOOFERTASCOMPRAFUNC1REFERENCIARAP).GetSelection() < 0:
-					Mensajes().Info(self, u"Por favor revise la referencia RAP.", u"Información Incompleta")
+					Mensajes().Info(self, u"Por favor revise la referencia RAP.", u"Informaciï¿½n Incompleta")
 					todook = False
 					break
 				
 				if self.GetControl(ID_COMBOOFERTASCOMPRAFUNC1PRECIOINMUEBLE).GetSelection() < 0:
-					Mensajes().Info(self, u"Por favor revise el precio del inmueble.", u"Información Incompleta")
+					Mensajes().Info(self, u"Por favor revise el precio del inmueble.", u"Informaciï¿½n Incompleta")
 					todook = False
 					break
 				
@@ -41164,23 +41165,23 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 			todook = False
 			if self.afiliacionimss <> imss:
 				Mensajes().Info(self, u"No coinciden el no. del IMSS del prospecto y el del cliente.\n\n" \
-				                u"Prospecto: %s     Cliente: %s" % (self.afiliacionimss, imss), u"Atención")
+				                u"Prospecto: %s     Cliente: %s" % (self.afiliacionimss, imss), u"Atenciï¿½n")
 			elif self.idvendedor <> int(subvendedor):
-				Mensajes().Info(self, u"El vendedor del prospecto no coincide con el del cliente.", u"Atención")
+				Mensajes().Info(self, u"El vendedor del prospecto no coincide con el del cliente.", u"Atenciï¿½n")
 			elif not comision:
-				Mensajes().Info(self, u"No se puede generar la cuenta debido a que no tiene comisión el subvendedor.",
-				                u"Atención")
+				Mensajes().Info(self, u"No se puede generar la cuenta debido a que no tiene comisiï¿½n el subvendedor.",
+				                u"Atenciï¿½n")
 			elif not self.comisionvendedor:
-				Mensajes().Info(self, u"No se puede generar la cuenta debido a que no tiene comisión el vendedor.",
-				                u"Atención")
+				Mensajes().Info(self, u"No se puede generar la cuenta debido a que no tiene comisiï¿½n el vendedor.",
+				                u"Atenciï¿½n")
 			elif self.GetControl(ID_COMBOOFERTASCOMPRAFUNC1REFERENCIARAP).GetSelection() < 0:
 				Mensajes().Info(self, u"No se puede generar la cuenta debido a que no existe referencia rap.",
-				                u"Atención")
+				                u"Atenciï¿½n")
 			else:
 				todook = True
 				
 		if todook:
-			if Mensajes().YesNo(self, u"¿ Desea realmente generar la oferta y la cuenta ?", u"Confirmación"):
+			if Mensajes().YesNo(self, u"ï¿½ Desea realmente generar la oferta y la cuenta ?", u"Confirmaciï¿½n"):
 				# Para obtener comisiones anticipadas (de ofertas canceladas) - ya no en uso.
 				#query = """
 				#select a.codigo, m.fk_vendedor, m.fk_cuenta, c.contrato, m.cantidad,
@@ -41240,7 +41241,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 				sql = "update desarrollo set contrato = %s where codigo = %s" % (contrato, self.desarrollo)
 				todook, trash = self.QueryUpdateRecord(sql, conexion = r_cn)
 				if not todook:
-					Mensajes().Info(self, u"¡ No se actualizó el contrato %s del desarrollo !" % contrato,
+					Mensajes().Info(self, u"ï¿½ No se actualizï¿½ el contrato %s del desarrollo !" % contrato,
 					                u"Notifique a Sistemas")
 				else:
 					cu = r_cn.cursor()
@@ -41267,7 +41268,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 					""" % (cuenta, fechadeventa, precio, cliente, contrato, self.etapa)
 					todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cn)
 					if not todook:
-						Mensajes().Info(self, u"¡ No se generó la cuenta %s !" % cuenta, u"Notifique a Sistemas")
+						Mensajes().Info(self, u"ï¿½ No se generï¿½ la cuenta %s !" % cuenta, u"Notifique a Sistemas")
 					else:
 						if (reactivacionetapa and reactivacionoferta):
 							query = """
@@ -41293,14 +41294,14 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 							
 						todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cn)
 						if not todook:
-							Mensajes().Info(self, u"¡ No se generó la oferta %s !" % contrato,
+							Mensajes().Info(self, u"ï¿½ No se generï¿½ la oferta %s !" % contrato,
 							                u"Notifique a Sistemas")
 						else:
 							sql = "update referencias_rap set cuenta = %s where referencia = '%s'" % \
 						            (cuenta, referenciarap)
 							todook, trash = self.QueryUpdateRecord(sql, conexion = r_cn)
 							if not todook:
-								Mensajes().Info(self, u"¡ No se actualizó la referencia rap (cuenta %s) !" % \
+								Mensajes().Info(self, u"ï¿½ No se actualizï¿½ la referencia rap (cuenta %s) !" % \
 							                        cuenta, u"Notifique a Sistemas")
 							else:
 								cu = r_cn.cursor()
@@ -41319,7 +41320,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 							               0, vendedor, cuenta)
 								todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query),conexion = r_cn)
 								if not todook:
-									Mensajes().Info(self, u"¡ No se generó comision del vendedor %s !" \
+									Mensajes().Info(self, u"ï¿½ No se generï¿½ comision del vendedor %s !" \
 								                        % vendedor, u"Notifique a Sistemas")
 
 								cu = r_cn.cursor()
@@ -41338,7 +41339,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 							               0, subvendedor, cuenta)
 								todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query),conexion = r_cn)
 								if not todook:
-									Mensajes().Info(self, u"¡ No se generó comision del subvendedor %s !" \
+									Mensajes().Info(self, u"ï¿½ No se generï¿½ comision del subvendedor %s !" \
 								                        % vendedor, u"Notifique a Sistemas")
 									
 								query = """
@@ -41350,7 +41351,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 								       precio, cuenta)
 								todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cn)
 								if not todook:
-									Mensajes().Info(self, u"¡ No se generó oferta/asignación de la cuenta %s !" % cuenta, u"Notifique a Sistemas")
+									Mensajes().Info(self, u"ï¿½ No se generï¿½ oferta/asignaciï¿½n de la cuenta %s !" % cuenta, u"Notifique a Sistemas")
 								
 								
 				if todook:
@@ -41368,7 +41369,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 						       cuenta, referenciarap)
 						todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cn)
 						if not todook:
-							Mensajes().Info(self, u"¡ No se generó el documento %s !" \
+							Mensajes().Info(self, u"ï¿½ No se generï¿½ el documento %s !" \
 						                        % codigodocumento, u"Notifique a Sistemas")
 						else:
 							cu = r_cn.cursor()
@@ -41383,7 +41384,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 							""" % (codigomovimiento, apartado, fechadeventa, codigodocumento)
 							todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cn)
 							if not todook:
-								Mensajes().Info(self, u"¡ No se generó el movimiento %s !" \
+								Mensajes().Info(self, u"ï¿½ No se generï¿½ el movimiento %s !" \
 									        % codigomovimiento, u"Notifique a Sistemas")
 						
 					cu = r_cn.cursor()
@@ -41399,7 +41400,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 				               cuenta, referenciarap)
 					todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cn)
 					if not todook:
-						Mensajes().Info(self, u"¡ No se generó el documento %s !" \
+						Mensajes().Info(self, u"ï¿½ No se generï¿½ el documento %s !" \
 					                        % codigodocumento, u"Notifique a Sistemas")
 					else:
 						cu = r_cn.cursor()
@@ -41414,7 +41415,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 					        """ % (codigomovimiento, resto, fechadeventa, codigodocumento)
 						todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cn)
 						if not todook:
-							Mensajes().Info(self, u"¡ No se generó el movimiento %s !" \
+							Mensajes().Info(self, u"ï¿½ No se generï¿½ el movimiento %s !" \
 						                        % codigomovimiento, u"Notifique a Sistemas")
 							
 					query = """
@@ -41423,11 +41424,11 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 					""" % (cuenta, prospecto)
 					todook, trash = self.QueryUpdateRecord(self.PreparaQuery(query), conexion = r_cn)
 					if not todook:
-						Mensajes().Info(self, u"¡ No se actualizó el prospecto %s cuenta %s !" \
+						Mensajes().Info(self, u"ï¿½ No se actualizï¿½ el prospecto %s cuenta %s !" \
 					                        % (prospecto, cuenta), u"Notifique a Sistemas")
 					
 					self.FillOfertasCompra()
-					if Mensajes().YesNo(self, u"¿ Desea imprimir la oferta de compra ?", u"Confirmación"):
+					if Mensajes().YesNo(self, u"ï¿½ Desea imprimir la oferta de compra ?", u"Confirmaciï¿½n"):
 						self.ImprimeOfertaCompra()
 						
 	def OnImprimeOfertaCompra(self, evt):
@@ -41437,7 +41438,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		try:
 			gridcontenthtml = self.GetHtmlOferta()
@@ -41457,10 +41458,10 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 						os.system("open %s" % archivo)
 				wx.EndBusyCursor()
 			else:
-				Mensajes().Info(self, u"¡ No se encontró información referente a la oferta !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente a la oferta !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al generar la oferta !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al generar la oferta !", u"Atenciï¿½n")
 		
 	def GetHtmlOferta(self, consecutivorecibo = 0):
 		query = """
@@ -41529,58 +41530,58 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 			cuento con <span style="font-weight: bold;">R.F.C.%s</span>,
 			con <span style="font-weight: bold;">N.S.S.%s</span>
 			y con domicilio ubicado en <span style="font-weight: bold;">%s</span>
-			con el número de teléfono: <span style="font-weight: bold;">%s</span>.
+			con el nï¿½mero de telï¿½fono: <span style="font-weight: bold;">%s</span>.
 			Por esta medio, acudo de manera unilateral, para que se me tome en
 			cuenta como interesado en adquirir la propiedad de alguna de las
-			viviendas que están ofertando en el conjunto habitacional denominado <span
+			viviendas que estï¿½n ofertando en el conjunto habitacional denominado <span
 			 style="font-weight: bold;">%s</span>,
 			ubicado en el municipio de <span style="font-weight: bold;">%s,
-			%s</span>, que será adquirida en su momento mediante crédito
+			%s</span>, que serï¿½ adquirida en su momento mediante crï¿½dito
 			del INFONAVIT, Sociedad Hipotecaria Federal, FOVISSSTE, Pensiones del
-			Estado, con financiamiento de alguna otra institución financiera o con
+			Estado, con financiamiento de alguna otra instituciï¿½n financiera o con
 			recursos propios.<br>
 			<br>
 			Asimismo manifiesto conocer y estar de acuerdo que a la fecha el precio
 			de la vivienda arriba mencionada es de: <span
 			 style="font-weight: bold;">$%s (%s)</span>
-			mismo que se actualizará hasta la fecha en que se formalice la presente
+			mismo que se actualizarï¿½ hasta la fecha en que se formalice la presente
 			oferta mediante la firma de escritura publica correspondiente, de
-			conformidad con los factores y política propias de los esquemas del
-			crédito mediante el cual se formalizará la operación. Manifestando en
+			conformidad con los factores y polï¿½tica propias de los esquemas del
+			crï¿½dito mediante el cual se formalizarï¿½ la operaciï¿½n. Manifestando en
 			este acto mi total conformidad a lo expresado en este esquema de
-			actualización de precio.<br>
+			actualizaciï¿½n de precio.<br>
 			<br>
-			De la misma manera, acepto conocer que la formalización de la presente
-			oferta, esta sujeta al otorgamiento en mi favor del crédito por parte
-			de la institución de que se trate y será usado únicamente para el pago
-			del valor de la vivienda. Estoy de acuerdo en que al día de hoy el
-			monto del crédito al que tengo derecho es de <span
+			De la misma manera, acepto conocer que la formalizaciï¿½n de la presente
+			oferta, esta sujeta al otorgamiento en mi favor del crï¿½dito por parte
+			de la instituciï¿½n de que se trate y serï¿½ usado ï¿½nicamente para el pago
+			del valor de la vivienda. Estoy de acuerdo en que al dï¿½a de hoy el
+			monto del crï¿½dito al que tengo derecho es de <span
 			 style="font-weight: bold;">$%s (%s)</span>.
-			Mismo que al igual que el valor de la vivienda se actualizará hasta el
-			día de la escritura publica correspondiente. Además, me comprometo a
-			cubrir la diferencia existente, en caso de que el monto del crédito que
+			Mismo que al igual que el valor de la vivienda se actualizarï¿½ hasta el
+			dï¿½a de la escritura publica correspondiente. Ademï¿½s, me comprometo a
+			cubrir la diferencia existente, en caso de que el monto del crï¿½dito que
 			me sea autorizado sea inferior al valor de la vivienda, aceptando que
-			la entrega de la vivienda será hasta que el monto de mi adeudo sea
-			totalmente liquidado; aún cuando haya firmado la escritura de la
-			vivienda, excepto si se me autorizó un convenio de pago en caso de
-			existir diferencia, el cual deberá estar firmado y al corriente en pagos.<br>
+			la entrega de la vivienda serï¿½ hasta que el monto de mi adeudo sea
+			totalmente liquidado; aï¿½n cuando haya firmado la escritura de la
+			vivienda, excepto si se me autorizï¿½ un convenio de pago en caso de
+			existir diferencia, el cual deberï¿½ estar firmado y al corriente en pagos.<br>
 			<br>
-			Que conste en la presente que conozco los requisitos para la obtención
-			de mi crédito y manifiesto que la institución que me otorgará el
-			crédito es la única responsable en los tiempos y en los requisitos para
-			el trámite, aceptando la cancelación de la presente oferta en caso de
-			no verme favorecido(a) con la aprobación del crédito correspondiente.<br>
+			Que conste en la presente que conozco los requisitos para la obtenciï¿½n
+			de mi crï¿½dito y manifiesto que la instituciï¿½n que me otorgarï¿½ el
+			crï¿½dito es la ï¿½nica responsable en los tiempos y en los requisitos para
+			el trï¿½mite, aceptando la cancelaciï¿½n de la presente oferta en caso de
+			no verme favorecido(a) con la aprobaciï¿½n del crï¿½dito correspondiente.<br>
 			<br>
 			La presente oferta de compra la respaldo con la cantidad de <span
 			 style="font-weight: bold;">$%s (%s)</span>
 			mismos que se toman en cuenta en el valor de la vivienda, manifestando
-			estar de acuerdo que en caso de que se cancele la presente operación se
-			aplicará como pena convencional la cantidad de <span
+			estar de acuerdo que en caso de que se cancele la presente operaciï¿½n se
+			aplicarï¿½ como pena convencional la cantidad de <span
 			 style="font-weight: bold;">$%s (%s)</span>,
-			sin importar la razón de la cancelación.<br>
+			sin importar la razï¿½n de la cancelaciï¿½n.<br>
 			<br>
-			Agradezco su atención a la presente, manifestándome a sus apreciables
-			órdenes, quedando en espera de noticias de su parte.<br>
+			Agradezco su atenciï¿½n a la presente, manifestï¿½ndome a sus apreciables
+			ï¿½rdenes, quedando en espera de noticias de su parte.<br>
 			<br>
 			</span></small></span>
 			<div style="text-align: center;"><span
@@ -41642,14 +41643,14 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 				dlg.ShowModal()
 				self.SetFocus()
 			else:
-				Mensajes().Info(self, u"La oferta %s no tiene características del inmueble.\n\n" \
+				Mensajes().Info(self, u"La oferta %s no tiene caracterï¿½sticas del inmueble.\n\n" \
 					        u"Tal vez la oferta no tenga inmueble asignado\n" \
 					        u"o se haya elaborado antes del 28/10/2011.\n\n" \
 					        u"En caso de que la oferta de compra se haya\n" \
 					        u"elaborado antes del 28/10/2011\n" \
-					        u"¡¡¡ POR FAVOR NOTIFICALO A ELI !!!" % self.oferta, u"Atención %s" % self.usuario)
+					        u"ï¿½ï¿½ï¿½ POR FAVOR NOTIFICALO A ELI !!!" % self.oferta, u"Atenciï¿½n %s" % self.usuario)
 		else:
-			Mensajes().Info(self, u"¡ Seleccione una oferta !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Seleccione una oferta !", u"Atenciï¿½n")
 
 	def OnElegirProspecto(self, evt):
 		cu = r_cn.cursor()
@@ -41661,7 +41662,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 			dlg.CenterOnParent()
 			dlg.ShowModal()
 		else:
-			Mensajes().Info(self, u"¡ No se encontraron prospectos !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se encontraron prospectos !", u"Atenciï¿½n")
 			
 	def ProspectoElegido(self, codigoprospecto):
 		cu = r_cn.cursor()
@@ -41742,7 +41743,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 			dlg.CenterOnParent()
 			dlg.ShowModal()
 		else:
-			Mensajes().Info(self, u"¡ No se encontraron clientes !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se encontraron clientes !", u"Atenciï¿½n")
 			
 	def ClienteElegido(self, codigocliente, nombrecliente):
 		cu = r_cn.cursor()
@@ -41774,7 +41775,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 			dlg.CenterOnParent()
 			dlg.ShowModal()
 		else:
-			Mensajes().Info(self, u"¡ No se encontraron prospectos !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se encontraron prospectos !", u"Atenciï¿½n")
 			
 	def SubvendedorElegido(self, codigosubvendedor):
 		cu = r_cn.cursor()
@@ -41900,7 +41901,7 @@ class GixFirmantes(wx.Frame, GixBase):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 				
 	def OnAgregar(self, event):
 		self.agregar, self.NewFlag, self.FillingARecord = True, True, True
@@ -41926,7 +41927,7 @@ class GixFirmantes(wx.Frame, GixBase):
 		
 	def OnEliminar(self, event):
 		if self.idfirmante == "":
-			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atenciï¿½n")
 			return
 		sql = "select count(*) from gixfirmantesbancos where idfirmante = %s" % self.idfirmante
 		cu = r_cn.cursor()
@@ -41934,12 +41935,12 @@ class GixFirmantes(wx.Frame, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if int(row[0]) > 0:
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n\n" \
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n\n" \
 							u"Esto se debe a que hay %s cuentas que\ndependen de este firmante."
-							% int(row[0]), u"Atención")
+							% int(row[0]), u"Atenciï¿½n")
 		else:
-			if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?"
-								% self.idfirmante, u"Confirmación"):
+			if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?"
+								% self.idfirmante, u"Confirmaciï¿½n"):
 				if self.DeleteRecord():
 					self.DeleteBlog()
 					self.FillListCtrl()
@@ -41951,9 +41952,9 @@ class GixFirmantes(wx.Frame, GixBase):
 					#sql = """
 					#insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 					#values ('%s', getdate(), '%s', '%s', '%s', '%s')
-					#""" % (self.BlogGUID, self.usuario, u"Eliminación del Registro", "", "")
+					#""" % (self.BlogGUID, self.usuario, u"Eliminaciï¿½n del Registro", "", "")
 					#if not self.QueryUpdateRecord(sql):
-						#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+						#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					
 		event.Skip()
 				
@@ -41967,9 +41968,9 @@ class GixFirmantes(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+							% sql, u"Atenciï¿½n")
 			return False
 		
 	def DeleteBlog(self):
@@ -41981,8 +41982,8 @@ class GixFirmantes(wx.Frame, GixBase):
 			r_cn.commit()
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar el historial del blog del registro." \
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar el historial del blog del registro." \
+							% sql, u"Atenciï¿½n")
 			
 	def OnText(self, event):
 		self.ctrlactual = event.GetId()
@@ -42005,7 +42006,7 @@ class GixFirmantes(wx.Frame, GixBase):
 		if valor == "" and not self.FillingARecord and not self.NewFlag:
 			self.NewFlag = True
 			if not VengodelaLista:
-				Mensajes().Info(self, u"¡ No debe quedar el nombre en blanco !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No debe quedar el nombre en blanco !", u"Atenciï¿½n")
 				return False
 			
 		if not self.FillingARecord:
@@ -42073,10 +42074,10 @@ class GixFirmantes(wx.Frame, GixBase):
 			self.Text(True)
 			if not self.NewFlag:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle(onguardar)
 				else:
-					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle()
 					
 				self.GetControl(ID_TEXTCTRLFIRMANTENOMBRE).SetBackgroundColour(wx.WHITE)
@@ -42096,7 +42097,7 @@ class GixFirmantes(wx.Frame, GixBase):
 			self.GetControl(ID_RADIOBOXFIRMANTESESTATUS).Enable(True)
 			self.editable = True
 		else:
-			Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+			Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 					
 	def GetRecord(self, record):
 		try:
@@ -42171,7 +42172,7 @@ class GixFirmantes(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord(self, querycancelar = ""):
 		nombre = self.GetControl(ID_TEXTCTRLFIRMANTENOMBRE).GetValue()
@@ -42184,13 +42185,13 @@ class GixFirmantes(wx.Frame, GixBase):
 		sql = "update %s set %s where idfirmante = %s" % (self.dbtable, setListForQuery, self.idfirmante)
 		queTal = self.QueryUpdateRecord(sql)
 		if queTal:
-			contenido = u"Edición del registro"
+			contenido = u"Ediciï¿½n del registro"
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -42213,7 +42214,7 @@ class GixFirmantes(wx.Frame, GixBase):
 			if identity is not None:
 				numero = identity
 			else:
-				Mensajes().Info(self, u"Problemas al buscar nuevo firmante.\n\n%s" % sqlmax, u"Atención")
+				Mensajes().Info(self, u"Problemas al buscar nuevo firmante.\n\n%s" % sqlmax, u"Atenciï¿½n")
 				
 			self.GetControl(ID_TEXTCTRLFIRMANTEID).SetValue(str(numero))
 			sqly = "select convert(varchar(100), BlogGUID) from %s where idfirmante = %s" % (self.dbtable, numero)
@@ -42229,7 +42230,7 @@ class GixFirmantes(wx.Frame, GixBase):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, "Alta del Firmante", "", "", "A")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atenciï¿½n")
 
 		return queTal, int(numero)
 	
@@ -42400,7 +42401,7 @@ class GixGuardias(wx.Frame, GixBase):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 				
 	def OnChoice(self, event):
 		self.RevisaCambios()
@@ -42445,7 +42446,7 @@ class GixGuardias(wx.Frame, GixBase):
 		
 	def OnEliminar(self, event):
 		if self.idguardia == "":
-			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atenciï¿½n")
 			return
 		sql = "select count(*) from gixguardiasroll where idguardia = %s" % self.idguardia
 		cu = r_cn.cursor()
@@ -42453,12 +42454,12 @@ class GixGuardias(wx.Frame, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if int(row[0]) > 0:
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n\n" \
-							u"Quiza se deba a que hay otra información que depende de esta guardia."
-							% int(row[0]), u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n\n" \
+							u"Quiza se deba a que hay otra informaciï¿½n que depende de esta guardia."
+							% int(row[0]), u"Atenciï¿½n")
 		else:
-			if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?"
-								% self.idguardia, u"Confirmación"):
+			if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?"
+								% self.idguardia, u"Confirmaciï¿½n"):
 				if self.DeleteRecord():
 					self.DeleteBlog()
 					self.FillListCtrl()
@@ -42476,9 +42477,9 @@ class GixGuardias(wx.Frame, GixBase):
 					#sql = """
 					#insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension)
 					#values ('%s', getdate(), '%s', '%s', '%s', '%s')
-					#""" % (self.BlogGUID, self.usuario, u"Eliminación del Registro", "", "")
+					#""" % (self.BlogGUID, self.usuario, u"Eliminaciï¿½n del Registro", "", "")
 					#if not self.QueryUpdateRecord(sql):
-						#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+						#Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					
 		event.Skip()
 				
@@ -42492,9 +42493,9 @@ class GixGuardias(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+							% sql, u"Atenciï¿½n")
 			return False
 		
 	def DeleteBlog(self):
@@ -42506,8 +42507,8 @@ class GixGuardias(wx.Frame, GixBase):
 			r_cn.commit()
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar el historial del blog del registro." \
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar el historial del blog del registro." \
+							% sql, u"Atenciï¿½n")
 			
 	def OnLimpiarFecha(self, event):
 		id = event.GetId()
@@ -42534,7 +42535,7 @@ class GixGuardias(wx.Frame, GixBase):
 					f_dia, f_mes, f_ano = self.GetControl(ID_TEXTCTRLGUARDIAFECHAFINAL).GetValue().split('/')
 					fechafinal = "%04d/%02d/%02d" % (int(f_ano), int(f_mes), int(f_dia))
 					if fechainicial > fechafinal:
-						Mensajes().Info(self, u"La fecha inicial no debe ser mayor a la fecha final.", u"Atención")
+						Mensajes().Info(self, u"La fecha inicial no debe ser mayor a la fecha final.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLGUARDIAFECHAFINAL).SetValue("")
 				else:
 					self.HabilitaFechaFinal(True)
@@ -42546,7 +42547,7 @@ class GixGuardias(wx.Frame, GixBase):
 			f_dia, f_mes, f_ano = self.GetControl(ID_TEXTCTRLGUARDIAFECHAFINAL).GetValue().split('/')
 			fechafinal = "%04d/%02d/%02d" % (int(f_ano), int(f_mes), int(f_dia))
 			if fechainicial > fechafinal:
-				Mensajes().Info(self, u"La fecha inicial no debe ser mayor a la fecha final.", u"Atención")
+				Mensajes().Info(self, u"La fecha inicial no debe ser mayor a la fecha final.", u"Atenciï¿½n")
 				self.GetControl(ID_TEXTCTRLGUARDIAFECHAFINAL).SetValue("")
 			else:
 				self.HabilitaFechaFinal(True)
@@ -42576,7 +42577,7 @@ class GixGuardias(wx.Frame, GixBase):
 			if valor == "" and not self.FillingARecord and not self.NewFlag:
 				self.NewFlag = True
 				if not VengodelaLista:
-					Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 					return False
 			
 		if not self.FillingARecord:
@@ -42675,10 +42676,10 @@ class GixGuardias(wx.Frame, GixBase):
 			self.Text(True)
 			if not self.NewFlag:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle(onguardar)
 				else:
-					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle()
 					
 				for id in (ID_TEXTCTRLGUARDIADESCRIPCION, ID_TEXTCTRLGUARDIAFECHAINICIAL, ID_TEXTCTRLGUARDIAFECHAFINAL,
@@ -42717,7 +42718,7 @@ class GixGuardias(wx.Frame, GixBase):
 			self.GetControl(ID_RADIOBOXGUARDIAESTATUS).Enable(True)
 			self.editable = True
 		else:
-			Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+			Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 					
 	def GetRecord(self, record):
 		try:
@@ -42822,7 +42823,7 @@ class GixGuardias(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord(self, querycancelar = ""):
 		descripcion = self.GetControl(ID_TEXTCTRLGUARDIADESCRIPCION).GetValue()
@@ -42846,13 +42847,13 @@ class GixGuardias(wx.Frame, GixBase):
 		sql = "update %s set %s where idguardia = %s" % (self.dbtable, setListForQuery, self.idguardia)
 		queTal = self.QueryUpdateRecord(sql)
 		if queTal:
-			contenido = u"Edición del registro"
+			contenido = u"Ediciï¿½n del registro"
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -42885,7 +42886,7 @@ class GixGuardias(wx.Frame, GixBase):
 			if identity is not None:
 				numero = identity
 			else:
-				Mensajes().Info(self, u"Problemas al buscar la nueva guardia.\n\n%s" % sqlmax, u"Atención")
+				Mensajes().Info(self, u"Problemas al buscar la nueva guardia.\n\n%s" % sqlmax, u"Atenciï¿½n")
 			self.GetControl(ID_TEXTCTRLGUARDIAID).SetValue(str(numero))
 			sqly = "select convert(varchar(100), BlogGUID) from %s where idguardia = %s" % (self.dbtable, numero)
 			cursor = r_cn.cursor()
@@ -42900,7 +42901,7 @@ class GixGuardias(wx.Frame, GixBase):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, "Alta de Guardia", "", "", "A")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atenciï¿½n")
 
 		return queTal, int(numero)
 	
@@ -42921,7 +42922,7 @@ class GixGuardias(wx.Frame, GixBase):
 			lctrl.InsertColumn(1, u"Inicio", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(2, u"Termino", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(3, u"Recurrencia", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(4, u"Descripción / Ubicación")
+			lctrl.InsertColumn(4, u"Descripciï¿½n / Ubicaciï¿½n")
 			for row in rows:
 				if str(row[5]) == "D":
 					bgcolor = [255,153,153]
@@ -43125,7 +43126,7 @@ class GixVendedores(wx.Frame, GixBase):
 			""" % (hash, self.dbtable, codigo)
 			todobien, trash = self.QueryUpdateRecord(sql)
 			if todobien:
-				Mensajes().Info(self, u"¡ Registro exitoso del vendedor en el blog !", u"Aviso")
+				Mensajes().Info(self, u"ï¿½ Registro exitoso del vendedor en el blog !", u"Aviso")
 			return False
 		else:
 			self.BlogGUID = row[0]
@@ -43179,7 +43180,7 @@ class GixVendedores(wx.Frame, GixBase):
 				values ('%s', getdate(), '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, comment, "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 				
 	def OnChoice(self, event):
 		self.Text()
@@ -43206,7 +43207,7 @@ class GixVendedores(wx.Frame, GixBase):
 		self.GetControl(ID_TEXTCTRLVENDEDORNOMBRE).SetFocus()
 		
 	def OnEliminar(self, event):
-		Mensajes().Info(self, u"¡ No puede eliminar a un vendedor !\n\nSi desea no utilizarlo, desactivelo.", u"Atención")
+		Mensajes().Info(self, u"ï¿½ No puede eliminar a un vendedor !\n\nSi desea no utilizarlo, desactivelo.", u"Atenciï¿½n")
 		
 	def OnText(self, event):
 		if self.validacontroles:
@@ -43240,7 +43241,7 @@ class GixVendedores(wx.Frame, GixBase):
 				if valor == "" and not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 						return False
 				
 			if not self.FillingARecord:
@@ -43308,8 +43309,8 @@ class GixVendedores(wx.Frame, GixBase):
 					if valor == "Desactivado":
 						if Mensajes().YesNo(self, u"Recuerde que al desactivar a un vendedor todos\n" \
 						                    u"sus prospectos se revincularan al vendedor virtual\n" \
-						                    u"del gerente.\n\n¿ Desea realmente desactivar al vendedor ?", \
-						                    u"Confirmación"):
+						                    u"del gerente.\n\nï¿½ Desea realmente desactivar al vendedor ?", \
+						                    u"Confirmaciï¿½n"):
 							valor = 1
 						else:
 							valor = 0
@@ -43407,16 +43408,16 @@ class GixVendedores(wx.Frame, GixBase):
 			self.Text(True)
 			if not self.NewFlag:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle(onguardar)
 				else:
 					if self.GetControl(ID_TEXTCTRLVENDEDORCODIGO).GetValue():
-						Mensajes().Info(self, u"¡ No guardo los cambios del vendedor %s !\n\n" \
-										u"Por lo tanto, no ser verá afectado el registro del vendedor." \
-										% self.idvendedor, u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo los cambios del vendedor %s !\n\n" \
+										u"Por lo tanto, no ser verï¿½ afectado el registro del vendedor." \
+										% self.idvendedor, u"Atenciï¿½n")
 					else:
-						Mensajes().Info(self, u"¡ No guardo el nuevo vendedor !\n\n" \
-										u"Por lo tanto, no quedará registrado.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo el nuevo vendedor !\n\n" \
+										u"Por lo tanto, no quedarï¿½ registrado.", u"Atenciï¿½n")
 						
 				for id, tipo in self.campos.iteritems():
 					ctrl = self.GetControl(id)
@@ -43437,7 +43438,7 @@ class GixVendedores(wx.Frame, GixBase):
 				self.GetControl(ID_NOTEBOOKVENDEDOR).Enable(True)
 				self.editable = True
 			else:
-				Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+				Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		else:
 			self.FillListCtrl()
 			
@@ -43602,7 +43603,7 @@ class GixVendedores(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def RevinculaProspectos(self, gerente):
 		sql = "select codigo from VENDEDOR where gerente = %s and vendedorvirtual = 1" % int(gerente)
@@ -43611,7 +43612,7 @@ class GixVendedores(wx.Frame, GixBase):
 		vendedor = fetchone(cu)
 		cu.close()
 		if vendedor is None:
-			Mensajes().Info(self, u"¡ El gerente %s no tiene vendedor virtual !" % int(gerente), u"Atención")
+			Mensajes().Info(self, u"ï¿½ El gerente %s no tiene vendedor virtual !" % int(gerente), u"Atenciï¿½n")
 			return False, 0
 		else:
 			vendedorvirtual = int(vendedor[0])
@@ -43634,13 +43635,13 @@ class GixVendedores(wx.Frame, GixBase):
 					queTal, trash = self.QueryUpdateRecord(sql)
 					if queTal:
 						usuario = "%s/GIX" % self.usuario
-						contenido = u"Revinculación del Prospecto por Desactivación del Vendedor %s" % self.GetString(row[2])
+						contenido = u"Revinculaciï¿½n del Prospecto por Desactivaciï¿½n del Vendedor %s" % self.GetString(row[2])
 						sql = """
 					        insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario,
 					        Extension, Estatus) values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 					        """ % (str(row[1]), usuario, contenido, "", "", "")
 						if not self.QueryUpdateRecord(sql):
-							Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+							Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 							
 		return True, prospectos
 								
@@ -43690,15 +43691,15 @@ class GixVendedores(wx.Frame, GixBase):
 				hash = self.Hash("%s%020d" % (self.dbtable, self.idvendedor))
 				if self.GetBlog(hash, codigo = self.idvendedor):
 					if desactivado:
-						contenido = u"Desactivación del Vendedor / Revinculación de %s Prospecto(s) al Vendedor Virtual" % int(prospectos)
+						contenido = u"Desactivaciï¿½n del Vendedor / Revinculaciï¿½n de %s Prospecto(s) al Vendedor Virtual" % int(prospectos)
 					else:
-						contenido = u"Edición del Registro"
+						contenido = u"Ediciï¿½n del Registro"
 					sql = """
 					insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario,
 					Extension, Estatus) values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 					""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 					if not self.QueryUpdateRecord(sql):
-						Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+						Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -43774,7 +43775,7 @@ class GixVendedores(wx.Frame, GixBase):
 					""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 					todobien, trash = self.QueryUpdateRecord(sql)
 					if not todobien:
-						Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atención")
+						Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n%s" % sql, u"Atenciï¿½n")
 
 		return queTal, codigo
 	
@@ -43962,7 +43963,7 @@ class GixVendedores(wx.Frame, GixBase):
 		fila = 0
 		if rows:
 			lctrl.InsertColumn(0, u"Id", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(1, u"Comisión %", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(1, u"Comisiï¿½n %", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(2, u"Desarrollo")
 			for row in rows:
 				if fila %2 != 0: bgcolor = [255,255,150]
@@ -44018,7 +44019,7 @@ class GixVendedores(wx.Frame, GixBase):
 					if valor == "" and not self.FillingARecord2 and not self.NewFlag2:
 						self.NewFlag2 = True
 						if not VengodelaLista:
-							Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 							return False
 					
 				if not self.FillingARecord2:
@@ -44035,7 +44036,7 @@ class GixVendedores(wx.Frame, GixBase):
 					try:
 						valor = float(valor)
 					except:
-						Mensajes().Info(self, u"¡ Error al ingresar la comisión !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ Error al ingresar la comisiï¿½n !", u"Atenciï¿½n")
 						valor = self.original2[id]
 						self.GetControl(id).SetValue(str(valor))
 				if valor != self.original2[id]:
@@ -44093,18 +44094,18 @@ class GixVendedores(wx.Frame, GixBase):
 			self.Text2(True)
 			if not self.NewFlag2:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar la comisión ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la comisiï¿½n ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle2(onguardar)
 					else:
 						self.HabilitaComisiones(False)
 				else:
 					if self.GetControl(ID_TEXTCTRLVENDEDORCODIGOCOMISION).GetValue():
-						Mensajes().Info(self, u"¡ No guardo los cambios de la comisión %s !\n\n" \
-										u"Por lo tanto, no ser verá afectado el registro del vendedor." \
-										% self.idporcentaje, u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo los cambios de la comisiï¿½n %s !\n\n" \
+										u"Por lo tanto, no ser verï¿½ afectado el registro del vendedor." \
+										% self.idporcentaje, u"Atenciï¿½n")
 					else:
-						Mensajes().Info(self, u"¡ No guardo la nueva comisión !\n\n" \
-										u"Por lo tanto, no quedará registrada.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo la nueva comisiï¿½n !\n\n" \
+										u"Por lo tanto, no quedarï¿½ registrada.", u"Atenciï¿½n")
 						
 				for id, tipo in self.campos2.iteritems():
 					ctrl = self.GetControl(id)
@@ -44119,7 +44120,7 @@ class GixVendedores(wx.Frame, GixBase):
 				self.HabilitaComisiones()
 				self.editable2 = True
 			else:
-				Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+				Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		else:
 			self.FillListCtrl2()
 			
@@ -44159,11 +44160,11 @@ class GixVendedores(wx.Frame, GixBase):
 		
 	def OnEliminar2(self, event):
 		if self.idporcentaje == "":
-			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atenciï¿½n")
 			return
 		else:
-			if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?"
-								% self.idporcentaje, u"Confirmación"):
+			if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?"
+								% self.idporcentaje, u"Confirmaciï¿½n"):
 				if self.DeleteRecord2():
 					desarrollo = self.GetControl(ID_CHOICEVENDEDORDESARROLLOCOMISION).GetStringSelection()
 					porcentaje = self.GetControl(ID_TEXTCTRLVENDEDORCOMISIONCOMISION).GetValue()
@@ -44181,14 +44182,14 @@ class GixVendedores(wx.Frame, GixBase):
 		event.Skip()
 		
 	def SetBlog(self, desarrollo, porcentaje):
-		contenido = u"Eliminación de Comisión %s: %s %s%s" \
+		contenido = u"Eliminaciï¿½n de Comisiï¿½n %s: %s %s%s" \
 				  % (int(self.idporcentaje), desarrollo, str(amount_and_cents_with_commas(float(porcentaje))), "%")
 		sql = """
 		insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario,
 		Extension, Estatus) values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 		""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 		if not self.QueryUpdateRecord(sql):
-			Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+			Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 	
 	def DeleteRecord2(self):
 		sql = "delete from %s where codigo = %s" % (self.dbtable2, self.idporcentaje)
@@ -44200,9 +44201,9 @@ class GixVendedores(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+							% sql, u"Atenciï¿½n")
 			return False
 		
 	def OnGuardar2(self, event):
@@ -44249,7 +44250,7 @@ class GixVendedores(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord2(self, querycancelar = ""):
 		comision = self.GetControl(ID_TEXTCTRLVENDEDORCOMISIONCOMISION).GetValue()
@@ -44265,14 +44266,14 @@ class GixVendedores(wx.Frame, GixBase):
 			porcentaje = self.GetControl(ID_TEXTCTRLVENDEDORCOMISIONCOMISION).GetValue()
 			hash = self.Hash("%s%020d" % (self.dbtable, self.idvendedor))
 			if self.GetBlog(hash, codigo = self.idvendedor):
-				contenido = u"Edición de Comisión %s: %s %s%s" \
+				contenido = u"Ediciï¿½n de Comisiï¿½n %s: %s %s%s" \
 						  % (int(self.idporcentaje), desarrollo, str(amount_and_cents_with_commas(float(porcentaje))), "%")
 				sql = """
 				insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario,
 				Extension, Estatus) values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -44304,14 +44305,14 @@ class GixVendedores(wx.Frame, GixBase):
 			porcentaje = self.GetControl(ID_TEXTCTRLVENDEDORCOMISIONCOMISION).GetValue()
 			hash = self.Hash("%s%020d" % (self.dbtable, self.idvendedor))
 			if self.GetBlog(hash, codigo = self.idvendedor):
-				contenido = u"Alta de Comisión %s: %s %s%s" \
+				contenido = u"Alta de Comisiï¿½n %s: %s %s%s" \
 						  % (int(codigo), desarrollo, str(amount_and_cents_with_commas(float(porcentaje))), "%")
 				sql = """
 				insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario,
 				Extension, Estatus) values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 
 		return queTal, codigo
 	
@@ -44471,7 +44472,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 		
 	def OnChoice(self, event):
 		id = event.GetId()
@@ -44503,7 +44504,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 		self.GetControl(ID_CHOICECONTRATOOBRAEMPRESA).SetFocus()
 		
 	def OnEliminar(self, event):
-		Mensajes().Info(self, u"¡ No puede eliminar un contrato de obra !\n\nSi desea no utilizarlo, desactivelo.", u"Atención")
+		Mensajes().Info(self, u"ï¿½ No puede eliminar un contrato de obra !\n\nSi desea no utilizarlo, desactivelo.", u"Atenciï¿½n")
 		
 	def OnText(self, event):
 		if self.validacontroles:
@@ -44534,7 +44535,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 				if valor == "" and not self.FillingARecord and not self.NewFlag and id != ID_TEXTCTRLCONTRATOOBRANOTAS:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 						return False
 				
 			if not self.FillingARecord:
@@ -44636,16 +44637,16 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 			self.Text(True)
 			if not self.NewFlag:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle(onguardar)
 				else:
 					if self.GetControl(ID_TEXTCTRLCONTRATOOBRAID).GetValue():
-						Mensajes().Info(self, u"¡ No guardo los cambios del contrato de obra %s !\n\n" \
-										u"Por lo tanto, no ser verá afectado el registro del contrato." \
-										% self.idcontratoobra, u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo los cambios del contrato de obra %s !\n\n" \
+										u"Por lo tanto, no ser verï¿½ afectado el registro del contrato." \
+										% self.idcontratoobra, u"Atenciï¿½n")
 					else:
-						Mensajes().Info(self, u"¡ No guardo el nuevo contrato de obra !\n\n" \
-										u"Por lo tanto, no quedará registrado.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo el nuevo contrato de obra !\n\n" \
+										u"Por lo tanto, no quedarï¿½ registrado.", u"Atenciï¿½n")
 						
 				for id, tipo in self.campos.iteritems():
 					ctrl = self.GetControl(id)
@@ -44666,7 +44667,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 				self.GetControl(ID_NOTEBOOKCONTRATOOBRA).Enable(True)
 				self.editable = True
 			else:
-				Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+				Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		else:
 			self.FillListCtrl()
 			
@@ -44852,7 +44853,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord(self, querycancelar = ""):
 		inx = self.GetControl(ID_CHOICECONTRATOOBRAEMPRESA).GetSelection()
@@ -44881,13 +44882,13 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 		sql = "update %s set %s where idcontratoobra = %s" % (self.dbtable, setListForQuery, self.idcontratoobra)
 		queTal, trash = self.QueryUpdateRecord(sql)
 		if queTal:
-			contenido = u"Edición del registro"
+			contenido = u"Ediciï¿½n del registro"
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -44938,7 +44939,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 				values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, "Alta del Contrato de Obra", "", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n" % sql, u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n" % sql, u"Atenciï¿½n")
 
 		return queTal, identity
 	
@@ -45195,7 +45196,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 					if valor == "" and not self.FillingARecord2 and not self.NewFlag2:
 						self.NewFlag2 = True
 						if not VengodelaLista:
-							Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 							return False
 					
 				if not self.FillingARecord2:
@@ -45212,7 +45213,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 					try:
 						valor = float(valor)
 					except:
-						Mensajes().Info(self, u"¡ Error al ingresar la comisión !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ Error al ingresar la comisiï¿½n !", u"Atenciï¿½n")
 						valor = self.original2[id]
 						self.GetControl(id).SetValue(str(valor))
 				if valor != self.original2[id]:
@@ -45278,18 +45279,18 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 			self.Text2(True)
 			if not self.NewFlag2:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar el convenio ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar el convenio ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle2(onguardar)
 					else:
 						self.HabilitaConvenios(False)
 				else:
 					if self.GetControl(ID_TEXTCTRLCONTRATOOBRACONVENIOID).GetValue():
-						Mensajes().Info(self, u"¡ No guardo los cambios del convenio %s !\n\n" \
-										u"Por lo tanto, no ser verá afectado el registro del contrato de obra." \
-										% self.idcontratoconvenio, u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo los cambios del convenio %s !\n\n" \
+										u"Por lo tanto, no ser verï¿½ afectado el registro del contrato de obra." \
+										% self.idcontratoconvenio, u"Atenciï¿½n")
 					else:
-						Mensajes().Info(self, u"¡ No guardo el nuevo convenio !\n\n" \
-										u"Por lo tanto, no quedará registrado.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo el nuevo convenio !\n\n" \
+										u"Por lo tanto, no quedarï¿½ registrado.", u"Atenciï¿½n")
 						
 				for id, tipo in self.campos2.iteritems():
 					ctrl = self.GetControl(id)
@@ -45304,7 +45305,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 				self.HabilitaConvenios()
 				self.editable2 = True
 			else:
-				Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+				Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		else:
 			self.FillListCtrl2()
 			
@@ -45350,11 +45351,11 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 		
 	def OnEliminar2(self, event):
 		if self.idcontratoconvenio == "":
-			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el Registro a Eliminar", u"Atenciï¿½n")
 			return
 		else:
-			if Mensajes().YesNo(self,u"¿ Desea realmente eliminar el registro %s ?"
-								% self.idcontratoconvenio, u"Confirmación"):
+			if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar el registro %s ?"
+								% self.idcontratoconvenio, u"Confirmaciï¿½n"):
 				if self.DeleteRecord2():
 					fecha = self.GetControl(ID_TEXTCTRLCONTRATOOBRACONVENIOFECHA).GetValue()
 					cantidad = self.GetControl(ID_TEXTCTRLCONTRATOOBRACONVENIOCANTIDAD).GetValue()
@@ -45368,7 +45369,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 							contratotxt = "Disminuye"
 					else:
 						contratotxt = u"Sin Definir Aumenta o Disminuye"
-					contenido = u"Eliminación de Convenio %s: %s %s %s" \
+					contenido = u"Eliminaciï¿½n de Convenio %s: %s %s %s" \
 							  % (int(self.idcontratoconvenio), fecha, contratotxt,
 								 str(amount_and_cents_with_commas(float(cantidad))))
 					sql = """
@@ -45376,7 +45377,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 					Extension, Estatus) values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 					""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 					if not self.QueryUpdateRecord(sql):
-						Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+						Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 					self.FillListCtrl2()
 					self.validacontroles2 = False
 					self.CleanForm2()
@@ -45395,9 +45396,9 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+							% sql, u"Atenciï¿½n")
 			return False
 		
 	def OnGuardar2(self, event):
@@ -45444,7 +45445,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord2(self, querycancelar = ""):
 		f_dia, f_mes, f_ano = self.GetControl(ID_TEXTCTRLCONTRATOOBRACONVENIOFECHA).GetValue().split('/')
@@ -45468,7 +45469,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 		queTal, trash = self.QueryUpdateRecord(sql)
 		if queTal:
 			fecha = self.GetControl(ID_TEXTCTRLCONTRATOOBRACONVENIOFECHA).GetValue()
-			contenido = u"Edición de Convenio %s: %s %s %s" \
+			contenido = u"Ediciï¿½n de Convenio %s: %s %s %s" \
 					  % (int(self.idcontratoconvenio), fecha, contratotxt,
 						 str(amount_and_cents_with_commas(float(cantidad))))
 			sql = """
@@ -45476,7 +45477,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 			Extension, Estatus) values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 			
 		return queTal
 	
@@ -45516,7 +45517,7 @@ class GixContratosObrasConvenios(wx.Frame, GixBase):
 			Extension, Estatus) values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 
 		return queTal, identity
 	
@@ -45626,7 +45627,7 @@ class GixAplicacionPagoEstimacion(wx.Frame, GixBase):
 		self.SetStatusWidths(anchos)
 		self.SetStatusText(u"Recursos Financieros", 0)
 		self.SetStatusText(u"Control de Obras", 1)
-		self.SetStatusText(u"Aplicación de Pagos", 2)
+		self.SetStatusText(u"Aplicaciï¿½n de Pagos", 2)
 		
 		self.GetControl(ID_SEARCHCTRLAPLICACIONPAGOESTIMACIONOBRAFILTRO).ShowCancelButton(True)
 		self.GetControl(ID_SEARCHCTRLAPLICACIONPAGOESTIMACIONBENEFICIARIOFILTRO).ShowCancelButton(True)
@@ -45691,23 +45692,23 @@ class GixAplicacionPagoEstimacion(wx.Frame, GixBase):
 			importeaplicar = self.GetControl(ID_TEXTCTRLAPLICACIONPAGOESTIMACIONIMPORTEAPLICADO).GetValue()
 			self.importeaplicar = float(importeaplicar.replace(",", ""))
 			if self.importeaplicar > self.saldo:
-				Mensajes().Info(self, u"¡ La cantidad a aplicar no debe ser mayor al saldo !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ La cantidad a aplicar no debe ser mayor al saldo !", u"Atenciï¿½n")
 			elif self.importeaplicar > self.poraplicar:
-				Mensajes().Info(self, u"¡ No puede aplicar una cantidad mayor de la que dispone por aplicar !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No puede aplicar una cantidad mayor de la que dispone por aplicar !", u"Atenciï¿½n")
 			else:
 				self.AplicaPago()
 				self.FillListCtrlEstimacion()
 				self.FillListCtrlPago()
 		except:
 			self.importeaplicar = 0
-			Mensajes().Info(self, u"¡ Por favor revise la cantidad a aplicar !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Por favor revise la cantidad a aplicar !", u"Atenciï¿½n")
 			
 	def AplicaPago(self):
 		sql = """
 		insert into gixfacturasestimacionpago (fkcheque, fkfacturaestimacion, importe) values (%s, %s, %s)
 		""" % (int(self.idcheque), int(self.idfacturaestimacion), self.importeaplicar)
 		if not self.QueryUpdateRecord(sql):
-			Mensajes().Info(self, u"¡ Problemas al aplicar el pago !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Problemas al aplicar el pago !", u"Atenciï¿½n")
 	
 	def RevisaAplicacion(self):
 		if (self.saldo > 0 and self.poraplicar > 0):
@@ -45726,7 +45727,7 @@ class GixAplicacionPagoEstimacion(wx.Frame, GixBase):
 		self.GetControl(ID_TEXTCTRLAPLICACIONPAGOESTIMACIONIMPORTEESTIMACION).SetValue(importe)
 		self.GetControl(ID_TEXTCTRLAPLICACIONPAGOESTIMACIONSALDOESTIMACION).SetValue(saldo)
 		self.RevisaAplicacion()
-		self.GetControl(ID_TEXTAPLICACIONPAGOESTIMACIONIDESTIMACION).SetLabel(u"Estimación a Afectar Id. %s" % self.idfacturaestimacion)
+		self.GetControl(ID_TEXTAPLICACIONPAGOESTIMACIONIDESTIMACION).SetLabel(u"Estimaciï¿½n a Afectar Id. %s" % self.idfacturaestimacion)
 		
 	def OnDeselectedEstimacion(self, evt):
 		self.ClearEstimacion()
@@ -46025,8 +46026,8 @@ class GixReporteFinancieroObra(wx.Frame, GixBase):
 				if fecha:
 					fechafinal = self.GetFecha(fecha)
 					if fechainicial > fechafinal:
-						Mensajes().Info(self, u"¡ La Fecha Inicial no debe ser mayor a la Fecha Final !\n\n" \
-								u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La Fecha Inicial no debe ser mayor a la Fecha Final !\n\n" \
+								u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.EstatusFechaFinal(False)
 			else:
 				self.EstatusFechaFinal(False)
@@ -46037,11 +46038,11 @@ class GixReporteFinancieroObra(wx.Frame, GixBase):
 				if fecha:
 					fechainicial = self.GetFecha(fecha)
 					if fechainicial > fechafinal:
-						Mensajes().Info(self, u"¡ La Fecha Inicial del Contrato no debe ser mayor a la Fecha Final !\n\n" \
-								u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La Fecha Inicial del Contrato no debe ser mayor a la Fecha Final !\n\n" \
+								u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.EstatusFechaFinal(False)
 				else:
-					Mensajes().Info(self, u"¡ Inconsistencia en la fecha inicial !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Inconsistencia en la fecha inicial !", u"Atenciï¿½n")
 					self.EstatusFechaFinal(False)
 		self.FillListCtrl()
 				
@@ -46158,8 +46159,8 @@ class GixReporteFinancieroObra(wx.Frame, GixBase):
 				if fecharango:
 					fechafinal = self.GetFecha(fecharango)
 					if fechainicial > fechafinal:
-						Mensajes().Info(self, u"¡ La Fecha Inicial no debe ser mayor a la Fecha Final !\n\n" \
-								u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La Fecha Inicial no debe ser mayor a la Fecha Final !\n\n" \
+								u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.EstatusFechaFinal(False)
 						fechacontrato = " and convert(varchar(10), o.fecha, 111) = %s " % fechainicial
 					else:
@@ -46329,7 +46330,7 @@ class GixReporteFinancieroObra(wx.Frame, GixBase):
 				self.Habilita()
 				
 		elif printexcel:
-			Mensajes().Info(self, u"¡ No se Encontraron Contratos !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se Encontraron Contratos !", u"Atenciï¿½n")
 			self.Habilita(True, False)
 		else:
 			lctrl.InsertColumn(0, "       No se Encontraron Contratos", wx.LIST_FORMAT_CENTER)
@@ -46405,8 +46406,8 @@ class GixReporteEstimacionesFacturas(wx.Dialog, GixBase):
 				if fecha:
 					fechafinal = self.GetFecha(fecha)
 					if fechainicial > fechafinal:
-						Mensajes().Info(self, u"¡ La Fecha Inicial de la Estimación/Factura no debe ser mayor a la Fecha Final !\n\n" \
-								u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La Fecha Inicial de la Estimaciï¿½n/Factura no debe ser mayor a la Fecha Final !\n\n" \
+								u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.EstatusFechaFinal(False)
 			else:
 				self.EstatusFechaFinal(False)
@@ -46417,11 +46418,11 @@ class GixReporteEstimacionesFacturas(wx.Dialog, GixBase):
 				if fecha:
 					fechainicial = self.GetFecha(fecha)
 					if fechainicial > fechafinal:
-						Mensajes().Info(self, u"¡ La Fecha Inicial de la Estimación/Factura no debe ser mayor a la Fecha Final !\n\n" \
-								u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La Fecha Inicial de la Estimaciï¿½n/Factura no debe ser mayor a la Fecha Final !\n\n" \
+								u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.EstatusFechaFinal(False)
 				else:
-					Mensajes().Info(self, u"¡ Inconsistencia en la fecha inicial !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Inconsistencia en la fecha inicial !", u"Atenciï¿½n")
 					self.EstatusFechaFinal(False)
 		self.FillListCtrl()
 				
@@ -46511,7 +46512,7 @@ class GixReporteEstimacionesFacturas(wx.Dialog, GixBase):
 					fechafinal = self.GetFecha(fecharango)
 					if fechainicial > fechafinal:
 						Mensajes().Info(self, u"La Fecha Inicial de la Factura no debe ser mayor a la Fecha Final.\n\n" \
-								u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+								u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.EstatusFechaFinal(False)
 						return
 					else:
@@ -46660,7 +46661,7 @@ class GixReporteEstimacionesFacturas(wx.Dialog, GixBase):
 				self.Habilita()
 				
 		elif printexcel:
-			Mensajes().Info(self, u"¡ No se Encontraron Estimaciones/Facturas !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se Encontraron Estimaciones/Facturas !", u"Atenciï¿½n")
 			self.Habilita(True, False)
 		else:
 			lctrl.InsertColumn(0, "       No se Encontraron Estimaciones/Facturas", wx.LIST_FORMAT_CENTER)
@@ -46741,8 +46742,8 @@ class GixReporteEstimacionesPagos(wx.Dialog, GixBase):
 				if fecha:
 					fechafinal = self.GetFecha(fecha)
 					if fechainicial > fechafinal:
-						Mensajes().Info(self, u"¡ La Fecha Inicial del Pago no debe ser mayor a la Fecha Final !\n\n" \
-								u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La Fecha Inicial del Pago no debe ser mayor a la Fecha Final !\n\n" \
+								u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.EstatusFechaFinal(False)
 			else:
 				self.EstatusFechaFinal(False)
@@ -46753,11 +46754,11 @@ class GixReporteEstimacionesPagos(wx.Dialog, GixBase):
 				if fecha:
 					fechainicial = self.GetFecha(fecha)
 					if fechainicial > fechafinal:
-						Mensajes().Info(self, u"¡ La Fecha Inicial del Pago no debe ser mayor a la Fecha Final !\n\n" \
-								u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La Fecha Inicial del Pago no debe ser mayor a la Fecha Final !\n\n" \
+								u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.EstatusFechaFinal(False)
 				else:
-					Mensajes().Info(self, u"¡ Inconsistencia en la fecha inicial !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Inconsistencia en la fecha inicial !", u"Atenciï¿½n")
 					self.EstatusFechaFinal(False)
 		self.FillListCtrl()
 				
@@ -46844,7 +46845,7 @@ class GixReporteEstimacionesPagos(wx.Dialog, GixBase):
 			#gixmodel.memcache
 		#except:
 			#warnings.warn("<<Falta instalar memcache>>")
-			#Mensajes().Info(self, u"¡ Falta instalar memcache !", u"Aviso")
+			#Mensajes().Info(self, u"ï¿½ Falta instalar memcache !", u"Aviso")
 			#self.Destroy()
 			#return
 		fechainicial, fechafinal = "", ""		
@@ -46857,7 +46858,7 @@ class GixReporteEstimacionesPagos(wx.Dialog, GixBase):
 					fechafinal = self.GetFecha(fecharango)
 					if fechainicial > fechafinal:
 						Mensajes().Info(self, u"La Fecha Inicial del Pago no debe ser mayor a la Fecha Final.\n\n" \
-								u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+								u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.EstatusFechaFinal(False)
 						return
 			except:
@@ -46916,7 +46917,7 @@ class GixReporteEstimacionesPagos(wx.Dialog, GixBase):
 		#rkey = setParametersInMemcache(req, FORCETEST)
 		#if not rkey:
 			#warnings.warn("<<No se pudo obtener la llave para la funcion reporteestimacionpago>>")
-			#Mensajes().Error(self, u"¡ Problemas con memcache !", u"Atención")
+			#Mensajes().Error(self, u"ï¿½ Problemas con memcache !", u"Atenciï¿½n")
 			#self.Destroy()
 			#return
 		
@@ -46927,7 +46928,7 @@ class GixReporteEstimacionesPagos(wx.Dialog, GixBase):
 				#break
 			#if ciclo > 7000:
 				#wx.EndBusyCursor()
-				#Mensajes().Error(self, u"¡ No Responde BlackBox !", u"Atención")
+				#Mensajes().Error(self, u"ï¿½ No Responde BlackBox !", u"Atenciï¿½n")
 				##self.Destroy()
 				#return
 			
@@ -47018,7 +47019,7 @@ class GixReporteEstimacionesPagos(wx.Dialog, GixBase):
 				self.Habilita()
 				
 		elif printexcel:
-			Mensajes().Info(self, u"¡ No se Encontraron Pagos !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se Encontraron Pagos !", u"Atenciï¿½n")
 			self.Habilita(True, False)
 		else:
 			lctrl.InsertColumn(0, "       No se Encontraron Pagos", wx.LIST_FORMAT_CENTER)
@@ -47103,7 +47104,7 @@ class GixPagosDeClientesFunc2(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Inmueble", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(2, u"Lote", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(3, u"Manzana", wx.LIST_FORMAT_CENTER)
@@ -47159,7 +47160,7 @@ def pagaresIclar( parent, call_fit = True, set_sizer = True ):
 	item3 = wx.BoxSizer( wx.HORIZONTAL )
     
 	item4 = wx.Button( parent, ID_BUTTONPAGARESELEGIR, u"Elegir", wx.DefaultPosition, wx.DefaultSize, 0 )
-	item4.SetToolTip( wx.ToolTip(u"Elegir Documento Pagaré") )
+	item4.SetToolTip( wx.ToolTip(u"Elegir Documento Pagarï¿½") )
 	item3.Add( item4, 0, wx.ALIGN_CENTER|wx.LEFT|wx.TOP|wx.BOTTOM, 5 )
 
 	item5 = wx.Button( parent, ID_BUTTONPAGARESCANCELAR, u"Cancelar", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -47176,7 +47177,7 @@ def pagaresIclar( parent, call_fit = True, set_sizer = True ):
 	return item0
 
 class GixPagaresIclar(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Elegir Documento Pagaré", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Elegir Documento Pagarï¿½", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, funcion = None, documentoelegido = 0  ):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.DocumentoElegido = documentoelegido
@@ -47218,12 +47219,12 @@ class GixPagaresIclar(wx.Dialog, GixBase):
 		self.dicGrupo[self.codigopagare] = dict( importepagareiclar = self.importepagareiclar, fechavencimientopagareiclar = self.fechavencimientopagareiclar)
 		
 	def ModificarEnGrupo( self, evt ):
-		importe = wx.GetTextFromUser("Monto a considerar", u"Atención", default_value = str(self.dicGrupo[self.codigopagare]["importepagareiclar"]))
+		importe = wx.GetTextFromUser("Monto a considerar", u"Atenciï¿½n", default_value = str(self.dicGrupo[self.codigopagare]["importepagareiclar"]))
 		try:
 			assert float(importe) <= self.dicGrupo[self.codigopagare]["importepagareiclar"]
 			self.dicGrupo[self.codigopagare]["importepagareiclar"] = float(importe) 
 		except:
-			Mensajes().Info( self, u"Importe inválido", u"Atención")
+			Mensajes().Info( self, u"Importe invï¿½lido", u"Atenciï¿½n")
 		return
 			
 	def QuitarAGrupo( self, evt ):
@@ -47280,7 +47281,7 @@ class GixPagaresIclar(wx.Dialog, GixBase):
 	def OnActivated(self, evt):
 		#if self.codigopagare <> 0:
 		if self.funcion( codigopagare = self.codigopagare, importepagareiclar = self.importepagareiclar, fechavencimientopagareiclar = self.fechavencimientopagareiclar, dicGrupo = self.dicGrupo):
-			#Mensajes().Info(self, " documento pagare %s, saldo %s" % ( self.codigopagare, self.importepagareiclar), u"Atención")
+			#Mensajes().Info(self, " documento pagare %s, saldo %s" % ( self.codigopagare, self.importepagareiclar), u"Atenciï¿½n")
 			self.Destroy()
 		self.GetControl(ID_LISTCTRLPAGARESICLAR).SetFocus()
 		
@@ -47305,7 +47306,7 @@ class GixPagaresIclar(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Fecha Venc")
 			lctrl.InsertColumn(2, u"Cantidad", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(3, u"Saldo", wx.LIST_FORMAT_RIGHT)
@@ -47399,7 +47400,7 @@ class GixPagosDeClientesFunc3(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Nombre")
 			lctrl.InsertColumn(2, u"R.F.C.")
 			for fila, row in enumerate(rows):
@@ -47576,7 +47577,7 @@ class GixPagosDeClientesFunc5(wx.Dialog, GixBase):
 		self.GetControl(ID_LISTCTRLPAGOCLIENTESFUNC5).SetFocus()
 		
 	def OnEliminar(self, evt):
-		if Mensajes().YesNo(self, u"¿ Desea realmente eliminar el prerecibo %s ?" % self.codigoprerecibo, u"Confirmación"):
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente eliminar el prerecibo %s ?" % self.codigoprerecibo, u"Confirmaciï¿½n"):
 			cu = r_cn.cursor()
 			cu.execute('delete from prerecibo where codigo = %s' % self.codigoprerecibo)
 			cu.close()
@@ -47752,10 +47753,10 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			if en_cuenta_pagare == 0:
 				if tipodocto == 17:
 					self.Bind( wx.EVT_MENU, self.ModificarDocumento17, menu.Append(-1, u"Modificar cantidad documento tipo 17"))
-				self.Bind( wx.EVT_MENU, self.GenerarCuentaPagare, menu.Append(-1, u"Generar cuenta especial con documentos para pagaré"))
+				self.Bind( wx.EVT_MENU, self.GenerarCuentaPagare, menu.Append(-1, u"Generar cuenta especial con documentos para pagarï¿½"))
 			else:
 				if tipodocto == 17:
-					self.Bind( wx.EVT_MENU, self.RestructurarCuentaPagare, menu.Append(-1, u"Restructurar pagarés"))
+					self.Bind( wx.EVT_MENU, self.RestructurarCuentaPagare, menu.Append(-1, u"Restructurar pagarï¿½s"))
 
 			
 			sql = "select count(*) from documento where fk_cuenta = %s and fk_tipo = 17" % ( cuentabase, )
@@ -47782,7 +47783,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 					self.Bind( wx.EVT_MENU, self.GenerarDocPagare, menu.Append(-1, u"Generar Documento especial"))
 				
 			if tipodocto == 17:
-				self.Bind(wx.EVT_MENU, self.EligePagare, menu.Append(-1, u"Elegir documento pagaré Iclar"))
+				self.Bind(wx.EVT_MENU, self.EligePagare, menu.Append(-1, u"Elegir documento pagarï¿½ Iclar"))
 			cu.close()
 			self.PopupMenu( menu )
 		except:
@@ -47817,7 +47818,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			try:
 				assert tipo17 == 17
 			except:
-				Mensajes().Info(self, u"Escogió el documento equivocado para esta operación", u"Atención")
+				Mensajes().Info(self, u"Escogiï¿½ el documento equivocado para esta operaciï¿½n", u"Atenciï¿½n")
 				cu.close()
 				return
 			
@@ -47831,7 +47832,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 					assert movimiento17cantidad == saldo17
 					assert str(row[2]) == "C"
 				except:
-					Mensajes().Info(self, "Error raro", u"Atención")
+					Mensajes().Info(self, "Error raro", u"Atenciï¿½n")
 					cu.close()
 					return
 			sql = "select codigo from documento where fk_tipo = 2 and fk_cuenta = %s " % ( cuenta, )
@@ -47849,21 +47850,21 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 					cu.execute( sql )
 					row = fetchone(cu)
 					if row:
-						if Mensajes().YesNo( self, u"La cantidad del documento 17\n y el abono al documento 2 es\n %s\n. Procedo a cambiar la cantidad?" % movimiento17cantidad, u"Atención"):
-							monto = wx.GetTextFromUser("Nuevo importe", u"Atención", default_value = str(movimiento17cantidad))
+						if Mensajes().YesNo( self, u"La cantidad del documento 17\n y el abono al documento 2 es\n %s\n. Procedo a cambiar la cantidad?" % movimiento17cantidad, u"Atenciï¿½n"):
+							monto = wx.GetTextFromUser("Nuevo importe", u"Atenciï¿½n", default_value = str(movimiento17cantidad))
 							try:
 								assert float(monto)
 							except:
-								Mensajes().Info(self, u"Importe mal", u"Atención")
+								Mensajes().Info(self, u"Importe mal", u"Atenciï¿½n")
 								cu.close()
 								return
-							if Mensajes().YesNo( self, u"No se crearán nuevos datos\n solo se sustituirá la cantidad\n donde sea necesario.\nProcedo ?", u"Atención"):
+							if Mensajes().YesNo( self, u"No se crearï¿½n nuevos datos\n solo se sustituirï¿½ la cantidad\n donde sea necesario.\nProcedo ?", u"Atenciï¿½n"):
 								cu.close()
 								if self.GrabaCambioCantidadDocumento17( cuenta, documento17, documento2, movimiento17, movimiento2, recibo2, movimiento17cantidad, float(monto)):
 									self.HabilitaDeshabilita(True)
 									self.FillDocumentosAPagar()
 								else:
-									Mensajes().Info( self, u"No se pudo efectuar la grabación", u"Atención")
+									Mensajes().Info( self, u"No se pudo efectuar la grabaciï¿½n", u"Atenciï¿½n")
 						
 					cu.close()
 					return
@@ -47877,7 +47878,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		if row:
 			if float(row[0]) < 0:
 				cu.close()
-				Mensajes().Info( self, u"La nueva cantidad haria\n que el saldo del documento\n tipo 2 fuera inferior a 0", u"Atención")
+				Mensajes().Info( self, u"La nueva cantidad haria\n que el saldo del documento\n tipo 2 fuera inferior a 0", u"Atenciï¿½n")
 				return False
 		else:
 			cu.close()
@@ -47916,7 +47917,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info( self, u"Hubo un problema de\n transacción hacia la base de datos", u"Atención")
+			Mensajes().Info( self, u"Hubo un problema de\n transacciï¿½n hacia la base de datos", u"Atenciï¿½n")
 			return False
 		
 	
@@ -47934,10 +47935,10 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		
 		 
 		monto_sugerido = self.saldo_de_la_cuenta - self.montosubsidio - self.montocredito
-		Mensajes().Info(self , u"Saldo cuenta:\t %s\nMonto Crédito: \t%s\nMonto Subsidio:\t %s\n\nMonto Sugerido\t : %s" % ( rjam(self.saldo_de_la_cuenta), rjam(self.montocredito), rjam(self.montosubsidio), rjam(monto_sugerido)), u"Atención")
+		Mensajes().Info(self , u"Saldo cuenta:\t %s\nMonto Crï¿½dito: \t%s\nMonto Subsidio:\t %s\n\nMonto Sugerido\t : %s" % ( rjam(self.saldo_de_la_cuenta), rjam(self.montocredito), rjam(self.montosubsidio), rjam(monto_sugerido)), u"Atenciï¿½n")
 		if Mensajes().YesNo(self, "Procedo?", u"Aviso"):
-			monto = wx.GetTextFromUser("Monto a considerar", u"Atención", default_value = str(monto_sugerido))
-			m_error = u"Monto equivocado. Abandono opción"
+			monto = wx.GetTextFromUser("Monto a considerar", u"Atenciï¿½n", default_value = str(monto_sugerido))
+			m_error = u"Monto equivocado. Abandono opciï¿½n"
 			try:
 				f_monto = float( monto )
 				d_monto = Decimal(monto)
@@ -48036,7 +48037,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 				
 				
 			except:
-				Mensajes().Info(self, m_error, u"Atención")
+				Mensajes().Info(self, m_error, u"Atenciï¿½n")
 			
 			#event = wx.CommandEvent( wx.wxEVT_COMMAND_BUTTON_CLICKED , ID_BITMAPBUTTONPAGOCLIENTESFUNC1ELEGIRCLIENTE)
 			#self.GetEventHandler().ProcessEvent( event )
@@ -48047,11 +48048,11 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			return
 	
 	def RestructurarCuentaPagare( self, evt):
-		cuantos_pagos = wx.GetNumberFromUser(message = u"Digite número de pagos", prompt = u"Restructura", caption = "" , value = 1, min = 1, max = 100)
+		cuantos_pagos = wx.GetNumberFromUser(message = u"Digite nï¿½mero de pagos", prompt = u"Restructura", caption = "" , value = 1, min = 1, max = 100)
 		try:
 			assert cuantos_pagos > 0
 		except:
-			Mensajes().Info( self, u"Cantidad de pagos inadecuada, abandono opción", u"Atención")
+			Mensajes().Info( self, u"Cantidad de pagos inadecuada, abandono opciï¿½n", u"Atenciï¿½n")
 			return
 		cu = r_cn.cursor()
 		sql = "select codigo from cuenta_pagare where fk_documento = %s" % ( self.docconsaldo, )
@@ -48067,7 +48068,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			fecha = datetime( int(fecha_vencimiento[:4]), int(fecha_vencimiento[4:6]), int(fecha_vencimiento[6:]))
 			assert fecha.day < 29
 		except:
-			Mensajes().Info( self, u"Fecha inapropiada abandono opción", u"Atención")
+			Mensajes().Info( self, u"Fecha inapropiada abandono opciï¿½n", u"Atenciï¿½n")
 			return
 		
 		sql = "select sum(saldo) from documento_pagare where fk_cuenta = %s" % ( codigo_cuenta_pagare, )
@@ -48081,18 +48082,18 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		try:
 			assert abs(saldocuenta - saldo) < .5
 		except:
-			Mensajes().Info( self, u"No se puede efectuar la restructura \nporque difieren los saldos de\n la cuenta_pagare y documento_pagare", u"Atención")
+			Mensajes().Info( self, u"No se puede efectuar la restructura \nporque difieren los saldos de\n la cuenta_pagare y documento_pagare", u"Atenciï¿½n")
 			return
 		try:
 			assert abs(saldocuenta - self.saldopagare ) < .5
 		except:
-			Mensajes().Info( self, u"No se puede efectuar la restructura \nporque difieren los saldos de\n documento 17 y cuenta_pagare", u"Atención")
+			Mensajes().Info( self, u"No se puede efectuar la restructura \nporque difieren los saldos de\n documento 17 y cuenta_pagare", u"Atenciï¿½n")
 			return
 			
 		
 		importe = saldo / cuantos_pagos * 1.0
 		
-		if Mensajes().YesNo(self, u"Se va a efectuar reestructura \neliminando los documentos sin abono\n y creando %s documentos de %s cada uno.\n Procedo ?" % (cuantos_pagos, importe), u"Atención"):
+		if Mensajes().YesNo(self, u"Se va a efectuar reestructura \neliminando los documentos sin abono\n y creando %s documentos de %s cada uno.\n Procedo ?" % (cuantos_pagos, importe), u"Atenciï¿½n"):
 			if self.GeneracionDocumentosPagare( self.docconsaldo, importe, cuantos_pagos , fecha, True):
 				Mensajes().Info( self, u"Restructura efectuada"  , "Aviso")
 			else:
@@ -48103,11 +48104,11 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 	def GenerarCuentaPagare(self, evt):
 		
 		cuantos_pagos = 0
-		cuantos_pagos = wx.GetNumberFromUser(message = u"Digite número de pagos", prompt = u"Pagos", caption = "" , value = 1, min = 1, max = 100)
+		cuantos_pagos = wx.GetNumberFromUser(message = u"Digite nï¿½mero de pagos", prompt = u"Pagos", caption = "" , value = 1, min = 1, max = 100)
 		try:
 			assert cuantos_pagos > 0
 		except:
-			Mensajes().Info( self, u"Cantidad de pagos inadecuada, abandono opción", u"Atención")
+			Mensajes().Info( self, u"Cantidad de pagos inadecuada, abandono opciï¿½n", u"Atenciï¿½n")
 			return
 		cu = r_cn.cursor()
 		cu.execute( "select getdate()" )
@@ -48121,16 +48122,16 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			fecha = datetime( int(fecha_vencimiento[:4]), int(fecha_vencimiento[4:6]), int(fecha_vencimiento[6:]))
 			assert fecha.day < 29
 		except:
-			Mensajes().Info( self, u"Fecha inapropiada abandono opción", u"Atención")
+			Mensajes().Info( self, u"Fecha inapropiada abandono opciï¿½n", u"Atenciï¿½n")
 			return
 		
 		importe = self.saldopagare / cuantos_pagos * 1.0
 		
-		if Mensajes().YesNo(self, u"Se va a crear cuenta especial\n y %s documentos de %s cada uno.\n Procedo ?" % (cuantos_pagos, importe), u"Atención"):
+		if Mensajes().YesNo(self, u"Se va a crear cuenta especial\n y %s documentos de %s cada uno.\n Procedo ?" % (cuantos_pagos, importe), u"Atenciï¿½n"):
 			if self.GeneracionDocumentosPagare( self.docconsaldo, importe, cuantos_pagos , fecha):
 				Mensajes().Info( self, u"Cuenta especial y documentos generados"  , "Aviso")
 			else:
-				Mensajes().Info( self, u"No se pudo efectuar la creación de cuenta especial y documentos"  , "Aviso")
+				Mensajes().Info( self, u"No se pudo efectuar la creaciï¿½n de cuenta especial y documentos"  , "Aviso")
 				
 		return
 	
@@ -48417,7 +48418,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Fecha Venc.", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(2, u"Saldo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(3, u"Cargo", wx.LIST_FORMAT_RIGHT)
@@ -48478,7 +48479,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			dlg.CenterOnParent()
 			dlg.Show(True)
 		else:
-			Mensajes().Info(self, u"¡ No se encontraron inmuebles !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se encontraron inmuebles !", u"Atenciï¿½n")
 	
 	def InmuebleElegido(self, codigoinmueble):
 		sql = """
@@ -48532,7 +48533,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			dlg.CenterOnParent()
 			dlg.Show(True)
 		else:
-			Mensajes().Info(self, u"¡ No se encontraron clientes !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se encontraron clientes !", u"Atenciï¿½n")
 	
 	def PagareIclarElegido( self, codigopagare, importepagareiclar, fechavencimientopagareiclar, dicGrupo ):
 		if codigopagare == 0 and len(dicGrupo) == 0:
@@ -48678,7 +48679,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			dlg.CenterOnParent()
 			dlg.Show(True)
 		else:
-			Mensajes().Info(self, u"¡ No se encontraron prerecibos !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se encontraron prerecibos !", u"Atenciï¿½n")
 	
 	def PrereciboElegido(self, codigoprerecibo):
 		sql = """
@@ -48751,7 +48752,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		cu.close()
 		if rows:
 			pagocapital, interesmoratorio, totalpagar = 0, 0, 0
-			lctrl.InsertColumn(0, u"Código", wx.LIST_FORMAT_RIGHT)
+			lctrl.InsertColumn(0, u"Cï¿½digo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(1, u"Fecha Venc.", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(2, u"Saldo", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(3, u"Cargo", wx.LIST_FORMAT_RIGHT)
@@ -48893,17 +48894,17 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 					x = float(abono) * 1
 					if x > 0:
 						if x > self.docsaldo:
-							Mensajes().Info(self, u"¡ No puede abonar más del saldo del documento !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ No puede abonar mï¿½s del saldo del documento !", u"Atenciï¿½n")
 						else:
 							self.dicabonar[self.docapagar] = float(abono)
 							self.FillDocumentosAPagar()
 							break
 					elif x == 0:
-						Mensajes().Info(self, u"¡ No puede introducir cantidades en cero !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No puede introducir cantidades en cero !", u"Atenciï¿½n")
 					else:
-						Mensajes().Info(self, u"¡ No puede introducir cantidades en negativo !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No puede introducir cantidades en negativo !", u"Atenciï¿½n")
 				except:
-					Mensajes().Error(self, u"¡ Cantidad mal introducida >> %s !" % abono, u"Error")
+					Mensajes().Error(self, u"ï¿½ Cantidad mal introducida >> %s !" % abono, u"Error")
 			else:
 				break
 		
@@ -48915,18 +48916,18 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 				x = float(abono) * 1
 				if x > 0:
 					if x > self.docsaldo:
-						Mensajes().Info(self, u"¡ No puede abonar más del saldo del documento !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No puede abonar mï¿½s del saldo del documento !", u"Atenciï¿½n")
 					else:
 						self.dicabonar[self.docapagar] = float(abono)
 						self.FillDocumentosAPagar()
 				elif x == 0:
-					Mensajes().Info(self, u"¡ No puede abonar cantidades en cero !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No puede abonar cantidades en cero !", u"Atenciï¿½n")
 				else:
-					Mensajes().Info(self, u"¡ No puede abonar cantidades en negativo !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No puede abonar cantidades en negativo !", u"Atenciï¿½n")
 			except:
-				Mensajes().Error(self, u"¡ Cantidad no valida >> %s !" % abono, u"Error")
+				Mensajes().Error(self, u"ï¿½ Cantidad no valida >> %s !" % abono, u"Error")
 		else:
-			Mensajes().Info(self, u"¡ No hay nada que abonar !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No hay nada que abonar !", u"Atenciï¿½n")
 		
 	def OnPonerEnCeroInteres(self, evt):
 		cuenta = self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1NUMEROCUENTA).GetValue()
@@ -48939,7 +48940,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1TOTALPAGAR).SetValue(self.GetString(amount_and_cents_with_commas(float(totalpagar))).rjust(20))
 			self.dicinteres[int(cuenta)] = 0
 		else:
-			Mensajes().Info(self, u"¡ Primero elija la cuenta !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Primero elija la cuenta !", u"Atenciï¿½n")
 		
 	def OnInteresMoratorio(self, evt):
 		cuenta = self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1NUMEROCUENTA).GetValue()
@@ -48962,15 +48963,15 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 							self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1TOTALPAGAR).SetValue(self.GetString(amount_and_cents_with_commas(float(totalpagar))).rjust(20))
 							break
 						elif x == 0:
-							Mensajes().Info(self, u"¡ No puede introducir cantidades en cero !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ No puede introducir cantidades en cero !", u"Atenciï¿½n")
 						else:
-							Mensajes().Info(self, u"¡ No puede introducir cantidades en negativo !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ No puede introducir cantidades en negativo !", u"Atenciï¿½n")
 					except:
-						Mensajes().Error(self, u"¡ Cantidad mal introducida >> %s !" % interes, u"Error")
+						Mensajes().Error(self, u"ï¿½ Cantidad mal introducida >> %s !" % interes, u"Error")
 				else:
 					break
 		else:
-			Mensajes().Info(self, u"¡ Primero elija la cuenta !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Primero elija la cuenta !", u"Atenciï¿½n")
 			
 	def OnAplicar(self, evt):
 		pagareiclar = False
@@ -48989,12 +48990,12 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			if montoprerecibo:
 				if float(pagocapital.replace(',','')) != float(montoprerecibo.replace(',','')):
 					if not Mensajes().YesNo(self, u"El monto del prerecibo es diferente al monto a abonar.\n\n" \
-					                        u"¿ Realmente desea aplicar el abono ?", u"Confirmación"):
+					                        u"ï¿½ Realmente desea aplicar el abono ?", u"Confirmaciï¿½n"):
 						todook = False
 		else:
-			Mensajes().Info(self, u"¡ Verifique la cantidad que desea abonar !\n\n" \
+			Mensajes().Info(self, u"ï¿½ Verifique la cantidad que desea abonar !\n\n" \
 			                u"Recuerde que no puede abonar cantidades en\n" \
-			                u"cero o negativas.", u"Atención")
+			                u"cero o negativas.", u"Atenciï¿½n")
 			todook = False
 			
 		if todook and self.lstdocapagar and self.dicabonar:
@@ -49131,15 +49132,15 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 					cu.close()
 					r_cn.commit()
 				else:
-					Mensajes().Info(self, u"¡ No se grabo el recibo !\n\n" \
-					                u"Se requiere inicializar la reservación de recibos\n" \
-					                u"para el desarrollo %s." % int(self.desarrollo), u"Atención")
+					Mensajes().Info(self, u"ï¿½ No se grabo el recibo !\n\n" \
+					                u"Se requiere inicializar la reservaciï¿½n de recibos\n" \
+					                u"para el desarrollo %s." % int(self.desarrollo), u"Atenciï¿½n")
 					cu.close()
 					todook = False
 			except:
 				r_cn.rollback()
-				Mensajes().Info(self, u"¡ No se grabo el recibo !\n\n" \
-			                        u"Se experimentaron problemas con el coordinador central.", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se grabo el recibo !\n\n" \
+			                        u"Se experimentaron problemas con el coordinador central.", u"Atenciï¿½n")
 				todook = False
 				
 			if pagareiclar:
@@ -49151,10 +49152,10 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 			if todook:
 				msg = u"Desea imprimir el recibo"
 				while True:
-					if Mensajes().YesNo(self, u"¿ %s ?" % msg,
-					                    u"Recibo generado: %s  Código: %s" % (consdesarrollo, codigorecibo)):
+					if Mensajes().YesNo(self, u"ï¿½ %s ?" % msg,
+					                    u"Recibo generado: %s  Cï¿½digo: %s" % (consdesarrollo, codigorecibo)):
 						self.ImprimeRecibo(codigorecibo)
-						msg = u"Desea repetir la impresión del recibo"
+						msg = u"Desea repetir la impresiï¿½n del recibo"
 					else:
 						self.HabilitaDeshabilita(True)
 						self.FillDocumentosAPagar()
@@ -49164,7 +49165,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		try:
 			gridcontenthtml = self.GetHtmlReciboFromGrid(consecutivorecibo = codigorecibo)
@@ -49197,10 +49198,10 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 						
 				wx.EndBusyCursor()
 			else:
-				Mensajes().Info(self, u"¡ No se encontró información referente al recibo !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente al recibo !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al generar el recibo !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al generar el recibo !", u"Atenciï¿½n")
 
 	def GetHtmlReciboFromGrid(self, consecutivorecibo = 0):
 		sql = """
@@ -49223,7 +49224,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if row is not None:
-			a = u"á"; e = u"é"; i = u"í"; o = u"ó"; u = u"ú"
+			a = u"ï¿½"; e = u"ï¿½"; i = u"ï¿½"; o = u"ï¿½"; u = u"ï¿½"
 			meses = ("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
 			         "Septiembre", "Octubre", "Noviembre", "Diciembre")
 			dia, mes, ano = row[0].split("/")
@@ -49590,14 +49591,14 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 		self.GetControl(ID_BUTTONRECIBOPAGOPINARESFUNC1EDITAR).Enable(False)
 	
 	def OnRecibo(self, evt):
-		titulo = u"Arcadia (Pinares Tapalpa) - Aplicación de Pagos y Generación de Recibos"
+		titulo = u"Arcadia (Pinares Tapalpa) - Aplicaciï¿½n de Pagos y Generaciï¿½n de Recibos"
 		dlg = GixRecibosPagoPinaresFunc3(self, -1, titulo, wx.Point(20,20), wx.Size(770,420),
 		                                 usuario = self.usuario)
 		dlg.Centre(wx.BOTH)
 		dlg.ShowModal()
 		
 	def OnEdit(self, evt):
-		titulo = u"Arcadia (Pinares Tapalpa) - Aplicación de Pagos y Generación de Recibos"
+		titulo = u"Arcadia (Pinares Tapalpa) - Aplicaciï¿½n de Pagos y Generaciï¿½n de Recibos"
 		dlg = GixRecibosPagoPinaresFunc2(self, -1, titulo, wx.Point(20,20), wx.Size(770,420),
 		                                 usuario = self.usuario, cuenta = self.cuenta)
 		dlg.Centre(wx.BOTH)
@@ -49653,7 +49654,7 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 					fechafinal = "'%s/%02d/%02d'" % (rango_ano, int(rango_mes), int(rango_dia))
 					if fechainicial > fechafinal:
 						Mensajes().Info(self, u"La Fecha Inicial no debe ser mayor a la Fecha Final.\n\n" \
-						                u"Se tomará en cuenta unicamente la fecha inicial.", u"Atención")
+						                u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLRECIBOPAGOPINARESFUNC1FECHAFINALFILTRO).SetValue("")
 						return
 					else:
@@ -49791,7 +49792,7 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		control = self.GetControl(ID_TEXTRECIBOPAGOPINARESFUNC2PINARES)
 		control.Enable(False)
 		control.Show(False)
-		control.SetLabel(u"Error, no se localizó información de la cuenta")
+		control.SetLabel(u"Error, no se localizï¿½ informaciï¿½n de la cuenta")
 		sql = """
 		select i.iden1, i.iden2, e.descripcion, t.nombre from CUENTA c
 		join INMUEBLE i on c.fk_inmueble = i.codigo
@@ -49923,9 +49924,9 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		if rows:
 			lctrl.InsertColumn(0, u"Id", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(1, u"Recibo", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(2, u"Emisión", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(2, u"Emisiï¿½n", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(3, u"Cantidad", wx.LIST_FORMAT_RIGHT)
-			lctrl.InsertColumn(4, u"Relación", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(4, u"Relaciï¿½n", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(5, u"Referencia")
 			for row in rows:
 				if str(row[6]) == "A":
@@ -49967,14 +49968,14 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		wx.EndBusyCursor()
 
 	def OnImprimirRecibo(self, evt):
-		if Mensajes().YesNo(self, u"¿ Desea realmente imprimir el recibo no. %s ?" % self.consecutivorecibo, u"Confirmación"):
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente imprimir el recibo no. %s ?" % self.consecutivorecibo, u"Confirmaciï¿½n"):
 			self.ImprimeRecibo()
 			
 	def ImprimeRecibo(self):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		try:
 			gridcontenthtml = self.GetHtmlReciboFromGrid(consecutivorecibo = self.consecutivorecibo)
@@ -49994,10 +49995,10 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 						os.system("open %s" % archivo)
 				wx.EndBusyCursor()
 			else:
-				Mensajes().Info(self, u"¡ No se encontró información referente al recibo !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente al recibo !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al generar el recibo !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al generar el recibo !", u"Atenciï¿½n")
 
 	def GetHtmlReciboFromGrid(self, consecutivorecibo = 0):
 		sql = """
@@ -50018,7 +50019,7 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if row is not None:
-			a = u"á"; e = u"é"; i = u"í"; o = u"ó"; u = u"ú"
+			a = u"ï¿½"; e = u"ï¿½"; i = u"ï¿½"; o = u"ï¿½"; u = u"ï¿½"
 			meses = ("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
 			         "Septiembre", "Octubre", "Noviembre", "Diciembre")
 			dia, mes, ano = row[0].split("/")
@@ -50402,7 +50403,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		self.FillListCtrl()
 
 	def OnEdit(self, evt):
-		titulo = u"Arcadia (Pinares Tapalpa) - Aplicación de Pagos y Generación de Recibos"
+		titulo = u"Arcadia (Pinares Tapalpa) - Aplicaciï¿½n de Pagos y Generaciï¿½n de Recibos"
 		dlg = GixRecibosPagoPinaresFunc2(self, -1, titulo, wx.Point(20,20), wx.Size(770,420),
 		                                 usuario = self.usuario, cuenta = self.cuenta)
 		dlg.Centre(wx.BOTH)
@@ -50479,7 +50480,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 					fechafinal = "'%s/%02d/%02d'" % (rango_ano, int(rango_mes), int(rango_dia))
 					if fechainicial > fechafinal:
 						Mensajes().Info(self, u"La Fecha Inicial no debe ser mayor a la Fecha Final.\n\n" \
-						                u"Se tomará¡ en cuenta unicamente la fecha inicial.", u"Atención")
+						                u"Se tomarï¿½ en cuenta unicamente la fecha inicial.", u"Atenciï¿½n")
 						self.GetControl(ID_TEXTCTRLRECIBOPAGOPINARESFUNC3FECHAFINALFILTRO).SetValue("")
 						return
 					else:
@@ -50598,30 +50599,30 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			lctrl = self.GetControl(ID_LISTCTRLRECIBOPAGOPINARESFUNC3DOCUMENTOS)
 			lctrl.ClearAll()
 		except:
-			Mensajes().Info(self, u"¡ Problemas al instanciar lctrl !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Problemas al instanciar lctrl !", u"Atenciï¿½n")
 			
 		try:
 			filtro = ""
 			if recibo and self.documentosrecibo:
 				filtro = "and codigo not in (%s)" % (",".join(map(str, self.documentosrecibo)),)
 		except:
-			Mensajes().Info(self, u"¡ Problemas en el filtro !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Problemas en el filtro !", u"Atenciï¿½n")
 				
 		try:
 			cu = r_cngcmex.cursor()
 		except:
-			Mensajes().Info(self, u"¡ Problemas en la conexión !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Problemas en la conexiï¿½n !", u"Atenciï¿½n")
 				
 		try:
 			cu.execute("select top 1 porcentaje from CPP order by fecha desc")
 		except:
-			Mensajes().Info(self, u"¡ Problemas en el execute primer query !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Problemas en el execute primer query !", u"Atenciï¿½n")
 			
 		try:
 			row = fetchone(cu)
 			cpp = float(row[0])
 		except:
-			Mensajes().Info(self, u"¡ Problemas en el primer query !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Problemas en el primer query !", u"Atenciï¿½n")
 			
 		try:
 			query = """
@@ -50637,7 +50638,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			cu.close()
 			fila, total, totmoratorios = 0, 0, 0
 		except:
-			Mensajes().Info(self, u"¡ Problemas en el segundo query !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Problemas en el segundo query !", u"Atenciï¿½n")
 			
 		try:
 			if rows:
@@ -50693,7 +50694,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 				lctrl.InsertColumn(0, "       No se Encontraron Documentos", wx.LIST_FORMAT_CENTER)
 				lctrl.SetColumnWidth(0, 200)
 		except:
-			Mensajes().Info(self, u"¡ Problemas en el ciclo !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Problemas en el ciclo !", u"Atenciï¿½n")
 			
 		self.currentitemdocumento = []
 		self.datointernodocumento = []
@@ -50747,7 +50748,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 				self.FillListCtrlRecibos()
 
 	def OnAplicarRecibo(self, evt):
-		if Mensajes().YesNo(self, u"¿ Desea realmente generar y aplicar el recibo ?", u"Confirmación"):
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente generar y aplicar el recibo ?", u"Confirmaciï¿½n"):
 			todobien = False
 			sql = "exec dbo.NumeroReciboDesSP %s" % self.desarrollo
 			cu = r_cngcmex.cursor()
@@ -50783,16 +50784,16 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 						cu.execute(str(sql))
 						todobien = True
 					except:
-						Mensajes().Info(self, u"¡ Revise la fecha del recibo !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ Revise la fecha del recibo !", u"Atenciï¿½n")
 				else:
-					Mensajes().Error(self, u"¡ Problemas con RECIBOS (Id) !", u"Error, Petición Abortada")
+					Mensajes().Error(self, u"ï¿½ Problemas con RECIBOS (Id) !", u"Error, Peticiï¿½n Abortada")
 			else:
-				Mensajes().Error(self, u"¡ Problemas con RECIBOS (Des) !", u"Error, Petición Abortada")
+				Mensajes().Error(self, u"ï¿½ Problemas con RECIBOS (Des) !", u"Error, Peticiï¿½n Abortada")
 					
 			cu.close()
 			if todobien:
 				r_cngcmex.commit()
-				if Mensajes().YesNo(self, u"Recibo: %s - Id: %s\n\n¿ Desea imprimir el recibo ?" % \
+				if Mensajes().YesNo(self, u"Recibo: %s - Id: %s\n\nï¿½ Desea imprimir el recibo ?" % \
 			                            (self.numerorecibo, self.consecutivorecibo), 
 			                            u"Recibo Generado y Aplicado"):
 					self.ImprimeRecibo()
@@ -50809,7 +50810,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		try:
 			pisa
 		except:
-			Mensajes().Info(self, u"¡ Por favor instale el módulo pisa !", u"Aviso")
+			Mensajes().Info(self, u"ï¿½ Por favor instale el mï¿½dulo pisa !", u"Aviso")
 			return
 		try:
 			gridcontenthtml = self.GetHtmlReciboFromGrid(consecutivorecibo = self.consecutivorecibo)
@@ -50829,10 +50830,10 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 						os.system("open %s" % archivo)
 				wx.EndBusyCursor()
 			else:
-				Mensajes().Info(self, u"¡ No se encontró información referente al recibo !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se encontrï¿½ informaciï¿½n referente al recibo !", u"Atenciï¿½n")
 		except:
 			wx.EndBusyCursor()
-			Mensajes().Info(self, u"¡ Se presento un problema al generar el recibo !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Se presento un problema al generar el recibo !", u"Atenciï¿½n")
 		
 	def GetHtmlReciboFromGrid(self, consecutivorecibo = 0):
 		sql = """
@@ -50853,7 +50854,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if row is not None:
-			a = u"á"; e = u"é"; i = u"í"; o = u"ó"; u = u"ú"
+			a = u"ï¿½"; e = u"ï¿½"; i = u"ï¿½"; o = u"ï¿½"; u = u"ï¿½"
 			meses = ("", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
 			         "Septiembre", "Octubre", "Noviembre", "Diciembre")
 			dia, mes, ano = row[0].split("/")
@@ -51244,7 +51245,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		
 class GixPresupAnalisisCostosFunc2(wx.Dialog, GixBase):
 	DicDatesAndTxt = {ID_BITMAPBUTTONPRESUPANALISISCOSTOSFUNC2FECHA : ID_TEXTCTRLPRESUPANALISISCOSTOSFUNC2FECHA}
-	def __init__(self, parent, id = -1, title = u"Agregando Análisis de Costos", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Agregando Anï¿½lisis de Costos", pos = wx.DefaultPosition,
 		     size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, usuario = None, agregarpresupuesto = None):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.inxlst = []; self.cholst = []
@@ -51331,7 +51332,7 @@ class GixPresupAnalisisCostosFunc2(wx.Dialog, GixBase):
 			else:
 				pass
 		except:
-			Mensajes().Info(self, u"¡ Problemas al rastrear centros de costo del desarrollo !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Problemas al rastrear centros de costo del desarrollo !", u"Atenciï¿½n")
 		
 		self.GetControl(ID_TEXTPRESUPANALISISCOSTOSFUNC2EMPRESA).SetLabel(empresa)
 		return inxlst, cholst
@@ -51382,18 +51383,18 @@ class GixPresupAnalisisCostosFunc2(wx.Dialog, GixBase):
 							self.EndModal(1)
 							self.Destroy()
 						else:
-							Mensajes().Info(self, u"¡ Problemas al agregar nuevo análisis !", u"Atención")
+							Mensajes().Info(self, u"ï¿½ Problemas al agregar nuevo anï¿½lisis !", u"Atenciï¿½n")
 					else:
-						Mensajes().Info(self, u"¡ Debe elegir al menos un Centro de Costo !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ Debe elegir al menos un Centro de Costo !", u"Atenciï¿½n")
 				else:
-					Mensajes().Info(self, u"¡ Por favor elija el Desarrollo !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Por favor elija el Desarrollo !", u"Atenciï¿½n")
 			else:
-				Mensajes().Info(self, u"¡ Por favor digite la Descripción del análisis !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Por favor digite la Descripciï¿½n del anï¿½lisis !", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"¡ Por favor elija la Fecha del análisis !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Por favor elija la Fecha del anï¿½lisis !", u"Atenciï¿½n")
 
 class GixPresupAnalisisCostosFunc5(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Rango de Fechas para el Cálculo del Concepto", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Rango de Fechas para el Cï¿½lculo del Concepto", pos = wx.DefaultPosition,
 		     size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, usuario = None, concepto = None, idtotalpresup = 0):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.concepto = concepto
@@ -51442,7 +51443,7 @@ class GixPresupAnalisisCostosFunc5(wx.Dialog, GixBase):
 			if int(row[2]): self.HabilitaAnioFinal(True)
 			else: self.HabilitaAnioFinal(False)
 		else:
-			Mensajes().Info(self, u"No se encontró información del concepto", u"Atención")
+			Mensajes().Info(self, u"No se encontrï¿½ informaciï¿½n del concepto", u"Atenciï¿½n")
 			self.Destroy()
 			
 	def OnChoiceMesInicial(self, evt):
@@ -51466,7 +51467,7 @@ class GixPresupAnalisisCostosFunc5(wx.Dialog, GixBase):
 		where idtotalpresup = %s
 		""" % (mesinicial, anioinicial, mesfinal, aniofinal, self.idtotalpresup)
 		if not self.QueryUpdateRecord(sql):
-			Mensajes().Info(self, u"¡ No se actualizó la información del concepto !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se actualizï¿½ la informaciï¿½n del concepto !", u"Atenciï¿½n")
 
 		self.EndModal(1)
 		self.Destroy()
@@ -51537,7 +51538,7 @@ class GixPresupAnalisisCostosFunc4(wx.Dialog, GixBase):
 				self.fechafiltroingreso = "and %s" % self.fechafiltroingreso
 				self.fechafiltroegreso = "and %s" % self.fechafiltroegreso
 		else:
-			Mensajes().Info(self, u"No se encontró información del concepto", u"Atención")
+			Mensajes().Info(self, u"No se encontrï¿½ informaciï¿½n del concepto", u"Atenciï¿½n")
 			self.Destroy()
 	
 	def ObtenerEmpresa(self):
@@ -51612,8 +51613,8 @@ class GixPresupAnalisisCostosFunc4(wx.Dialog, GixBase):
 		fila = 0
 		if rows:
 			lctrl.InsertColumn(0, u"Id", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(1, u"Código", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(2, u"Descripción de la Partida")
+			lctrl.InsertColumn(1, u"Cï¿½digo", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(2, u"Descripciï¿½n de la Partida")
 			lctrl.InsertColumn(3, u"Importe", wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(4, u"Naturaleza", wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(5, u"Partida Id", wx.LIST_FORMAT_CENTER)
@@ -51622,7 +51623,7 @@ class GixPresupAnalisisCostosFunc4(wx.Dialog, GixBase):
 			for fila, row in enumerate(rows):
 				if int(row[0]) in self.partidas:
 					Mensajes().Error(self, u"Partida repetida: %s\n%s - %s" % 
-					                 (int(row[0]), self.GetString(row[1]), self.GetString(row[2])), u"Atención")
+					                 (int(row[0]), self.GetString(row[1]), self.GetString(row[2])), u"Atenciï¿½n")
 				else:
 					importe = self.CalculaImporte(int(row[5]))
 					self.totalconcepto += importe
@@ -51802,7 +51803,7 @@ class GixPresupAnalisisCostosFunc4(wx.Dialog, GixBase):
 		wx.EndBusyCursor()
 
 class GixPresupAnalisisCostosFunc3(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Configuración de las Partidas del Concepto", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Configuraciï¿½n de las Partidas del Concepto", pos = wx.DefaultPosition,
 		     size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, usuario = None, idpresupuestopresup = 0,
 	             concepto = None, idtotalpresup = 0):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
@@ -51883,13 +51884,13 @@ class GixPresupAnalisisCostosFunc3(wx.Dialog, GixBase):
 		row = fetchone(cu)
 		cu.close()
 		if row is not None:
-			Mensajes().Info(self, u"¡ La partida que desea agregar al análisis ya existe !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ La partida que desea agregar al anï¿½lisis ya existe !", u"Atenciï¿½n")
 		else:
 			sql = """
 			insert into gixpresupanalisiscostospartidas (fktotalpresup, fkPartidaID) values (%s, %s)
 			""" % (self.idtotalpresup, self.partidaid)
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ No se agrego la partida al análisis !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se agrego la partida al anï¿½lisis !", u"Atenciï¿½n")
 			else:
 				self.ObtenerPartidasDelAnalisis()
 	
@@ -51905,7 +51906,7 @@ class GixPresupAnalisisCostosFunc3(wx.Dialog, GixBase):
 			self.ObtenerPartidasDelAnalisis()
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self, u"¡ No se removio la partida del análisis !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se removio la partida del anï¿½lisis !", u"Atenciï¿½n")
 			
 	def ObtenerPartidasDelAnalisis(self):
 		wx.BeginBusyCursor()
@@ -51927,14 +51928,14 @@ class GixPresupAnalisisCostosFunc3(wx.Dialog, GixBase):
 		fila = 0
 		if rows:
 			lctrl.InsertColumn(0, u"Id", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(1, u"Código", wx.LIST_FORMAT_CENTER)
-			lctrl.InsertColumn(2, u"Descripción")
+			lctrl.InsertColumn(1, u"Cï¿½digo", wx.LIST_FORMAT_CENTER)
+			lctrl.InsertColumn(2, u"Descripciï¿½n")
 			lctrl.InsertColumn(3, u"Naturaleza", wx.LIST_FORMAT_CENTER)
 			naturaleza = {"E":"EGRESO", "I":"INGRESO"}
 			for row in rows:
 				if int(row[0]) in self.partidas:
 					Mensajes().Error(self, u"Partida repetida: %s\n%s - %s" % 
-					                 (int(row[0]), self.GetString(row[1]), self.GetString(row[2])), u"Atención")
+					                 (int(row[0]), self.GetString(row[1]), self.GetString(row[2])), u"Atenciï¿½n")
 				else:
 					self.partidas.append(int(row[0]))
 					if fila %2 != 0: bgcolor = [204,204,255]
@@ -52142,7 +52143,7 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 		self.CreateStatusBar(2)
 		self.SetStatusWidths(anchos)
 		self.SetStatusText(u"Presupuestos", 0)
-		self.SetStatusText(u"Análisis de Costos", 1)
+		self.SetStatusText(u"Anï¿½lisis de Costos", 1)
 		if wx.Platform == '__WXMSW__':
 			self.SetSize(wx.Size(940, 675))
 			
@@ -52220,9 +52221,9 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 				porcentajeejercido, importeejercer) values (%s, %s, 0, 0, 0, 0, 0, 0)
 				""" % (idpresupuestopresup, int(row[0]))
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"¡ No se grabo el registro !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No se grabo el registro !", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"¡ No existen conceptos para elaborar el presupuesto !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No existen conceptos para elaborar el presupuesto !", u"Atenciï¿½n")
 			
 		cu.close()
 		
@@ -52237,11 +52238,11 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 		dlg.ShowModal()
 		
 	def OnGuardarPresupuesto(self, evt):
-		if Mensajes().YesNo(self, u"¿ Desea realmente guardar el presupuesto ?", u"Confirmación"):
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente guardar el presupuesto ?", u"Confirmaciï¿½n"):
 			pass
 		
 	def OnEliminarPresupuesto(self, evt):
-		if Mensajes().YesNo(self, u"¿ Desea realmente eliminar el presupuesto ?", u"Confirmación"):
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente eliminar el presupuesto ?", u"Confirmaciï¿½n"):
 			sqld = "delete from gixpresupanalisiscostostotal where fkpresupuestopresup = %s" % self.idpresupuestopresup
 			sqlm = "delete from gixpresupanalisiscostospresupuesto where idpresupuestopresup = %s" % self.idpresupuestopresup
 			eliminado = True
@@ -52253,9 +52254,9 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 				r_cn.commit()
 			except:
 				r_cn.rollback()
-				Mensajes().Info(self,u"Sucedió algo que impidió eliminar el presupuesto.\n" \
-						u"Quizá se deba a que hay otra información\nque depende del presupuesto.\n%s\n\n%s" \
-						% (sqld, sqlm), u"Atención")
+				Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar el presupuesto.\n" \
+						u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende del presupuesto.\n%s\n\n%s" \
+						% (sqld, sqlm), u"Atenciï¿½n")
 				eliminado = False
 			if eliminado:
 				self.ObtenerDesarrollos()
@@ -52287,7 +52288,7 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 			(80, u"Importe Ejercido", wx.ALIGN_RIGHT),
 			(80, u"Porcentaje Ejercido", wx.ALIGN_RIGHT),
 			(80, u"Importe por Ejercer", wx.ALIGN_RIGHT))
-		tabla = "gixpresupanalisiscostostotal"; titulo = u"Presupuesto - Análisis de Costos"
+		tabla = "gixpresupanalisiscostostotal"; titulo = u"Presupuesto - Anï¿½lisis de Costos"
 		self.DisplayGrid(tabla, meta, query, titulo)
 		
 	def OnRefrescarGrid(self, evt):
@@ -52414,7 +52415,7 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 					""" % (importeejercido, porcentajeejercido, importeejercer, int(concepto[0]))
 					todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql))
 					if not todook:
-						Mensajes().Info(self, u"¡ Problemas al actualizar el análisis (A) !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ Problemas al actualizar el anï¿½lisis (A) !", u"Atenciï¿½n")
 				else:
 					importeejercer = float(concepto[2])
 					sql = """
@@ -52424,7 +52425,7 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 					""" % (importeejercer, int(concepto[0]))
 					todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql))
 					if not todook:
-						Mensajes().Info(self, u"¡ Problemas al actualizar el análisis (B) !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ Problemas al actualizar el anï¿½lisis (B) !", u"Atenciï¿½n")
 
 	def CalculaDetalle(self, calculo = True):
 		formato = {3: ("INFONAVIT", "self.EnteroComas(%s)"), 4: ("CLIENTES", "amount_and_cents_with_commas(%s)")}
@@ -52514,7 +52515,7 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 	def OnCalcular(self, evt):
 		if Mensajes().YesNo(self, u"Al calcular el presupuesto se tomaran los saldos\n" \
 		                    u"actuales de las partidas.\n\n"
-		                    u"¿ Desea realmente calcular el presupuesto ?", u"Confirmación"):
+		                    u"ï¿½ Desea realmente calcular el presupuesto ?", u"Confirmaciï¿½n"):
 			self.CalculaImporteEjercido()
 			self.FillGridCtrl()
 			
@@ -52528,7 +52529,7 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 			dlg.CenterOnScreen()
 			dlg.ShowModal()
 		else:
-			Mensajes().Info(self, u"¡ Seleccione un Ingreso o Costo !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Seleccione un Ingreso o Costo !", u"Atenciï¿½n")
 			
 	def OnGridEvent(self, event):
 		self.GridEvent(event.GetRow())
@@ -52569,9 +52570,9 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 				       float(importeejercer), int(idtotalpresup))
 				queTal, trash = self.QueryUpdateRecord(sql)
 				if not queTal:
-					Mensajes().Info(self, u"¡ El registro no fué grabado !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ El registro no fuï¿½ grabado !", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"¡ El registro no fué grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El registro no fuï¿½ grabado !", u"Atenciï¿½n")
 			
 	def OnGridDetalle(self, event):
 		if self.GridEvent(event.GetRow()):
@@ -52606,7 +52607,7 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 			popup.Append(ID_POPUPPRESUPANALISISCOSTOSDETALLE, u"Detalle")
 			if self.rowgrid == 15:
 				popup.AppendSeparator()
-				popup.Append(ID_POPUPPRESUPANALISISCOSTOSFECHAS, u"Rango de Fechas para Cálculo")
+				popup.Append(ID_POPUPPRESUPANALISISCOSTOSFECHAS, u"Rango de Fechas para Cï¿½lculo")
 
 			self.PopupMenu(popup)
 			popup.Destroy()
@@ -52677,7 +52678,7 @@ class GixPresupAnalisisCostos(wx.Frame, GixBase):
 		join gixpresupanalisiscostosconcepto c on t.fkconceptopresup = c.idconceptopresup
 		where t.fkpresupuestopresup = %s order by c.consecutivo
 		""" % self.idpresupuestopresup
-		metapiece = ((10, u""), (250, u"Información General\n(Concepto)"), (80, u"T o t a l\n(Presupuesto)", wx.ALIGN_RIGHT),
+		metapiece = ((10, u""), (250, u"Informaciï¿½n General\n(Concepto)"), (80, u"T o t a l\n(Presupuesto)", wx.ALIGN_RIGHT),
 			     (80, u"Por Casa", wx.ALIGN_RIGHT), (80, u"%", wx.ALIGN_RIGHT),
 			     (80, u"Importe\nEjercido\ndel\nPresupuesto", wx.ALIGN_RIGHT),
 			     (80, u"Porcentaje\nEjercido\ndel\nPresupuesto", wx.ALIGN_RIGHT),
@@ -54238,7 +54239,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 		anchos = [-1, 160, 200]
 		self.CreateStatusBar(3)
 		self.SetStatusWidths(anchos)
-		self.SetStatusText(u"Estimaciones / Facturación", 1)
+		self.SetStatusText(u"Estimaciones / Facturaciï¿½n", 1)
 		self.SetStatusText(u"Control de Proveedores de Obra", 2)
 
 		if wx.Platform == '__WXMSW__':
@@ -54285,7 +54286,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			dlg.CenterOnParent()
 			dlg.Show(True)
 		else:
-			Mensajes().Info(self, u"¡ No se encontraron contratos registrados !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se encontraron contratos registrados !", u"Atenciï¿½n")
 	
 	def ContratoObraElegido(self, idcontratoobra):
 		sql = """
@@ -54352,7 +54353,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 		
 	def OnAgregar(self, event):
 		self.agregar, self.NewFlag, self.FillingARecord = True, True, True
@@ -54382,19 +54383,19 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 		cursor.close()
 		continua = True
 		if int(row[0]) > 0:
-			if not Mensajes().YesNo(self, u"Al cancelar la estimación/factura se eliminarán todos los pagos que la afectan,\n" \
-						u"por lo tanto, estos regresarán a su origen (solicitudes y otros egresos).\n\n" \
-						u"¿ Desea realmente cancelar la estimación/factura ?", u"Confirmación"):
+			if not Mensajes().YesNo(self, u"Al cancelar la estimaciï¿½n/factura se eliminarï¿½n todos los pagos que la afectan,\n" \
+						u"por lo tanto, estos regresarï¿½n a su origen (solicitudes y otros egresos).\n\n" \
+						u"ï¿½ Desea realmente cancelar la estimaciï¿½n/factura ?", u"Confirmaciï¿½n"):
 				continua = False
-		elif not Mensajes().YesNo(self, u"¿ Desea realmente cancelar la estimación/factura ?", u"Confirmación"):
+		elif not Mensajes().YesNo(self, u"ï¿½ Desea realmente cancelar la estimaciï¿½n/factura ?", u"Confirmaciï¿½n"):
 			continua = False
 			
 		if continua:
 			if self.EliminaPagos():
 				if int(row[0]) > 0:
-					comentario = u"Cancelación de la Estimación/Factura %s --> Incluye %s pagos" % (self.idfacturaestimacion, int(row[0]))
+					comentario = u"Cancelaciï¿½n de la Estimaciï¿½n/Factura %s --> Incluye %s pagos" % (self.idfacturaestimacion, int(row[0]))
 				else:
-					comentario = u"Cancelación de la Estimación/Factura %s" % self.idfacturaestimacion
+					comentario = u"Cancelaciï¿½n de la Estimaciï¿½n/Factura %s" % self.idfacturaestimacion
 					
 				self.GridBlogUpdate(comentario)
 				self.ObtenerPagos()
@@ -54412,9 +54413,9 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-					u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-					% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+					u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+					% sql, u"Atenciï¿½n")
 			return False
 		
 	def OnText(self, event):
@@ -54441,7 +54442,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 				if valor == "" and not self.FillingARecord and not self.NewFlag and id != ID_TEXTCTRLFACTURAESTIMACIONNOTAS:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 						return False
 				
 			if not self.FillingARecord:
@@ -54501,16 +54502,16 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			self.Text(True)
 			if not self.NewFlag:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle(onguardar)
 				else:
 					if self.GetControl(ID_TEXTCTRLFACTURAESTIMACIONID).GetValue():
-						Mensajes().Info(self, u"¡ No guardo los cambios de la factura %s !\n\n" \
-						                u"Por lo tanto, no ser verá afectado el registro de la estimación." \
-						                % self.idfacturaestimacion, u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo los cambios de la factura %s !\n\n" \
+						                u"Por lo tanto, no ser verï¿½ afectado el registro de la estimaciï¿½n." \
+						                % self.idfacturaestimacion, u"Atenciï¿½n")
 					else:
-						Mensajes().Info(self, u"¡ No guardo la nueva estimación / factura !\n\n" \
-						                u"Por lo tanto, no quedará registrada.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo la nueva estimaciï¿½n / factura !\n\n" \
+						                u"Por lo tanto, no quedarï¿½ registrada.", u"Atenciï¿½n")
 						
 				for id, tipo in self.campos.iteritems():
 					ctrl = self.GetControl(id)
@@ -54521,7 +54522,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			if self.GetRecord(record = self.datointerno):
 				self.editable = True
 			else:
-				Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+				Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		else:
 			self.FillListCtrl()
 			
@@ -54645,7 +54646,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord(self, querycancelar = ""):
 		f_dia, f_mes, f_ano = self.GetControl(ID_TEXTCTRLFACTURAESTIMACIONFECHA).GetValue().split('/')
@@ -54659,13 +54660,13 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 		sql = "update %s set %s where idfacturaestimacion = %s" % (self.dbtable, setListForQuery, self.idfacturaestimacion)
 		queTal, trash = self.QueryUpdateRecord(sql)
 		if queTal:
-			contenido = u"Edición del registro"
+			contenido = u"Ediciï¿½n del registro"
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -54700,9 +54701,9 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 				insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura,
 				ContenidoText, ContenidoBinario, Extension, Estatus)
 				values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
-				""" % (self.BlogGUID, self.usuario, u"Alta de la Estimación / Factura", "", "", "")
+				""" % (self.BlogGUID, self.usuario, u"Alta de la Estimaciï¿½n / Factura", "", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n" % sql, u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n" % sql, u"Atenciï¿½n")
 
 		return queTal, identity
 	
@@ -54938,7 +54939,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 				descripcion = descripcionlst[self.index]
 				idconceptoestimacion = idconceptoestimacionlst[self.index]
 		else:
-			Mensajes().Info(self, u"¡ No hay conceptos de estimación registrados !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No hay conceptos de estimaciï¿½n registrados !", u"Atenciï¿½n")
 			
 		return idconceptoestimacion, descripcion
 	
@@ -55076,7 +55077,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 		values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 		""" % (self.BlogGUID, self.usuario, comentario, "", "", "")
 		if not self.QueryUpdateRecord(sql):
-			Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n" % sql, u"Atenciï¿½n")
 		
 	def OnGridRightClick(self, event):
 		grid = self.GetControl(ID_GRIDFACTURAESTIMACIONDETALLEFACTURA)
@@ -55113,7 +55114,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			importe = grid.GetCellValue(fila, 3)
 			if not cantidad: cantidad = 0
 			if not importe: importe = 0
-			comentario = u"Eliminación movimiento de detalle %s --> %s %s %s" \
+			comentario = u"Eliminaciï¿½n movimiento de detalle %s --> %s %s %s" \
 					   % (int(iddetallefacturaestimacion), float(cantidad), concepto,
 					      self.GetString(amount_and_cents_with_commas(float(importe))))
 			self.GridBlogUpdate(comentario)
@@ -55127,7 +55128,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			return False
 		iddetallefacturaestimacion = grid.GetCellValue(fila, 0)
 		if not iddetallefacturaestimacion:
-			Mensajes().Info(self, u"¡ No se ha especificado el movimiento de detalle a eliminar !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se ha especificado el movimiento de detalle a eliminar !", u"Atenciï¿½n")
 			return False
 		
 		sql = "delete from %s where iddetallefacturaestimacion = %s" % (self.dbtable2, int(iddetallefacturaestimacion)) 
@@ -55139,9 +55140,9 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+							% sql, u"Atenciï¿½n")
 			return False
 	
 	def ObtenerPagos(self):
@@ -55264,7 +55265,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			fecha = grid.GetCellValue(fila, 1)
 			referencia = grid.GetCellValue(fila, 2)
 			importe = grid.GetCellValue(fila, 3)
-			comentario = u"Eliminación pago %s --> %s (%s) %s" \
+			comentario = u"Eliminaciï¿½n pago %s --> %s (%s) %s" \
 					   % (int(idpagofacturaestimacion), fecha, referencia,
 					      self.GetString(amount_and_cents_with_commas(float(importe))))
 			self.GridBlogUpdate(comentario)
@@ -55278,7 +55279,7 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			return False
 		idpagofacturaestimacion = grid.GetCellValue(fila, 0)
 		if not idpagofacturaestimacion:
-			Mensajes().Info(self, u"¡ No se ha especificado el pago a eliminar !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No se ha especificado el pago a eliminar !", u"Atenciï¿½n")
 			return False
 		
 		sql = "delete from gixfacturasestimacionpago where idpagofacturaestimacion = %s" % (int(idpagofacturaestimacion)) 
@@ -55290,9 +55291,9 @@ class GixFacturasEstimaciones(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+							% sql, u"Atenciï¿½n")
 			return False
 	
 class GixProveedoresObra(wx.Frame, GixBase):
@@ -55417,7 +55418,7 @@ class GixProveedoresObra(wx.Frame, GixBase):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 		
 	def OnChoiceFiltro(self, event):
 		self.FillListCtrl()
@@ -55439,8 +55440,8 @@ class GixProveedoresObra(wx.Frame, GixBase):
 		self.GetControl(ID_TEXTCTRLPROVEEDORRAZONSOCIAL).SetFocus()
 		
 	def OnEliminar(self, event):
-		Mensajes().Info(self, u"¡ No puede eliminar a un proveedor de obra !\n\nSi desea no utilizarlo, desactivelo.",
-						u"Atención")
+		Mensajes().Info(self, u"ï¿½ No puede eliminar a un proveedor de obra !\n\nSi desea no utilizarlo, desactivelo.",
+						u"Atenciï¿½n")
 		
 	def OnText(self, event):
 		if self.validacontroles:
@@ -55472,7 +55473,7 @@ class GixProveedoresObra(wx.Frame, GixBase):
 				if valor == "" and not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 						return False
 				
 			if not self.FillingARecord:
@@ -55561,16 +55562,16 @@ class GixProveedoresObra(wx.Frame, GixBase):
 			self.Text(True)
 			if not self.NewFlag:
 				if onguardar:
-					if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+					if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 						self.GuardarDetalle(onguardar)
 				else:
 					if self.GetControl(ID_TEXTCTRLPROVEEDORID).GetValue():
-						Mensajes().Info(self, u"¡ No guardo los cambios del proveedor %s !\n\n" \
-										u"Por lo tanto, no ser verá afectado el registro del proveedor." \
-										% self.idproveedor, u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo los cambios del proveedor %s !\n\n" \
+										u"Por lo tanto, no ser verï¿½ afectado el registro del proveedor." \
+										% self.idproveedor, u"Atenciï¿½n")
 					else:
-						Mensajes().Info(self, u"¡ No guardo el nuevo proveedor !\n\n" \
-										u"Por lo tanto, no quedará registrado.", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No guardo el nuevo proveedor !\n\n" \
+										u"Por lo tanto, no quedarï¿½ registrado.", u"Atenciï¿½n")
 						
 				for id, tipo in self.campos.iteritems():
 					ctrl = self.GetControl(id)
@@ -55591,7 +55592,7 @@ class GixProveedoresObra(wx.Frame, GixBase):
 				self.GetControl(ID_NOTEBOOKPROVEEDOR).Enable(True)
 				self.editable = True
 			else:
-				Mensajes().Warn(self, u"Escoja un registro válido", u"Atención")
+				Mensajes().Warn(self, u"Escoja un registro vï¿½lido", u"Atenciï¿½n")
 		else:
 			self.FillListCtrl()
 			
@@ -55699,7 +55700,7 @@ class GixProveedoresObra(wx.Frame, GixBase):
 					except:
 						pass
 		else:
-			Mensajes().Info(self, u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord(self, querycancelar = ""):
 		razonsocial = self.GetControl(ID_TEXTCTRLPROVEEDORRAZONSOCIAL).GetValue().strip()
@@ -55726,13 +55727,13 @@ class GixProveedoresObra(wx.Frame, GixBase):
 		sql = "update %s set %s where idproveedor = %s" % (self.dbtable, setListForQuery, self.idproveedor)
 		queTal, trash = self.QueryUpdateRecord(sql)
 		if queTal:
-			contenido = u"Edición del registro"
+			contenido = u"Ediciï¿½n del registro"
 			sql = """
 			insert into Blogs (BlogGUID, FechaCaptura, UsuarioCaptura, ContenidoText, ContenidoBinario, Extension, Estatus)
 			values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, contenido, "", "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar el blog.", u"Atenciï¿½n")
 		
 		return queTal
 	
@@ -55782,7 +55783,7 @@ class GixProveedoresObra(wx.Frame, GixBase):
 				values ('%s', getdate(), '%s', '%s', '%s', '%s', '%s')
 				""" % (self.BlogGUID, self.usuario, "Alta del Proveedor de Obra", "", "", "")
 				if not self.QueryUpdateRecord(sql):
-					Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n" % sql, u"Atención")
+					Mensajes().Info(self, u"Problemas al actualizar el blog.\n\n" % sql, u"Atenciï¿½n")
 
 		return queTal, idproveedor
 	
@@ -55904,7 +55905,7 @@ class GixBancos(wx.Frame, GixBase):
 		self.CreateStatusBar(2)
 		self.SetStatusWidths(anchos)
 		self.SetStatusText(u"Recursos Financieros", 0)
-		self.SetStatusText(u"Catálogo de Bancos", 1)
+		self.SetStatusText(u"Catï¿½logo de Bancos", 1)
 		self.FillGridCtrl()
 		
 	def GetEmpresa(self):
@@ -55913,7 +55914,7 @@ class GixBancos(wx.Frame, GixBase):
 		return obj.empresadetrabajo
 		
 	def ObtenerEmpresa(self, empresaid):
-		""" Obtener de base de datos la razón social de la empresa
+		""" Obtener de base de datos la razï¿½n social de la empresa
 		"""
 		query = """
 		select RazonSocial + ' - ' + convert(varchar(7), EmpresaID)
@@ -55928,11 +55929,11 @@ class GixBancos(wx.Frame, GixBase):
 				self.SetTitle(self.GetStringFromField(row[0]),)
 			else:
 				Mensajes().Info(self, u"No se ha encontrado la empresa de trabajo.\n" \
-								u"Por favor abandone este módulo y verifique.", u"Atención")
+								u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 		except:
 			cu.close()
 			Mensajes().Info(self, u"Se estan experimentando problemas.\n" \
-							u"Por favor abandone este módulo y verifique.\n\n%s" % query, u"Atención")
+							u"Por favor abandone este mï¿½dulo y verifique.\n\n%s" % query, u"Atenciï¿½n")
 		
 	def FillListBox(self, display = 'first'):
 		wx.BeginBusyCursor()
@@ -55957,8 +55958,8 @@ class GixBancos(wx.Frame, GixBase):
 		
 	def OnPrint(self,event):
 		tabla = self.dbtable
-		meta = (( 14, "Id Banco") , (300, u"Nombre"), (100,u"Email"),(20,u"Teléfono"),
-			(100,u"Nombre del Contacto"), (100,"Email del Contacto"),(20,u"Teléfono del Contacto"))
+		meta = (( 14, "Id Banco") , (300, u"Nombre"), (100,u"Email"),(20,u"Telï¿½fono"),
+			(100,u"Nombre del Contacto"), (100,"Email del Contacto"),(20,u"Telï¿½fono del Contacto"))
 		query = """
 		select idbanco, nombre, email, telefono, contactonombre, contactoemail, contactotelefono
 		from gixbancos where empresaid = %s order by nombre
@@ -55994,7 +55995,7 @@ class GixBancos(wx.Frame, GixBase):
 				self.NewFlag = True
 				if not VengodelaLista:
 					Mensajes().Info(self, u"No deben quedar en blanco el nombre del banco\n" \
-									u"y el nombre del contacto", u"Atención")
+									u"y el nombre del contacto", u"Atenciï¿½n")
 					return
 				
 			if self.controlactual in self.ctrlmayuscula:
@@ -56002,7 +56003,7 @@ class GixBancos(wx.Frame, GixBase):
 				valor = ctrl.GetValue().encode("iso8859-1")
 				valornum = str(valor).replace('.','')
 				if valor and not valornum.isdigit():
-					if valor not in (",", ".", "#", "&", "!", "¡", "?", "¿", "/", "(", ")", "$", "'"):
+					if valor not in (",", ".", "#", "&", "!", "ï¿½", "?", "ï¿½", "/", "(", ")", "$", "'"):
 						if not str(valor).isupper():
 							ctrl.SetValue(str(valor).upper())
 							lastposition = ctrl.GetLastPosition()
@@ -56032,7 +56033,7 @@ class GixBancos(wx.Frame, GixBase):
 			self.MenuSetter(ID_MENUNUEVO, True)
 			self.GetRecord("%s" % (banco))
 		else:
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord( self ):
 		idbanco = self.GetControl(ID_TEXTCTRLBANCOSBANCO).GetValue()
@@ -56084,13 +56085,13 @@ class GixBancos(wx.Frame, GixBase):
 		return queTal
 	
 	def OnDeleteRecord(self, event):
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n") :
 			if self.DeleteRecord():
 				lbx = self.GetControl(ID_LISTBOXBANCOS)
 				pos = lbx.GetSelection()
 				self.MoveOneStep("PREVIOUS")
 				lbx.Delete(pos)
-				Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+				Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 				self.tb.EnableTool( ID_TOOLSAV, False)
 				self.tb.EnableTool( ID_TOOLDEL, True)
 				self.tb.EnableTool( ID_TOOLNEW, True)
@@ -56101,7 +56102,7 @@ class GixBancos(wx.Frame, GixBase):
 	def DeleteRecord(self):
 		idbanco = self.GetControl(ID_TEXTCTRLBANCOSBANCO).GetValue().strip()
 		if idbanco == "":
-			Mensajes().Info(self, u"No se ha especificado el banco", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el banco", u"Atenciï¿½n")
 			return False
 		sql = "delete from %s where idbanco = %s" % (self.dbtable, idbanco) 
 		try:
@@ -56112,9 +56113,9 @@ class GixBancos(wx.Frame, GixBase):
 			return True
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\n" \
-							u"Quizá se deba a que hay otra información\nque depende de este registro.\n%s"
-							% sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\n" \
+							u"Quizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro.\n%s"
+							% sql, u"Atenciï¿½n")
 			return False
 	
 	def GetAnotherRecord(self, comparison):
@@ -56212,9 +56213,9 @@ class GixBancos(wx.Frame, GixBase):
 					if self.QueryUpdateRecord(sql):
 						self.FillGridCtrl()
 					else:
-						Mensajes().Info(self, u"¡ Problemas al agregar firmante.\n\n%s" % sql, u"Atención")
+						Mensajes().Info(self, u"ï¿½ Problemas al agregar firmante.\n\n%s" % sql, u"Atenciï¿½n")
 			else:
-				Mensajes().Info(self, u"¡ No hay firmantes registrados !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No hay firmantes registrados !", u"Atenciï¿½n")
 		elif str(self.fila_elegida).isdigit():
 			if self.fila_elegida >= 0:
 				idfirmantebanco = self.grid.GetCellValue(self.fila_elegida, 0)
@@ -56225,11 +56226,11 @@ class GixBancos(wx.Frame, GixBase):
 					cu.close()
 					self.FillGridCtrl()
 				else:
-					Mensajes().Info(self, u"¡ No hay firmante que eliminar !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No hay firmante que eliminar !", u"Atenciï¿½n")
 			else:
-				Mensajes().Info(self, u"¡ No ha elijido el firmante a eliminar de la cuenta !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No ha elijido el firmante a eliminar de la cuenta !", u"Atenciï¿½n")
 		else:
-			Mensajes().Info(self, u"¡ No ha elijido el firmante a eliminar de la cuenta !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ No ha elijido el firmante a eliminar de la cuenta !", u"Atenciï¿½n")
 	
 	def OnLeftGridClick(self, event):
 		self.fila_elegida = event.GetRow()
@@ -56346,7 +56347,7 @@ class GixPuestos(wx.Frame, GixBase):
 		select idempleado, rtrim(ltrim(apellido_paterno)) + ' ' +  rtrim(ltrim(apellido_materno)) + ', ' + rtrim(ltrim(nombre)) + ' - ' + convert(varchar(7), idempleado)
 		from gixempleados order by apellido_paterno
 		"""
-		self.RelatedFieldSearch(u"Búsqueda de Empleado", query, ID_TEXTCTRLPUESTOEMPLEADO)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Empleado", query, ID_TEXTCTRLPUESTOEMPLEADO)
 		
 	def OnBuscarPuesto(self,event):
 		
@@ -56354,7 +56355,7 @@ class GixPuestos(wx.Frame, GixBase):
 		select idpuesto, descripcion + ' - ' + convert(varchar(7), idpuesto)
 		from gixpuestos order by descripcion
 		"""
-		self.RelatedFieldSearch(u"Búsqueda de Jefe Inmediato Superior", query, ID_TEXTCTRLPUESTOJIS)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Jefe Inmediato Superior", query, ID_TEXTCTRLPUESTOJIS)
 		
 	def FillListBox(self, display = 'first'):
 		
@@ -56383,7 +56384,7 @@ class GixPuestos(wx.Frame, GixBase):
 		
 	def OnPrint(self,event):
 		tabla = self.dbtable
-		meta = (( 10, "Id Puesto") , (150, u"Descripción"), (400,u"Descripción Ampliada"),(80,"Empleado", wx.ALIGN_RIGHT,"ponCeros(%s,7)"),(80,"Puesto JIS",wx.ALIGN_RIGHT))
+		meta = (( 10, "Id Puesto") , (150, u"Descripciï¿½n"), (400,u"Descripciï¿½n Ampliada"),(80,"Empleado", wx.ALIGN_RIGHT,"ponCeros(%s,7)"),(80,"Puesto JIS",wx.ALIGN_RIGHT))
 		query = "select idpuesto, descripcion, descripcion_ampliada, idempleado, idpuesto_jis from gixpuestos order by descripcion"
 		
 		titulo = u"Consulta de Puestos " 
@@ -56392,7 +56393,7 @@ class GixPuestos(wx.Frame, GixBase):
 		
 	def OnSearch(self, event):
 		
-		opcionesbusqueda = ["No. Puesto", u"Descripción puesto"]
+		opcionesbusqueda = ["No. Puesto", u"Descripciï¿½n puesto"]
 		basebusqueda = self.DisplaySearchMenu(opcionesbusqueda)
 		if basebusqueda == "":
 			return
@@ -56404,21 +56405,21 @@ class GixPuestos(wx.Frame, GixBase):
 		esDESCRIPCION = False
 		
 		if buscar == "":
-			Mensajes().Info(self, u"Como está vacío el criterio\n de búsqueda no voy a arrojar resultado", u"Atención")
+			Mensajes().Info(self, u"Como estï¿½ vacï¿½o el criterio\n de bï¿½squeda no voy a arrojar resultado", u"Atenciï¿½n")
 			return
 		
 		ob = opcionesbusqueda
 		
 		if ob[0] in basebusqueda:
 			if not buscar.isdigit():
-				Mensajes().Info(self, u"Este dato debería ser numérico", u"Atención")
+				Mensajes().Info(self, u"Este dato deberï¿½a ser numï¿½rico", u"Atenciï¿½n")
 				return
 			opcionelegida = 0
 			esPUESTO = True
 
 		if ob[1] in basebusqueda:
 			if buscar.strip() == "":
-				Mensajes().Info(self, u"Este dato no puede estar vacío", u"Atención")
+				Mensajes().Info(self, u"Este dato no puede estar vacï¿½o", u"Atenciï¿½n")
 				return
 			opcionelegida = 1
 			esDESCRIPCION = True
@@ -56441,7 +56442,7 @@ class GixPuestos(wx.Frame, GixBase):
 		try:
 			cursor.execute(str(sql))
 		except:
-			Mensajes().Info(self, "Algún dato está faltando para\nrealizar la búsqueda", u"Atención")
+			Mensajes().Info(self, "Algï¿½n dato estï¿½ faltando para\nrealizar la bï¿½squeda", u"Atenciï¿½n")
 			return
 			
 		rows = fetchall(cursor)
@@ -56455,7 +56456,7 @@ class GixPuestos(wx.Frame, GixBase):
 		try:
 			primero = listaParaBuscar[0]
 		except:
-			Mensajes().Info(self,u"La búsqueda no arroja resultado",u"Atención")
+			Mensajes().Info(self,u"La bï¿½squeda no arroja resultado",u"Atenciï¿½n")
 			return
 		
 		if esPUESTO:
@@ -56465,7 +56466,7 @@ class GixPuestos(wx.Frame, GixBase):
 				lbox.SetStringSelection( u"%s" % primero, True)
 				self.GetRecord(primero.strip())
 			else:
-				Mensajes().Info( self, u"Extraño error de búsqueda\nde Número de Empleado", u"Atención")
+				Mensajes().Info( self, u"Extraï¿½o error de bï¿½squeda\nde Nï¿½mero de Empleado", u"Atenciï¿½n")
 			return
 		
 		self.DisplaySearchResults(opcionelegida, listaParaBuscar)
@@ -56505,41 +56506,41 @@ class GixPuestos(wx.Frame, GixBase):
 				if descripcion == "" and not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ La descripión no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La descripiï¿½n no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 				
 			if id == ID_TEXTCTRLPUESTOEMPLEADO:
 				empleado = control.GetValue().strip()
 				if empleado != "":
 					if not empleado.isdigit():
-						Mensajes().Info(self, u"¡ El empleado debe ser numérico !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El empleado debe ser numï¿½rico !", u"Atenciï¿½n")
 						return
 					nombre = self.ObtenEmpleado(empleado)
 					if nombre == "":
-						Mensajes().Info(self, u"¡ El empleado no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El empleado no existe !", u"Atenciï¿½n")
 						return
 					self.GetControl(ID_PUESTOEMPLEADONOMBRE).SetLabel(nombre)
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡  El empleado no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½  El empleado no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 				
 			if id == ID_TEXTCTRLPUESTOJIS:
 				jis = control.GetValue().strip()
 				if jis != "":
 					if not jis.isdigit():
-						Mensajes().Info(self, u"¡ El puesto del jefe inmediato superior\n debe ser numérico !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El puesto del jefe inmediato superior\n debe ser numï¿½rico !", u"Atenciï¿½n")
 						return
 					puesto = self.ObtenJis(jis)
 					if puesto == "":
-						Mensajes().Info(self, u"¡ El puesto del jefer inmediato superior \n no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El puesto del jefer inmediato superior \n no existe !", u"Atenciï¿½n")
 						return
 					self.GetControl(ID_PUESTOJIS).SetLabel(puesto)
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ El puesto del jefer inmediato superior \n no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El puesto del jefer inmediato superior \n no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 		
 		self.EndOfOnText(self.controlactual)
@@ -56577,7 +56578,7 @@ class GixPuestos(wx.Frame, GixBase):
 			
 		else:
 
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 		
 			
@@ -56612,7 +56613,7 @@ class GixPuestos(wx.Frame, GixBase):
 
 	def AddRecord( self ):
 		
-		dlg = wx.TextEntryDialog( self, u"Teclee el nuevo número de puesto", u"Número de Puesto",self.GetSiguientePuesto())
+		dlg = wx.TextEntryDialog( self, u"Teclee el nuevo nï¿½mero de puesto", u"Nï¿½mero de Puesto",self.GetSiguientePuesto())
 		
 		dlg.ShowModal()
 
@@ -56621,12 +56622,12 @@ class GixPuestos(wx.Frame, GixBase):
 		dlg.Destroy()
 		
 		if not puesto.isdigit():
-			Mensajes().Info( self, u"Digite bien el número de puesto", u"Atención")
+			Mensajes().Info( self, u"Digite bien el nï¿½mero de puesto", u"Atenciï¿½n")
 			return False
 		
 		
 		if self.GetPuesto( puesto ) != "":
-			Mensajes().Info( self, u"¡ El puesto ya existe !\nIndique otro", u"Atención")
+			Mensajes().Info( self, u"ï¿½ El puesto ya existe !\nIndique otro", u"Atenciï¿½n")
 			return False
 		
 		self.GetControl(ID_TEXTCTRLPUESTO).SetValue(puesto)
@@ -56689,7 +56690,7 @@ class GixPuestos(wx.Frame, GixBase):
 	
 	def OnDeleteRecord( self, event):
 
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n") :
 
 			if self.DeleteRecord():
 
@@ -56698,7 +56699,7 @@ class GixPuestos(wx.Frame, GixBase):
 				
 				self.MoveOneStep("PREVIOUS")
 				lbx.Delete(pos)
-				Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+				Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 				#self.LimpiaControles()
 				self.tb.EnableTool( ID_TOOLSAV, False)
 				self.tb.EnableTool( ID_TOOLDEL, True)
@@ -56713,13 +56714,13 @@ class GixPuestos(wx.Frame, GixBase):
 
 		if puesto  == "":
 			
-			Mensajes().Info(self, u"No se ha especificado el puesto", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado el puesto", u"Atenciï¿½n")
 			return False
 		
 		cuantos = int( self.GetEmpleadosEnPuesto( puesto ))
 		if cuantos > 0:
 
-			Mensajes().Info( self, u"Hay %d empleados relacionados con este puesto.\nPor ello no puede eliminarlo." % cuantos, u"Atención")
+			Mensajes().Info( self, u"Hay %d empleados relacionados con este puesto.\nPor ello no puede eliminarlo." % cuantos, u"Atenciï¿½n")
 			return False
 		
 		sql = "delete from %s where idpuesto = %s" % ( self.dbtable, puesto ) 
@@ -56734,7 +56735,7 @@ class GixPuestos(wx.Frame, GixBase):
 		
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\nQuizá se deba a que hay otra información\nque depende de este registro\n%s" % sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\nQuizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro\n%s" % sql, u"Atenciï¿½n")
 			return False
 		
 	def GetAnotherRecord(self, comparison):
@@ -57052,7 +57053,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 		row = fetchone(cu)
 		cu.close()
 		if row is None:
-			Mensajes().Info(self, u"No Existe el Consecutivo %s" % numrequisicion, u"Atención")
+			Mensajes().Info(self, u"No Existe el Consecutivo %s" % numrequisicion, u"Atenciï¿½n")
 			return
 		
 		titulo = u"Cambio de Estatus"
@@ -57081,9 +57082,9 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 			self.Bind(wx.EVT_MENU, self.OnQueSignificanLosColores, id=ID_QUESIGNIFICANLOSCOLORES)
 		popup = wx.Menu()
 		popup.Append(ID_CAMBIARESTATUS, u"Cambio de Estatus")
-		popup.Append(ID_HISTORIAREQUISICION, u"Historia de la Requisición")
+		popup.Append(ID_HISTORIAREQUISICION, u"Historia de la Requisiciï¿½n")
 		popup.AppendSeparator()
-		popup.Append(ID_QUESIGNIFICANLOSCOLORES, u"¿ Que Significan los Colores ?")
+		popup.Append(ID_QUESIGNIFICANLOSCOLORES, u"ï¿½ Que Significan los Colores ?")
 		self.PopupMenu(popup)
 		popup.Destroy()
 		
@@ -57103,7 +57104,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 			self.grid.Refresh()
 		
 	def OnNuevaRequisicion(self,event):
-		titulo = u"Requisición Producto Unico"
+		titulo = u"Requisiciï¿½n Producto Unico"
 		dialog = GixRequisicion(self,-1, titulo, size = (450,400),style = wx.DEFAULT_DIALOG_STYLE, usuario = self.usuario)
 		dialog.CenterOnScreen()
 		dialog.ShowModal()
@@ -57116,8 +57117,8 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 		fila = self.fila_elegida
 		idrequisicion = str(grid.GetCellValue(fila, 0))
 		if idrequisicion in self.req_finalizadas:
-			Mensajes().Info(self, u"Ha finalizado el ciclo de la requisición (consecutivo %s).\n\n" \
-							u"¡ No puede cambiar el estatus !" % idrequisicion, u"Atención")
+			Mensajes().Info(self, u"Ha finalizado el ciclo de la requisiciï¿½n (consecutivo %s).\n\n" \
+							u"ï¿½ No puede cambiar el estatus !" % idrequisicion, u"Atenciï¿½n")
 			return
 		else:
 			titulo = u"Cambio de Estatus"
@@ -57127,8 +57128,8 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 			if len(self.req_grupo) > 1 and idrequisicion in self.req_grupo:
 				if not Mensajes().YesNo(self, u"Puede aplicar el cambio de estatus unicamente al consecutivo %s\n" \
 									u"o a nivel grupo de productos.\n\n" \
-									u"¿ Desea aplicar el cambio de estatus unicamente al consecutivo %s ?"
-									% (idrequisicion, idrequisicion), u"Confirmación"):
+									u"ï¿½ Desea aplicar el cambio de estatus unicamente al consecutivo %s ?"
+									% (idrequisicion, idrequisicion), u"Confirmaciï¿½n"):
 					titulo = u"Cambio de Estatus a Nivel Grupo de Productos"
 					capmas = True
 					req_grupo = self.req_grupo
@@ -57153,7 +57154,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 		order by a.id_movto desc;
 		select count(*) from gixmovimientos_estatus a where a.idrequisicion = %s
 		""" % (idrequisicion, idrequisicion)
-		titulo = u"Historia de la Requisición - Consecutivo %s - %s" % (idrequisicion, producto)
+		titulo = u"Historia de la Requisiciï¿½n - Consecutivo %s - %s" % (idrequisicion, producto)
 		tabla = "gixmovimientos_estatus"
 		frame = GixFrameCatalogo(self, -1 , titulo , wx.Point(20,20),wx.Size(800,600), 
 					wx.DEFAULT_FRAME_STYLE, None, None, None, tabla, meta, query, gridsize = [770,300])
@@ -57186,12 +57187,12 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 		
 		dialog.Destroy()
 		if not estatusdialogo_correcto:
-			Mensajes().Info( self, u"¡ No se aplicará el intervalo de fechas !", u"Atención")
+			Mensajes().Info( self, u"ï¿½ No se aplicarï¿½ el intervalo de fechas !", u"Atenciï¿½n")
 			return False
 		self.fechainicial = "%s/%02d/%02d" % ( aho_ini, mes_ini, dia_ini )
 		self.fechafinal  = "%s/%02d/%02d" % ( aho_fin, mes_fin, dia_fin )
 		if not dialog.producto:
-			Mensajes().Info( self, u"¡ No se aplicará el producto y el intervalo de fechas !", u"Atención")
+			Mensajes().Info( self, u"ï¿½ No se aplicarï¿½ el producto y el intervalo de fechas !", u"Atenciï¿½n")
 			return False
 		self.producto = dialog.producto
 		return True
@@ -57215,7 +57216,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 		
 		dialog.Destroy()
 		if not estatusdialogo_correcto:
-			Mensajes().Info( self, u"¡ No se aplicará el intervalo de fechas !", u"Atención")
+			Mensajes().Info( self, u"ï¿½ No se aplicarï¿½ el intervalo de fechas !", u"Atenciï¿½n")
 			return False
 		
 		self.fechainicial = "%s/%02d/%02d" % ( aho_ini, mes_ini, dia_ini )
@@ -57234,7 +57235,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 					(2, 70, u"Cantidad"),
 					(3, 60, u"Unidad"),
 					(4, 160, u"Producto"),
-					(5, 100, u"Categoría"),
+					(5, 100, u"Categorï¿½a"),
 					(6, 120, u"Fecha Requerida"),
 					(7, 160, u"Area"),
 					(8, 150, u"Estatus"),
@@ -57276,7 +57277,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 					self.categorias.append(self.GetString(row[0]))
 					descripciones.append(self.GetString(row[1]))
 				cu.close()
-				self.index = wx.GetSingleChoiceIndex(u"Elija una Categoría",  u"Opciones", descripciones, parent = None)
+				self.index = wx.GetSingleChoiceIndex(u"Elija una Categorï¿½a",  u"Opciones", descripciones, parent = None)
 				if int(self.index) < 0:
 					return True
 				else:
@@ -57313,7 +57314,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 					self.categorias.append(self.GetString(row[0]))
 					descripciones.append(self.GetString(row[1]))
 				cu.close()
-				self.index = wx.GetSingleChoiceIndex(u"Elija una Categoría",  u"Opciones", descripciones, parent = None)
+				self.index = wx.GetSingleChoiceIndex(u"Elija una Categorï¿½a",  u"Opciones", descripciones, parent = None)
 				if int(self.index) < 0:
 					return True
 				else:
@@ -57352,7 +57353,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 						self.categorias.append(self.GetString(row[0]))
 						descripciones.append(self.GetString(row[1]))
 					cu.close()
-					self.index = wx.GetSingleChoiceIndex(u"Elija una Categoría",  u"Opciones", descripciones, parent = None)
+					self.index = wx.GetSingleChoiceIndex(u"Elija una Categorï¿½a",  u"Opciones", descripciones, parent = None)
 					if int(self.index) < 0:
 						return True
 					else:
@@ -57388,7 +57389,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 					self.categorias.append(self.GetString(row[0]))
 					descripciones.append(self.GetString(row[1]) + "                                       ")
 				cu.close()
-				self.index = wx.GetSingleChoiceIndex(u"Elija una Categoría",  u"Opciones", descripciones, parent = None)
+				self.index = wx.GetSingleChoiceIndex(u"Elija una Categorï¿½a",  u"Opciones", descripciones, parent = None)
 				if int(self.index) < 0:
 					return True
 				else:
@@ -57450,7 +57451,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 					self.prerequisiciones.append(str(int(row[0])).rjust(9) + " - " + self.GetString(row[1]) + "  " + self.GetString(row[2]))
 					self.prerequisicion.append(row[0])
 				cu.close()
-				self.index = wx.GetSingleChoiceIndex(u"Elija una Requisición o Requisiciones Producto Unico",  u"Opciones", self.prerequisiciones, parent = None)
+				self.index = wx.GetSingleChoiceIndex(u"Elija una Requisiciï¿½n o Requisiciones Producto Unico",  u"Opciones", self.prerequisiciones, parent = None)
 				if int(self.index) < 0:
 					return True
 				else:
@@ -57684,25 +57685,25 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 		MRToolBarFunc( tb )
 		
 	def OnFiltro(self, event):
-		opciones = ["<Todo>", "En Proceso y Categoría", "Del Mes y Categoría", "Por Fecha y Categoría",
-				"Por Categoría","Por Producto y Fecha", "Por Requisición o Requisiciones Producto Unico",
+		opciones = ["<Todo>", "En Proceso y Categorï¿½a", "Del Mes y Categorï¿½a", "Por Fecha y Categorï¿½a",
+				"Por Categorï¿½a","Por Producto y Fecha", "Por Requisiciï¿½n o Requisiciones Producto Unico",
 				"Por Area (Todas las Requisiciones)", "Por Area (Requisiciones Activas)"]
 		opcion = wx.FindWindowById(ID_MR_CHOICEFILTRO).GetSelection() 
 		if opciones[opcion] == "<Todo>":
 			self.RellenoGrid(1)
-		elif opciones[opcion] == "En Proceso y Categoría":
+		elif opciones[opcion] == "En Proceso y Categorï¿½a":
 			if self.RellenoGrid(2):
 				self.RellenoGrid(1)
 				wx.FindWindowById(ID_MR_CHOICEFILTRO).SetSelection(0)
-		elif opciones[opcion] == "Del Mes y Categoría":
+		elif opciones[opcion] == "Del Mes y Categorï¿½a":
 			if self.RellenoGrid(3):
 				self.RellenoGrid(1)
 				wx.FindWindowById(ID_MR_CHOICEFILTRO).SetSelection(0)
-		elif opciones[opcion] == "Por Fecha y Categoría":
+		elif opciones[opcion] == "Por Fecha y Categorï¿½a":
 			if self.RellenoGrid(4):
 				self.RellenoGrid(1)
 				wx.FindWindowById(ID_MR_CHOICEFILTRO).SetSelection(0)
-		elif opciones[opcion] == "Por Categoría":
+		elif opciones[opcion] == "Por Categorï¿½a":
 			if self.RellenoGrid(5):
 				self.RellenoGrid(1)
 				wx.FindWindowById(ID_MR_CHOICEFILTRO).SetSelection(0)
@@ -57710,7 +57711,7 @@ class GixMr(wx.Frame, GixBase, wx.PySizer):
 			if self.RellenoGrid(6):
 				self.RellenoGrid(1)
 				wx.FindWindowById(ID_MR_CHOICEFILTRO).SetSelection(0)
-		elif opciones[opcion] == "Por Requisición o Requisiciones Producto Unico":
+		elif opciones[opcion] == "Por Requisiciï¿½n o Requisiciones Producto Unico":
 			if self.RellenoGrid(7):
 				self.RellenoGrid(1)
 				wx.FindWindowById(ID_MR_CHOICEFILTRO).SetSelection(0)
@@ -57838,12 +57839,12 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 		wx.EVT_BUTTON(self, ID_BUTTONPREREQUISICIONESCOMPACTAPRODUCTOS,self.OnCompactaProductos)
 		wx.EVT_BUTTON(self, ID_BUTTONPREREQUISICIONESCREAREQUISICION,self.OnCreaRequisiciones)
 		
-		self.tb.SetToolShortHelp(ID_TOOLNEW, u"Nueva Requisición")
-		self.tb.SetToolShortHelp(ID_TOOLDEL, u"Eliminar Requisición")
-		self.tb.SetToolShortHelp(ID_TOOLSAV, u"Grabar Requisición")
-		self.mb.SetLabel(ID_MENUNUEVO, u"Nueva Requisición")		
-		self.mb.SetLabel(ID_MENUELIMINAR, u"Eliminar Requisición")		
-		self.mb.SetLabel(ID_MENUGRABAR, u"Grabar Requisición")		
+		self.tb.SetToolShortHelp(ID_TOOLNEW, u"Nueva Requisiciï¿½n")
+		self.tb.SetToolShortHelp(ID_TOOLDEL, u"Eliminar Requisiciï¿½n")
+		self.tb.SetToolShortHelp(ID_TOOLSAV, u"Grabar Requisiciï¿½n")
+		self.mb.SetLabel(ID_MENUNUEVO, u"Nueva Requisiciï¿½n")		
+		self.mb.SetLabel(ID_MENUELIMINAR, u"Eliminar Requisiciï¿½n")		
+		self.mb.SetLabel(ID_MENUGRABAR, u"Grabar Requisiciï¿½n")		
 		self.empleado = self.ObtenEmpleado(usuario)
 		self.usuario = usuario
 		
@@ -57870,20 +57871,20 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 				self.PrepararQuery()
 			else:
 				self.GetControl(ID_NOTEBOOKPREREQUISICIONES).SetSelection(0)
-				Mensajes().Info(self, u"Primero introduzca la información general y grabela", u"Atención")
+				Mensajes().Info(self, u"Primero introduzca la informaciï¿½n general y grabela", u"Atenciï¿½n")
 			
 	def BuscarUnidad(self, fila, col):
 		
 		producto = self.grid.GetCellValue( fila, col+1)
 		query = "select unidadrequisicion, unidadrequisicion from gixunidadesfactores where id_producto = '%s' order by unidadrequisicion" % producto
-		self.RelatedFieldSearchForGrid(u"Búsqueda de Unidad", query, ID_GRIDPREREQUISICIONES, fila, col)
+		self.RelatedFieldSearchForGrid(u"Bï¿½squeda de Unidad", query, ID_GRIDPREREQUISICIONES, fila, col)
 		
 	def BuscarProducto(self, fila, col):
 		
 		control =self.GetControl(ID_TEXTCTRLPREREQUISICIONESIDCATEGORIA)
 		categoria = control.GetValue().strip()
 		query = "select id_producto, id_producto + ' - ' + descripcion from gixproductos where categoria = '%s' order by descripcion" % categoria
-		self.RelatedFieldSearchForGrid(u"Búsqueda de Producto", query, ID_GRIDPREREQUISICIONES, fila, col)
+		self.RelatedFieldSearchForGrid(u"Bï¿½squeda de Producto", query, ID_GRIDPREREQUISICIONES, fila, col)
 		
 	def InsertaFilas(self):
 		
@@ -57921,7 +57922,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 			(70, u"Cantidad", wx.ALIGN_RIGHT),
 			(80, u"Unidad (F1)"),
 			(80, u"Producto (F1)"),
-			(250, u"Descripción"),
+			(250, u"Descripciï¿½n"),
 			(5,u""))
 		
 		self.buildFromQuery()
@@ -57945,7 +57946,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 		
 		if evtkey == wx.WXK_F6:
 			archivo = "detalle_prerequisicion.xls"
-			if Mensajes().YesNo(self, u"Desea volcar el detalle al archivo de excel\n %s ?" % (archivo), u"Atención"):
+			if Mensajes().YesNo(self, u"Desea volcar el detalle al archivo de excel\n %s ?" % (archivo), u"Atenciï¿½n"):
 				siono = "SI"
 				try:
 					exc = SimNoraExcel(excel = archivo)
@@ -57953,7 +57954,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 					exc.HazExcelDesdeGrid()
 				except:
 					siono = "NO"
-				Mensajes().Info(self,u"El archivo de excel\n%s\n%s pudo ser generado!" % (archivo,siono), u"Atención")
+				Mensajes().Info(self,u"El archivo de excel\n%s\n%s pudo ser generado!" % (archivo,siono), u"Atenciï¿½n")
 				
 			evt.Skip()
 			return
@@ -58234,7 +58235,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 		producto = self.grid.GetCellValue( fila, 3)
 		cantidadanterior = self.grid.GetCellValue( fila, 5)
 
-		if Mensajes().YesNo(self,u"¿ Desea eliminar el registro %s ?" % (fila + 1), u"Confirmación"):
+		if Mensajes().YesNo(self,u"ï¿½ Desea eliminar el registro %s ?" % (fila + 1), u"Confirmaciï¿½n"):
 			
 			if "" in (producto, cantidad, unidad):
 				self.grid.DeleteRows(fila, 1)
@@ -58256,7 +58257,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 		if row:
 			unidadrequisicion = self.GetStringFromField(row[0])
 		else:
-			Mensajes().Info(self, u"El producto no cuenta con la unidad elegida para elaborar la requisición.\nAgrege al menos una unidad de conversión.",u"Aviso")
+			Mensajes().Info(self, u"El producto no cuenta con la unidad elegida para elaborar la requisiciï¿½n.\nAgrege al menos una unidad de conversiï¿½n.",u"Aviso")
 		
 		return unidadrequisicion
 	
@@ -58287,10 +58288,10 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 				if row:
 					unidad = self.GetStringFromField(row[0])
 				else:
-					Mensajes().Info(self, u"El producto no cuenta con unidad(es) para elaborar la requisición.\nAgrege al menos una unidad de conversión.",u"Aviso")
+					Mensajes().Info(self, u"El producto no cuenta con unidad(es) para elaborar la requisiciï¿½n.\nAgrege al menos una unidad de conversiï¿½n.",u"Aviso")
 					
 			else:
-					Mensajes().Info(self, u"El producto que solicita pertenece a otra categoría.",u"Aviso")
+					Mensajes().Info(self, u"El producto que solicita pertenece a otra categorï¿½a.",u"Aviso")
 				
 		else:
 			Mensajes().Info(self, u"No exite el producto que solicita.",u"Aviso")           
@@ -58321,7 +58322,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 			cursor.execute( str( sql ) )
 			siguiente = int(fetchone(cursor)[0])
 			
-		# aqui va el query de eliminacion de requisición o registro de detalle
+		# aqui va el query de eliminacion de requisiciï¿½n o registro de detalle
 		
 		sql = """
 		delete from gixprerequisicionesdet where idprerequisicion = %s and idprerequisiciondet = %s
@@ -58339,7 +58340,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 				fila = self.grid.GetGridCursorRow()
 				self.grid.SetCellValue(fila,0,str(partida))
 			
-			# aqui va el query de insercion de requisición o registro de detalle
+			# aqui va el query de insercion de requisiciï¿½n o registro de detalle
 			
 			sql = """
 			insert into gixprerequisicionesdet( idprerequisicion, idprerequisiciondet, cantidad, unidad, id_producto)
@@ -58356,7 +58357,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 			cursor.close()
 			r_cn.rollback()
 			
-			Mensajes().Info( self, u"No pudo afectarse la información", u"Atención")
+			Mensajes().Info( self, u"No pudo afectarse la informaciï¿½n", u"Atenciï¿½n")
 			
 			return False
 		
@@ -58367,7 +58368,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 	def OnBuscarCategoria(self,event):
 		
 		query = "select idcategoria, descripcion + ' - ' + idcategoria from gixcategorias order by descripcion" 
-		self.RelatedFieldSearch(u"Búsqueda de Categoría", query, ID_TEXTCTRLPREREQUISICIONESIDCATEGORIA)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Categorï¿½a", query, ID_TEXTCTRLPREREQUISICIONESIDCATEGORIA)
 		
 	def FillListBox(self, display = 'first'):
 		
@@ -58397,7 +58398,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 	def OnPrint(self,event):
 		
 		tabla = self.dbtable
-		meta = (( 120, u"Id Requisición"), (200,u"Categoría"), (80, u"Fecha"), (200,u"Area"))
+		meta = (( 120, u"Id Requisiciï¿½n"), (200,u"Categorï¿½a"), (80, u"Fecha"), (200,u"Area"))
 		query = """
 		select r.idprerequisicion, c.descripcion, convert(varchar(10), r.fecha_requerida,103), p.descripcion
 		from gixprerequisiciones r join gixpuestos p on p.idpuesto = r.idpuesto
@@ -58446,7 +58447,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 				if valor == "" and not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 						return
 				
 			if id == ID_TEXTCTRLPREREQUISICIONESIDCATEGORIA:
@@ -58454,13 +58455,13 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 				if idcategoria != "":
 					categoria = self.ObtenCategoria(idcategoria)
 					if categoria == "":
-						Mensajes().Info(self, u"¡ La categoría no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La categorï¿½a no existe !", u"Atenciï¿½n")
 						return
 					self.GetControl(ID_TEXTPREREQUISICIONESCATEGORIA).SetLabel(categoria)
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ La categoría no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ La categorï¿½a no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 		
 			if id == ID_TEXTCTRLPREREQUISICIONESIDPUESTO:
@@ -58468,20 +58469,20 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 				if idpuesto != "":
 					puesto = self.ObtenPuesto(idpuesto)
 					if puesto == "":
-						Mensajes().Info(self, u"¡ El area no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El area no existe !", u"Atenciï¿½n")
 						return
 					self.GetControl(ID_TEXTPREREQUISICIONESPUESTO).SetLabel(puesto)
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ El area no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El area no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 					
 		self.EndOfOnText(self.controlactual)
 		
 	def ObtenCategoria(self, idcategoria):
 		""" 
-		Obtener de base de datos la descripción de la categoria
+		Obtener de base de datos la descripciï¿½n de la categoria
 		"""
 		sql = "select descripcion from gixcategorias where idcategoria = '%s'" % idcategoria
 		
@@ -58500,7 +58501,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 		
 	def ObtenPuesto(self, idpuesto):
 		""" 
-		Obtener de base de datos la descripción del puesto (area)
+		Obtener de base de datos la descripciï¿½n del puesto (area)
 		"""
 		sql = "select descripcion from gixpuestos where idpuesto = '%s'" % idpuesto
 		
@@ -58540,8 +58541,8 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 				
 				if row is None:
 					cu.close()
-					Mensajes().Info(self,u"Sucedió algo que impidió enviar los e-mails\n%s"
-							% sql, u"Atención")
+					Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ enviar los e-mails\n%s"
+							% sql, u"Atenciï¿½n")
 					return False
 					
 				xautorizador_puesto, xsurtidor_puesto, xidempleado, xcategoria, xproducto, xcantidad, xunidad, xfecha_requerida = row
@@ -58562,8 +58563,8 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 				
 				if row is None:
 					cu.close()
-					Mensajes().Info(self,u"Sucedió algo que impidió enviar los e-mails\n%s"
-							% sql, u"Atención")
+					Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ enviar los e-mails\n%s"
+							% sql, u"Atenciï¿½n")
 					return False
 					
 				xcantidad, xunidad, xproducto = row
@@ -58638,7 +58639,7 @@ class GixPrerequisiciones(wx.Frame,GixBase):
 		
 		lEmail = dEmails.keys()
 		estatus = u"Confirmada"
-		nota = u"Requisición %s Confirmada." % idprerequisicion
+		nota = u"Requisiciï¿½n %s Confirmada." % idprerequisicion
 		nsubject = "Requisicion.%s %s Confirmada (No Contestar)" % (letracategoria, idprerequisicion)
 		nfromAddr = "gix@grupoiclar.com"
 		
@@ -58683,13 +58684,13 @@ Estatus: %s
 				json_string = urlopen("%s?%s" % (URLSMAIL, data)).read()
 				foo = json.loads(json_string)
 			
-		#Mensajes().Info(self, u"Mensaje \n %s \n %s" % (mensaje, "\n".join(lEmail)), u"Atención")
+		#Mensajes().Info(self, u"Mensaje \n %s \n %s" % (mensaje, "\n".join(lEmail)), u"Atenciï¿½n")
 		
 		return True
 	
 	def OnLimpiaCantidades(self, event):
 		
-		if Mensajes().YesNo(self, u"¿ Desea realmente limpiar todas las cantidades ?", u"Confirmación") :
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente limpiar todas las cantidades ?", u"Confirmaciï¿½n") :
 		
 			wx.BeginBusyCursor()
 			
@@ -58714,13 +58715,13 @@ Estatus: %s
 						if not self.UpdateRecordCantidad(idprerequisiciondet):
 			
 							producto = str(row[2])
-							Mensajes().Info(self,u"¡ No fué posible limpiar el producto %s !" % producto, u"Atención")
+							Mensajes().Info(self,u"ï¿½ No fuï¿½ posible limpiar el producto %s !" % producto, u"Atenciï¿½n")
 				
 				cursor.close()
 				r_cn.commit()
 				self.PrepararQuery()
 				wx.EndBusyCursor()
-				Mensajes().Info(self,u"A finalizado la limpieza de las cantidades.", u"Atención")
+				Mensajes().Info(self,u"A finalizado la limpieza de las cantidades.", u"Atenciï¿½n")
 					
 			except:
 				
@@ -58728,8 +58729,8 @@ Estatus: %s
 				r_cn.rollback()
 				self.PrepararQuery()
 				wx.EndBusyCursor()
-				Mensajes().Info(self,u"Sucedió algo que impidió limpiar las cantidades\n%s"
-						% sql, u"Atención")
+				Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ limpiar las cantidades\n%s"
+						% sql, u"Atenciï¿½n")
 		
 		return
 	
@@ -58744,7 +58745,7 @@ Estatus: %s
 
 		except:
 
-			Mensajes().Info(self,"Problemas al encoding del query",u"Atención")
+			Mensajes().Info(self,"Problemas al encoding del query",u"Atenciï¿½n")
 			
 			return False
 		
@@ -58761,7 +58762,7 @@ Estatus: %s
 		except:
 			
 			r_cn.rollback()
-			Mensajes().Info(self,"Problemas con \n%s" % sqlu, u"Atención")
+			Mensajes().Info(self,"Problemas con \n%s" % sqlu, u"Atenciï¿½n")
 			
 			return False
 		
@@ -58769,7 +58770,7 @@ Estatus: %s
 		
 	def OnCompactaProductos(self, event):
 		
-		if Mensajes().YesNo(self, u"¿ Desea realmente compactar los productos ?", u"Confirmación") :
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente compactar los productos ?", u"Confirmaciï¿½n") :
 		
 			wx.BeginBusyCursor()
 			
@@ -58794,13 +58795,13 @@ Estatus: %s
 						if not self.DeleteRecordPrerequisicionesDet(idprerequisiciondet):
 						
 							producto = str(row[2])
-							Mensajes().Info(self,u"¡ No fué posible compactar el producto %s !" % producto, u"Atención")
+							Mensajes().Info(self,u"ï¿½ No fuï¿½ posible compactar el producto %s !" % producto, u"Atenciï¿½n")
 				
 				cursor.close()
 				r_cn.commit()
 				self.PrepararQuery()
 				wx.EndBusyCursor()
-				Mensajes().Info(self,u"A finalizado la compactación de los productos.", u"Atención")
+				Mensajes().Info(self,u"A finalizado la compactaciï¿½n de los productos.", u"Atenciï¿½n")
 					
 			except:
 				
@@ -58808,8 +58809,8 @@ Estatus: %s
 				r_cn.rollback()
 				self.PrepararQuery()
 				wx.EndBusyCursor()
-				Mensajes().Info(self,u"Sucedió algo que impidió compactar los productos\n%s"
-						% sql, u"Atención")
+				Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ compactar los productos\n%s"
+						% sql, u"Atenciï¿½n")
 		
 		return
 
@@ -58819,7 +58820,7 @@ Estatus: %s
 
 		if idprerequisicion == "":
 			
-			Mensajes().Info(self, u"No se ha especificado la requisición", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado la requisiciï¿½n", u"Atenciï¿½n")
 			return False
 		
 		sql="""
@@ -58836,12 +58837,12 @@ Estatus: %s
 		
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\nQuizá se deba a que hay otra información\nque depende de este registro\n%s" % sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\nQuizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro\n%s" % sql, u"Atenciï¿½n")
 			return False
 
 	def OnCreaRequisiciones(self, event):
 
-		if Mensajes().YesNo(self, u"¿ Desea realmente enviar la requisición ?", u"Confirmación") :
+		if Mensajes().YesNo(self, u"ï¿½ Desea realmente enviar la requisiciï¿½n ?", u"Confirmaciï¿½n") :
 			
 			wx.BeginBusyCursor()
 			requisiciones = []
@@ -58905,17 +58906,17 @@ Estatus: %s
 				if requisiciones:
 					self.EnviaMails(idprerequisicion, requisiciones)
 					wx.EndBusyCursor()
-					Mensajes().Info(self,u"A finalizado el envio de la requisición.", u"Atención")
+					Mensajes().Info(self,u"A finalizado el envio de la requisiciï¿½n.", u"Atenciï¿½n")
 				else:
 					wx.EndBusyCursor()
-					Mensajes().Info(self,u"No se encontró ningún producto para enviar la requisición.\nA finalizado el envio de la requisición.", u"Atención")
+					Mensajes().Info(self,u"No se encontrï¿½ ningï¿½n producto para enviar la requisiciï¿½n.\nA finalizado el envio de la requisiciï¿½n.", u"Atenciï¿½n")
 				
 			except:
 				
 				cursor.close()
 				r_cn.rollback()
-				Mensajes().Info(self,u"Sucedió algo que impidió enviar la requisición\n%s\n%s\n%s"
-						% (sql, sqlReq, sqlx), u"Atención")
+				Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ enviar la requisiciï¿½n\n%s\n%s\n%s"
+						% (sql, sqlReq, sqlx), u"Atenciï¿½n")
 				wx.EndBusyCursor()
 		
 		return
@@ -58951,7 +58952,7 @@ Estatus: %s
 			
 		else:
 
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord( self ):
 		
@@ -59051,7 +59052,7 @@ Estatus: %s
 						sqlDet = "insert into gixprerequisicionesdet ( %s ) values ( %s ) " % ( sqlFields, sqlValues ) 
 						cursor.execute(str(sqlDet))
 					else:
-						Mensajes().Info(self, u"El producto '%s' no cuenta con unidad para elaborar la requisición.\nAgrege al menos una unidad de conversión."
+						Mensajes().Info(self, u"El producto '%s' no cuenta con unidad para elaborar la requisiciï¿½n.\nAgrege al menos una unidad de conversiï¿½n."
 								% id_producto, u"Aviso")
 		
 				
@@ -59062,8 +59063,8 @@ Estatus: %s
 				
 				cursor.close()
 				r_cn.rollback()
-				Mensajes().Info(self,u"Sucedió algo que impidió crear el detalle de la requisición\n%s"
-						% sql, u"Atención")
+				Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ crear el detalle de la requisiciï¿½n\n%s"
+						% sql, u"Atenciï¿½n")
 
 		wx.EndBusyCursor()
 		
@@ -59071,7 +59072,7 @@ Estatus: %s
 	
 	def OnDeleteRecord( self, event):
 
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n") :
 
 			if self.DeleteRecord():
 
@@ -59080,7 +59081,7 @@ Estatus: %s
 				
 				self.MoveOneStep("PREVIOUS")
 				lbx.Delete(pos)
-				Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+				Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 				#self.LimpiaControles()
 				self.tb.EnableTool( ID_TOOLSAV, False)
 				self.tb.EnableTool( ID_TOOLDEL, True)
@@ -59095,7 +59096,7 @@ Estatus: %s
 
 		if idprerequisicion  == "":
 			
-			Mensajes().Info(self, u"No se ha especificado la requisición", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado la requisiciï¿½n", u"Atenciï¿½n")
 			
 			return False
 		
@@ -59120,13 +59121,13 @@ Estatus: %s
 				if not self.DeleteRecordPrerequisicionesDet(idprerequisiciondet):
 				
 					producto = str(row[1])
-					Mensajes().Info(self,u"¡ No fué posible eliminar el producto %s !" % producto, u"Atención")
+					Mensajes().Info(self,u"ï¿½ No fuï¿½ posible eliminar el producto %s !" % producto, u"Atenciï¿½n")
 			
 			return True
 		
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\nQuizá se deba a que hay otra información\nque depende de este registro\n%s" % sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\nQuizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro\n%s" % sql, u"Atenciï¿½n")
 			return False
 	
 	def GetAnotherRecord(self, comparison):
@@ -59259,12 +59260,12 @@ class GixEntradasInventario(wx.Frame,GixBase):
 				self.PrepararQuery()
 			else:
 				self.GetControl(ID_NOTEBOOKENTRADASINV).SetSelection(0)
-				Mensajes().Info(self, u"Por favor introduzca la información general y grabela", u"Atención")
+				Mensajes().Info(self, u"Por favor introduzca la informaciï¿½n general y grabela", u"Atenciï¿½n")
 			
 	def BuscarProducto(self, fila, col):
 		
 		query = "select id_producto, id_producto + ' - ' + descripcion from gixproductos order by descripcion"
-		self.RelatedFieldSearchForGrid(u"Búsqueda de Producto", query, ID_GRIDENTRADASINV, fila, col)
+		self.RelatedFieldSearchForGrid(u"Bï¿½squeda de Producto", query, ID_GRIDENTRADASINV, fila, col)
 		
 	def InsertaFilas(self):
 		
@@ -59303,14 +59304,14 @@ class GixEntradasInventario(wx.Frame,GixBase):
 		grid.InsertRows(0,self.InsertaFilas())
 		columnas = [(0, 70, u"Cantidad"),
 			(1, 80, u"Producto"),
-			(2, 250, u"Descripción"),
+			(2, 250, u"Descripciï¿½n"),
 			(3, 90, u"Precio Unitario"),
 			(4, 95, u"Importe")]
 		grid.InsertCols(0, len(columnas))
-		#grid.ClearGrid() ¡ No es necesario !
-		#grid.CreateGrid(self.Filas(tipo), 1) ¡ La herramienta lo crea -x,y- !
+		#grid.ClearGrid() ï¿½ No es necesario !
+		#grid.CreateGrid(self.Filas(tipo), 1) ï¿½ La herramienta lo crea -x,y- !
 		for pos, ancho, titulo in columnas:
-			#pos, ancho, titulo = col ¡ Otra manera de asignarse -for col- !
+			#pos, ancho, titulo = col ï¿½ Otra manera de asignarse -for col- !
 			grid.SetColSize(pos, ancho)
 			grid.SetColLabelValue(pos, titulo)
 			
@@ -59389,7 +59390,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 			(70, u"Cantidad", wx.ALIGN_RIGHT),
 			(70, u"Unidad"),
 			(80, u"Producto (F1)"),
-			(250, u"Descripción"),
+			(250, u"Descripciï¿½n"),
 			(90, u"Precio Unitario",wx.ALIGN_RIGHT),
 			(95, u"Importe",wx.ALIGN_RIGHT),
 			(70, u"% Impuesto", wx.ALIGN_RIGHT),
@@ -59410,7 +59411,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 			
 		if evtkey == wx.WXK_F6:
 			archivo = "detalle_entradas_almacen.xls"
-			if Mensajes().YesNo(self, u"Desea volcar el detalle al archivo de excel\n %s ?" % (archivo), u"Atención"):
+			if Mensajes().YesNo(self, u"Desea volcar el detalle al archivo de excel\n %s ?" % (archivo), u"Atenciï¿½n"):
 				siono = "SI"
 				try:
 					exc = SimNoraExcel(excel = archivo)
@@ -59418,7 +59419,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 					exc.HazExcelDesdeGrid()
 				except:
 					siono = "NO"
-				Mensajes().Info(self,u"El archivo de excel\n%s\n%s pudo ser generado!" % (archivo,siono), u"Atención")
+				Mensajes().Info(self,u"El archivo de excel\n%s\n%s pudo ser generado!" % (archivo,siono), u"Atenciï¿½n")
 					
 				
 			evt.Skip()
@@ -59430,7 +59431,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 			producto = self.grid.GetCellValue( fila, col)
 			descrip, unidad = self.ObtenDescripcionProducto(producto)
 			if producto and descrip == "":
-				Mensajes().Info(self, u"Producto  equivocado, revise la descripción",u"Aviso")
+				Mensajes().Info(self, u"Producto  equivocado, revise la descripciï¿½n",u"Aviso")
 				return
 			if producto and unidad == "":
 				Mensajes().Info(self, u"Producto  equivocado, revise la unidad de compra",u"Aviso")
@@ -59457,7 +59458,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 			producto = self.grid.GetCellValue( fila, col)
 			descrip, unidad = self.ObtenDescripcionProducto(producto)
 			if descrip == "":
-				Mensajes().Info(self, "Producto  equivocado, revise la descripción","Aviso")
+				Mensajes().Info(self, "Producto  equivocado, revise la descripciï¿½n","Aviso")
 				return
 			if unidad == "":
 				Mensajes().Info(self, "Producto  equivocado, revise la unidad de compra","Aviso")
@@ -59737,7 +59738,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 		cantidadanterior = self.grid.GetCellValue( fila, 9)
 		
 
-		if Mensajes().YesNo(self,u"¿ Desea eliminar la partida %s ?" % (fila + 1), u"Confirmación"):
+		if Mensajes().YesNo(self,u"ï¿½ Desea eliminar la partida %s ?" % (fila + 1), u"Confirmaciï¿½n"):
 			if "" in (producto, cantidad, unidad, precio_uintario, porcentajeimpuesto, notas):
 				
 				self.grid.DeleteRows(fila, 1)
@@ -59836,7 +59837,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 		except:
 			cursor.close()
 			r_cn.rollback()
-			Mensajes().Info( self, u"No pudo afectarse la información", u"Atención")
+			Mensajes().Info( self, u"No pudo afectarse la informaciï¿½n", u"Atenciï¿½n")
 			return False
 
 		self.grid.AutoSizeColumns()
@@ -59845,7 +59846,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 	def OnBuscarProveedor(self,event):
 		
 		query = "select idproveedor, razonsocial + ' - ' + convert(varchar(7), idproveedor) from gixproveedores order by razonsocial" 
-		self.RelatedFieldSearch(u"Búsqueda de Proveedor", query, ID_TEXTCTRLENTRADASINVPROVEEDOR)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Proveedor", query, ID_TEXTCTRLENTRADASINVPROVEEDOR)
 		
 	def FillListBox(self, display = 'first'):
 		
@@ -59918,24 +59919,24 @@ class GixEntradasInventario(wx.Frame,GixBase):
 				if valor == "" and not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 						return
 				
 			if id == ID_TEXTCTRLENTRADASINVPROVEEDOR:
 				proveedor = control.GetValue().strip()
 				if proveedor != "":
 					if not proveedor.isdigit():
-						Mensajes().Info(self, u"¡ El proveedor debe ser numérico !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El proveedor debe ser numï¿½rico !", u"Atenciï¿½n")
 						return
 					razonsocial = self.ObtenProveedor(proveedor)
 					if razonsocial == "":
-						Mensajes().Info(self, u"¡ El proveedor no existe !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El proveedor no existe !", u"Atenciï¿½n")
 						return
 					self.GetControl(ID_ENTRADASINVPROVEEDOR).SetLabel(razonsocial)
 				elif not self.FillingARecord and not self.NewFlag:
 					self.NewFlag = True
 					if not VengodelaLista:
-						Mensajes().Info(self, u"¡ El proveedor no debe quedar en blanco !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El proveedor no debe quedar en blanco !", u"Atenciï¿½n")
 						return
 		
 		self.EndOfOnText(self.controlactual)    
@@ -59998,7 +59999,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 			
 		else:
 
-			Mensajes().Info(self,u"¡ El Registro no fue grabado !", u"Atención")
+			Mensajes().Info(self,u"ï¿½ El Registro no fue grabado !", u"Atenciï¿½n")
 			
 	def UpdateRecord( self ):
 		
@@ -60067,7 +60068,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 	
 	def OnDeleteRecord( self, event):
 
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n") :
 
 			if self.DeleteRecord():
 
@@ -60076,7 +60077,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 				
 				self.MoveOneStep("PREVIOUS")
 				lbx.Delete(pos)
-				Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+				Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 				#self.LimpiaControles()
 				self.tb.EnableTool( ID_TOOLSAV, False)
 				self.tb.EnableTool( ID_TOOLDEL, True)
@@ -60090,7 +60091,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 
 		if entrada  == "":
 			
-			Mensajes().Info(self, u"No se ha especificado la entrada", u"Atención")
+			Mensajes().Info(self, u"No se ha especificado la entrada", u"Atenciï¿½n")
 			return False
 		
 		sql = "delete from %s where identradainv = %s" % ( self.dbtable, entrada ) 
@@ -60105,7 +60106,7 @@ class GixEntradasInventario(wx.Frame,GixBase):
 		
 		except:
 			r_cn.rollback()
-			Mensajes().Info(self,u"Sucedió algo que impidió eliminar este registro.\nQuizá se deba a que hay otra información\nque depende de este registro\n%s" % sql, u"Atención")
+			Mensajes().Info(self,u"Sucediï¿½ algo que impidiï¿½ eliminar este registro.\nQuizï¿½ se deba a que hay otra informaciï¿½n\nque depende de este registro\n%s" % sql, u"Atenciï¿½n")
 			return False
 	
 	def GetAnotherRecord(self, comparison):
@@ -60222,7 +60223,7 @@ class GixEntradasInventarioDetalle(gridlib.Grid):
 		self.meta = (( 70, u"Cantidad", wx.ALIGN_RIGHT),
 			(60, u"Unidad"),
 			(80, u"Producto"),
-			( 250, u"Descripción"),
+			( 250, u"Descripciï¿½n"),
 			( 90, u"Precio Unitario",wx.ALIGN_RIGHT),
 			( 95, u"Importe",wx.ALIGN_RIGHT))
 		
@@ -60240,7 +60241,7 @@ class GixEntradasInventarioDetalle(gridlib.Grid):
 		
 		if evtkey == wx.WXK_F6:
 			archivo = "detalle_entradas_almacen.xls"
-			if Mensajes().YesNo(self, u"Desea volcar el detalle al archivo de excel\n %s?" % (archivo), u"Atención"):
+			if Mensajes().YesNo(self, u"Desea volcar el detalle al archivo de excel\n %s?" % (archivo), u"Atenciï¿½n"):
 				siono = "SI"
 				try:
 					exc = SimNoraExcel(excel = archivo)
@@ -60248,14 +60249,14 @@ class GixEntradasInventarioDetalle(gridlib.Grid):
 					exc.HazExcelDesdeGrid()
 				except:
 					siono = "NO"
-				Mensajes().Info(self,u"El archivo de excel\n%s\n%s pudo ser generado!" % (archivo,siono), u"Atención")
+				Mensajes().Info(self,u"El archivo de excel\n%s\n%s pudo ser generado!" % (archivo,siono), u"Atenciï¿½n")
 					
 				
 			evt.Skip()
 			return
 		
 		#if evt.KeyCode() == wx.WXK_F5:
-			#opciones = [u"Número Empleado", "Nombre", "Concepto"]
+			#opciones = [u"Nï¿½mero Empleado", "Nombre", "Concepto"]
 			#indi = wx.GetSingleChoiceIndex(u"Elija criterio para ordenar la lista", u"Ordenamiento", opciones)
 			#if indi >= 0:
 				#self.Sort(indi)
@@ -60267,14 +60268,14 @@ class GixEntradasInventarioDetalle(gridlib.Grid):
 			##Mensajes().Info(self, "F1", "hey")
 			#if col == 2:
 			
-				#indi = wx.GetSingleChoiceIndex(u"Elija una deducción", u"Deducciones", self.descripciondeducciones)
+				#indi = wx.GetSingleChoiceIndex(u"Elija una deducciï¿½n", u"Deducciones", self.descripciondeducciones)
 				#if indi >= 0:
 					#self.SetCellValue(fila, col, str(self.deducciones[indi]))
 					
 			#if col == 7:
 				#acum, ctos = self.ObtenerAcumulado(self.GetCellValue(fila,0),self.GetCellValue(fila,2),self.GetCellValue(fila,5))
 				#if acum:
-					#if Mensajes().YesNo(self, u"El Acumulado en base a lo calculado\nes $%s\nDesea tomarlo?" % (acum), u"Atención"):
+					#if Mensajes().YesNo(self, u"El Acumulado en base a lo calculado\nes $%s\nDesea tomarlo?" % (acum), u"Atenciï¿½n"):
 						#self.SetCellValue(fila,col, str(acum))
 			
 			#if col == 9:
@@ -60388,7 +60389,7 @@ class GixEntradasInventarioDetalle(gridlib.Grid):
 		metapiece_selected = metapiece
 		#columnas = [(0, 70, u"Cantidad"),
 			#(1, 80, u"Producto"),
-			#(2, 250, u"Descripción"),
+			#(2, 250, u"Descripciï¿½n"),
 			#(3, 90, u"Precio Unitario"),
 			#(4, 95, u"Importe")]
 		
@@ -60499,7 +60500,7 @@ class GixEntradasInventarioDetalle(gridlib.Grid):
 		precio_uintario = self.GetCellValue( fila, 3)
 		
 
-		if Mensajes().YesNo(self,"Desea eliminar la fila %s" % (fila,),u"Atención"):
+		if Mensajes().YesNo(self,"Desea eliminar la fila %s" % (fila,),u"Atenciï¿½n"):
 			if "" in (fila, cantidad, precio_uintario):
 				
 				self.DeleteRows(fila, 1)
@@ -60536,7 +60537,7 @@ class GixEntradasInventarioDetalle(gridlib.Grid):
 		except:
 			cursor.close()
 			r_cn.rollback()
-			Mensajes().Info( self, u"No pudo afectarse la información", u"Atención")
+			Mensajes().Info( self, u"No pudo afectarse la informaciï¿½n", u"Atenciï¿½n")
 			return False
 
 		return True
@@ -60584,7 +60585,7 @@ class GixFrame(wx.Frame, GixBase):
 		self.CreateStatusBar(2)
 		self.SetStatusWidths(anchos)
 		self.ReLogin(None)
-		self.SetStatusText(u"GIX versión %s (Desarrollado por Smartics) " % GIXVERSION, 0)
+		self.SetStatusText(u"GIX versiï¿½n %s (Desarrollado por Smartics) " % GIXVERSION, 0)
 		self.SetStatusText(u"Usuario: %s" % self.usuario, 1)
 		
 		panel = wx.Panel( self, -1)
@@ -60598,7 +60599,7 @@ class GixFrame(wx.Frame, GixBase):
 			#self.bmp = wx.StaticBitmap(parent = panel, bitmap = temp)
 			#sizer.Add(self.bmp, 0, wx.ALIGN_CENTER_HORIZONTAL| wx.ALL, 5)
 			
-			#self.stext = wx.StaticText(panel, ID_TEXT, u"Versión %s" % GIXVERSION, wx.DefaultPosition, wx.DefaultSize, 0)
+			#self.stext = wx.StaticText(panel, ID_TEXT, u"Versiï¿½n %s" % GIXVERSION, wx.DefaultPosition, wx.DefaultSize, 0)
 			#self.stext.SetForegroundColour(wx.BLUE)
 			#sizer.Add(self.stext, 0, wx.ALIGN_CENTER_HORIZONTAL| wx.ALL, 5 )
 			
@@ -60759,8 +60760,8 @@ class GixFrame(wx.Frame, GixBase):
 	# WDR: methods for GixFrame
 
 		try:
-			#ToasterBoxSimple.play(self, u"Iniciando sesión %s" % self.usuario)
-			ToasterBoxComplex.play(self, u"Iniciando Sesión", self.usuario)
+			#ToasterBoxSimple.play(self, u"Iniciando sesiï¿½n %s" % self.usuario)
+			ToasterBoxComplex.play(self, u"Iniciando Sesiï¿½n", self.usuario)
 		except:
 			pass
 	
@@ -60796,8 +60797,8 @@ class GixFrame(wx.Frame, GixBase):
 			except:
 				pass
 			
-			warnings.warn("<<Se perdio la conexión con el coordinador central>>")
-			Mensajes().Error(self, u"¡ Se ha perdido la conexión con el coordinador central !", u"Atención")
+			warnings.warn("<<Se perdio la conexiï¿½n con el coordinador central>>")
+			Mensajes().Error(self, u"ï¿½ Se ha perdido la conexiï¿½n con el coordinador central !", u"Atenciï¿½n")
 			conexion = False
 			
 		return conexion
@@ -60810,12 +60811,12 @@ class GixFrame(wx.Frame, GixBase):
 			r_cn = gixmodel.reasignarconexion()
 			asignaConexion(r_cn)
 			mcache = gixmodel.mcache
-			warnings.warn("<<Se restablecio la conexión con el coordinador central>>")
-			Mensajes().Info(self, u"¡ Se ha restablecido la conexión con el coordinador central !", u"Aviso")
+			warnings.warn("<<Se restablecio la conexiï¿½n con el coordinador central>>")
+			Mensajes().Info(self, u"ï¿½ Se ha restablecido la conexiï¿½n con el coordinador central !", u"Aviso")
 		else:
-			warnings.warn("<<Se estan experimentando problemas para restablecer la conexión con el coordinador central>>")
-			Mensajes().Error(self, u"¡ Se estan experimentando problemas para restablecer la conexión" \
-							u"con el coordinador central !", u"Atención")
+			warnings.warn("<<Se estan experimentando problemas para restablecer la conexiï¿½n con el coordinador central>>")
+			Mensajes().Error(self, u"ï¿½ Se estan experimentando problemas para restablecer la conexiï¿½n" \
+							u"con el coordinador central !", u"Atenciï¿½n")
 			
 	def CreateMyMenuBar(self):
 		self.SetMenuBar( MyMenuBarFunc() )
@@ -60833,7 +60834,7 @@ class GixFrame(wx.Frame, GixBase):
 		
 	def OnNuevaRequisicion(self,event):
 		
-		titulo = u"Requisición Producto Unico"
+		titulo = u"Requisiciï¿½n Producto Unico"
 		dialog = GixRequisicion(self,-1, titulo, size = (450,400),style = wx.DEFAULT_DIALOG_STYLE, usuario = self.usuario)
 		
 		dialog.CenterOnScreen()
@@ -60872,7 +60873,7 @@ class GixFrame(wx.Frame, GixBase):
 	def OnCatalogoCuentasContabilidad(self, event):
 		
 		id = event.GetId()
-		titulo = u"Catálogo de Cuentas"
+		titulo = u"Catï¿½logo de Cuentas"
 		dialog = GixCatalogoCuentasContabilidad( self, -1, titulo, size = (800,620), style = wx.DEFAULT_DIALOG_STYLE)
 		
 		wx.BeginBusyCursor()
@@ -60887,7 +60888,7 @@ class GixFrame(wx.Frame, GixBase):
 	def OnCatalogoPartidasEgresos(self, event):
 		
 		id = event.GetId()
-		titulo = u"Catálogo de las Partidas Financieras"
+		titulo = u"Catï¿½logo de las Partidas Financieras"
 		dialog = GixCatalogoPartidasEgresos(self, -1, titulo, size = (870,690), style = wx.DEFAULT_DIALOG_STYLE,
 		                                    usuario = self.usuario)
 		
@@ -60902,7 +60903,7 @@ class GixFrame(wx.Frame, GixBase):
 
 	def OnImportaArchivoDbf(self, event):
 
-		password = wx.GetPasswordFromUser(u"Digite Contraseña", caption = u"Autorización",
+		password = wx.GetPasswordFromUser(u"Digite Contraseï¿½a", caption = u"Autorizaciï¿½n",
 												default_value = "", parent = None)
 
 		if password:
@@ -60911,7 +60912,7 @@ class GixFrame(wx.Frame, GixBase):
 				dlg.CenterOnScreen()
 				dlg.ShowModal()
 			else:
-				Mensajes().Error(self, u"¡ Contraseña Inválida !", u"Acceso Denegado")
+				Mensajes().Error(self, u"ï¿½ Contraseï¿½a Invï¿½lida !", u"Acceso Denegado")
 			
 		return
 	@logger
@@ -60953,19 +60954,19 @@ class GixFrame(wx.Frame, GixBase):
 		"""
 		Este metodo es para invocar cualquier ABC
 		"""
-		dOpciones = dict(ID_MENU_PUESTOS = (u"Catálogo de Puestos",GixPuestos,630,420),
-					ID_MENU_PERSONAS = (u"Cátálogo de Empleados", GixEmpleados,550,490),
-					ID_MENU_CATEGORIAS = (u"Catálogo de Categorías", GixCategorias, 680,390),
-					ID_MENU_PRODUCTOS = (u"Catálogo de Productos", GixProductos, 650,440),
-					ID_MENU_PROVEEDORES = (u"Catálogo de Proveedores", GixProveedores, 620,550),
-					ID_MENU_RECFINCAT_BANCOS = (u"Catálogo de Bancos y Cuentas", GixBancos, 640,690),
+		dOpciones = dict(ID_MENU_PUESTOS = (u"Catï¿½logo de Puestos",GixPuestos,630,420),
+					ID_MENU_PERSONAS = (u"Cï¿½tï¿½logo de Empleados", GixEmpleados,550,490),
+					ID_MENU_CATEGORIAS = (u"Catï¿½logo de Categorï¿½as", GixCategorias, 680,390),
+					ID_MENU_PRODUCTOS = (u"Catï¿½logo de Productos", GixProductos, 650,440),
+					ID_MENU_PROVEEDORES = (u"Catï¿½logo de Proveedores", GixProveedores, 620,550),
+					ID_MENU_RECFINCAT_BANCOS = (u"Catï¿½logo de Bancos y Cuentas", GixBancos, 640,690),
 					ID_MENU_ENTRADAS_INVENTARIO = (u"Entradas al Inventario", GixEntradasInventario, 800,490),
-					ID_MENU_POLIZAS_CONTABILIDAD = (u"Pólizas Contables", GixPolizasContables, 582,620),
+					ID_MENU_POLIZAS_CONTABILIDAD = (u"Pï¿½lizas Contables", GixPolizasContables, 582,620),
 					ID_MENU_PREREQUISICIONES = (u"Requisiciones", GixPrerequisiciones, 800,490),
-					ID_MENU_FACTORES_CONVERSION = (u"Factores de Conversión de Unidades", GixUnidadesFactores, 800,460),
+					ID_MENU_FACTORES_CONVERSION = (u"Factores de Conversiï¿½n de Unidades", GixUnidadesFactores, 800,460),
 					ID_MENU_EMPRESAS_CENTROS_COSTOS = (u"Empresas y Centros de Costos", GixEmpresasCentrosCostos, 650,510),
 					ID_MENU_RECFIN_CAPTURAS_BANCOS = (u"Capturas Bancos", GixMovimientosBancos, 700,700),
-					ID_MENU_RECFINING_CLASIFICACION = (u"Clasificación de Ingresos", GixIngresosClasificacion, 750,700),
+					ID_MENU_RECFINING_CLASIFICACION = (u"Clasificaciï¿½n de Ingresos", GixIngresosClasificacion, 750,700),
 					ID_MENU_RECFINEGR_CHEQUES_SOLICITUD = (u"Solicitud de Cheques", GixEgrSolicitudCheques, 750,700),
 					ID_MENU_VENTAS_PROSPECTOS = (u"Prospectos", GixVentasProspectosBueno, 800,700),
 					ID_MENU_VENTAS_CANALIZAR_PROSPECTOS = (u"Canalizar Prospectos", GixVentasProspectosConsulta, 1000,720),
@@ -60973,33 +60974,33 @@ class GixFrame(wx.Frame, GixBase):
 					ID_MENU_RECEPCION_CONTEO_MEDIOS = (u"Conteo Medios Publicitarios", GixConteoMediosPublicitarios, 620,700),
 					ID_MENU_CLIENTES_PROSPECTOS = (u"Prospectos", GixVentasProspectosBueno, 800,700),
 					ID_MENU_RECFINEGR_EGRESOS_OTROS = (u"Otros Egresos", GixEgresosOtros, 750,700),
-					ID_MENU_VENTAS_MEDIOS_PUBLICITARIOS = (u"Catálogo de Medios Publicitarios", GixMediosPublicitarios, 770,420),
-					ID_MENU_VENTAS_GUARDIAS = (u"Catálogo de Guardias", GixGuardias, 900,640),
+					ID_MENU_VENTAS_MEDIOS_PUBLICITARIOS = (u"Catï¿½logo de Medios Publicitarios", GixMediosPublicitarios, 770,420),
+					ID_MENU_VENTAS_GUARDIAS = (u"Catï¿½logo de Guardias", GixGuardias, 900,640),
 					ID_MENU_VENTAS_CANDIDATOS_GUARDIA = (u"Vendedores Candidatos a Cubrir Guardia", GixVentasCandidatos, 640, 700),
-					ID_MENU_VENTAS_PRECIOS_SUSTENTABLES_OFERTAS = (u"Asignación de Precio Sustentable a Ofertas de Compra", GixPrecioSustentableOferta, 800, 700),
-					ID_MENU_VENTAS_PRECIOS_SUSTENTABLES_INMUEBLES = (u"Asignación de Precio Sustentable a Inmuebles", GixPrecioSustentableInmueble, 1000, 700),
-					ID_MENU_VENTAS_SOLICITUD_DEVOLUCION = (u"Solicitud de Devolución de Saldo a Favor", GixEgrSolicitudCheques, 750,700),
-					ID_MENU_RECFINCAT_FIRMANTES = (u"Catálogo de Firmantes", GixFirmantes, 770,420),
-					ID_MENU_VENTAS_VENDEDORES = (u"Catálogo de Vendedores y Comisiones", GixVendedores, 870,720),
-					ID_MENU_CTRLOBRASCAT_PROVEEDORES = (u"Catálogo de Proveedores de Obra", GixProveedoresObra, 870,690),
-					ID_MENU_CTRLOBRASCAT_CONCEPTOS = (u"Catálogo de Conceptos de Estimación para Facturación", GixConceptosEstimacion, 770,420),
+					ID_MENU_VENTAS_PRECIOS_SUSTENTABLES_OFERTAS = (u"Asignaciï¿½n de Precio Sustentable a Ofertas de Compra", GixPrecioSustentableOferta, 800, 700),
+					ID_MENU_VENTAS_PRECIOS_SUSTENTABLES_INMUEBLES = (u"Asignaciï¿½n de Precio Sustentable a Inmuebles", GixPrecioSustentableInmueble, 1000, 700),
+					ID_MENU_VENTAS_SOLICITUD_DEVOLUCION = (u"Solicitud de Devoluciï¿½n de Saldo a Favor", GixEgrSolicitudCheques, 750,700),
+					ID_MENU_RECFINCAT_FIRMANTES = (u"Catï¿½logo de Firmantes", GixFirmantes, 770,420),
+					ID_MENU_VENTAS_VENDEDORES = (u"Catï¿½logo de Vendedores y Comisiones", GixVendedores, 870,720),
+					ID_MENU_CTRLOBRASCAT_PROVEEDORES = (u"Catï¿½logo de Proveedores de Obra", GixProveedoresObra, 870,690),
+					ID_MENU_CTRLOBRASCAT_CONCEPTOS = (u"Catï¿½logo de Conceptos de Estimaciï¿½n para Facturaciï¿½n", GixConceptosEstimacion, 770,420),
 					ID_MENU_CTRLOBRAS_CONTRATOS = (u"Contratos de Obra y Convenios Modificatorios", GixContratosObrasConvenios, 870,720),
-					ID_MENU_CTRLOBRAS_ESTIMACIONES = (u"Estimaciones / Facturación", GixFacturasEstimaciones, 940,720),
-					ID_MENU_CTRLOBRAS_APLICACION_PAGOS = (u"Aplicación de Pagos a Estimaciones / Facturas", GixAplicacionPagoEstimacion, 940,610),
+					ID_MENU_CTRLOBRAS_ESTIMACIONES = (u"Estimaciones / Facturaciï¿½n", GixFacturasEstimaciones, 940,720),
+					ID_MENU_CTRLOBRAS_APLICACION_PAGOS = (u"Aplicaciï¿½n de Pagos a Estimaciones / Facturas", GixAplicacionPagoEstimacion, 940,610),
 					ID_MENU_VENTAS_PRECIOS_SUSTENTABLES_PRECIOS = (u"Precios Sustentables para Ofertas de Compra", GixPreciosSustentables, 770, 450),
-					ID_MENU_RECFINARCADIA_RECIBOS_PAGO_PINARES = (u"Arcadia (Pinares Tapalpa) - Aplicación de Pagos y Generación de Recibos", GixRecibosPagoPinaresFunc1, 1000,650),
-					ID_MENU_PRESUP_ANALISISCOSTOS = (u"Análisis de Costos - Vivienda Economica", GixPresupAnalisisCostos, 940, 655),
+					ID_MENU_RECFINARCADIA_RECIBOS_PAGO_PINARES = (u"Arcadia (Pinares Tapalpa) - Aplicaciï¿½n de Pagos y Generaciï¿½n de Recibos", GixRecibosPagoPinaresFunc1, 1000,650),
+					ID_MENU_PRESUP_ANALISISCOSTOS = (u"Anï¿½lisis de Costos - Vivienda Economica", GixPresupAnalisisCostos, 940, 655),
 					ID_MENU_VENTAS_RECIBOS_DE_PAGO = (u"Pagos de Clientes", GixPagosDeClientesFunc1, 770,420),
-					ID_MENU_RECFINARCADIA_TABLAS_AMORTIZACION_PINARES = (u"Tablas de Pagos/Amortización, Contratos y Generación de Cuentas", GixTablasAmortizacionFunc1, 970,700),
+					ID_MENU_RECFINARCADIA_TABLAS_AMORTIZACION_PINARES = (u"Tablas de Pagos/Amortizaciï¿½n, Contratos y Generaciï¿½n de Cuentas", GixTablasAmortizacionFunc1, 970,700),
 					ID_MENU_VENTAS_LISTA_DE_PRECIOS = (u"Lista de Precios", GixPreciosEtapaFunc1, 770,630),
 					ID_MENU_VENTAS_OFERTAS_DE_COMPRA = (u"Ofertas de Compra", GixOfertasDeCompraFunc1, 630,580),
-		                        ID_MENU_VENTAS_REPORTE_OFERTAS_ASIGNACIONES = (u"Reporte de Ofertas de Compra y Asignación de Inmuebles", GixReporteOfertasAsignacionesFunc1, 970, 700),
-		                        ID_MENU_VENTAS_ASIGNACION_PRECIOS_INMUEBLES = (u"Asignación de Precios a Inmuebles", GixAsignacionPreciosInmueblesFunc1, 800, 700),
+		                        ID_MENU_VENTAS_REPORTE_OFERTAS_ASIGNACIONES = (u"Reporte de Ofertas de Compra y Asignaciï¿½n de Inmuebles", GixReporteOfertasAsignacionesFunc1, 970, 700),
+		                        ID_MENU_VENTAS_ASIGNACION_PRECIOS_INMUEBLES = (u"Asignaciï¿½n de Precios a Inmuebles", GixAsignacionPreciosInmueblesFunc1, 800, 700),
 					ID_MENU_RECFINARCADIA_ESTADO_CUENTA_PINARES = (u"Arcadia (Pinares Tapalpa) - Estados de Cuenta", GixEstadoCuentaPinaresFunc1, 995,670),
 					ID_MENU_VENTAS_CLIENTES = (u"Clientes", GixClientesVentasFunc1, 610,650),
 					ID_MENU_RECFINARCADIA_VENDEDORES_PINARES = (u"Arcadia (Pinares Tapalpa) - Vendedores", GixVendedoresVentasPinaresFunc1, 610,650),
 					ID_MENU_RECFINARCADIA_CLIENTES_PINARES = (u"Arcadia (Pinares Tapalpa) - Clientes", GixClientesVentasPinaresFunc1, 610,650),
-		                        ID_MENU_RECFINARCADIA_INSTRUCCION_ESCRITURA_PINARES = (u"Impresión de Instrucción de Escritura", GixInstruccionEscrituraFunc1, 810,650))
+		                        ID_MENU_RECFINARCADIA_INSTRUCCION_ESCRITURA_PINARES = (u"Impresiï¿½n de Instrucciï¿½n de Escritura", GixInstruccionEscrituraFunc1, 810,650))
 		
 		claseusuario = (GixPrerequisiciones, GixPolizasContables, GixMovimientosBancos, GixBancos, GixGuardias,
 				GixEgrSolicitudCheques, GixIngresosClasificacion, GixVentasProspectosBueno, GixEgresosOtros,
@@ -61015,7 +61016,7 @@ class GixFrame(wx.Frame, GixBase):
 		id = event.GetId()
 		titulo, clase, ancho, alto = dOpciones[dAux[id]]
 		if clase in claseusuario:
-			if titulo == u"Solicitud de Devolución de Saldo a Favor":
+			if titulo == u"Solicitud de Devoluciï¿½n de Saldo a Favor":
 				frame = clase(self, -1, titulo, wx.Point(20,20), wx.Size(ancho,alto), usuario = self.usuario,
 							  devolucionsaldo = True)
 			else:
@@ -61027,12 +61028,12 @@ class GixFrame(wx.Frame, GixBase):
 			
 		frame.Centre(wx.BOTH)
 
-		if titulo == u"Pólizas Contables":
+		if titulo == u"Pï¿½lizas Contables":
 			global SUSCRIPTOR
 			if SUSCRIPTOR:
 				frame.LigarCatalogoCuentas()
 				frame.Show(True)
-			elif Mensajes().YesNo(self, u"¿ Desea ligarse al catálogo de cuentas ?", u"Iniciando Pólizas Contables"):
+			elif Mensajes().YesNo(self, u"ï¿½ Desea ligarse al catï¿½logo de cuentas ?", u"Iniciando Pï¿½lizas Contables"):
 				frame.LigarCatalogoCuentas()
 				frame.Show(True)
 				frame.SetFocus()
@@ -61106,7 +61107,7 @@ log
 		
 	def OnRoles(self,event):
 		
-		meta = (( 14, "Id Rol") , (100, u"Descripción"))
+		meta = (( 14, "Id Rol") , (100, u"Descripciï¿½n"))
 		
 		query = """
 		select idrol, descripcion from gixroles order by idrol
@@ -61128,7 +61129,7 @@ log
 	
 	def OnPolizasContables(self, event):
 		
-		titulo = u"Pólizas Contables"
+		titulo = u"Pï¿½lizas Contables"
 		dlg = GixPolizasContables(self, -1, titulo, size = (800,620), style = wx.DEFAULT_DIALOG_STYLE)
 		
 		dlg.CenterOnScreen()
@@ -61136,7 +61137,7 @@ log
 	
 		return
 	
-		#GixSuscriptor()   Para mostrar como el suscriptor cacha el número de cuenta
+		#GixSuscriptor()   Para mostrar como el suscriptor cacha el nï¿½mero de cuenta
 		
 	def OnEnConstruccion(self, event):
 
@@ -61185,9 +61186,9 @@ log
 		
 	def OnUsuario(self,event):
 		
-		if Mensajes().YesNo(self, u"Desea regenerar MD5s ?", u"Atención" ):
+		if Mensajes().YesNo(self, u"Desea regenerar MD5s ?", u"Atenciï¿½n" ):
 			self.RegeneraMD5()
-		meta = (( 120, "Usuario") , (200, u"Nombre"), (120,u"Contraseña"))
+		meta = (( 120, "Usuario") , (200, u"Nombre"), (120,u"Contraseï¿½a"))
 		
 		query = """
 		select usuario, nombre, password
@@ -61203,7 +61204,7 @@ log
 		
 	def OnEstatus(self,event):
 		
-		meta = (( 14, "Id Estatus") , (100, u"Descripción"), (300,u"Descripción Ampliada"))
+		meta = (( 14, "Id Estatus") , (100, u"Descripciï¿½n"), (300,u"Descripciï¿½n Ampliada"))
 		
 		query = """
 		select idestatus, descripcion, descripcion_ampliada
@@ -61238,8 +61239,8 @@ log
 
 	def OnInventarioCompras(self,event):
 		
-		opciones = [u"Todas",  u"Todas Faltantes", u"Determinada Categoría", 
-					u"Determinada Categoría Faltantes                                                "]
+		opciones = [u"Todas",  u"Todas Faltantes", u"Determinada Categorï¿½a", 
+					u"Determinada Categorï¿½a Faltantes                                                "]
 		opcion = wx.GetSingleChoiceIndex("Elija", u"Requisiciones vs. Existencias", opciones)
 		
 		if opcion not in (0,1,2,3):
@@ -61272,7 +61273,7 @@ log
 				
 			cursor.close()
 			if len(lCats) > 0:
-				cual = wx.GetSingleChoiceIndex( "Elija", u"Categorías", lCatNombres)
+				cual = wx.GetSingleChoiceIndex( "Elija", u"Categorï¿½as", lCatNombres)
 				if cual > -1:
 					categoria = lCats[cual]
 					additionalWhere = " where p.categoria = '%s' " % categoria
@@ -61286,8 +61287,8 @@ log
 			( 70, u"Requerido", wx.ALIGN_RIGHT, "amount_and_cents_with_commas(%s)"),
 			( 70, u"Diferencia", wx.ALIGN_RIGHT, "amount_and_cents_with_commas(%s)"),
 			(120, u"Producto"),
-			(250, u"Descripción"),
-			(100, u"Categoría"),
+			(250, u"Descripciï¿½n"),
+			(100, u"Categorï¿½a"),
 			(100,u"En letras", wx.ALIGN_LEFT, "aletras(%s)"))
 		
 		
@@ -61332,7 +61333,7 @@ log
 		
 	def OnSugerencias(self,event):
 		
-		meta = ((90,u"Sugerencia") , (80, u"Categoría"), (150,u"Producto"), (90,u"Requerido"), (70,u"Cantidad"),
+		meta = ((90,u"Sugerencia") , (80, u"Categorï¿½a"), (150,u"Producto"), (90,u"Requerido"), (70,u"Cantidad"),
 			(80,u"Unidad"), (700,u"Comentario"))
 		
 		query = """
@@ -61422,7 +61423,7 @@ log
 		for row in rows:
 			etapas.append("%04d %s %s" % (row[0] ,self.GetStringFromField(row[1]) , self.GetStringFromField(row[2]) ) )
 		wx.EndBusyCursor()
-		#Mensajes().Info(self, mensaje, u"Atención")
+		#Mensajes().Info(self, mensaje, u"Atenciï¿½n")
 		sc_dialog = wx.SingleChoiceDialog(self, "Etapas consideradas", "Escoja", etapas, wx.CHOICEDLG_STYLE)
 		if sc_dialog.ShowModal() == wx.ID_OK:
 			seleccion = sc_dialog.GetStringSelection()
@@ -61447,7 +61448,7 @@ log
 		
 		dialog.Destroy()
 		if not estatusdialogo_correcto:
-			Mensajes().Info( self, u"Fecha errónea", u"Atención")
+			Mensajes().Info( self, u"Fecha errï¿½nea", u"Atenciï¿½n")
 			return
 		
 		
@@ -61483,7 +61484,7 @@ log
 		
 		wx.EndBusyCursor()
 		#for row in rows:
-		#       Mensajes().Info(self,"%s %s" % (row[0],row[1]),u"Atención")
+		#       Mensajes().Info(self,"%s %s" % (row[0],row[1]),u"Atenciï¿½n")
 		#Mensajes().Info(self,sql,"Oops")
 		
 		#N = 5
@@ -61566,7 +61567,7 @@ log
 			return False
 		else:
 			if self.ObtenEmpleado(user) == "":
-				Mensajes().Warn(self,u"El usuario\n%s\nnot tiene empleado\nasociado" % user, u"Atención")
+				Mensajes().Warn(self,u"El usuario\n%s\nnot tiene empleado\nasociado" % user, u"Atenciï¿½n")
 				return False
 			self.SetStatusText(u"Bienvenido(a) ( %s ), %s" % (user, nombre))
 			return True
@@ -61680,8 +61681,8 @@ log
 			if dialog.AmILogged():
 				if dialog.vendedor > 0:
 					removerobjetos = ['Archivo', 'Operador', 'Inventarios', 'Requisiciones', 'Ventas',
-					                  'Recursos Financieros', 'Control de Obras', u'Estadísticas', 'Empresas',
-					                  u'Recepción']
+					                  'Recursos Financieros', 'Control de Obras', u'Estadï¿½sticas', 'Empresas',
+					                  u'Recepciï¿½n']
 					self.RemoverObjetos(mb, removerobjetos)
 					self.MenuSetter(ID_MENU_CLIENTES_PROSPECTOS, True)
 					self.MenuSetter(ID_MENU_CLIENTES_SALIR, True)
@@ -61689,7 +61690,7 @@ log
 					self.usuario = dialog.usuario
 				elif FORCEQUERYONLY:
 					removerobjetos = ['Archivo', 'Operador', 'Inventarios', 'Requisiciones', 'Ventas',
-					                  'Recursos Financieros', 'Control de Obras', u'Estadísticas', 'Empresas',
+					                  'Recursos Financieros', 'Control de Obras', u'Estadï¿½sticas', 'Empresas',
 					                  'Clientes']
 					self.RemoverObjetos(mb, removerobjetos)
 					self.MenuSetter(ID_MENU_RECEPCION_PROSPECTOS, True)
@@ -61698,7 +61699,7 @@ log
 					self.AllMenues(True)
 					self.usuario = dialog.usuario
 				else:
-					removerobjetos = ['Clientes', u'Recepción']
+					removerobjetos = ['Clientes', u'Recepciï¿½n']
 					self.RemoverObjetos(mb, removerobjetos)
 					self.MenuSetter( ID_MENU_LOGIN, False)
 					self.MenuSetter( ID_MENU_LOGOUT, True)
@@ -61740,7 +61741,7 @@ log
 		dlg = wx.TextEntryDialog( self, u"Teclee cantidad de prueba", u"Cantidad a Palabras","1")
 		dlg.ShowModal()
 		valor = dlg.GetValue()
-		Mensajes().Info(self, "%s -- > %s" % (valor, CantidadAPalabras(valor).texto()),u"Conversión")
+		Mensajes().Info(self, "%s -- > %s" % (valor, CantidadAPalabras(valor).texto()),u"Conversiï¿½n")
 		
 	def Hash(self, pwd):
 		#m = md5.new()
@@ -61775,7 +61776,7 @@ log
 
 		except:
 
-			Mensajes().Info(self,"Problemas al encoding del query",u"Atención")
+			Mensajes().Info(self,"Problemas al encoding del query",u"Atenciï¿½n")
 				
 			return False
 		
@@ -61792,8 +61793,8 @@ log
 		except:
 			
 			r_cn.rollback()
-			Mensajes().Info(self,"Problemas con \n%s" % sql, u"Atención")
-			#Mensajes().Info(self,u"¡ Está intentando crear un registro duplicado !", u"Atención")
+			Mensajes().Info(self,"Problemas con \n%s" % sql, u"Atenciï¿½n")
+			#Mensajes().Info(self,u"ï¿½ Estï¿½ intentando crear un registro duplicado !", u"Atenciï¿½n")
 			return False
 		
 
@@ -61811,7 +61812,7 @@ class GixApp(wx.App):
 		self.name = "gix-%s" % wx.GetUserId()
 		self.instance = wx.SingleInstanceChecker( self.name )
 		if self.instance.IsAnotherRunning():
-			Mensajes().Info( None, u"Ya está corriendo Gix, no puede correrlo dos veces desde la misma máquina al mismo tiempo", u"Atención")
+			Mensajes().Info( None, u"Ya estï¿½ corriendo Gix, no puede correrlo dos veces desde la misma mï¿½quina al mismo tiempo", u"Atenciï¿½n")
 			return False		
 		wx.InitAllImageHandlers()
 		
@@ -61841,10 +61842,10 @@ class GixApp(wx.App):
 			#w = 760
 			w = 740
 
-		#frame = GixFrame( None, -1, u"(GIX versión %s) Gestión Inmobiliaria de Grupo Iclar [%s] [%s] %s" \
+		#frame = GixFrame( None, -1, u"(GIX versiï¿½n %s) Gestiï¿½n Inmobiliaria de Grupo Iclar [%s] [%s] %s" \
 						  #% (GIXVERSION, cuantos, auto_ansi2oem, g_si_pruebas), wx.DefaultPosition,
 						  #wx.Size(800,600), wx.DEFAULT_FRAME_STYLE )
-		frame = GixFrame( None, -1, u"Gestión Inmobiliaria Extendida  %s-  GIX Versión %s" \
+		frame = GixFrame( None, -1, u"Gestiï¿½n Inmobiliaria Extendida  %s-  GIX Versiï¿½n %s" \
 						  % (titpruebas, GIXVERSION), wx.DefaultPosition,
 						  wx.Size(w,h), wx.DEFAULT_FRAME_STYLE )
 		
@@ -61860,7 +61861,7 @@ class GixApp(wx.App):
 	
 class GixAppError(wx.App):
         def OnInit(self):
-		Mensajes().Warn(None,u"No pudo establecerse conexión con el coordinador central.\nEl programa por ende termina aqui.\n%s %s" % (g_cl_user or "" , g_cl_password or ""), u"Atención")
+		Mensajes().Warn(None,u"No pudo establecerse conexiï¿½n con el coordinador central.\nEl programa por ende termina aqui.\n%s %s" % (g_cl_user or "" , g_cl_password or ""), u"Atenciï¿½n")
 		return True
 
 #----------------------------------------------------------------------------
@@ -61925,30 +61926,30 @@ class GixCambioEstatus(wx.Dialog, GixBase):
 			estatus = combo.GetClientData(pos)
 			descripcionEstatus = combo.GetString(pos)
 		else:
-			Mensajes().Info(self, u"Elija un estatus primero", u"Atención")
+			Mensajes().Info(self, u"Elija un estatus primero", u"Atenciï¿½n")
 			return
 		
 		if estatus in self.estatusAutorizador:
-			p_autorizador = wx.GetPasswordFromUser(u"Digite Contraseña", caption = u"Autorización", default_value = "", parent = None)
+			p_autorizador = wx.GetPasswordFromUser(u"Digite Contraseï¿½a", caption = u"Autorizaciï¿½n", default_value = "", parent = None)
 			if self.autorizador_p != p_autorizador:
-				Mensajes().Info(self, u"Contraseña Invalida", u"Atención")
+				Mensajes().Info(self, u"Contraseï¿½a Invalida", u"Atenciï¿½n")
 				self.EndModal(1)
 				self.Destroy()
 				return
 			
 		if estatus in self.estatusSurtidor:
-			p_surtidor = wx.GetPasswordFromUser(u"Digite Contraseña", caption = u"Autorización", default_value = "", parent = None)
+			p_surtidor = wx.GetPasswordFromUser(u"Digite Contraseï¿½a", caption = u"Autorizaciï¿½n", default_value = "", parent = None)
 			if self.surtidor_p_p != p_surtidor:
-				Mensajes().Info(self, u"Contraseña Invalida", u"Atención")
+				Mensajes().Info(self, u"Contraseï¿½a Invalida", u"Atenciï¿½n")
 				self.EndModal(1)
 				self.Destroy()
 				return
 			
 		# Si el cambio de estatus es a nivel grupo de productos
 		if self.capturamasiva:
-			if Mensajes().YesNo(self,u"Se aplicará el estatus '%s' al grupo de productos\n" \
-							u"que provengan del estatus '%s'.\n\n¿ Desea realmente aplicar el cambio de estatus ?"
-							% (descripcionEstatus, self.descripcionEstatus),u"Confirmación"):
+			if Mensajes().YesNo(self,u"Se aplicarï¿½ el estatus '%s' al grupo de productos\n" \
+							u"que provengan del estatus '%s'.\n\nï¿½ Desea realmente aplicar el cambio de estatus ?"
+							% (descripcionEstatus, self.descripcionEstatus),u"Confirmaciï¿½n"):
 				wx.BeginBusyCursor()
 				req_estatus = []
 				self.req_emails = {}
@@ -61960,11 +61961,11 @@ class GixCambioEstatus(wx.Dialog, GixBase):
 				if len(req_estatus) > 0:
 					if self.EnviaMailsGrupo():
 						wx.EndBusyCursor()
-						Mensajes().Info(self, u"¡ El cambio de estatus a nivel grupo ha finalizado !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ El cambio de estatus a nivel grupo ha finalizado !", u"Atenciï¿½n")
 					else:
 						wx.EndBusyCursor()
-						Mensajes().Info(self, u"¡ No se logró notificar por e-mail !\n\n" \
-										u"¡ El cambio de estatus a nivel grupo ha finalizado !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ No se logrï¿½ notificar por e-mail !\n\n" \
+										u"ï¿½ El cambio de estatus a nivel grupo ha finalizado !", u"Atenciï¿½n")
 		else:
 			self.ActualizaEstatus()
 				
@@ -61977,14 +61978,14 @@ class GixCambioEstatus(wx.Dialog, GixBase):
 		if self.AltaCambioEstatus():
 			if self.actualizaexistencia:
 				if not self.AfectaExistencias():
-					Mensajes().Info(self, u"¡ No se logró actualizar la existencia !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No se logrï¿½ actualizar la existencia !", u"Atenciï¿½n")
 					
 			if self.estatus == '15':
 				if not self.ActualizaFechaEntrega():
-					Mensajes().Info(self, u"¡ No se logró actualizar la fecha de entrega !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No se logrï¿½ actualizar la fecha de entrega !", u"Atenciï¿½n")
 
 			if not self.PreparaMails():
-				Mensajes().Info(self, u"¡ No se logró notificar por e-mail !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se logrï¿½ notificar por e-mail !", u"Atenciï¿½n")
 
 	def OnFechaButton( self, event):
 		id = event.GetId()
@@ -62014,7 +62015,7 @@ class GixCambioEstatus(wx.Dialog, GixBase):
 				xdia = lafecha.day
 				xmes = lafecha.month
 				xano = lafecha.year
-				Mensajes().Info(self, u"Fecha mal usaré la de hoy", u"Atención")
+				Mensajes().Info(self, u"Fecha mal usarï¿½ la de hoy", u"Atenciï¿½n")
 				
 			dlg = CalenDlg( self,xmes, xdia, xano )
 			
@@ -62030,7 +62031,7 @@ class GixCambioEstatus(wx.Dialog, GixBase):
 				#mifecha = "%02d/%02d/%s" % (int(result[1]), self.mes[result[2]], result[3])
 				#tbox.SetValue( mifecha)
 			except:
-				Mensajes().Warn(self, "Escoja una fecha",u"Atención")
+				Mensajes().Warn(self, "Escoja una fecha",u"Atenciï¿½n")
 		else:
 			pass
 		
@@ -62073,16 +62074,16 @@ class GixCambioEstatus(wx.Dialog, GixBase):
 			insert into gixmovimientos_estatus ( idrequisicion, idempleado, idestatus, nota, fecha )
 				values(%s,%s,%s,'%s',convert(varchar(10),getdate(),111) )
 			""" % (self.req, self.Empleado, estatus, nota)
-			#Mensajes().Info(self, sql, u"Atención")
+			#Mensajes().Info(self, sql, u"Atenciï¿½n")
 		else:
 			if not estatus:
-				Mensajes().Info(self, u"Seleccione el  Estatus",u"Atención")   
+				Mensajes().Info(self, u"Seleccione el  Estatus",u"Atenciï¿½n")   
 			else:
-				Mensajes().Info(self, u"No existe la requisición %s" % (self.req),u"Atención")
+				Mensajes().Info(self, u"No existe la requisiciï¿½n %s" % (self.req),u"Atenciï¿½n")
 				
 			return False
 			
-		#Mensajes().Info(self, u"Cambio de Estatus realizado !!!", u"Atención")
+		#Mensajes().Info(self, u"Cambio de Estatus realizado !!!", u"Atenciï¿½n")
 		return self.QueryUpdateRecord(sql)
 	
 	def AfectaExistencias(self):
@@ -62192,7 +62193,7 @@ Estatus: %s
 				json_string = urlopen("%s?%s" % (URLSMAIL, data)).read()
 				foo = json.loads(json_string)
 				
-			#Mensajes().Info(self, u"Asunto: %s\nMensaje \n %s \n %s" % (nsubject, mensaje, toAddr), u"Atención")
+			#Mensajes().Info(self, u"Asunto: %s\nMensaje \n %s \n %s" % (nsubject, mensaje, toAddr), u"Atenciï¿½n")
 
 		return True
 		
@@ -62350,7 +62351,7 @@ Fecha Requerida: %s
 					foo = json.loads(json_string)
 				
 				
-			#Mensajes().Info(self, u" \n %s \n %s \n %s" % (nsubject, mensaje, "\n".join(lEmail)), u"Atención")
+			#Mensajes().Info(self, u" \n %s \n %s \n %s" % (nsubject, mensaje, "\n".join(lEmail)), u"Atenciï¿½n")
 
 		
 		return True
@@ -62420,7 +62421,7 @@ Fecha Requerida: %s
 			
 		cu.close()
 		
-		#Mensajes().Info(self, "Ha elegido el estatus %s" % self.estatus, u"Atención")
+		#Mensajes().Info(self, "Ha elegido el estatus %s" % self.estatus, u"Atenciï¿½n")
 		
 	def FillEstatus(self, estatus_elegibles = []):
 		where = ""
@@ -62482,7 +62483,7 @@ Fecha Requerida: %s
 			return
 		
 		if not self.ExisteRequisicion():
-			#Mensajes().Info(self, u"Requisición Inexistente", u"Atención")
+			#Mensajes().Info(self, u"Requisiciï¿½n Inexistente", u"Atenciï¿½n")
 			return
 		
 		self.roles = []
@@ -62676,19 +62677,19 @@ class GixRequisicion(wx.Frame, GixBase):
 		combo = self.GetControl(ID_COMBOREQUISICIONCATEGORIA)
 		categoria = combo.GetClientData(combo.GetSelection())
 		query = "select id_producto, id_producto + ' - ' + descripcion from gixproductos where categoria = '%s' order by 1" % categoria
-		self.RelatedFieldSearch(u"Búsqueda de Producto", query, ID_TEXTCTRLREQUISICIONPRODUCTO)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Producto", query, ID_TEXTCTRLREQUISICIONPRODUCTO)
 	
 	def OnBuscarUnidad(self,event):
 		
 		producto = self.GetControl(ID_TEXTCTRLREQUISICIONPRODUCTO).GetValue()
 		if producto == "":
-			Mensajes().Info(self, u"¡ Antes de elegir la unidad de la requisición introduzca el producto requerido !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Antes de elegir la unidad de la requisiciï¿½n introduzca el producto requerido !", u"Atenciï¿½n")
 		else:
 			query = """
 			select unidadrequisicion, unidadrequisicion + '   ' from gixunidadesfactores
 			where id_producto = '%s' order by unidadrequisicion
 			""" % producto
-			self.RelatedFieldSearch(u"Búsqueda de la Unidad de Requisición para " + producto, query, ID_TEXTCTRLREQUISICIONUNIDAD)
+			self.RelatedFieldSearch(u"Bï¿½squeda de la Unidad de Requisiciï¿½n para " + producto, query, ID_TEXTCTRLREQUISICIONUNIDAD)
 		
 	def OnClose(self, event):
 		#self.EndModal(1)
@@ -62701,7 +62702,7 @@ class GixRequisicion(wx.Frame, GixBase):
 			control = self.GetControl(id)
 			valor = control.GetValue().strip()
 			if valor == "":
-				Mensajes().Info(self, u"¡ No debe quedar ningún dato en blanco !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No debe quedar ningï¿½n dato en blanco !", u"Atenciï¿½n")
 				return
 
 		producto = self.GetControl(ID_TEXTCTRLREQUISICIONPRODUCTO).GetValue().strip()
@@ -62725,10 +62726,10 @@ class GixRequisicion(wx.Frame, GixBase):
 		
 		if row is None:
 			wx.Bell()
-			if Mensajes().YesNo(self, u"El producto '%s' que solicita no existe en el catálogo.\n¿ Desea registrar la sugerencia para su adquisición ?" % producto, u"Confirmación"):
+			if Mensajes().YesNo(self, u"El producto '%s' que solicita no existe en el catï¿½logo.\nï¿½ Desea registrar la sugerencia para su adquisiciï¿½n ?" % producto, u"Confirmaciï¿½n"):
 				
 				fapl = "NULL"
-				comentario = u"El producto no existe en el catálogo y se requiere. Verificar categoría y unidad."
+				comentario = u"El producto no existe en el catï¿½logo y se requiere. Verificar categorï¿½a y unidad."
 				
 				try:
 					fapl_dia, fapl_mes, fapl_ano = self.GetControl(ID_TEXTCTRLREQUISICIONFECHA).GetValue().split('/')
@@ -62745,7 +62746,7 @@ class GixRequisicion(wx.Frame, GixBase):
 				
 				self.QueryUpdateRecord(sql)
 				
-				Mensajes().Info(self, u"Ha quedado registrada la sugerencia de adquirir el producto '%s'.\n¡ La requisición no quedará registrada !" % producto, u"Atención")
+				Mensajes().Info(self, u"Ha quedado registrada la sugerencia de adquirir el producto '%s'.\nï¿½ La requisiciï¿½n no quedarï¿½ registrada !" % producto, u"Atenciï¿½n")
 				#self.EndModal(1)
 				self.Destroy()
 				return
@@ -62765,10 +62766,10 @@ class GixRequisicion(wx.Frame, GixBase):
 		
 		if row is None:
 			wx.Bell()
-			if Mensajes().YesNo(self, u"La unidad '%s' que solicita no existe para el producto.\n¿ Desea registrar la sugerencia para su incorporación ?" % unidad, u"Atención"):
+			if Mensajes().YesNo(self, u"La unidad '%s' que solicita no existe para el producto.\nï¿½ Desea registrar la sugerencia para su incorporaciï¿½n ?" % unidad, u"Atenciï¿½n"):
 				
 				fapl = "NULL"
-				comentario = u"La unidad para requisición del producto no existe. Verificar factores de conversión de unidades."
+				comentario = u"La unidad para requisiciï¿½n del producto no existe. Verificar factores de conversiï¿½n de unidades."
 				
 				try:
 					fapl_dia, fapl_mes, fapl_ano = self.GetControl(ID_TEXTCTRLREQUISICIONFECHA).GetValue().split('/')
@@ -62785,8 +62786,8 @@ class GixRequisicion(wx.Frame, GixBase):
 				
 				self.QueryUpdateRecord(sql)
 				
-				Mensajes().Info(self, u"Ha quedado registrada la sugerencia para incorporar la unidad '%s' al producto '%s'.\n¡ La requisición no quedará registrada !"
-						% (unidad, producto), u"Atención")
+				Mensajes().Info(self, u"Ha quedado registrada la sugerencia para incorporar la unidad '%s' al producto '%s'.\nï¿½ La requisiciï¿½n no quedarï¿½ registrada !"
+						% (unidad, producto), u"Atenciï¿½n")
 				#self.EndModal(1)
 				self.Destroy()
 				return
@@ -62807,7 +62808,7 @@ class GixRequisicion(wx.Frame, GixBase):
 		cu.close()
 		
 		if row is None:
-			Mensajes().Info(self, u"No existe el empleado %s.\n¡ La requisición no quedará registrada !" % self.empleado, u"Atención")
+			Mensajes().Info(self, u"No existe el empleado %s.\nï¿½ La requisiciï¿½n no quedarï¿½ registrada !" % self.empleado, u"Atenciï¿½n")
 			#self.EndModal(1)
 			self.Destroy()
 			return
@@ -62824,8 +62825,8 @@ class GixRequisicion(wx.Frame, GixBase):
 		cu.close()
 		
 		if row is None:
-			Mensajes().Info(self, u"Para registrar la requisición es necesario que se le asigne un puesto al empleado:\n%s\n¡ La requisición no quedará registrada !"
-					% nombreempleado.decode("iso8859-1"), u"Atención")
+			Mensajes().Info(self, u"Para registrar la requisiciï¿½n es necesario que se le asigne un puesto al empleado:\n%s\nï¿½ La requisiciï¿½n no quedarï¿½ registrada !"
+					% nombreempleado.decode("iso8859-1"), u"Atenciï¿½n")
 			#self.EndModal(1)
 			self.Destroy()
 			return
@@ -62917,7 +62918,7 @@ class GixRequisicion(wx.Frame, GixBase):
 		return True
 	
 class GixBalanzaComprobacion(wx.Dialog, GixBase, GixContabilidad):
-	def __init__(self, parent, id = -1, title = u"Balanza de Comprobación", pos = wx.DefaultPosition,
+	def __init__(self, parent, id = -1, title = u"Balanza de Comprobaciï¿½n", pos = wx.DefaultPosition,
 			size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, usuario = None ):
 		
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
@@ -62965,10 +62966,10 @@ class GixBalanzaComprobacion(wx.Dialog, GixBase, GixContabilidad):
 				self.empresa = row[0]
 			else:
 				Mensajes().Info(self, u"No se ha encontrado la empresa de trabajo.\n" \
-						u"Por favor abandone este módulo y verifique.", u"Atención")
+						u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 		except:
 			Mensajes().Info(self, u"No se ha encontrado la empresa de trabajo.\n" \
-					u"Por favor abandone este módulo y verifique.", u"Atención")
+					u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 			
 	def FillCombos(self):
 		combomes = self.GetControl(ID_COMBOBALANZAPERIODOMES)
@@ -63017,7 +63018,7 @@ class GixBalanzaComprobacion(wx.Dialog, GixBase, GixContabilidad):
 			periodomesnum = indice + 1
 			periodomesstr = combo.GetString(indice).strip()
 		else:
-			Mensajes().Info(self, u"Elija el mes del periodo", u"Atención")
+			Mensajes().Info(self, u"Elija el mes del periodo", u"Atenciï¿½n")
 			return
 		
 		combo = self.GetControl(ID_COMBOBALANZAPERIODOYEAR)
@@ -63025,7 +63026,7 @@ class GixBalanzaComprobacion(wx.Dialog, GixBase, GixContabilidad):
 		if indice >= 0:
 			periodoyearstr = combo.GetString(indice).strip()
 		else:
-			Mensajes().Info(self, u"Elija el año del periodo", u"Atención")
+			Mensajes().Info(self, u"Elija el aï¿½o del periodo", u"Atenciï¿½n")
 			return
 		
 		inx = 0
@@ -63041,10 +63042,10 @@ class GixBalanzaComprobacion(wx.Dialog, GixBase, GixContabilidad):
 			if cuantos > 1:
 				tipocuenta = tuple(map(int,selecciones))
 			else:
-				Mensajes().Info(self, u"Debe elegir al menos dos tipos de cuenta", u"Atención")
+				Mensajes().Info(self, u"Debe elegir al menos dos tipos de cuenta", u"Atenciï¿½n")
 				return
 		else:
-			Mensajes().Info(self, u"Debe elegir al menos dos tipos de cuenta", u"Atención")
+			Mensajes().Info(self, u"Debe elegir al menos dos tipos de cuenta", u"Atenciï¿½n")
 			return
 
 		if self.GetControl(ID_CHECKBOXBALANZADETALLE).GetValue() == True:
@@ -63062,7 +63063,7 @@ class GixBalanzaComprobacion(wx.Dialog, GixBase, GixContabilidad):
 		
 	def BalanzaFormatoReducido(self, periodomesnum, periodomesstr, periodoyearstr, tipocuenta, subqry):
 		funci = "cuentanula(%s)" 
-		meta = ((100,u"Cuenta", wx.ALIGN_LEFT, funci) , (200, u"Descripción"),
+		meta = ((100,u"Cuenta", wx.ALIGN_LEFT, funci) , (200, u"Descripciï¿½n"),
 			(100,u"Saldo Deudor", wx.ALIGN_RIGHT, "amount_and_cents_with_commas(%s)"),
 			(100,u"Saldo Acreedor", wx.ALIGN_RIGHT, "amount_and_cents_with_commas(%s)"))
 		periodo = periodoyearstr + u"/" + str(periodomesnum) + u"/01"
@@ -63096,7 +63097,7 @@ class GixBalanzaComprobacion(wx.Dialog, GixBase, GixContabilidad):
 		""" % (periodo, empresa, tipocuenta, subqry, periodo, empresa, tipocuenta, subqry,
 			periodo, empresa, tipocuenta, subqry)
 		
-		titulo = u"Balanza de Comprobación - %s del %s - %s" % (periodomesstr, periodoyearstr, self.empresa)
+		titulo = u"Balanza de Comprobaciï¿½n - %s del %s - %s" % (periodomesstr, periodoyearstr, self.empresa)
 		tabla = "cont_Cuentas"
 		frame = GixFrameCatalogo(self, -1, titulo, wx.Point(20,20), wx.Size(800,600), 
 					wx.DEFAULT_FRAME_STYLE, None, None, None, tabla, meta, query, gridsize = [630,500])
@@ -63105,7 +63106,7 @@ class GixBalanzaComprobacion(wx.Dialog, GixBase, GixContabilidad):
 		
 	def BalanzaFormatoCompleto(self, periodomesnum, periodomesstr, periodoyearstr, tipocuenta, subqry):
 		funci = "cuentanula(%s)" 
-		meta = ((100,u"Cuenta", wx.ALIGN_LEFT, funci) , (200, u"Descripción"),
+		meta = ((100,u"Cuenta", wx.ALIGN_LEFT, funci) , (200, u"Descripciï¿½n"),
 			(100,u"Saldo Inicial", wx.ALIGN_RIGHT, "amount_and_cents_with_commas(%s)"),
 			(100,u"Cargos", wx.ALIGN_RIGHT, "amount_and_cents_with_commas(%s)"),
 			(100,u"Abonos", wx.ALIGN_RIGHT, "amount_and_cents_with_commas(%s)"),
@@ -63148,7 +63149,7 @@ class GixBalanzaComprobacion(wx.Dialog, GixBase, GixContabilidad):
 		""" % (periodo, empresa, tipocuenta, subqry, periodo, empresa, tipocuenta, subqry,
 			periodo, empresa, tipocuenta, subqry)
 		
-		titulo = u"Balanza de Comprobación - %s del %s - %s" % (periodomesstr, periodoyearstr, self.empresa)
+		titulo = u"Balanza de Comprobaciï¿½n - %s del %s - %s" % (periodomesstr, periodoyearstr, self.empresa)
 		tabla = "cont_Cuentas"
 		frame = GixFrameCatalogo(self, -1, titulo, wx.Point(20,20), wx.Size(800,600), 
 					wx.DEFAULT_FRAME_STYLE, None, None, None, tabla, meta, query, gridsize = [850,500])
@@ -63219,10 +63220,10 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 				self.empresa = row[0]
 			else:
 				Mensajes().Info(self, u"No se ha encontrado la empresa de trabajo.\n" \
-						u"Por favor abandone este módulo y verifique.", u"Atención")
+						u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 		except:
 			Mensajes().Info(self, u"No se ha encontrado la empresa de trabajo.\n" \
-					u"Por favor abandone este módulo y verifique.", u"Atención")
+					u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 			
 	def FillTipoDeCuenta(self):
 		query = """
@@ -63245,7 +63246,7 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 				pass
 		except:
 			Mensajes().Info(self, u"Sucedio algo que impidio accesar los tipos de cuenta.\n" \
-					u"Por favor abandone este módulo y verifique.", u"Atención")
+					u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 		
 		return inxlst, cholst
 
@@ -63274,7 +63275,7 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 				xdia = lafecha.day
 				xmes = lafecha.month
 				xano = lafecha.year
-				Mensajes().Info(self, u"Fecha mal usaré la de hoy", u"Atención")
+				Mensajes().Info(self, u"Fecha mal usarï¿½ la de hoy", u"Atenciï¿½n")
 				
 			dlg = CalenDlg(self, xmes, xdia, xano)
 			
@@ -63287,7 +63288,7 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 				self.GetControl(id - 1).SetValue("%02d/%02d/%s" \
 									% (int(result[1]), self.mes[result[2]], result[3]))
 			except:
-				Mensajes().Warn(self, u"Escoja una fecha", u"Atención")
+				Mensajes().Warn(self, u"Escoja una fecha", u"Atenciï¿½n")
 				
 	def OnElegirCuentaTxt(self, event):
 		id = event.GetId()
@@ -63309,10 +63310,10 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 					self.GetControl(id + 2).SetLabel(self.GetStringFromField(row[1]))
 					self.ComparaCuentas()
 				else:
-					Mensajes().Info(self, u"¡ No existe la cuenta !", u"Atención")
+					Mensajes().Info(self, u"ï¿½ No existe la cuenta !", u"Atenciï¿½n")
 			except:
-				Mensajes().Info(self, u"Sucedio algo que impidio accesar el catálogo de cuentas.\n" \
-						u"Por favor abandone este módulo y verifique.", u"Atención")
+				Mensajes().Info(self, u"Sucedio algo que impidio accesar el catï¿½logo de cuentas.\n" \
+						u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 		else:
 			self.ComparaCuentas()
 			self.GetControl(id + 2).SetLabel('')
@@ -63332,8 +63333,8 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 			else:
 				return False
 		except:
-			Mensajes().Info(self, u"Sucedio algo que impidio accesar el catálogo de cuentas.\n" \
-					u"Por favor abandone este módulo y verifique.", u"Atención")
+			Mensajes().Info(self, u"Sucedio algo que impidio accesar el catï¿½logo de cuentas.\n" \
+					u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 			return False
 		
 	def OnElegirCuentaBtn(self, event):
@@ -63360,7 +63361,7 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 			if self.chocuenta:
 				self.index = wx.GetSingleChoiceIndex(u"Opciones",  u"Elegir Cuenta", self.chocuenta, parent = None)
 			else:
-				Mensajes().Info(self, u"¡ No se ha definido el catálogo de cuentas !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ No se ha definido el catï¿½logo de cuentas !", u"Atenciï¿½n")
 				event.Skip()
 				return
 			
@@ -63368,7 +63369,7 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 				clavecuenta, descripcion = self.chocuenta[self.index].split('  -  ')
 				
 				if descripcion == "":
-					Mensajes().Info(self, u"¡ Cuenta equivocada !\n\nNo tiene descripción.", u"Atención")
+					Mensajes().Info(self, u"ï¿½ Cuenta equivocada !\n\nNo tiene descripciï¿½n.", u"Atenciï¿½n")
 					event.Skip()
 					return
 				else:
@@ -63379,8 +63380,8 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 			else:
 				pass
 		except:
-			Mensajes().Info(self, u"Sucedio algo que impidio accesar el catálogo de cuentas.\n" \
-					u"Por favor abandone este módulo y verifique.", u"Atención")
+			Mensajes().Info(self, u"Sucedio algo que impidio accesar el catï¿½logo de cuentas.\n" \
+					u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 		
 	def ComparaCuentas(self):
 		ctaini = self.GetControl(ID_TEXTCTRLAUXILIARCUENTAINICIAL).GetValue()
@@ -63437,8 +63438,8 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 			else:
 				pass
 		except:
-			Mensajes().Info(self, u"Sucedio algo que impidio accesar el catálogo de cuentas.\n" \
-					u"Por favor abandone este módulo y verifique.", u"Atención")
+			Mensajes().Info(self, u"Sucedio algo que impidio accesar el catï¿½logo de cuentas.\n" \
+					u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 		
 		return inxlst, cholst
 		
@@ -63446,7 +63447,7 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 		fini = self.GetControl(ID_TEXTCTRLAUXILIARFECHAINICIAL)
 		ffin = self.GetControl(ID_TEXTCTRLAUXILIARFECHAFINAL)
 		if fini.GetValue() == "" or ffin.GetValue() == "":
-			Mensajes().Info(self, u"¡ El intervalo de fechas no debe quedar en blanco !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El intervalo de fechas no debe quedar en blanco !", u"Atenciï¿½n")
 			event.Skip()
 			return
 		else:
@@ -63455,8 +63456,8 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 			fechainicial = "%s/%s/%s" % (self.aho_ini, self.mes_ini, self.dia_ini)
 			fechafinal = "%s/%s/%s" % (self.aho_fin, self.mes_fin, self.dia_fin)
 			if fechainicial > fechafinal:
-				Mensajes().Info( self, u"¡ La fecha inicial no debe ser mayor a la fecha final !",
-							u"Atención")
+				Mensajes().Info( self, u"ï¿½ La fecha inicial no debe ser mayor a la fecha final !",
+							u"Atenciï¿½n")
 				event.Skip()
 				return
 		inx = 0
@@ -63469,7 +63470,7 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 			selecciones.sort()
 			tiposcuenta = tuple(map(int,selecciones))
 		else:
-			Mensajes().Info(self, u"¡ Debe elegir al menos un tipo de cuenta !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ Debe elegir al menos un tipo de cuenta !", u"Atenciï¿½n")
 			event.Skip()
 			return
 		
@@ -63477,33 +63478,33 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 		cini = self.GetControl(ID_TEXTCTRLAUXILIARCUENTAINICIAL)
 		cfin = self.GetControl(ID_TEXTCTRLAUXILIARCUENTAFINAL)
 		if cini.GetValue() == "" and cfin.GetValue() == "":
-			if Mensajes().YesNo(self, u"¡ No se especifico un rango de cuentas !\n\n" \
-							u"Por lo tanto, se aplicará el criterio de\n" \
-							u"selección a todas las cuentas.\n\n¿ Desea continuar ?", u"Confirmación"):
+			if Mensajes().YesNo(self, u"ï¿½ No se especifico un rango de cuentas !\n\n" \
+							u"Por lo tanto, se aplicarï¿½ el criterio de\n" \
+							u"selecciï¿½n a todas las cuentas.\n\nï¿½ Desea continuar ?", u"Confirmaciï¿½n"):
 				cuentainicial = "000000000000"
 				cuentafinal = "999999999999"
 			else:
 				event.Skip()
 				return
 		elif cini.GetValue() == "" or cfin.GetValue() == "":
-			Mensajes().Info(self, u"¡ El intervalo de cuentas no debe quedar en blanco !", u"Atención")
+			Mensajes().Info(self, u"ï¿½ El intervalo de cuentas no debe quedar en blanco !", u"Atenciï¿½n")
 			event.Skip()
 			return
 		else:
 			cuentainicial = self.DesenmascaraCuenta(cini.GetValue())
 			cuentafinal = self.DesenmascaraCuenta(cfin.GetValue())
 			if cuentainicial > cuentafinal:
-				Mensajes().Info( self, u"¡ La cuenta inicial no debe ser mayor a la cuenta final !",
-							u"Atención")
+				Mensajes().Info( self, u"ï¿½ La cuenta inicial no debe ser mayor a la cuenta final !",
+							u"Atenciï¿½n")
 				event.Skip()
 				return
 			else:
 				if not self.ExisteCuenta(cuentainicial):
-					Mensajes().Info(self, u"¡ No existe la cuenta %s !" % cuentainicial, u"Atención")
+					Mensajes().Info(self, u"ï¿½ No existe la cuenta %s !" % cuentainicial, u"Atenciï¿½n")
 					event.Skip()
 					return
 				elif not self.ExisteCuenta(cuentafinal):
-					Mensajes().Info(self, u"¡ No existe la cuenta %s !" % cuentafinal, u"Atención")
+					Mensajes().Info(self, u"ï¿½ No existe la cuenta %s !" % cuentafinal, u"Atenciï¿½n")
 					event.Skip()
 					return
 				elif self.cholstsubcta:
@@ -63517,7 +63518,7 @@ class GixAuxiliarMovimientos(wx.Dialog, GixBase, GixContabilidad):
 						selecciones.sort()
 						subcuentas = tuple(map(int,selecciones))
 					else:
-						Mensajes().Info(self, u"¡ Debe elegir al menos una subcuenta !", u"Atención")
+						Mensajes().Info(self, u"ï¿½ Debe elegir al menos una subcuenta !", u"Atenciï¿½n")
 						event.Skip()
 						return
 					
@@ -63590,7 +63591,7 @@ class GixAuxMovGrid(wx.Frame, GixBase, GixContabilidad):
 		poliza = self.grid.GetCellValue(fila_elegida, 6)
 		tipopoliza = self.grid.GetCellValue(fila_elegida, 7)
 		descripcion = self.grid.GetCellValue(fila_elegida, 8)
-		meta = ((100, u"Cuenta", wx.ALIGN_LEFT, "self.EnmascaraCuenta('%s')"), (200, u"Descripción"),
+		meta = ((100, u"Cuenta", wx.ALIGN_LEFT, "self.EnmascaraCuenta('%s')"), (200, u"Descripciï¿½n"),
 			(100, u"Cargo", wx.ALIGN_RIGHT, "amount_and_cents_with_commas(%s)"),
 			(100, u"Abono", wx.ALIGN_RIGHT, "amount_and_cents_with_commas(%s)"), (100, u"Referencia"))
 		query = """
@@ -63603,7 +63604,7 @@ class GixAuxMovGrid(wx.Frame, GixBase, GixContabilidad):
 		select count(*) from cont_PolizaDetalle where PolizaID = %s and Item <> 0
 		""" % (poliza, poliza)
 		
-		titulo = u"Póliza de %s del %s - %s" % (tipopoliza, fecha, descripcion)
+		titulo = u"Pï¿½liza de %s del %s - %s" % (tipopoliza, fecha, descripcion)
 		tabla = "cont_PolizaDetalle"
 		frame = GixFrameCatalogo(self, -1, titulo, wx.Point(20,20), wx.Size(800,600), 
 					wx.DEFAULT_FRAME_STYLE, None, None, None, tabla, meta, query,
@@ -63688,8 +63689,8 @@ class GixAuxMovGrid(wx.Frame, GixBase, GixContabilidad):
 					break
 			cu.close()
 		except:
-			Mensajes().Info(self, u"Sucedio algo que impidio accesar el catálogo de cuentas.\n" \
-					u"Por favor abandone este módulo y verifique.", u"Atención")
+			Mensajes().Info(self, u"Sucedio algo que impidio accesar el catï¿½logo de cuentas.\n" \
+					u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 		
 		sql = """
 		select d.Cargo, d.Abono from cont_PolizaDetalle d join cont_Polizas p on d.PolizaID = p.PolizaID
@@ -63710,8 +63711,8 @@ class GixAuxMovGrid(wx.Frame, GixBase, GixContabilidad):
 					else:
 						break
 			except:
-				Mensajes().Info(self, u"Sucedio algo que impidio accesar el detalle de pólizas.\n" \
-						u"Por favor abandone este módulo y verifique.", u"Atención")
+				Mensajes().Info(self, u"Sucedio algo que impidio accesar el detalle de pï¿½lizas.\n" \
+						u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 			if ctanat[1] == "D":
 				saldofinal = saldoinicial + cargos - abonos
 			else:
@@ -63796,7 +63797,7 @@ class GixAuxMovGrid(wx.Frame, GixBase, GixContabilidad):
 		if len(cuentas):
 			columnas = [(0, 100, u"Fecha"),
 					(1, 100, u"Cuenta"),
-					(2, 100, u"Descripción de la Cuenta"),
+					(2, 100, u"Descripciï¿½n de la Cuenta"),
 					(3, 100, u"Referencia"),
 					(4, 100, u"Cargo"),
 					(5, 100, u"Abono"),
@@ -63901,7 +63902,7 @@ class GixAuxMovGrid(wx.Frame, GixBase, GixContabilidad):
 			grid.InsertCols(0, 1)
 			grid.SetLabelBackgroundColour(wx.NamedColour("RED"))
 			grid.SetLabelTextColour(wx.NamedColour("WHITE"))
-			grid.SetColLabelValue(0, u"          ¡ No se encontraron movimientos !          ")
+			grid.SetColLabelValue(0, u"          ï¿½ No se encontraron movimientos !          ")
 			grid.AutoSizeColumns()
 		
 class GixMovimientosInventario(wx.Dialog, GixBase):
@@ -63922,7 +63923,7 @@ class GixMovimientosInventario(wx.Dialog, GixBase):
 	def OnBuscarProducto(self,event):
 		
 		query = "select id_producto, id_producto + ' - ' + descripcion from gixproductos order by descripcion"
-		self.RelatedFieldSearch(u"Búsqueda de Producto", query, ID_TEXTCTRLELEGIRPRODUCTO)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Producto", query, ID_TEXTCTRLELEGIRPRODUCTO)
 		
 		return
 	
@@ -63982,7 +63983,7 @@ class GixMovimientosInventario(wx.Dialog, GixBase):
 		return
 
 class GixEnConstruccion(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Notificación", pos = wx.DefaultPosition, size = wx.DefaultSize,
+	def __init__(self, parent, id = -1, title = u"Notificaciï¿½n", pos = wx.DefaultPosition, size = wx.DefaultSize,
 		style = wx.DEFAULT_DIALOG_STYLE ):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.parent = parent
@@ -63995,7 +63996,7 @@ class GixEnConstruccion(wx.Dialog, GixBase):
 		self.Destroy()
 
 class GixNoDisponible(wx.Dialog, GixBase):
-	def __init__(self, parent, id = -1, title = u"Notificación", pos = wx.DefaultPosition, size = wx.DefaultSize,
+	def __init__(self, parent, id = -1, title = u"Notificaciï¿½n", pos = wx.DefaultPosition, size = wx.DefaultSize,
 		style = wx.DEFAULT_DIALOG_STYLE ):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.parent = parent
@@ -64007,7 +64008,7 @@ class GixNoDisponible(wx.Dialog, GixBase):
 		self.Destroy()
 
 class CambioPassword(wx.Dialog,GixBase):
-	def __init__(self, parent, id = -1, title = u"Cambio de Contraseña", pos = wx.DefaultPosition, size = wx.DefaultSize,
+	def __init__(self, parent, id = -1, title = u"Cambio de Contraseï¿½a", pos = wx.DefaultPosition, size = wx.DefaultSize,
 		style = wx.DEFAULT_DIALOG_STYLE, usuario = None):
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.parent = parent
@@ -64032,10 +64033,10 @@ class CambioPassword(wx.Dialog,GixBase):
 			update usuarios set password = '%s' , md5 = '%s' where usuario = '%s' 
 			""" % (paswd_nuevo, self.Hash(paswd_nuevo), g_cl_user)
 			if self.QueryUpdateRecord( sql):
-				Mensajes().Info(self,u"Su contraseña ha cambiado tanto para GI como para GIX", u"Atención")
+				Mensajes().Info(self,u"Su contraseï¿½a ha cambiado tanto para GI como para GIX", u"Atenciï¿½n")
 			
 			else:
-				Mensajes().Info(self,u"Su contraseña NO cambió !!!", u"Atención")
+				Mensajes().Info(self,u"Su contraseï¿½a NO cambiï¿½ !!!", u"Atenciï¿½n")
 		self.Destroy()
 		return
 		
@@ -64148,18 +64149,18 @@ class LoginDialog(wx.Dialog, GixBase):
 		Password = cPassword.GetValue()
 		gixanip = False
 		if True:
-			Usuario = wx.GetTextFromUser(u"Usuario",u"Tecleelo a patín",default_value = Usuario )
+			Usuario = wx.GetTextFromUser(u"Usuario",u"Tecleelo a patï¿½n",default_value = Usuario )
 		Usuario, Password = self.VerificaUsuario(Usuario, Password)
 		
 		if str(Usuario) == "":
 								
-			Mensajes().Warn(self, u"Indique Usuario", u"Atención")
+			Mensajes().Warn(self, u"Indique Usuario", u"Atenciï¿½n")
 			cUsuario.SetFocus()
 			return False
 				
 		if str(Password) == "" and not SMARTICS:
 								
-			Mensajes().Warn(self, u"Indique Contraseña", u"Atención")
+			Mensajes().Warn(self, u"Indique Contraseï¿½a", u"Atenciï¿½n")
 			cPassword.SetFocus()
 			return False
 		
@@ -64190,7 +64191,7 @@ class LoginDialog(wx.Dialog, GixBase):
 		cursor.close()
 		
 		if resultado == "0":
-			Mensajes().Error(self, u"Usuario o Contraseña inválidas", u"Seguridad")
+			Mensajes().Error(self, u"Usuario o Contraseï¿½a invï¿½lidas", u"Seguridad")
 			#cUsuario.SetValue("")
 			cPassword.SetValue("")
 			cUsuario.SetFocus()
@@ -64199,7 +64200,7 @@ class LoginDialog(wx.Dialog, GixBase):
 		else:
 			if not gixanip:
 				if self.ObtenEmpleado(Usuario) == "":
-					Mensajes().Warn(self,u"El usuario\n%s\nno tiene empleado asociado" % Usuario, u"Atención")
+					Mensajes().Warn(self,u"El usuario\n%s\nno tiene empleado asociado" % Usuario, u"Atenciï¿½n")
 					return False
 			self.usuario = Usuario
 			gixmodel.USER = self.usuario
@@ -64363,12 +64364,12 @@ class LoginDialog2(wx.Dialog, GixBase):
 		cPassword = self.GetControl(ID_TEXTCTRLLOGINPASS); Password = cPassword.GetValue()
 		Usuario, Password = self.VerificaUsuario(Usuario, Password)
 		if str(Usuario) == "":
-			Mensajes().Warn(self, u"Indique Usuario", u"Atención")
+			Mensajes().Warn(self, u"Indique Usuario", u"Atenciï¿½n")
 			cUsuario.SetFocus()
 			return False
 				
 		if str(Password) == "" and not SMARTICS:
-			Mensajes().Warn(self, u"Indique Contraseña", u"Atención")
+			Mensajes().Warn(self, u"Indique Contraseï¿½a", u"Atenciï¿½n")
 			cPassword.SetFocus()
 			return False
 		
@@ -64386,14 +64387,14 @@ class LoginDialog2(wx.Dialog, GixBase):
 		resultado = str(row[0])
 		if resultado == "0":
 			if not self.EsVendedor(Usuario, Password):
-				Mensajes().Error(self, u"Usuario o Contraseña Inválidas", u"Seguridad")
+				Mensajes().Error(self, u"Usuario o Contraseï¿½a Invï¿½lidas", u"Seguridad")
 				cUsuario.SetValue("")
 				cPassword.SetValue("")
 				cUsuario.SetFocus()
 				self.PonNombre()
 				return False
 			elif FORCEQUERYONLY:
-				Mensajes().Error(self, u"Usuario o Contraseña Inválidas", u"Seguridad")
+				Mensajes().Error(self, u"Usuario o Contraseï¿½a Invï¿½lidas", u"Seguridad")
 				cUsuario.SetValue("")
 				cPassword.SetValue("")
 				cUsuario.SetFocus()
@@ -64401,7 +64402,7 @@ class LoginDialog2(wx.Dialog, GixBase):
 				return False
 		else:
 			if self.ObtenEmpleado(Usuario) == "":
-				Mensajes().Warn(self,u"El usuario\n%s\nno tiene empleado asociado" % Usuario, u"Atención")
+				Mensajes().Warn(self,u"El usuario\n%s\nno tiene empleado asociado" % Usuario, u"Atenciï¿½n")
 				return False
 			
 		self.usuario = Usuario
