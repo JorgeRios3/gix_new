@@ -33555,12 +33555,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</div>
 			<div style="text-align: justify;">
 			CONTRATO DE PROMESA DE COMPRA VENTA
-			QUE CELEBRAN POR UNA PARTE %s REPRESENTADA EN ESTE ACTO POR EL SE�OR
+			QUE CELEBRAN POR UNA PARTE %s REPRESENTADA EN ESTE ACTO POR EL SE\xd1OR
 			%s, A QUIEN EN LO SUCESIVO SE LE
-			DENOMINAR� "LA PROMITENTE VENDEDORA", Y POR OTRA PARTE, EL(LOS) SE�OR(ES)
-			%s, POR SU PROPIO DERECHO, A QUIEN(ES) EN LO SUCESIVO SE LE(S) DENOMINAR� "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", A AMBOS EN SU CONJUNTO SE LES DENOMINAR� "LAS PARTES",
-			EL CUAL SUJETAN AL CONTENIDO DE LAS SIGUIENTES DECLARACIONES Y CL�USULAS:
+			DENOMINAR\xc1 "LA PROMITENTE VENDEDORA", Y POR OTRA PARTE, EL(LOS) SE\xd1OR(ES)
+			%s, POR SU PROPIO DERECHO, A QUIEN(ES) EN LO SUCESIVO SE LE(S) DENOMINAR\xc1 "EL(LOS) PROMITENTE(S)
+			COMPRADOR(ES)", A AMBOS EN SU CONJUNTO SE LES DENOMINAR\xc1 "LAS PARTES",
+			EL CUAL SUJETAN AL CONTENIDO DE LAS SIGUIENTES DECLARACIONES Y CL\xc1USULAS:
 			<br>
 			</div>
 			<div style="text-align: center;"><span style="font-weight: bold;"><br>DECLARACIONES:</span><br>
@@ -33568,11 +33568,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<br>
 			I.- Declara el representante de "LA PROMITENTE VENDEDORA", por conducto de su representante:<br>
 			<div style="text-align: justify;">a) Que su representada es una sociedad
-			mercantil legalmente constituida mediante escritura p�blica n�mero
-			43,065, otorgada el d�a 16 de agosto de 1991, ante la f� del Licenciado
-			Felipe Ignacio V�zquez Aldana Sauza, Notario P�blico Suplente Adscrito
-			y Asociado n�mero 2 de Tlaquepaque, Jalisco, la cual se registr� bajo
-			inscripci�n 311-312 del tomo 410 del Libro Primero del Registro P�blico
+			mercantil legalmente constituida mediante escritura p\xfablica n\xfamero
+			43,065, otorgada el d\xeda 16 de agosto de 1991, ante la f\xe9 del Licenciado
+			Felipe Ignacio V\xe1zquez Aldana Sauza, Notario P\xfablico Suplente Adscrito
+			y Asociado n\xfamero 2 de Tlaquepaque, Jalisco, la cual se registr\xf3 bajo
+			inscripci\xf3n 311-312 del tomo 410 del Libro Primero del Registro P\xfablico
 			de Comercio de Guadalajara, Jalisco.<br>
 			</div>
 			<div style="text-align: justify;"><br>b)Que su representante cuenta con las facultades
@@ -33583,11 +33583,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<div style="text-align: justify;"><br>c) Que su representada se encuentra inscrita
 			en el Registro Federal de Contribuyentes bajo la Clave: APR910816FJ3.<br>
 			</div>
-			<div style="text-align: justify;"><br>d) Que tiene inter�s en vender a "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", 
-			el inmueble que acontinuaci�n se describe:<br>
+			<div style="text-align: justify;"><br>d) Que tiene inter\xe9s en vender a "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", 
+			el inmueble que acontinuaci\xf3n se describe:<br>
 			</div>
 			<div style="text-align: justify;"><br>Lote marcado con la Letra %s del
-			M�dulo %s, perteneciente al Desarrollo Campestre Recreativo
+			M\xf3dulo %s, perteneciente al Desarrollo Campestre Recreativo
 			conocido como "%s", ubicado en el municipio de %s,
 			%s, dicho inmueble tiene una Superficie de %s m2.
 			y las siguientes medidas y linderos:<br>
@@ -33602,17 +33602,17 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<br>
 			e) Que "EL INMUEBLE" se encuentra libre de todo gravamen, limitacion
 			de dominio y de cualquier responsabilidad, al corriente en el pago del impuesto predial y demas
-			contribuciones que le corresponden, as� como de los servicios con que cuentan.<br>
+			contribuciones que le corresponden, as\xed como de los servicios con que cuentan.<br>
 			</div>
 			<div style="text-align: justify;"><br>f) Que ha ofrecido en venta "EL INMUEBLE", y que "EL(LOS)
-			PROMITENTE(S) COMPRADOR(ES)" ha(n) tomado y aceptado en todos sus t�rminos, la oferta realizada
+			PROMITENTE(S) COMPRADOR(ES)" ha(n) tomado y aceptado en todos sus t\xe9rminos, la oferta realizada
 			de conformidad con los dispuesto en el presente Contrato.
 			<br></div>			
 			AQUIESTABA
 			<div style="text-align: justify;"><br>II.- Declara "El(LOS) RPOMINENTE(S) COMPRADOR(ES)":
 			</div>
-			<div style="text-align:justify;">a) Ser persona(s), f�sica(s), de nacionalidad mexicana, mayor(es) de edad,
-			y que cuenta(n) con la capacidad jur�dica para contratarse en t�rminos del presente instrumento.
+			<div style="text-align:justify;">a) Ser persona(s), f\xedsica(s), de nacionalidad mexicana, mayor(es) de edad,
+			y que cuenta(n) con la capacidad jur\xeddica para contratarse en t\xe9rminos del presente instrumento.
 			<br></div>
 			<div style="text-align:justify;"><br>b) Que se encuentra(n) inscrito(s) en el Registro Federal de Contribuyentes
 			bajo Clave(s) %s:
@@ -33620,7 +33620,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			JUMP3
 			JUMP3
 			<div style="text-align:justify;"><br>c) Que en su deseo de adquirir de "LA PROMITENTE VENDEDORA" "EL INMUEBLE",
-			bajo los t�rminos y condiciones que m�s adelante se establecen.
+			bajo los t\xe9rminos y condiciones que m\xe1s adelante se establecen.
 			<br></div>
 			<div style="text-align:justify;"><br>III.- Declaran "LAS PARTES", la primera por conducto de su representante:
 			<br></div>
@@ -33630,101 +33630,101 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</div>
 			<div style="text-align: justify;"><br>c) Que comparecen en este acto al otorgar su consentimiento,
 			manifestando conocer plenamente el sentido del presente Contrato, no existiendo dolo, mala fe, enriquecimiento ilegitimo,
-			lesi�n o error que pudiera invalidarlo.
+			lesi\xf3n o error que pudiera invalidarlo.
 			<br></div>
 			<div style="text-align: justify;"><br>En base a las Declaraciones que anteceden, "LAS PARTES" convienen en celebrar el presente
 			CONTRATO de Promesa de Compraventa, de conformidad con las siguientes,
 			<br></div>
 			<br>
-			<div style="text-align: center;"><span style="font-weight: bold;">CL�USULAS:<br></span>
+			<div style="text-align: center;"><span style="font-weight: bold;">CL\xc1USULAS:<br></span>
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">PRIMERA.-OBJETO<br></div>
 			<div style="text-align:justify;">Por virtud del presente Instrumento "LA PROMITENTE VENDEDORA" promete vender "EL INMUEBLE" "ad corpus" a
-			"EL(LOS) PROMITENTE(S) COMPRADOR(ES)" quien(es) se obliga(n) a comprarlo, y pagar el precio acordado por "LAS PARTES", bajo los t�rminos
-			y condiciones que m�s adelante se establecen. 
+			"EL(LOS) PROMITENTE(S) COMPRADOR(ES)" quien(es) se obliga(n) a comprarlo, y pagar el precio acordado por "LAS PARTES", bajo los t\xe9rminos
+			y condiciones que m\xe1s adelante se establecen. 
 			<br></div>
 			<div style="text-align:justify;><span style="font-weight: bold;">SEGUNDA.- PRECIO Y FORMA DE PAGO<br></div>
 			
 			<div style="text-align: justify;">El precio que "LAS PARTES"
-			han pactado por concepto de contraprestaci�n asciende a la cantidad de
+			han pactado por concepto de contraprestaci\xf3n asciende a la cantidad de
 			$%s, (%s), el cual se establece por todo
-			el "INMUEBLE" materia de Contrato, ya que la presente operaci�n se
+			el "INMUEBLE" materia de Contrato, ya que la presente operaci\xf3n se
 			realiza "ad corpus", por lo que en el supuesto de que al verificarse la
-			medici�n del mismo, �ste resulte de mayor o menor superficie, el
-			precio no sufrir� alteraci�n, tal como disponen los art�culos 1858 y
-			1860 del C�digo Civil para el estado de Jalisco. "LAS PARTES" convienen en que el precio ser� pagado de la siguiente forma:<br>
+			medici\xf3n del mismo, \xe9ste resulte de mayor o menor superficie, el
+			precio no sufrir\xe1 alteraci\xf3n, tal como disponen los art\xedculos 1858 y
+			1860 del C\xf3digo Civil para el estado de Jalisco. "LAS PARTES" convienen en que el precio ser\xe1 pagado de la siguiente forma:<br>
 			</div>
 			
 			    %s
 			    
 			
 			<div><br><br></div>
-			<div style="text-align:justify;><span style="font-weight: bold;">QUINTA.- ESCRITURACI�N<br></div>
+			<div style="text-align:justify;><span style="font-weight: bold;">QUINTA.- ESCRITURACI\xd3N<br></div>
 			<div style="text-align: justify;">"LA PROMITENTE VENDEDORA" se obliga a escriturar a "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
 			"EL INMUEBLE", una vez que este(os) haya(n) liquidado
-			la totalidad del precio de venta, y ser�n a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" 
-			todos los gastos que genera dicha transmisi�n de propiedad,
+			la totalidad del precio de venta, y ser\xe1n a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" 
+			todos los gastos que genera dicha transmisi\xf3n de propiedad,
 			tanto en el otorgamiento del presente Contrato como en la escritura
-			p�blica correspondiente, como son Impuesto Sobre Transmisi�n
-			Patrimonial, derechos del Registro P�blico de la Propiedad, Aval�o y
+			p\xfablica correspondiente, como son Impuesto Sobre Transmisi\xf3n
+			Patrimonial, derechos del Registro P\xfablico de la Propiedad, Aval\xfao y
 			honorarios notariales o cualquier otro gasto, impuesto o derecho que se
-			cause con la propia escritura, siendo �nicamente a cargo de "LA PROMITENTE
+			cause con la propia escritura, siendo \xfanicamente a cargo de "LA PROMITENTE
 			VENDEDORA" &nbsp;el impuesto &nbsp;sobre la &nbsp;Renta &nbsp;que &nbsp;
 			se &nbsp;llegase &nbsp;a causar por la
 			venta &nbsp;de &nbsp;"EL INMUEBLE"; &nbsp;asimismo "EL(LOS) PROMITENTE(S) COMPRADOR((ES)",
-			en su caso,deber�(n) estar al
+			en su caso,deber\xe1(n) estar al
 			corriente en las cuotas condominales y se obliga(n) a entregar toda la
-			documentaci�n que sea necesaria al Fedatario P�blico correspondiente
+			documentaci\xf3n que sea necesaria al Fedatario P\xfablico correspondiente
 			para el otorgamiento de la referida escritura.<br></div>
 			<div style="text-align: justify;"><br>"LA PROMITENTE VENDEDORA"
-			girar� instrucci�n al Notario P�blico de su elecci�n 30 (treinta) d�as
-			naturales despu�s de liquidado el precio de operaci�n, misma que tendr�
-			una vigencia de 45 (cuarenta y cinco) d�as naturales para que "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES) acuda(n) ante Dicho Notario, presente(n) su documentaci�n y firme(n)
+			girar\xe1 instrucci\xf3n al Notario P\xfablico de su elecci\xf3n 30 (treinta) d\xedas
+			naturales despu\xe9s de liquidado el precio de operaci\xf3n, misma que tendr\xe1
+			una vigencia de 45 (cuarenta y cinco) d\xedas naturales para que "EL(LOS) PROMITENTE(S)
+			COMPRADOR(ES) acuda(n) ante Dicho Notario, presente(n) su documentaci\xf3n y firme(n)
 			la escritura correspondiente.&nbsp; En caso de no formalizar la
-			escritura p�blica de que se trata en el plazo de la vigencia de la
-			instrucci�n, "LA PROMITENTE VENDEDORA" podr� girar nueva instrucci�n con un
+			escritura p\xfablica de que se trata en el plazo de la vigencia de la
+			instrucci\xf3n, "LA PROMITENTE VENDEDORA" podr\xe1 girar nueva instrucci\xf3n con un
 			costo administrativo a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" de $ 100.00 ( CIEN
-			PESOS 00/100 M.N.) por cada d�a transcurrido desde la fecha de
-			caducidad de la primera instrucci�n y hasta la fecha de la nueva
-			instrucci�n.<br><br>
+			PESOS 00/100 M.N.) por cada d\xeda transcurrido desde la fecha de
+			caducidad de la primera instrucci\xf3n y hasta la fecha de la nueva
+			instrucci\xf3n.<br><br>
 			</div>			
 			JUMP1
-			<div style="text-align:justify;><span style="font-weight: bold;">SEXTA.- ENTREGA DE LA POSESI�N DE "EL INMUEBLE".<br></div>
-			<div style="text-align: justify;">La posesi�n material de "EL
+			<div style="text-align:justify;><span style="font-weight: bold;">SEXTA.- ENTREGA DE LA POSESI\xd3N DE "EL INMUEBLE".<br></div>
+			<div style="text-align: justify;">La posesi\xf3n material de "EL
 			INMUEBLE", la entrega en este acto "LA PROMITENTE VENDEDORA" a "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", a su entera satisfacci�n. En caso de rescisi�n del
-			presente contrato "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", deber�(n)
-			restituir la posesi�n de dicho inmueble a "LA PROMITENTE VENDEDORA",
-			dentro de un plazo no mayor a 5 d�as contados a partir de la fecha en
-			que ocurra la rescisi�n. "LAS PARTES" convienen expresamente que en caso
+			COMPRADOR(ES)", a su entera satisfacci\xf3n. En caso de rescisi\xf3n del
+			presente contrato "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", deber\xe1(n)
+			restituir la posesi\xf3n de dicho inmueble a "LA PROMITENTE VENDEDORA",
+			dentro de un plazo no mayor a 5 d\xedas contados a partir de la fecha en
+			que ocurra la rescisi\xf3n. "LAS PARTES" convienen expresamente que en caso
 			de incumplimiento de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" en cuanto a
-			la restituci�n de la posesi�n dentro del plazo convenido, pagar�(n) a
+			la restituci\xf3n de la posesi\xf3n dentro del plazo convenido, pagar\xe1(n) a
 			"LA PROMITENTE VENDEDORA" por concepto de pena convencional una
-			cantidad equivalente a 9 veces el salario m�nimo vigente en esta
-			ciudad de Guadalajara, Jalisco, por cada d�a de retraso en la entrega de dicha posesi�n.<br><br><br><br>
+			cantidad equivalente a 9 veces el salario m\xednimo vigente en esta
+			ciudad de Guadalajara, Jalisco, por cada d\xeda de retraso en la entrega de dicha posesi\xf3n.<br><br><br><br>
 			</div>
 			JUMP2
 			<div style="text-align:justify;><span style="font-weight: bold;">SEPTIMA.- PENA CONVENCIONAL.<br></div>
 			<div style="textrm-align: justify;">En caso de incumplimiento
 			de alguna de las obligaciones que asumen "LAS PARTES" en el presente
-			Contrato, la parte que incumpla pagar� a la otra por concepto de pena
+			Contrato, la parte que incumpla pagar\xe1 a la otra por concepto de pena
 			convencional una cantidad equivalente al 25%s calculado sobre el monto
 			total del precio pactado. En caso de que el incumplimiento fuere por
 			parte de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", "LA PROMITENTE
-			VENDEDORA" podr� optar por rescindir el presente contrato sin necesidad
-			de declaraci�n judicial previa, mediante simple notificaci�n hecha por
+			VENDEDORA" podr\xe1 optar por rescindir el presente contrato sin necesidad
+			de declaraci\xf3n judicial previa, mediante simple notificaci\xf3n hecha por
 			escrito.<br><br><br><br>
 			</div>
 			JUMP3
-			<div style="text-align:justify;><span style="font-weight: bold;">OCTAVA.- CESI�N.<br></div>
+			<div style="text-align:justify;><span style="font-weight: bold;">OCTAVA.- CESI\xd3N.<br></div>
 			<div style="text-align: justify;">En caso de que "EL(LOS)
 			PROMITENTE(S) COMPRADOR(ES)", quisiere(n) ceder los derechos del
-			presente contrato, deber� de notificarlo por escrito a "LA PROMITENTE
-			VENDEDORA" y adem�s se obliga(n) a pagarle a esta, una cantidad
-			equivalente al 5%s sobre el valor total de la correspondiente cesi�n de
+			presente contrato, deber\xe1 de notificarlo por escrito a "LA PROMITENTE
+			VENDEDORA" y adem\xe1s se obliga(n) a pagarle a esta, una cantidad
+			equivalente al 5%s sobre el valor total de la correspondiente cesi\xf3n de
 			derechos. Sin el consentimiento expreso por escrito de "LA PROMITENTE
-			VENDEDORA", la cesi�n de derechos no surtir� efecto legal alguno.<br><br><br><br>
+			VENDEDORA", la cesi\xf3n de derechos no surtir\xe1 efecto legal alguno.<br><br><br><br>
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">NOVENA.- IMPUESTOS PREDIAL DE "EL INMUEBLE".<br></div>
 			<div style="text-align: justify;">"EL(LOS) PROMITENTE(S)
@@ -33734,69 +33734,69 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA.- CONSTRUCCION DE "EL INMUEBLE".<br></div>
 			<div style="text-align: justify;">"EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", se obliga(n) a acatar las caracter�sticas de obra que
-			se�ale la Direcci�n de Obras P�blicas del
+			COMPRADOR(ES)", se obliga(n) a acatar las caracter\xedsticas de obra que
+			se\xf1ale la Direcci\xf3n de Obras P\xfablicas del
 			H. Ayuntamiento respectivo,
-			as� como las limitaciones que se�ala el
+			as\xed como las limitaciones que se\xf1ala el
 			reglamento del Desarrollo,
-			respecto a la construcci�n que edifiquen sobre "EL INMUEBLE" misma que
-			deber� ser recreativa campestres.<br><br><br><br><br><br>
+			respecto a la construcci\xf3n que edifiquen sobre "EL INMUEBLE" misma que
+			deber\xe1 ser recreativa campestres.<br><br><br><br><br><br>
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">DECIMO PRIMERA.- REGIMEN DE PROPIEDAD EN CONDOMINIO.<br></div>
 			<div style="text-align: justify;">"LAS PARTES" convienen
-			en que "LA PROMITENTE VENDEDORA" podr�, sin requerir el consentimiento
+			en que "LA PROMITENTE VENDEDORA" podr\xe1, sin requerir el consentimiento
 			de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", sujetar "EL INMUEBLE" al Regimen de Propiedad y Condominio.
-			En caso de que "EL INMUEBLE" se afecte al R�gimen de Propiedad y Condominio "LA
+			En caso de que "EL INMUEBLE" se afecte al R\xe9gimen de Propiedad y Condominio "LA
 			PROMITENTE VENDEDORA", se obliga a transmitir a "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", el mismo conjuntamente con la acci�n de dominio
-			indivisa sobre las �reas comunes que corresponda al lote condominal.
+			COMPRADOR(ES)", el mismo conjuntamente con la acci\xf3n de dominio
+			indivisa sobre las \xe1reas comunes que corresponda al lote condominal.
 			&nbsp; por su cuenta "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" se obliga(n) a cumplir y acatar
-			en todos sus t�rminos el
-			reglamento de administraci�n del condominio.
-			"El inmueble" deber� estar libre de gravamen, al corriente de sus
-			obligaciones fiscales y "LA PROMITENTE VENDEDORA" se obligar� al
-			saneamiento para el caso de evicci�n en los t�rminos de Ley.<br><br><br>
+			en todos sus t\xe9rminos el
+			reglamento de administraci\xf3n del condominio.
+			"El inmueble" deber\xe1 estar libre de gravamen, al corriente de sus
+			obligaciones fiscales y "LA PROMITENTE VENDEDORA" se obligar\xe1 al
+			saneamiento para el caso de evicci\xf3n en los t\xe9rminos de Ley.<br><br><br>
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA SEGUNDA.- GASTOS.<br></div>
 			<div style="text-align: justify;">Los gastos
-			ocasionados por el presente contrato, as� como los gastos, impuestos,
+			ocasionados por el presente contrato, as\xed como los gastos, impuestos,
 			derechos y honorarios ocasionados por la escritura de compra venta
-			definitiva ser�n a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)". El
-			impuesto sobre la renta ser� pagado por "LA PROMITENTE VENDEDORA".<br><br><br>
+			definitiva ser\xe1n a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)". El
+			impuesto sobre la renta ser\xe1 pagado por "LA PROMITENTE VENDEDORA".<br><br><br>
 			</div>
 			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA TERCERA.- TRIBUNALES COMPETENTES<br></div>
 			<div style="text-align: justify;">Para la
-			interpretaci�n y cumplimiento del presente contrato "LAS PARTES" se
+			interpretaci\xf3n y cumplimiento del presente contrato "LAS PARTES" se
 			someten expresamente a los Tribunales de esta ciudad de Guadalajara,
 			Jalisco, renunciando al fuero presente o futuro que por cualquier causa
 			pudiere corresponderles.<br><br><br><br><br>
 			</div>
-			<div style="text-align:justify;><span style="font-weight: bold;">D�CIMA CUARTA.- DEPOSITARIO DE "EL INMUEBLE".<br></div>
+			<div style="text-align:justify;><span style="font-weight: bold;">D\xc9CIMA CUARTA.- DEPOSITARIO DE "EL INMUEBLE".<br></div>
 			<div style="text-align: justify;">En el caso de que "LA
 			PROMITENTE VENDEDORA" exigiere judicialmente, el cumplimiento de las
-			obligaciones a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", �ste(os)
-			conviene(n) en que no ser�(n) depositario(s) de "EL INMUEBLE" objeto de este
+			obligaciones a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", \xe9ste(os)
+			conviene(n) en que no ser\xe1(n) depositario(s) de "EL INMUEBLE" objeto de este
 			contrato, y por lo tanto se obliga a entregar a "LA PROMITENTE
-			VENDEDORA" al depositario que �sta nombre dicho inmueble; siendo
-			responsable(s) de cualquier da�o o perjuicio que el inmueble sufra
-			mientras el depositario no tome posesi�n de su cargo.<br>
+			VENDEDORA" al depositario que \xe9sta nombre dicho inmueble; siendo
+			responsable(s) de cualquier da\xf1o o perjuicio que el inmueble sufra
+			mientras el depositario no tome posesi\xf3n de su cargo.<br>
 			</div>
 			JUMP1
 			<div style="text-align: justify;"><br>Todas las prestaciones derivadas de
-			este contrato, deber� pagarlas y cumplirlas "EL(LOS) PROMITENTE(S)
+			este contrato, deber\xe1 pagarlas y cumplirlas "EL(LOS) PROMITENTE(S)
 			COMPRADOR(ES)" en la Ciudad de %s, %s, en las oficinas de
 			la empresa ubicadas en %s, o en las que designe con
 			posterioridad, mediante aviso dado por escrito a "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)". El cambio de domicilio, los emplazamientos y dem�s diligencias judiciales o extrajudiciales
-			, se practicar�n en el domicilio se�alado en la presente cl�usula<br><br><br><br><br>
+			COMPRADOR(ES)". El cambio de domicilio, los emplazamientos y dem\xe1s diligencias judiciales o extrajudiciales
+			, se practicar\xe1n en el domicilio se\xf1alado en la presente cl\xe1usula<br><br><br><br><br>
 			</div>
 			<br>
 			JUMP1
 			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA QUINTA.- <br></div>
 			<div style="text-align: justify;">Para todos los efectos judiciales relativos al presente contrato, el acreditado
-			se�ala como su domicilio %s en la Ciudad de %s, %s.  Mientras 
+			se\xf1ala como su domicilio %s en la Ciudad de %s, %s.  Mientras 
 			"EL(LOS) PROMINENTES COMPRADOR(ES)" no notifiquen por escrito a la "PROMINENTE VENDEDORA" el cambio de domicilio, 
-			los emplazamientos y demas diligencias judiciales o extrajudiciales, se practicar�n en el domicilio se�alado en la presente cl�usula.
+			los emplazamientos y demas diligencias judiciales o extrajudiciales, se practicar\xe1n en el domicilio se\xf1alado en la presente cl\xe1usula.
 			<br><br>
 			</div>
 			JUMP2
@@ -33806,7 +33806,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Enteradas "LAS PARTES" del valor,
 			alcances y consecuencias legales del presente contrato, lo ratifican y
 			firman por duplicado en la Ciudad de Guadalajara, Jalisco, a los
-			%s d�as del mes de %s de %s.<br><br><br>
+			%s d\xedas del mes de %s de %s.<br><br><br>
 			</div>
 			<div style="text-align: center;"><br>"LA PROMITENTE VENDEDORA"<br>
 			<br><br>
