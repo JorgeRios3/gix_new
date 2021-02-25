@@ -33342,11 +33342,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					c2p1 = u"""
 					<div style="text-align: justify;"><br>1.- La cantidad de $%s,
 					(%s), que manifiesta "LA PROMITENTE VENDEDORA" recibir en
-					este acto a su entera satisfacci�n, sirviendo el presente contrato de
+					este acto a su entera satisfacci\xf3n, sirviendo el presente contrato de
 					formal recibo por la entrega de dicha cantidad.<br>
 					</div>
-					<div style="text-align: justify;"><br>2.- El resto de la contraprestaci�n o
-					sea la cantidad de $%s, (%s) la deber� pagar
+					<div style="text-align: justify;"><br>2.- El resto de la contraprestaci\xf3n o
+					sea la cantidad de $%s, (%s) la deber\xe1 pagar
 					"EL(LOS) PROMITENTE(S) COMPRADOR(ES)" mediante %s amortizaciones
 					de la siguiente forma:<br><br>
 					</div>
@@ -33403,48 +33403,48 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 					c2p1 += u"""
 					<div style="text-align: justify;"><br>3.- Las amortizaciones a
-					que se refiere el punto No. 2 de la presente cl�usula se documentan
-					mediante pagar�(s) que en este acto suscribe "EL(LOS) PROMITENTE(S)
-					COMPRADOR(ES)" quien(es) est�(n) de acuerdo en que dicho(s) t�tulo(s)
-					de cr�dito sea(n) descontado(s) con terceras personas f�sicas o morales
-					a elecci�n de "LA PROMITENTE VENDEDORA".<br>
+					que se refiere el punto No. 2 de la presente cl\xe1usula se documentan
+					mediante pagar\xe9(s) que en este acto suscribe "EL(LOS) PROMITENTE(S)
+					COMPRADOR(ES)" quien(es) est\xe1(n) de acuerdo en que dicho(s) t\xedtulo(s)
+					de cr\xe9dito sea(n) descontado(s) con terceras personas f\xedsicas o morales
+					a elecci\xf3n de "LA PROMITENTE VENDEDORA".<br>
 					</div>
 					<div style="text-align: justify;"><br>4.- En caso de que "EL(LOS)
 					PROMITENTE(S) COMPRADOR(ES)" incurra(n) en mora en el pago de las
-					amortizaciones se causar�n intereses moratorios por todo el tiempo que
+					amortizaciones se causar\xe1n intereses moratorios por todo el tiempo que
 					se mantenga insoluto dicho pago a una tasa igual al 25 %% anual.<br>
 					</div>
 					<div style="text-align: justify;"><br>
 					Si "LA PROMITENTE VENDEDORA" incurre
 					en gastos judiciales o extrajudiciales para realizar la cobranza de los
 					pagos vencidos en su caso, "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
-					estar�(n) obligado(s) a reembolsarle �stos gastos a "LA PROMITENTE
+					estar\xe1(n) obligado(s) a reembolsarle \xe9stos gastos a "LA PROMITENTE
 					VENDEDORA".<br>
 					</div>
 					<div style="text-align: justify;"><br>TERCERA.- La falta de pago puntual de
-					dos de las amortizaciones mensuales, se considerar� como incumplimiento
+					dos de las amortizaciones mensuales, se considerar\xe1 como incumplimiento
 					por parte de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" al presente
-					contrato, por lo que "LA PROMITENTE VENDEDORA" tendr� la opci�n de
-					rescindirlo en los t�rminos que se establecen en la
-					cl�usula s�ptima del mismo.<br>
+					contrato, por lo que "LA PROMITENTE VENDEDORA" tendr\xe1 la opci\xf3n de
+					rescindirlo en los t\xe9rminos que se establecen en la
+					cl\xe1usula s\xe9ptima del mismo.<br>
 					</div>
 					<div style="text-align: justify;"><br>"EL(LOS) PROMITENTE(S)
 					COMPRADOR(ES)", se obliga(n) a contribuir con los gastos generales, que
-					se originen en la conservaci�n y buen funcionamiento de las �reas de
-					uso com�n, en la proporci�n que le corresponda, tal como lo establece
-					el reglamento del desarrollo. Dicha obligaci�n la adquiere(n) a partir de
+					se originen en la conservaci\xf3n y buen funcionamiento de las \xe1reas de
+					uso com\xfan, en la proporci\xf3n que le corresponda, tal como lo establece
+					el reglamento del desarrollo. Dicha obligaci\xf3n la adquiere(n) a partir de
 					la firma del presente documento. La falta de pago puntual de por lo
 					menos dos de los pagos mensuales que anteriormente se detallan, se
-					considerar� como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
-					COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendr� la
-					opci�n de rescindir el presente contrato en los t�rminos que se
-					establecen en la cl�usula s�ptima de este contrato.<br><br><br>
+					considerar\xe1 como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
+					COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendr\xe1 la
+					opci\xf3n de rescindir el presente contrato en los t\xe9rminos que se
+					establecen en la cl\xe1usula septima de este contrato.<br><br><br>
 					</div><div style="text-align:justify;><span style="font-weight: bold;">CUARTA.- PRECIO PACTADO<br></div>
 					
 					
 					<div style="text-align: justify;"><br>"LAS PARTES" manifiestan que
-					el precio pactado en esta operaci�n, es justo y v�lido, por lo tanto en
-					este contrato no existe error, ni enriquecimiento ileg�timo de alguna
+					el precio pactado en esta operaci\xf3n, es justo y v\xe1lido, por lo tanto en
+					este contrato no existe error, ni enriquecimiento ileg\xedtimo de alguna
 					de las partes.<br>
 					</div>
 					"""
@@ -33455,27 +33455,27 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					c2p1 = u"""
 					<div style="text-align: justify;"><br>1.- La cantidad de $%s,
 					(%s), manifiesta "LA PROMITENTE VENDEDORA" quien la recibe en
-					este acto a su entera satisfacci�n, sirviendo el presente contrato de
+					este acto a su entera satisfacci\xf3n, sirviendo el presente contrato de
 					formal recibo por la entrega de dicha cantidad.<br>
 					</div>
-					<div style="text-align: justify;"><br>2.- El resto de la contraprestaci�n o
-					sea la cantidad de $%s, (%s) la deber�(n) pagar
+					<div style="text-align: justify;"><br>2.- El resto de la contraprestaci\xf3n o
+					sea la cantidad de $%s, (%s) la deber\xe1(n) pagar
 					"EL(LOS) PROMITENTE(S) COMPRADOR(ES)" mediante %s amortizaciones
-					mensuales, consecutivas sin intereses del d�a %s de
-					%s de %s al d�a %s de %s de
+					mensuales, consecutivas sin intereses del d\xeda %s de
+					%s de %s al d\xeda %s de %s de
 					%s, cada una por la cantidad de $%s,
 					(%s).<br>
 					</div>
 					<div style="text-align: justify;"><br>3.- Las amortizaciones mensuales a
-					que se refiere el punto anterior, se documentan mediante pagar�(s) que en 
+					que se refiere el punto anterior, se documentan mediante pagar\xe1(s) que en 
 					este acto suscribe "EL(LOS) PROMITENTE(S)
-					COMPRADOR(ES)" quien(es) est�(n) de acuerdo en que dicho(s) t�tulo(s)
-					de cr�dito sea(n) descontado(s) con terceras personas f�sicas o morales
-					a elecci�n de "LA PROMITENTE VENDEDORA".<br>
+					COMPRADOR(ES)" quien(es) est\xe1(n) de acuerdo en que dicho(s) t\xedtulo(s)
+					de cr\xe9dito sea(n) descontado(s) con terceras personas f\xedsicas o morales
+					a elecci\xf3n de "LA PROMITENTE VENDEDORA".<br>
 					</div>
 					<div style="text-align: justify;"><br>4.- En caso de que "EL(LOS)
 					PROMITENTE(S) COMPRADOR(ES)" incurra(n) en mora en el pago de las
-					amortizaciones se causar�n intereses moratorios por todo el tiempo que
+					amortizaciones se causar\xe1n intereses moratorios por todo el tiempo que
 					se mantenga insoluto dicho pago a una tasa del 25 %% anual.<br>
 					</div>
 					
@@ -33483,33 +33483,33 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					Si "LA PROMITENTE VENDEDORA" incurre
 					en gastos judiciales o extrajudiciales para realizar la cobranza de los
 					pagos vencidos en su caso, "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
-					estar�(n) obligado(s) a reembolsarle �stos gastos a "LA PROMITENTE
+					estar\xe1(n) obligado(s) a reembolsarle \xe9stos gastos a "LA PROMITENTE
 					VENDEDORA".<br><br><br>
 					</div>
 					<div style="text-align:justify;><span style="font-weight: bold;">TERCERA.- INCUMPLIMIENTO.<br></div>
 					<div style="text-align: justify;">La falta de pago puntual de
-					dos de las amortizaciones mensuales, se considerar� como incumplimiento
+					dos de las amortizaciones mensuales, se considerar\xe1 como incumplimiento
 					por parte de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" al presente
-					contrato, por lo que "LA PROMITENTE VENDEDORA" tendr� la opci�n de
-					rescindirlo en los t�rminos que se establecen en la
-					cl�usula s�ptima del mismo.<br>
+					contrato, por lo que "LA PROMITENTE VENDEDORA" tendr\xe1 la opci\xf3n de
+					rescindirlo en los t\xe9rminos que se establecen en la
+					cl\xe1usula s\xe9ptima del mismo.<br>
 					</div>
 					<div style="text-align: justify;"><br>"EL(LOS) PROMITENTE(S)
 					COMPRADOR(ES)", se obliga(n) a contribuir con los gastos generales, que
-					se originen en la conservaci�n y buen funcionamiento de las �reas de
-					uso com�n, en la proporci�n que le corresponda, tal como lo establece
-					el reglamento del desarrollo. Dicha obligaci�n la adquiere a partir de
+					se originen en la conservaci\xf3n y buen funcionamiento de las \xe1reas de
+					uso com\xfan, en la proporci\xf3n que le corresponda, tal como lo establece
+					el reglamento del desarrollo. Dicha obligaci\xf3n la adquiere a partir de
 					la firma del presente documento. La falta de pago puntual de por lo
 					menos dos de los pagos mensuales que anteriormente se detallan, se
-					considerar� como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
-					COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendr� la
-					opci�n de rescindir el presente contrato en los t�rminos que se
-					establecen en la cl�usula s�ptima de este contrato.<br>
+					considerar\xe1 como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
+					COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendr\xe1 la
+					opci\xf3n de rescindir el presente contrato en los t\xe9rminos que se
+					establecen en la cl\xe1usula s\xe9ptima de este contrato.<br>
 					</div>
 					<div style="text-align:justify;><span style="font-weight: bold;">CUARTA.- PRECIO PACTADO.<br></div>
 					<div style="text-align: justify;">Las partes manifiestan que
-					el precio pactado en esta operaci�n, es justo y v�lido, por lo tanto en
-					este contrato no existe error, ni enriquecimiento ileg�timo de alguna
+					el precio pactado en esta operaci\xf3n, es justo y v\xe1lido, por lo tanto en
+					este contrato no existe error, ni enriquecimiento ileg\xedtimo de alguna
 					de las partes.<br>
 					</div>
 					""" % (engancheq, enganchel, restoq, restol, plazomeses, int(di), meses[int(mi)], int(ai),
@@ -33524,24 +33524,24 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				<div><h1></div>
 				<br><br><br><br><br><br><br><br><br><br>
 				<div style="text-align: justify;"><br>1.- La cantidad de $%s,
-				(%s), la deber� pagar "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
-				mediante un pago �nico el d�a %s.<br>
+				(%s), la deber\xe1 pagar "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
+				mediante un pago \xfanico el d\xeda %s.<br>
 				</div>
 				<div style="text-align: justify;"><br>TERCERA.- "EL(LOS) PROMITENTE(S)
 				COMPRADOR(ES)", se obliga(n) a contribuir con los gastos generales, que
-				se originen en la conservaci�n y buen funcionamiento de las �reas de
-				uso com�n, en la proporci�n que le corresponda, tal como lo establece
-				el reglamento del desarrollo. Dicha obligaci�n la adquiere a partir de
+				se originen en la conservaci\xf3n y buen funcionamiento de las \xe1reas de
+				uso com\xfan, en la proporci\xf3n que le corresponda, tal como lo establece
+				el reglamento del desarrollo. Dicha obligaci\xf3n la adquiere a partir de
 				la firma del presente documento. La falta de pago puntual de por lo
 				menos dos de los pagos mensuales que anteriormente se detallan, se
-				considerar� como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
-				COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendr� la
-				opci�n de rescindir el presente contrato en los t�rminos que se
-				establecen en la cl�usula s�ptima de este contrato.<br><br>
+				considerar\xe1 como incumplimiento por parte de "EL(LOS) PROMITENTE(S)
+				COMPRADOR(ES)", y por lo tanto, "LA PROMITENTE VENDEDORA", tendr\xe1 la
+				opci\xf3n de rescindir el presente contrato en los t\xe9rminos que se
+				establecen en la cl\xe1usula s\xe9ptima de este contrato.<br><br>
 				</div>
 				<div style="text-align: justify;"><br>CUARTA.- Las partes manifiestan que
-				el precio pactado en esta operaci�n, es justo y v�lido, por lo tanto en
-				este contrato no existe error, ni enriquecimiento ileg�timo de alguna
+				el precio pactado en esta operaci\xf3n, es justo y v\xe1lido, por lo tanto en
+				este contrato no existe error, ni enriquecimiento ileg\xedtimo de alguna
 				de las partes.<br>
 				</div>
 				""" % (engancheq, enganchel, fechaenganche)
@@ -33819,7 +33819,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			_______________________________________________<br>
 			%s<br>
 			<br><br><br>
-			</div>
+			</div>n 
 			<table
 			style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;"
 			border="0" cellpadding="2" cellspacing="2">
