@@ -33828,7 +33828,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<td style="vertical-align: top; text-align: center;">TESTIGO<br>
 			<br><br>
 			__________________________________________<br>
-			Sr. Vicente Bejarano Casillas
+			Gerente de Ventas <br>
+			Juan Pablo Lares Monraz
 			</td>
 			<td style="vertical-align: top; text-align: center; width: 100px;"><br>
 			</td>
