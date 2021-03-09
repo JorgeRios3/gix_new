@@ -32769,12 +32769,14 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		<br>
 		<div style="text-align: justify;"><big><big><span
 		style="font-family: Arial;">Por
-		medio de este pagar� reconozco(emos) deber y me(nos) obligo(amos) a
+		medio de este pagar\xe9 reconozco(emos) deber y me(nos) obligo(amos) a
 		pagar incondicionalmente a la orden de Arcadia Promotora S. de R.L. de
-		C.V., la cantidad total de <span style="font-weight: bold;">${$TOTALTABLAC}
+		C.V., la cantidad total de 
+		<span style="font-weight: bold;">${$TOTALTABLAC}
 		({$TOTALTABLAL})</span>, en el domicilio de Av. Hidalgo 1443 Piso 9,
-		mediante <span style="font-weight: bold;">{$PLAZOTABLA}</span> pagos
-		mensuales consecutivos sin intereses del d�a <span
+		mediante 
+		<span style="font-weight: bold;">{$PLAZOTABLA}</span> pagos
+		mensuales consecutivos sin intereses del d\xeda <span
 		style="font-weight: bold;">{$FECHAINICIAL}</span><span
 		style="font-weight: bold;"></span><span style="font-weight: bold;"></span>
 		al <span style="font-weight: bold;">{$FECHAFINAL}</span><span
@@ -32783,31 +32785,31 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		({$PAGOFIJOL})</span>.</span><br>
 		<br>
 		<span style="font-family: Arial;">En caso de mora en el principal, la
-		suma de que se trate causar� intereses moratorios del 
+		suma de que se trate causar\xe1 intereses moratorios del 
 		25 por ciento anual.<br>
 		<br>
 		<span style="font-family: Arial;">La falta de pago oportuno del capital
-		de por los menos dos mensualidades, traer� como consecuencia que sea
+		de por los menos dos mensualidades, traer\xe1 como consecuencia que sea
 		exigible en su totalidad el saldo insoluto de la cantidad que ampara el
-		presente pagar�, a�n cuando las mensualidades que sucedan a dicha
+		presente pagar\xe9, a\xfan cuando las mensualidades que sucedan a dicha
 		mensualidad, no se encuentren vencidas.<br>
 		<br>
-		Este pagar� queda relevado de protesto.<br>
+		Este pagare queda relevado de protesto.<br>
 		<br>
-		Para todo lo relacionado con este pagar�, incluyendo su interpretaci�n
+		Para todo lo relacionado con este pagar\xe9, incluyendo su interpretaci\xf3n
 		y cumplimiento, me someto expresamente a las leyes y tribunales
 		vigentes y competentes en la ciudad de Guadalajara, Jalisco,
 		renunciando al fuero que por cualquier otra causa pudiera corresponder.<br>
 		<br>
-		Suscribo el presente pagar� en la ciudad de Guadalajara, Jalisco a los <span
-		style="font-weight: bold;">{$DIA} d�as del mes de {$MES} del {$ANIO}.</span><br>
+		Suscribo el presente pagar\xe9 en la ciudad de Guadalajara, Jalisco a los <span
+		style="font-weight: bold;">{$DIA} d\xedas del mes de {$MES} del {$ANIO}.</span><br>
 		<br>
 		<br>
 		<small>Nombre del Suscriptor:</small><br>
 		<span style="font-weight: bold;">{$NOMBRE}<small><br>
 		</small></span><small>Domicilio:</small><br>
 		<span style="font-weight: bold;">{$DOMICILIO}</span><br>
-		<small>Tel�fono:</small><br>
+		<small>Tel\xe9fono:</small><br>
 		<span style="font-weight: bold;">{$TELEFONO}</span><br>
 		<small>Ciudad y Estado:</small><br>
 		<span style="font-weight: bold;">{$CDEDO}</span></span></span></big></big><br>
