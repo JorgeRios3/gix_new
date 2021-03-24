@@ -35243,7 +35243,7 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 			<br>
 			<div style="text-align: justify;"><big><span style="font-family: Arial;">LINDEROS.-
 			<span style="font-weight: bold;">Los que se consignan en Escritura de
-			Constituci�n de R�gimen de Condominio PINARES TAPALPA {$ETAPA}.</span></span></big><br>
+			Constituci\xf3n de R\xe9gimen de Condominio PINARES TAPALPA {$ETAPA}.</span></span></big><br>
 			<br>
 			<br>
 			<table
