@@ -9,6 +9,7 @@
 
 from __future__ import with_statement
 import warnings
+import os
 try:
 	import pyodbc
 except:
@@ -290,7 +291,11 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 					else:
 						DSN = "ARCADIAODBCTEST"
 					conexion = "mssql://%s:%s@%s" % (cn_data2[1], cn_data2[2], DSN)
-					engine2 = create_engine(conexion)
+					engine2=None
+					if os.environ["POSTGRES"]:
+						engine2 = create_engine('postgresql://iclarpro:2015@localhost/arcadia', connect_args={'options': '-csearch_path={}'.format('dbo,arcadia,public')})
+					else:
+						engine2 = create_engine(conexion)
 					conn = engine2.connect()
 					r_cngcmex = conn.connection
 					

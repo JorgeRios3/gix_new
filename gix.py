@@ -21,7 +21,7 @@
 	#pass
 	
 #############
-
+import os
 try:
 	import wx.lib.agw.toasterbox as TB
 
@@ -30086,6 +30086,7 @@ class GixTablasAmortizacionFunc2(wx.Dialog, GixBase):
 		dlg.ShowModal()
 		
 	def OnEditar(self, evt):
+		print("aquiiiii xxx")
 		dlg = GixClientesVentasPinaresFunc2(self, codigocliente = self.codigocliente, filllistctrl = self.FillListCtrl)
 		dlg.CenterOnParent()
 		dlg.ShowModal()
@@ -31110,7 +31111,7 @@ class GixTablasAmortizacionFunc13(wx.Dialog, GixBase):
 class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def __init__(self, parent, id, title, pos = wx.DefaultPosition, size = wx.DefaultSize, style = wx.DEFAULT_FRAME_STYLE, usuario = None):
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
-		self.usuarioautorizado = ("CESAR", "ENRIQUE")
+		self.usuarioautorizado = ("CESAR", "ENRIQUE", "MALR")
 		self.usuario = usuario
 		self.currentitem, self.fkamortizacion, self.numerodepago, self.pkamortizaciondetalle = -1, 0, 0, 0
 		self.DicDatesAndTxt = {ID_BITMAPBUTTONAMORFUNC1ELEGIRFECHAELABORACION : ID_TEXTCTRLAMORFUNC1FECHAELABORACION}
@@ -32077,14 +32078,24 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query = ""
+		if os.environ["POSTGRES"]:
+			query = "SELECT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
 
 	def GetTime(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(8), getdate(), 108)")
+		query = ""
+		if os.environ["POSTGRES"]:
+			query = "select current_time(2)"
+		else:
+			query = "select convert(varchar(8), getdate(), 108)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -38003,6 +38014,7 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 		return (sql.replace('\t', ' ')).replace('\n', ' ')
 	
 	def PreparaEdicion(self):
+		print("en edicion")
 		query = """
 		select nombre, rfc, nacionalidad, lugardenacimiento, convert(varchar(10), fechadenacimiento, 103),
 		estadocivil, situacion, regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa,
@@ -39040,6 +39052,7 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		return (sql.replace('\t', ' ')).replace('\n', ' ')
 	
 	def PreparaEdicion(self):
+		print("hasta acaaa")
 		query = """
 		select nombre, rfc, nacionalidad, lugardenacimiento, convert(varchar(10), fechadenacimiento, 103),
 		estadocivil, situacion, regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa,
@@ -39048,6 +39061,15 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		conyugerfc, conyugeocupacion, curp, conyugecurp, email
 		from cliente where codigo = %s
 		""" % self.codigocliente
+		if os.environ["POSTGRES"]:
+			query = """
+			select nombre, rfc, nacionalidad, lugardenacimiento, fechadenacimiento,
+			estadocivil, situacion, regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa,
+			telefonotrabajo, conyugenombre, conyugenacionalidad, conyugelugardenacimiento,
+			conyugefechadenacimiento, 103
+			conyugerfc, conyugeocupacion, curp, conyugecurp, email
+			from cliente where codigo = %s
+			""" % self.codigocliente
 		cu = r_cngcmex.cursor()
 		cu.execute(self.PreparaQuery(query))
 		row = fetchone(cu)
@@ -39202,7 +39224,12 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 			todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql), conexion = r_cngcmex)
 		else:
 			cu = r_cngcmex.cursor()
-			cu.execute("select top 1 codigo from cliente order by codigo desc")
+			query = ""
+			if os.environ["POSTGRES"]:
+				query = "select codigo from cliente order by codigo desc limit 1"
+			else:
+				query = "select top 1 codigo from cliente order by codigo desc"
+			cu.execute(query)
 			row = fetchone(cu)
 			cu.close()
 			self.codigocliente = int(row[0]) + 1
@@ -39233,6 +39260,8 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 				self.Destroy()
 
 class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
+	print("aqui")
+	logging.info("probando a ver si funciona")
 	def __init__(self, parent, id = -1, title = u"Clientes", pos = wx.DefaultPosition, size = wx.DefaultSize,
 	             style = wx.DEFAULT_FRAME_STYLE):
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
@@ -39289,10 +39318,12 @@ class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
 		return dato.strip()
 
 	def OnDoSearchIdCliente(self, evt):
+		print("entro aqui 10")
 		self.idclientefiltro = self.GetControl(ID_SEARCHCTRLCLIENTEPINARESFUNC1BUSCARIDCLIENTE).GetValue()
 		self.FillListCtrl()
 
 	def OnCleanIdCliente(self, evt):
+		print("entro aqui 11")
 		self.GetControl(ID_SEARCHCTRLCLIENTEPINARESFUNC1BUSCARIDCLIENTE).SetValue("")
 		self.idclientefiltro = ""
 		self.FillListCtrl()
@@ -39308,9 +39339,11 @@ class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
 		self.FillListCtrl()
 		
 	def OnChoiceClientes(self, evt):
+		print("entro aqui 7")
 		self.FillListCtrl()
 
 	def OnSelected(self, evt):
+		print("entro aqui 6")
 		currentitem = evt.m_itemIndex
 		datointerno = self.GetControl(ID_LISTCTRLCLIENTEPINARESFUNC1).GetItem(currentitem, 0).GetText()
 		self.codigocliente = int(datointerno)
@@ -39319,24 +39352,30 @@ class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
 		evt.Skip()
 		
 	def OnDeselected(self, evt):
+		print("entro aqui 5")
 		self.codigocliente, self.nombrecliente = 0, ""
 		self.GetControl(ID_BUTTONCLIENTEPINARESFUNC1EDITAR).Enable(False)
 		evt.Skip()
 	
 	def OnActivated(self, evt):
+		print("entro aqui 4")
 		dlg = GixClientesVentasPinaresFunc2(self, codigocliente = self.codigocliente, filllistctrl = self.FillListCtrl)
 		dlg.CenterOnParent()
 		dlg.ShowModal()
 		
 	def OnAgregar(self, evt):
+		print("entro aqui 3")
 		dlg = GixClientesVentasPinaresFunc2(self, title = u"Arcadia (Pinares Tapalpa) - Agregando Cliente", filllistctrl = self.FillListCtrl)
 		dlg.CenterOnParent()
 		dlg.ShowModal()
 		
 	def OnRefrescar(self, evt):
+		print("entro aqui 2")
 		self.FillListCtrl()
 		
 	def FillListCtrl(self):
+		print("entro aqui jajajaja")
+		logging.info("probando a ver si funciona")
 		wx.BeginBusyCursor()
 		lctrl = self.GetControl(ID_LISTCTRLCLIENTEPINARESFUNC1)
 		if lctrl.GetItemCount() > 0 or lctrl.GetColumnCount() > 0:
