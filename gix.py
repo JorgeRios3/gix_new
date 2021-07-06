@@ -30693,15 +30693,27 @@ class GixTablasAmortizacionFunc8(wx.Dialog, GixBase):
 		if self.clientefiltro:
 			listctrlfiltro = "where nombre like '%s%s%s'" % ("%%", str(self.clientefiltro), "%%")
 		cu = r_cngcmex.cursor()
-		query = """
-		select a.pkamortizacion, convert(varchar(10), a.fechaelaboracion, 103),
-		rtrim(ltrim(i.iden2)) + '-' + rtrim(ltrim(i.iden1)), rtrim(ltrim(e.descripcion)), isnull(c.nombre, '')
-		from gixamortizacion a
-		join INMUEBLE i on a.fkinmueble = i.codigo
-		join ETAPA e on a.fketapa = e.codigo
-		left join CLIENTE c on a.fkcliente = c.codigo
-		%s order by a.fechaelaboracion desc, a.pkamortizacion desc
-		""" % listctrlfiltro
+		query =""
+		if os.environ["POSTGRES"]:
+			query = """
+			select a.pkamortizacion, convert(varchar(10), a.fechaelaboracion, 103),
+			rtrim(ltrim(i.iden2)) + '-' + rtrim(ltrim(i.iden1)), rtrim(ltrim(e.descripcion)), isnull(c.nombre, '')
+			from gixamortizacion a
+			join INMUEBLE i on a.fkinmueble = i.codigo
+			join ETAPA e on a.fketapa = e.codigo
+			left join CLIENTE c on a.fkcliente = c.codigo
+			%s order by a.fechaelaboracion desc, a.pkamortizacion desc
+			""" % listctrlfiltro
+		else:
+			query = """
+			select a.pkamortizacion, convert(varchar(10), a.fechaelaboracion, 103),
+			rtrim(ltrim(i.iden2)) + '-' + rtrim(ltrim(i.iden1)), rtrim(ltrim(e.descripcion)), isnull(c.nombre, '')
+			from gixamortizacion a
+			join INMUEBLE i on a.fkinmueble = i.codigo
+			join ETAPA e on a.fketapa = e.codigo
+			left join CLIENTE c on a.fkcliente = c.codigo
+			%s order by a.fechaelaboracion desc, a.pkamortizacion desc
+			""" % listctrlfiltro
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu.execute(str(sql))
 		rows = fetchall(cu)
@@ -31239,7 +31251,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		
 	def ObtenerFechaDelDia(self, primerpago = False):
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select convert(varchar(10), getdate(), 103)"))
+		query = ""
+		if os.environ["POSTGRES"]:
+			query= "SELECT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		fecha = str(row[0])
