@@ -18,6 +18,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL as URLSQL
 from threading import Thread
 from wsgiref.simple_server import make_server
+from gixutils import Mensajes
 
 try:
 	import memcache
@@ -292,9 +293,11 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 						DSN = "ARCADIAODBCTEST"
 					conexion = "mssql://%s:%s@%s" % (cn_data2[1], cn_data2[2], DSN)
 					engine2=None
-					if os.environ["POSTGRES"]:
+					if os.environ.get("POSTGRES") == "True":
+						Mensajes().Info(self, u"postgres ")
 						engine2 = create_engine('postgresql://iclarpro:2015@localhost/arcadia', connect_args={'options': '-csearch_path={}'.format('dbo,arcadia,public')})
 					else:
+						Mensajes().Info(self, u"sql ")
 						engine2 = create_engine(conexion)
 					conn = engine2.connect()
 					r_cngcmex = conn.connection
@@ -361,7 +364,7 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 						DSN = "ARCADIAODBCTEST"
 					conexion = "mssql://%s:%s@%s" % (cn_data2[1], cn_data2[2], DSN)
 					engine2=None
-					if os.environ["POSTGRES"]:
+					if os.environ.get("POSTGRES") == "True":
 						engine2 = create_engine('postgresql://iclarpro:2015@localhost/arcadia', connect_args={'options': '-csearch_path={}'.format('dbo,arcadia,public')})
 					else:
 						engine2 = create_engine(conexion)
