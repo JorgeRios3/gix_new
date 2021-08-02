@@ -32126,10 +32126,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		return (identity.replace('Id','')).replace(' ','')
 	
 	def GetDate(self):
-		cu = r_cn.cursor()
+		cu = r_cngcmex.cursor()
 		query = ""
 		if os.environ.get("POSTGRES") == "True":
-			query="SELECT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy')"
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
 		cu.execute(query)
@@ -32138,7 +32138,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		return str(row[0])
 
 	def GetTime(self):
-		cu = r_cn.cursor()
+		cu = r_cngcmex.cursor()
 		query = ""
 		if os.environ.get("POSTGRES") == "True":
 			query = "select current_time(2)"
@@ -32529,15 +32529,24 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, u"� Se presento un problema al imprimir el pagar� !", u"Atenci�n")
 			
 	def GetHtmlPagareEnganche(self):
+		Mensajes().Info(self, "pagare7")
 		mes = {1:"Enero", 2:"Febrero", 3:"Marzo", 4:"Abril", 5:"Mayo", 6:"Junio", 7:"Julio",
 		       8:"Agosto", 9:"Septiembre", 10:"Octubre", 11:"Noviembre", 12:"Diciembre"}
-		query = """
-	        select a.enganchec, convert(varchar(10), a.fechaenganche, 103), c.nombre, c.domicilio, c.colonia,
-	        c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
-		convert(varchar(10), fechaelaboracion, 103) from gixamortizacion a
-	        join cliente c on a.fkcliente = c.codigo
-	        where a.pkamortizacion = %s
-	        """ % self.pkamortizacion
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query = """
+			select a.enganchec, to_char(a.fechaenganche, 'DD/MM/YYYY'), c.nombre, c.domicilio, c.colonia,
+			c.telefonocasa, trim(concat(c.ciudad, ', ', c.estado, ' ', c.cp)), to_char(fechaelaboracion, 'DD/MM/YYYY')
+			from dbo.gixamortizacion a join dbo.cliente c on a.fkcliente = c.codigo where a.pkamortizacion = %s
+			""" % self.pkamortizacion
+		else:
+			query = """
+			select a.enganchec, convert(varchar(10), a.fechaenganche, 103), c.nombre, c.domicilio, c.colonia,
+			c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
+			convert(varchar(10), fechaelaboracion, 103) from gixamortizacion a
+			join cliente c on a.fkcliente = c.codigo
+			where a.pkamortizacion = %s
+			""" % self.pkamortizacion
 		cu = r_cngcmex.cursor()
 		cu.execute(self.PreparaQuery(query))
 		row = fetchone(cu)
@@ -32640,8 +32649,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		return html
 	
 	def OnImprimirPagarePagos(self, evt):
+		Mensajes().Info(self, "pagare1")
 		self.pkamortizacion = self.GetIdentity()
+		Mensajes().Info(self, "pagare2")
 		if self.pkamortizacion:
+			Mensajes().Info(self, "pagare3")
 			if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 				if self.cambio:
 					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaci�n.\n\n" \
@@ -32653,6 +32665,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			else:
 				Mensajes().Info(self, u"� Asigne un inmueble !", u"Atenci�n")
 		else:
+			Mensajes().Info(self, "pagare4")
 			index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 			if index < 0:
 				Mensajes().Info(self, u"� No hay nada que imprimir !", u"Atenci�n")
@@ -32674,15 +32687,17 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, u"� Por favor instale el m�dulo xhtml2pdf (pisa) !", u"Aviso")
 			return
 		try:
+			Mensajes().Info(self, "pagare5")
 			aux = self.GetIdentity()
+			Mensajes().Info(self, "pagare51")
+			Mensajes().Info(self, "{}".format(aux))
+			Mensajes().Info(self, "pagare52")
 			pkamortizacion = int(aux)
-			query =""
+			Mensajes().Info(self, "pagare53")
+			query = ""
 			if os.environ.get("POSTGRES") == "True":
-				query = """
-				select fechadepago, numerodepago, pagofijo
-				from gixamortizaciondetalle
-				where fkamortizacion = %s and eliminado = False
-				order by fechadepago, numerodepago
+				query = """select to_char(fechadepago, 'DD/MM/YYYY'), numerodepago, pagofijo from dbo.gixamortizaciondetalle
+				where fkamortizacion = %s and eliminado = False order by fechadepago, numerodepago
 				""" % pkamortizacion
 			else:
 				query = """
@@ -32691,9 +32706,13 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				where fkamortizacion = %s and eliminado <> 1
 				order by fechadepago, numerodepago
 				""" % pkamortizacion
+			Mensajes().Info(self, "CHALE1 ")
 			cu = r_cngcmex.cursor()
+			Mensajes().Info(self, "CHALE2")
 			cu.execute(self.PreparaQuery(query))
+			Mensajes().Info(self, "CHALE3")
 			rows = fetchall(cu)
+			Mensajes().Info(self, "CHALE4")
 			cu.close()
 			aux = self.GetControl(ID_TEXTCTRLAMORFUNC1PLAZOMESES).GetValue()
 			plazo = int(aux)
@@ -32780,7 +32799,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		query=""
 		if os.environ.get("POSTGRES") == "True":
 			query = """
-			select fechadepago from gixamortizaciondetalle
+			select to_char(fechadepago, 'DD/MM/YYYY') from gixamortizaciondetalle
 			where fkamortizacion = %s and eliminado = false order by fechadepago
 			""" % int(self.pkamortizacion)
 		else:
@@ -32801,9 +32820,15 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			plazotabla = len(rows)
 			di, mi, ai = str(rows[0][0]).split("/")
 			df, mf, af = str(rows[len(rows) - 1][0]).split("/")
-			query = """
-			select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0
-			""" % int(self.pkamortizacion)
+			query = ""
+			if os.environ.get("POSTGRES") == "True":
+				query = """
+				select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = false
+				""" % int(self.pkamortizacion)
+			else:
+				query = """
+				select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0
+				""" % int(self.pkamortizacion)
 			sql = (query.replace('\n',' ')).replace('\t',' ')
 			cu = r_cngcmex.cursor()
 			cu.execute(str(sql))
@@ -32825,14 +32850,23 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			pagofijo = float(row[0])
 			if pagofijo <= 0:
 				return ""
-			
-		query = """
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query = """
+			select c.nombre, c.domicilio, c.colonia,
+			c.telefonocasa, trim(concat(c.ciudad, ', ', c.estado,' ', c.cp)),
+			to_char(a.fechaelaboracion, 'DD/MM/YYYY') from gixamortizacion a
+			join cliente c on a.fkcliente = c.codigo
+			where a.pkamortizacion = %s
+			""" % self.pkamortizacion
+		else:
+			query = """
 	        select c.nombre, c.domicilio, c.colonia,
-	        c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
-		convert(varchar(10), a.fechaelaboracion, 103) from gixamortizacion a
-	        join cliente c on a.fkcliente = c.codigo
-	        where a.pkamortizacion = %s
-	        """ % self.pkamortizacion
+			c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
+			convert(varchar(10), a.fechaelaboracion, 103) from gixamortizacion a
+			join cliente c on a.fkcliente = c.codigo
+			where a.pkamortizacion = %s
+			""" % self.pkamortizacion
 		cu = r_cngcmex.cursor()
 		cu.execute(self.PreparaQuery(query))
 		row = fetchone(cu)
@@ -32986,14 +33020,23 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				return ""
 		else:
 			return ""
-			
-		query = """
-	        select c.nombre, c.domicilio, c.colonia,
-	        c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
-		convert(varchar(10), a.fechaelaboracion, 103) from gixamortizacion a
-	        join cliente c on a.fkcliente = c.codigo
-	        where a.pkamortizacion = %s
-	        """ % self.pkamortizacion
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query = """
+			select c.nombre, c.domicilio, c.colonia,
+			c.telefonocasa, trim(concat(c.ciudad, ', ', c.estado, ' ', c.cp)),
+			to_char(a.fechaelaboracion, 'DD/MM/YYYY') from gixamortizacion a
+			join cliente c on a.fkcliente = c.codigo
+			where a.pkamortizacion = %s
+			""" % self.pkamortizacion
+		else:
+			query = """
+			select c.nombre, c.domicilio, c.colonia,
+			c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
+			convert(varchar(10), a.fechaelaboracion, 103) from gixamortizacion a
+			join cliente c on a.fkcliente = c.codigo
+			where a.pkamortizacion = %s
+			""" % self.pkamortizacion
 		cu = r_cngcmex.cursor()
 		cu.execute(self.PreparaQuery(query))
 		row = fetchone(cu)
@@ -33217,7 +33260,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			cu = r_cngcmex.cursor()
 			cu.execute(self.PreparaQuery(query))
 			rows = fetchall(cu)
-			Mensajes().Info(self, "viendo length de rows {}".format(len(rows)))
 			cu.close()
 			aux = self.GetControl(ID_TEXTCTRLAMORFUNC1PLAZOMESES).GetValue()
 			plazo = int(aux)
@@ -33275,7 +33317,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				wx.EndBusyCursor()
 				
 			elif contrato:
-				Mensajes().Info(self, u"aaaaaaaqui 8")
 				archivo = "Contrato%s_%s.pdf" % (contrato, self.pkamortizacion)
 				try:
 					os.startfile(str(archivo))
@@ -33355,12 +33396,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		row = fetchone(cu)
 		pagoextra = False
 		if row is not None:
-			Mensajes().Info(self, u"aaaaaaaqui 21")
 			if int(row[0]) > 0:
 				pagoextra = True
 			else:
 				plazotabla, totaltabla = 0, 0
-		Mensajes().Info(self, u"aaaaaaaqui 20")
 		query=""
 		if os.environ.get("POSTGRES") == "True":
 			query = """
@@ -34156,6 +34195,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, u"� Se presento un problema al imprimir la tabla !", u"Atenci�n")
 
 	def GetHtmlTabla(self):
+		Mensajes().Info(self, "aaaaqui 1")
 		query = ""
 		if os.environ.get("POSTGRES") == "True":
 			query = """
@@ -34165,6 +34205,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			query = """
 			select sum(abonocapital) + sum(interes) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0
 			""" % int(self.pkamortizacion)
+		Mensajes().Info(self, "aaaaqui 2")
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
@@ -34191,11 +34232,14 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			join INMUEBLE i on a.fkinmueble = i.codigo
 			where a.pkamortizacion = %s
 			""" % int(self.pkamortizacion)
+		Mensajes().Info(self, "aaaaqui 3")
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
+		Mensajes().Info(self, "aaaaqui 4")
 		row = fetchone(cu)
 		cu.close()
+		Mensajes().Info(self, "aaaaqui 5")
 		if row is not None:
 			a = u"�"; e = u"�"; i = u"�"; o = u"�"; u = u"�"
 			meses = ("", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic")
@@ -34203,15 +34247,18 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			superficie = str(amount_and_cents_with_commas(float(row[2])))
 			saldoafinanciar = str(amount_and_cents_with_commas(float(row[3])))
 			preciom2 = str(amount_and_cents_with_commas(float(row[4])))
+			Mensajes().Info(self, "aaaaqui 6")
 			if abonointeres:
 				totalapagar = str(amount_and_cents_with_commas(abonointeres + float(row[1])))
+				Mensajes().Info(self, "aaaaqui 7")
 			else:
 				totalapagar = str(amount_and_cents_with_commas(float(row[5])))
-				
+				Mensajes().Info(self, "aaaaqui 8")
 			cuenta = int(row[6])
+			Mensajes().Info(self, "aaaaqui 9")
 			#if cuenta:
 				#return "", cuenta
-			
+			Mensajes().Info(self, "jaja 10")
 			header = """
 			<table
 			 style="width: 993px; height: 200px; text-align: left; margin-left: auto; margin-right: auto;"
@@ -34226,7 +34273,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</table>
 			<div style="text-align: right;"><big><big>&nbsp;<span
 			 style="font-weight: bold;">Id de la Tabla:&nbsp;""" + str(self.pkamortizacion) + """</big></big>
-			 <br>%date%&nbsp;%time%&nbsp;&nbsp;(%page%)</span><br>
+			 <br>good_fecha%&nbsp;%time%&nbsp;&nbsp;(%page%)</span><br>
 			</div>
 			<hr style="width: 100%; height: 2px;">
 			<table style="text-align: left; width: 985px; height: 82px; margin-left: auto; margin-right: auto;"
@@ -34260,18 +34307,29 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</table>
 			<hr style="width: 100%; height: 1px;" noshade="noshade">
 			"""
-			header = header.replace('%date%',self.GetDate())
+			Mensajes().Info(self, "hasta aca 11")
+			header = header.replace('good_fecha',self.GetDate())
+			Mensajes().Info(self, "jajajaja 11")
 			header = header.replace('%time%',self.GetTime())
-			
-			query = """
-			select numerodepago, convert(varchar(10), fechadepago, 103), saldoinicial, pagofijo, abonocapital, interes, saldofinal
-			from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0 order by fechadepago, numerodepago
-			""" % int(self.pkamortizacion)
+			Mensajes().Info(self, "aaaaqui 12")
+			query = ""
+			if os.environ.get("POSTGRES") == "True":
+				query = """
+				select numerodepago, to_char(fechadepago, 'DD/MM/YYYY'), saldoinicial, pagofijo, abonocapital, interes, saldofinal
+				from gixamortizaciondetalle where fkamortizacion = %s and eliminado = false order by fechadepago, numerodepago
+				""" % int(self.pkamortizacion)
+			else:
+				query = """
+				select numerodepago, convert(varchar(10), fechadepago, 103), saldoinicial, pagofijo, abonocapital, interes, saldofinal
+				from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0 order by fechadepago, numerodepago
+				""" % int(self.pkamortizacion)
 			sql = (query.replace('\n',' ')).replace('\t',' ')
 			cu = r_cngcmex.cursor()
 			cu.execute(str(sql))
+			Mensajes().Info(self, "aaaaqui 13")
 			rows = fetchall(cu)
 			cu.close()
+			Mensajes().Info(self, "aaaaqui 14")
 			detail, footer = "", ""
 			lines, page, pages = 0, 1, 1
 			if rows:
@@ -39208,7 +39266,6 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		return (sql.replace('\t', ' ')).replace('\n', ' ')
 	
 	def PreparaEdicion(self):
-		print("hasta acaaa")
 		query = """
 		select nombre, rfc, nacionalidad, lugardenacimiento, convert(varchar(10), fechadenacimiento, 103),
 		estadocivil, situacion, regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa,
