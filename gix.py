@@ -31537,9 +31537,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		self.cambio = False
 		self.GetControl(ID_TEXTCTRLAMORFUNC1FECHAELABORACION).SetFocus()
 		
-	def OnAbrir(self, evt):
-		print("probando a ver si funciona")
-		
+	def OnAbrir(self, evt):		
 		if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 			if self.cambio:
 				if Mensajes().YesNo(self, u"� Desea guardar la informaci�n ?", u"Confirmaci�n"):
@@ -36359,6 +36357,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 	def __init__(self, parent, id = -1, title = "", pos = wx.DefaultPosition, size = wx.DefaultSize,
 	             style = wx.DEFAULT_FRAME_STYLE, usuario = None):
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
+		Mensajes().Info(self, "iniciando Estados de Cuenta")
 		self.lstctrlorder = {0:("c.codigo","desc",""), 1:("c.fecha","desc","> "), 2:("i.iden1, i.iden2","desc",""),
 		                     3:("i.iden2, i.iden1","desc",""), 4:("c.saldo","desc",""), 5:("e.descripcion","desc",""),
 		                     6:("t.nombre","desc","")}
@@ -36379,8 +36378,9 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		self.choiceinxinmueble = 1
 		self.GetControl(ID_CHOICEESTADOCUENTAPINARESFUNC1INMUEBLEFILTRO).SetSelection(self.choiceinxinmueble)
 		self.Bind(wx.EVT_CHOICE, self.OnChoiceCtrlInmueble, id = ID_CHOICEESTADOCUENTAPINARESFUNC1INMUEBLEFILTRO)
-		
+		Mensajes().Info(self, "iniciando1")
 		self.ObtenerEtapas()
+		Mensajes().Info(self, "iniciando2")
 		self.Bind(wx.EVT_CHOICE, self.OnChoiceCtrlEtapa, id = ID_CHOICEESTADOCUENTAPINARESFUNC1ETAPAFILTRO)
 		wx.EVT_BUTTON(self, ID_BITMAPBUTTONESTADOCUENTAPINARESFUNC1LIMPIARETAPAFILTRO, self.OnLimpiarEtapaFiltro)
 		
@@ -36462,7 +36462,17 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		
 	def OnInfoCliente( self, evt):
 		Mensajes().Info(self,u"En construcci�n", u"Atenci�n")
-		
+	
+	def GetString(self, valor):
+		dato = ""
+		try:
+			dato = valor.decode("iso8859-1")
+		except:
+			try:
+				dato = str(valor)
+			except:
+				dato = valor
+		return dato.strip()
 		
 	def ObtenerEtapas(self):
 		control = self.GetControl(ID_CHOICEESTADOCUENTAPINARESFUNC1ETAPAFILTRO)
@@ -36477,8 +36487,10 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		cu.close()
 		if rows:
 			for row in rows:
-				control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
-				
+				if os.environ.get("POSTGRES") == "True":
+					control.Append(self.GetString(row[1]), int(row[0]))
+				else:
+					control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
 		control.SetSelection(-1)
 		
 	def OnChoiceCtrlEtapa(self, evt):
@@ -36616,24 +36628,40 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 			
 		if self.etapa:
 			listctrlfiltro += " and e.codigo = %s" % int(self.etapa)
-			
-		query = """
-		select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
-		c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
-		from CUENTA c
-		join CLIENTE t on c.fk_cliente = t.codigo
-		join INMUEBLE i on c.fk_inmueble = i.codigo
-		join ETAPA e on i.fk_etapa = e.codigo
-		join DESARROLLO d on e.fk_desarrollo = d.codigo
-		where d.codigo = %s and d.fk_empresa = %s
-		%s order by %s
-		""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			if "c.congelada = 0" in listctrlfiltro:
+				listctrlfiltro = listctrlfiltro.replace("c.congelada = 0", "c.congelada = false")
+			Mensajes().Info(self, "{}".format(listctrlfiltro))
+			query = """
+			select c.codigo, to_char(c.fecha, 'DD/MM/YYYY'), i.iden1, i.iden2,
+			c.saldo, trim(e.descripcion), trim(t.nombre)
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		else:
+			query = """select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
+			c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
 		sql = (query.replace('\t', ' ')).replace('\n', ' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
 		cuentas = fetchall(cu)
 		cu.close()
 		rows = []
+		Mensajes().Info(self, "cuentas1")
 		if cuentas:
 			if self.choiceinxinmueble == 4:
 				fechadeldia = self.GetDate()
@@ -36644,6 +36672,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 					where fk_cuenta = %s and fechadevencimiento < '%s'
 					""" % (int(cuenta[0]), fechadeldia)
 					sql = (query.replace('\t', ' ')).replace('\n', ' ')
+					Mensajes().Info(self, "{}".format(sql))
 					cu.execute(str(sql))
 					saldo = fetchone(cu)
 					if saldo is not None:
@@ -49932,17 +49961,29 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 			listctrlfiltro += " and t.nombre like '%s%s%s'" % ("%%", str(self.cliente), "%%")
 		if self.etapa:
 			listctrlfiltro += " and e.codigo = %s" % int(self.etapa)
-		query = """
-		select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
-		c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
-		from CUENTA c
-		join CLIENTE t on c.fk_cliente = t.codigo
-		join INMUEBLE i on c.fk_inmueble = i.codigo
-		join ETAPA e on i.fk_etapa = e.codigo
-		join DESARROLLO d on e.fk_desarrollo = d.codigo
-		where d.codigo = %s and d.fk_empresa = %s
-		%s order by %s
-		""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query = """select c.codigo, to_char(c.fecha, 'DD/MM/YYYY'), i.iden1, i.iden2,
+			c.saldo, trim(e.descripcion), trim(t.nombre)
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		else:
+			query = """select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
+			c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu = r_cngcmex.cursor()
@@ -50761,18 +50802,29 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			
 		if self.etapa:
 			listctrlfiltro += " and e.codigo = %s" % int(self.etapa)
-			
-		query = """
-		select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
-		c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
-		from CUENTA c
-		join CLIENTE t on c.fk_cliente = t.codigo
-		join INMUEBLE i on c.fk_inmueble = i.codigo
-		join ETAPA e on i.fk_etapa = e.codigo
-		join DESARROLLO d on e.fk_desarrollo = d.codigo
-		where d.codigo = %s and d.fk_empresa = %s
-		%s order by %s
-		""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query = """select c.codigo, to_char(c.fecha, 'DD/MM/YYYY'), i.iden1, i.iden2,
+			c.saldo, trim(e.descripcion), trim(t.nombre)
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		else:
+			query = """select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
+			c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu = r_cngcmex.cursor()
