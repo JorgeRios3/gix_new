@@ -7319,9 +7319,13 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 		control.Enable(True)
 		
 	def ObtenerFechaDelDia(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(ID_TEXTCTRLPROSPECTOFECHAALTA).SetValue("%s" % str(row[0]))
@@ -9186,9 +9190,13 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 		control.Enable(True)
 		
 	def ObtenerFechaDelDia(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(ID_TEXTCTRLPROSPECTOFECHAALTA).SetValue("%s" % str(row[0]))
@@ -17009,9 +17017,13 @@ Estatus de la solicitud: %s
 			                u"Solicitud de Devoluci�n de Saldo a Favor.", u"Recordatorio para Elizabeth")
 		
 	def CalculaFechaCaptura(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(self.idtcfechacaptura).SetValue(str(row[0]))
@@ -20571,9 +20583,13 @@ Estatus del egreso: %s
 		control.SetFocus()
 		
 	def CalculaFechaCaptura(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(self.idtcfechacaptura).SetValue(str(row[0]))
@@ -25963,9 +25979,13 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 		self.FillListCtrl()
 		
 	def GetTodayDate(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -27026,9 +27046,13 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 		self.FillListCtrl()
 		
 	def GetTodayDate(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -27833,9 +27857,13 @@ class GixReporteHijosClientes(wx.Dialog, GixBase):
 		self.FillListCtrl()
 		
 	def GetTodayDate(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -28198,9 +28226,13 @@ class GixReporteGuardiasAsignadas(wx.Dialog, GixBase):
 		self.FillListCtrl()
 		
 	def GetTodayDate(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -30317,7 +30349,12 @@ class GixTablasAmortizacionFunc3(wx.Dialog, GixBase):
 		if self.vendedorfiltro:
 			listctrlfiltro = "and nombre like '%s%s%s'" % ("%%", str(self.vendedorfiltro), "%%")
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select codigo, nombre from VENDEDOR where activo = 1 %s order by nombre" % listctrlfiltro))
+		sql=""
+		if os.environ.get("POSTGRES") == "True":
+			sql= str("select codigo, nombre from VENDEDOR where activo = true %s order by nombre" % listctrlfiltro)
+		else:
+			sql = str("select codigo, nombre from VENDEDOR where activo = 1 %s order by nombre" % listctrlfiltro)
+		cu.execute(sql)
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
@@ -30398,7 +30435,11 @@ class GixTablasAmortizacionFunc4(wx.Dialog, GixBase):
 		wx.BeginBusyCursor()
 		lctrl = self.GetControl(ID_LISTCTRLAMORFUNC4)
 		lctrl.Enable(False); lctrl.Show(False); lctrl.ClearAll()
-		campos = "codigo, rtrim(ltrim(iden2)) + '-' + rtrim(ltrim(iden1)), superficie, preciopormetro"
+		campos = ""
+		if os.environ.get("POSTGRES") == "True":
+			campos = "codigo, concat(trim(iden2), '-',trim(iden1)), superficie, preciopormetro"
+		else:
+			campos = "codigo, rtrim(ltrim(iden2)) + '-' + rtrim(ltrim(iden1)), superficie, preciopormetro"
 		filtro = ""
 		if self.etapa > 0:
 			filtro = "and fk_etapa = %s" % self.etapa
@@ -30776,7 +30817,12 @@ class GixTablasAmortizacionFunc9(wx.Dialog, GixBase):
 		
 	def ObtenerFechaDelDia(self):
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select convert(varchar(10), getdate(), 103)"))
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(ID_TEXTCTRLAMORFUNC9FECHAPAGO).SetValue(str(row[0]))
@@ -31889,10 +31935,15 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				self.GetControl(ID_TEXTCTRLAMORFUNC1ID).SetValue(" Id %s" % str(identity))
 			else:
 				Mensajes().Info(self, u"� No se grab� la informaci�n !", u"Atenci�n")
-				
-		sql = """
-		delete from gixamortizaciondetalle where fkamortizacion = %s and pagado = 0 and insertado = 0 and eliminado = 0
-		""" % identity
+		sql=""
+		if os.environ.get("POSTGRES") == "True":
+			sql = """
+			delete from gixamortizaciondetalle where fkamortizacion = %s and pagado = false and insertado = false and eliminado = false
+			""" % identity
+		else:
+			sql = """
+			delete from gixamortizaciondetalle where fkamortizacion = %s and pagado = 0 and insertado = 0 and eliminado = 0
+			""" % identity
 		try:
 			cursor = r_cngcmex.cursor()
 			cursor.execute(str(sql))
@@ -34483,7 +34534,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 	def OnElegirVendedor(self, evt):
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select codigo, nombre from VENDEDOR where activo = 1 order by nombre"))
+		sql=""
+		if os.environ.get("POSTGRES") == "True":
+			sql="select codigo, nombre from VENDEDOR where activo = true order by nombre"
+		else:
+			sql="select codigo, nombre from VENDEDOR where activo = 1 order by nombre"
+		cu.execute(sql)
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
@@ -34589,7 +34645,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				cambio = True
 				
 		cu = r_cngcmex.cursor()
-		campos = "rtrim(ltrim(iden2)) + '-' + rtrim(ltrim(iden1)), tipo, superficie, preciopormetro"
+		campos = ""
+		if os.environ.get("POSTGRES") == "True":
+			campos = "concat(trim(iden2), '-',trim(iden1)), tipo, superficie, preciopormetro"
+		else:
+			campos = "rtrim(ltrim(iden2)) + '-' + rtrim(ltrim(iden1)), tipo, superficie, preciopormetro"
 		cu.execute(str("select %s from INMUEBLE where codigo = %s" % (campos, codigolote)))
 		row = fetchone(cu)
 		cu.close()
@@ -35790,7 +35850,12 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 		
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -36661,7 +36726,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		cuentas = fetchall(cu)
 		cu.close()
 		rows = []
-		Mensajes().Info(self, "cuentas1")
+		Mensajes().Info(self, "cuentas1 {}".format(len(cuentas)) )
 		if cuentas:
 			if self.choiceinxinmueble == 4:
 				fechadeldia = self.GetDate()
@@ -36690,7 +36755,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		lctrl = self.GetControl(ID_LISTCTRLESTADOCUENTAPINARESFUNC1)
 		if lctrl.GetItemCount() > 0:
 			lctrl.ClearAll()
-			
+		Mensajes().Info(self, "cuentas2 {}".format(len(rows)) )
 		if rows:
 			lctrl.InsertColumn(0, u"%sCuenta" % self.lstctrlorder[0][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(1, u"%sCreaci�n" % self.lstctrlorder[1][2], wx.LIST_FORMAT_CENTER)
@@ -36732,16 +36797,19 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 			lctrl.SetColumnWidth(4, 90)
 			lctrl.SetColumnWidth(5, wx.LIST_AUTOSIZE)
 			lctrl.SetColumnWidth(6, wx.LIST_AUTOSIZE)
+			Mensajes().Info(self, "cuentas5 {}".format("sabe") )
 			self.Habilita()
 		else:
+			Mensajes().Info(self, "cuentas3 {}".format("sabe") )
 			lctrl.InsertColumn(0, "       No se Encontraron Cuentas", wx.LIST_FORMAT_CENTER)
 			lctrl.SetColumnWidth(0, 200)
 			self.Habilita()
-			
+		Mensajes().Info(self, "cuentas6 {}".format("sabe") )	
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALREGISTROS).SetBackgroundColour(wx.Colour(153,255,153))
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALREGISTROS).SetValue(str(int(fila)))
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALSALDO).SetBackgroundColour(wx.Colour(153,255,153))
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALSALDO).SetValue(str(amount_and_cents_with_commas(total)))
+		Mensajes().Info(self, "cuentas7 {}".format("sabe") )
 		wx.EndBusyCursor()
 		
 	def Habilita(self):
@@ -36963,7 +37031,10 @@ class GixReporteOfertasAsignacionesFunc1(wx.Frame, GixBase):
 		inmueble = ""
 		if codigo:
 			cu = r_cn.cursor()
-			cu.execute(str("select rtrim(ltrim(iden2)) + rtrim(ltrim(iden1)) from inmueble where codigo = %s" % codigo))
+			if os.environ.get("POSTGRES") == "True":
+				cu.execute(str("select trim(iden2) + trim(iden1) from inmueble where codigo = %s" % codigo))
+			else:
+				cu.execute(str("select rtrim(ltrim(iden2)) + rtrim(ltrim(iden1)) from inmueble where codigo = %s" % codigo))
 			row = fetchone(cu)
 			cu.close()
 			if row is not None:
@@ -37191,7 +37262,12 @@ class GixAsignacionPreciosInmueblesFunc2(wx.Dialog, GixBase):
 		
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -37395,7 +37471,12 @@ class GixAsignacionPreciosInmueblesFunc1(wx.Frame, GixBase):
 		
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -37644,7 +37725,12 @@ class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 		
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -38228,7 +38314,12 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 	
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -39266,7 +39357,12 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 	
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -39717,7 +39813,12 @@ class GixVendedoresVentasPinaresFunc2(wx.Dialog, GixBase):
 	
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -40840,7 +40941,12 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 		
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -48537,9 +48643,13 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 	
 	
 	def ObtenerFechaDelDia(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query=""
+		if os.environ.get("POSTGRES") == "True":
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1FECHAPAGO).SetValue("%s" % str(row[0]))
