@@ -35282,8 +35282,8 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 			<br>
 			<br>
 			<div style="text-align: center;"><big><span
-			style="font-family: Arial; font-weight: bold;">LAE MIGUEL ANGEL LARES
-			ROJAS</span><br style="font-family: Arial; font-weight: bold;">
+			style="font-family: Arial; font-weight: bold;">ING. JAIME LARES RANGEL
+			</span><br style="font-family: Arial; font-weight: bold;">
 			<span style="font-family: Arial; font-weight: bold;">REPRESENTANTE
 			LEGAL ARCADIA PROMOTORA</span></big>
 			<br>
