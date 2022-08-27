@@ -32736,13 +32736,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, u"� Por favor instale el m�dulo xhtml2pdf (pisa) !", u"Aviso")
 			return
 		try:
-			Mensajes().Info(self, "pagare5")
 			aux = self.GetIdentity()
-			Mensajes().Info(self, "pagare51")
-			Mensajes().Info(self, "{}".format(aux))
-			Mensajes().Info(self, "pagare52")
 			pkamortizacion = int(aux)
-			Mensajes().Info(self, "pagare53")
 			query = ""
 			if os.environ.get("POSTGRES") == "True":
 				query = """select to_char(fechadepago, 'DD/MM/YYYY'), numerodepago, pagofijo from dbo.gixamortizaciondetalle
@@ -32755,13 +32750,9 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				where fkamortizacion = %s and eliminado <> 1
 				order by fechadepago, numerodepago
 				""" % pkamortizacion
-			Mensajes().Info(self, "CHALE1 ")
 			cu = r_cngcmex.cursor()
-			Mensajes().Info(self, "CHALE2")
 			cu.execute(self.PreparaQuery(query))
-			Mensajes().Info(self, "CHALE3")
 			rows = fetchall(cu)
-			Mensajes().Info(self, "CHALE4")
 			cu.close()
 			aux = self.GetControl(ID_TEXTCTRLAMORFUNC1PLAZOMESES).GetValue()
 			plazo = int(aux)
@@ -35827,7 +35818,9 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 		#panel = wx.Panel(self, -1)
 		EstadoCuentaPinaresFunc2(self)
 		self.DicDatesAndTxt = {ID_BITMAPBUTTONESTADOCUENTAPINARESFUNC2ELEGIRFECHAHASTA : ID_TEXTCTRLESTADOCUENTAPINARESFUNC2FECHAHASTA}
+		Mensajes().Info(self, "obtener encabezado", "")
 		self.ObtenerEncabezado()
+		Mensajes().Info(self, "paso obtener encabezado", "")
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC2FECHAHASTA).SetValue(self.GetDate())
 		for v in self.DicDatesAndTxt.keys():
 			self.Bind(wx.EVT_BUTTON, self.OnFechaButton, id = v )
@@ -35842,7 +35835,9 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 		wx.EVT_BUTTON(self, ID_BITMAPBUTTONESTADOCUENTAPINARESFUNC2IMPRIMIR, self.OnImprimir)
 		wx.EVT_BUTTON(self, ID_BUTTONESTADOCUENTAPINARESFUNC2SALIR, self.OnClose)
 		wx.EVT_CLOSE(self, self.OnClose)
+		Mensajes().Info(self, "antes de fillcrl", "")
 		self.FillListCtrl()
+		Mensajes().Info(self, "despues de fillcrl", "")
 		
 	def OnClose(self, evt):
 	        self.EndModal(1)
@@ -35936,26 +35931,46 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 			d, m, a = self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC2FECHAHASTA).GetValue().split('/')
 			filtrofecha1 = "and d.fechadevencimiento <= '%04d/%02d/%02d'" % (int(a), int(m), int(d))
 			filtrofecha2 = "and r.fechaemision <= '%04d/%02d/%02d'" % (int(a), int(m), int(d))
-			
-		query = """
-		select m.codigo as movimiento, d.fechadevencimiento as fecha,
-		d.codigo as documento, 0 as recibo, 0 as consdesarrollo, m.cantidad as cargo, 0 as abono,
-		isnull(m.relaciondepago, '') as relacionpago, '' as referencia, convert(varchar(10), d.fechadevencimiento, 103),
-		d.saldo as saldo, 0 as interesmoratorio
-		from documento d
-		join movimiento m on m.fk_documento = d.codigo
-		where d.fk_cuenta = %s and m.cargoabono = 'C' %s
-		union
-		select m.codigo as movimiento, r.fechaemision as fecha,
-		d.codigo as documento, r.codigo as recibo, r.consdesarrollo as consdesarrollo, 0 as cargo, m.cantidad as abono,
-		isnull(m.relaciondepago,'') as relacionpago, r.referencia as referencia, convert(varchar(10), r.fechaemision, 103),
-		0 as saldo, r.interesmoratorio as interesmoratorio
-		from recibo r
-		join movimiento m on m.numrecibo = r.codigo
-		join documento d on d.codigo = m.fk_documento
-		where d.fk_cuenta = %s and m.cargoabono = 'A' and r.status = 'A' %s
-		order by 2
-		""" % (self.cuenta, filtrofecha1, self.cuenta, filtrofecha2)
+		if os.environ.get("POSTGRES") == "True":
+			query = """
+			select m.codigo as movimiento, d.fechadevencimiento as fecha,
+			d.codigo as documento, 0 as recibo, 0 as consdesarrollo, m.cantidad as cargo, 0 as abono,
+			COALESCE(m.relaciondepago, '') as relacionpago, '' as referencia, to_char(d.fechadevencimiento, 'DD/MM/YYYY'),
+			d.saldo as saldo, 0 as interesmoratorio
+			from documento d
+			join movimiento m on m.fk_documento = d.codigo
+			where d.fk_cuenta = %s and m.cargoabono = 'C' %s
+			union
+			select m.codigo as movimiento, r.fechaemision as fecha,
+			d.codigo as documento, r.codigo as recibo, r.consdesarrollo as consdesarrollo, 0 as cargo, m.cantidad as abono,
+			COALESCE(m.relaciondepago,'') as relacionpago, r.referencia as referencia, to_char(r.fechaemision, 'DD/MM/YYYY'),
+			0 as saldo, r.interesmoratorio as interesmoratorio
+			from recibo r
+			join movimiento m on m.numrecibo = r.codigo
+			join documento d on d.codigo = m.fk_documento
+			where d.fk_cuenta = %s and m.cargoabono = 'A' and r.status = 'A' %s
+			order by 2
+			""" % (self.cuenta, filtrofecha1, self.cuenta, filtrofecha2)
+		else:	
+			query = """
+			select m.codigo as movimiento, d.fechadevencimiento as fecha,
+			d.codigo as documento, 0 as recibo, 0 as consdesarrollo, m.cantidad as cargo, 0 as abono,
+			isnull(m.relaciondepago, '') as relacionpago, '' as referencia, convert(varchar(10), d.fechadevencimiento, 103),
+			d.saldo as saldo, 0 as interesmoratorio
+			from documento d
+			join movimiento m on m.fk_documento = d.codigo
+			where d.fk_cuenta = %s and m.cargoabono = 'C' %s
+			union
+			select m.codigo as movimiento, r.fechaemision as fecha,
+			d.codigo as documento, r.codigo as recibo, r.consdesarrollo as consdesarrollo, 0 as cargo, m.cantidad as abono,
+			isnull(m.relaciondepago,'') as relacionpago, r.referencia as referencia, convert(varchar(10), r.fechaemision, 103),
+			0 as saldo, r.interesmoratorio as interesmoratorio
+			from recibo r
+			join movimiento m on m.numrecibo = r.codigo
+			join documento d on d.codigo = m.fk_documento
+			where d.fk_cuenta = %s and m.cargoabono = 'A' and r.status = 'A' %s
+			order by 2
+			""" % (self.cuenta, filtrofecha1, self.cuenta, filtrofecha2)
 		
 		sql = (query.replace('\t', ' ')).replace('\n', ' ')
 		cu = r_cngcmex.cursor()
@@ -36697,7 +36712,6 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		if os.environ.get("POSTGRES") == "True":
 			if "c.congelada = 0" in listctrlfiltro:
 				listctrlfiltro = listctrlfiltro.replace("c.congelada = 0", "c.congelada = false")
-			Mensajes().Info(self, "{}".format(listctrlfiltro))
 			query = """
 			select c.codigo, to_char(c.fecha, 'DD/MM/YYYY'), i.iden1, i.iden2,
 			c.saldo, trim(e.descripcion), trim(t.nombre)
@@ -36726,7 +36740,6 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		cuentas = fetchall(cu)
 		cu.close()
 		rows = []
-		Mensajes().Info(self, "cuentas1 {}".format(len(cuentas)) )
 		if cuentas:
 			if self.choiceinxinmueble == 4:
 				fechadeldia = self.GetDate()
@@ -36737,7 +36750,6 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 					where fk_cuenta = %s and fechadevencimiento < '%s'
 					""" % (int(cuenta[0]), fechadeldia)
 					sql = (query.replace('\t', ' ')).replace('\n', ' ')
-					Mensajes().Info(self, "{}".format(sql))
 					cu.execute(str(sql))
 					saldo = fetchone(cu)
 					if saldo is not None:
@@ -36755,7 +36767,6 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		lctrl = self.GetControl(ID_LISTCTRLESTADOCUENTAPINARESFUNC1)
 		if lctrl.GetItemCount() > 0:
 			lctrl.ClearAll()
-		Mensajes().Info(self, "cuentas2 {}".format(len(rows)) )
 		if rows:
 			lctrl.InsertColumn(0, u"%sCuenta" % self.lstctrlorder[0][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(1, u"%sCreaci�n" % self.lstctrlorder[1][2], wx.LIST_FORMAT_CENTER)
@@ -36764,31 +36775,40 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 			lctrl.InsertColumn(4, u"%sSaldo" % self.lstctrlorder[4][2], wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(5, u"%sEtapa" % self.lstctrlorder[5][2])
 			lctrl.InsertColumn(6, u"%sCliente" % self.lstctrlorder[6][2])
-			for row in rows:
-				if float(row[4]) > 0:
-					if fila %2 != 0: bgcolor = [204,204,255]
-					else:            bgcolor = [230,230,255]
-				elif float(row[4]) == 0:
-					if fila %2 != 0: bgcolor = [248,181,68]
-					else:            bgcolor = [251,212,146]
-				else:
-					if fila %2 != 0: bgcolor = [255,153,153]
-					else:            bgcolor = [255,215,215]
-					
-				index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
-				lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
-				etapa = str(row[5].strip())
-				cliente = str(row[6].strip())
-				lctrl.SetStringItem(index, 0, str(row[0]))
-				lctrl.SetStringItem(index, 1, str(row[1]))
-				lctrl.SetStringItem(index, 2, self.GetString(row[2]))
-				lctrl.SetStringItem(index, 3, str(row[3]))
-				lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
-				lctrl.SetStringItem(index, 5, self.GetString(etapa))
-				lctrl.SetStringItem(index, 6, self.GetString(cliente))
-				lctrl.SetItemData(index, row[0])
-				fila += 1
-				total += float(row[4])
+			Mensajes().Info(self, "entrooo 1")
+			try:
+				for i,row in enumerate(rows):
+					if float(row[4]) > 0:
+						if fila %2 != 0: bgcolor = [204,204,255]
+						else:            bgcolor = [230,230,255]
+					elif float(row[4]) == 0:
+						if fila %2 != 0: bgcolor = [248,181,68]
+						else:            bgcolor = [251,212,146]
+					else:
+						if fila %2 != 0: bgcolor = [255,153,153]
+						else:            bgcolor = [255,215,215]
+					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
+					lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
+					lctrl.SetStringItem(index, 0, str(row[0]))
+					lctrl.SetStringItem(index, 1, str(row[1]))
+					lctrl.SetStringItem(index, 2, self.GetString(row[2]))
+					lctrl.SetStringItem(index, 3, str(row[3]))
+					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
+					if os.environ.get("POSTGRES") == "True":
+						lctrl.SetStringItem(index, 5, row[5])
+						lctrl.SetStringItem(index, 6, row[6])
+					else:
+						etapa = str(row[5].strip())
+						lctrl.SetStringItem(index, 5, self.GetString(etapa))
+						cliente = str(row[6].strip())
+						lctrl.SetStringItem(index, 6, self.GetString(cliente))
+					lctrl.SetItemData(index, row[0])
+					fila += 1
+					total += float(row[4])
+					#Mensajes().Info(self, "entrooo 15 {}".format(i))
+			except:
+				Mensajes().Info(self, "trono en  {}, {}".format(i, row))
+
 				
 			lctrl.SetColumnWidth(0, 60)
 			lctrl.SetColumnWidth(1, 90)
@@ -36797,19 +36817,15 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 			lctrl.SetColumnWidth(4, 90)
 			lctrl.SetColumnWidth(5, wx.LIST_AUTOSIZE)
 			lctrl.SetColumnWidth(6, wx.LIST_AUTOSIZE)
-			Mensajes().Info(self, "cuentas5 {}".format("sabe") )
 			self.Habilita()
 		else:
-			Mensajes().Info(self, "cuentas3 {}".format("sabe") )
 			lctrl.InsertColumn(0, "       No se Encontraron Cuentas", wx.LIST_FORMAT_CENTER)
 			lctrl.SetColumnWidth(0, 200)
 			self.Habilita()
-		Mensajes().Info(self, "cuentas6 {}".format("sabe") )	
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALREGISTROS).SetBackgroundColour(wx.Colour(153,255,153))
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALREGISTROS).SetValue(str(int(fila)))
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALSALDO).SetBackgroundColour(wx.Colour(153,255,153))
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALSALDO).SetValue(str(amount_and_cents_with_commas(total)))
-		Mensajes().Info(self, "cuentas7 {}".format("sabe") )
 		wx.EndBusyCursor()
 		
 	def Habilita(self):
@@ -49911,7 +49927,6 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 		self.Bind(wx.EVT_SEARCHCTRL_SEARCH_BTN, self.OnDoSearchCliente, id = ID_SEARCHCTRLRECIBOPAGOPINARESFUNC1CLIENTEFILTRO)
 		self.Bind(wx.EVT_SEARCHCTRL_CANCEL_BTN, self.OnCleanCliente, id = ID_SEARCHCTRLRECIBOPAGOPINARESFUNC1CLIENTEFILTRO)
 		self.Bind(wx.EVT_TEXT_ENTER, self.OnDoSearchCliente, id = ID_SEARCHCTRLRECIBOPAGOPINARESFUNC1CLIENTEFILTRO)
-		
 		self.Bind(wx.EVT_LIST_COL_CLICK, self.OnSortListCtrl, id = ID_LISTCTRLRECIBOPAGOPINARESFUNC1)
 		self.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelected, id = ID_LISTCTRLRECIBOPAGOPINARESFUNC1)
 		self.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.OnDeselected, id = ID_LISTCTRLRECIBOPAGOPINARESFUNC1)
@@ -49940,9 +49955,13 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
+			Mensajes().Info(self, "hubo rows en obtener etapas")
 			for row in rows:
-				control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
-				
+				if os.environ.get("POSTGRES") == "True":
+					control.Append(row[1], int(row[0]))
+				else:
+					control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
+		Mensajes().Info(self, "hubo rows termino")
 		control.Show(True)
 		control.Enable(True)
 		control.SetSelection(-1)
@@ -49990,6 +50009,7 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 		self.GetControl(ID_BUTTONRECIBOPAGOPINARESFUNC1EDITAR).Enable(False)
 	
 	def OnRecibo(self, evt):
+		Mensajes.info(self, "este es el boton bueno")
 		titulo = u"Arcadia (Pinares Tapalpa) - Aplicaci�n de Pagos y Generaci�n de Recibos"
 		dlg = GixRecibosPagoPinaresFunc3(self, -1, titulo, wx.Point(20,20), wx.Size(770,420),
 		                                 usuario = self.usuario)
@@ -50121,21 +50141,37 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 				else:
 					if fila %2 != 0: bgcolor = [255,153,153]
 					else:            bgcolor = [255,215,215]
-				index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
+				if os.environ.get("POSTGRES") == "True":
+					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
+				else:
+					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
 				lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
-				etapa = str(row[5].strip())
-				cliente = str(row[6].strip())
-				lctrl.SetStringItem(index, 0, str(row[0]))
-				lctrl.SetStringItem(index, 1, str(row[1]))
-				lctrl.SetStringItem(index, 2, self.GetString(row[2]))
-				lctrl.SetStringItem(index, 3, str(row[3]))
-				lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
-				lctrl.SetStringItem(index, 5, self.GetString(etapa))
-				lctrl.SetStringItem(index, 6, self.GetString(cliente))
-				lctrl.SetItemData(index, row[0])
-				fila += 1
-				total += float(row[4])
-				
+				if os.environ.get("POSTGRES") == "True":
+					#etapa = str(row[5].strip())
+					#cliente = str(row[6].strip())
+					lctrl.SetStringItem(index, 0, str(row[0]))
+					lctrl.SetStringItem(index, 1, str(row[1]))
+					lctrl.SetStringItem(index, 2, str(row[2]))
+					lctrl.SetStringItem(index, 3, str(row[3]))
+					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
+					lctrl.SetStringItem(index, 5, row[5])
+					lctrl.SetStringItem(index, 6, row[6])
+					lctrl.SetItemData(index, row[0])
+					fila += 1
+					total += float(row[4])
+				else:
+					etapa = str(row[5].strip())
+					cliente = str(row[6].strip())
+					lctrl.SetStringItem(index, 0, str(row[0]))
+					lctrl.SetStringItem(index, 1, str(row[1]))
+					lctrl.SetStringItem(index, 2, self.GetString(row[2]))
+					lctrl.SetStringItem(index, 3, str(row[3]))
+					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
+					lctrl.SetStringItem(index, 5, self.GetString(etapa))
+					lctrl.SetStringItem(index, 6, self.GetString(cliente))
+					lctrl.SetItemData(index, row[0])
+					fila += 1
+					total += float(row[4])
 			lctrl.SetColumnWidth(0, 60)
 			lctrl.SetColumnWidth(1, 90)
 			lctrl.SetColumnWidth(2, 70)
@@ -50244,10 +50280,17 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		lctrl.Enable(False)
 		lctrl.Show(False)
 		lctrl.ClearAll()
-		query = """
-		select codigo, convert(varchar(10), fechadeelaboracion, 103), convert(varchar(10), fechadevencimiento, 103),
-		cargo, abono, saldo from DOCUMENTO where fk_cuenta = %s order by fechadevencimiento, codigo
-		""" % self.cuenta
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query = """
+			select codigo, to_char(fechadeelaboracion, 'DD/MM/YYYY'), to_char(fechadevencimiento, 'DD/MM/YYYY'),
+			cargo, abono, saldo from DOCUMENTO where fk_cuenta = %s order by fechadevencimiento, codigo
+			""" % self.cuenta
+		else:
+			query = """
+			select codigo, convert(varchar(10), fechadeelaboracion, 103), convert(varchar(10), fechadevencimiento, 103),
+			cargo, abono, saldo from DOCUMENTO where fk_cuenta = %s order by fechadevencimiento, codigo
+			""" % self.cuenta
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu = r_cngcmex.cursor()
@@ -50318,13 +50361,23 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		lctrl.Enable(False)
 		lctrl.Show(False)
 		lctrl.ClearAll()
-		query = """
-		select r.codigo, r.consdesarrollo, convert(varchar(10), r.fechaemision, 103),
-		m.cantidad, m.relaciondepago, r.referencia, r.status
-		from RECIBO r 
-		join MOVIMIENTO m on r.codigo = m.numrecibo
-		where m.fk_documento = %s and m.cargoabono = 'A' order by r.fechaemision desc, r.codigo desc
-		""" % self.documento
+		query = ""
+		if os.environ.get("POSTGRES") == "True":
+			query = """
+			select r.codigo, r.consdesarrollo, to_char(r.fechaemision, 'DD/MM/YYYY'),
+			m.cantidad, m.relaciondepago, r.referencia, r.status
+			from RECIBO r 
+			join MOVIMIENTO m on r.codigo = m.numrecibo
+			where m.fk_documento = %s and m.cargoabono = 'A' order by r.fechaemision desc, r.codigo desc
+			""" % self.documento
+		else:
+			query = """
+			select r.codigo, r.consdesarrollo, convert(varchar(10), r.fechaemision, 103),
+			m.cantidad, m.relaciondepago, r.referencia, r.status
+			from RECIBO r 
+			join MOVIMIENTO m on r.codigo = m.numrecibo
+			where m.fk_documento = %s and m.cargoabono = 'A' order by r.fechaemision desc, r.codigo desc
+			""" % self.documento
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu = r_cngcmex.cursor()
@@ -50677,6 +50730,7 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 	def __init__(self, parent, id = -1, title = "", pos = wx.DefaultPosition, size = wx.DefaultSize,
 	             style = wx.DEFAULT_DIALOG_STYLE, usuario = None):
+		Mensajes().Info(self, "este es el boton que busco")
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.lstctrlorder = {0:("c.codigo","desc",""), 1:("c.fecha","desc","> "), 2:("i.iden1, i.iden2","desc",""),
 		                     3:("i.iden2, i.iden1","desc",""), 4:("c.saldo","desc",""), 5:("e.descripcion","desc",""),
