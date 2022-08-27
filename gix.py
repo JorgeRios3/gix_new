@@ -48808,7 +48808,10 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		lctrl = self.GetControl(ID_LISTCTRLPAGOCLIENTESFUNC1DOCUMENTOSCONSALDO)
 		lctrl.ClearAll(); lctrl.InsertColumn(0, "", wx.LIST_FORMAT_CENTER); lctrl.SetColumnWidth(0, 0)
 		cu = r_cn.cursor()
-		cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
+		if os.environ.get("POSTGRES") == "True":
+			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
+		else:
+			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
 		row = fetchone(cu)
 		cu.close()
 		cpp = float(row[0])
@@ -48977,7 +48980,10 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		row = fetchone(cu)
 		if row:
 			fkcuentapagare = int(row[0])
-		cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
+		if os.environ.get("POSTGRES") == "True":
+			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
+		else:
+			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
 		row = fetchone(cu)
 		cpp = float(row[0])
 		sql = "select datediff(day, d.fechadevencimiento, getdate()) from documento_pagare d where d.codigo = %s" % ( codigopagare, )
@@ -49139,7 +49145,10 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1INTERESMORATORIO).SetValue("0.00")
 		self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1TOTALPAGAR).SetValue("0.00")
 		cu = r_cn.cursor()
-		cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
+		if os.environ.get("POSTGRES") == "True":
+			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
+		else:
+			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
 		row = fetchone(cu)
 		cu.close()
 		cpp = float(row[0])
@@ -50009,7 +50018,6 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 		self.GetControl(ID_BUTTONRECIBOPAGOPINARESFUNC1EDITAR).Enable(False)
 	
 	def OnRecibo(self, evt):
-		Mensajes.info(self, "este es el boton bueno")
 		titulo = u"Arcadia (Pinares Tapalpa) - Aplicaci�n de Pagos y Generaci�n de Recibos"
 		dlg = GixRecibosPagoPinaresFunc3(self, -1, titulo, wx.Point(20,20), wx.Size(770,420),
 		                                 usuario = self.usuario)
@@ -50730,7 +50738,6 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 	def __init__(self, parent, id = -1, title = "", pos = wx.DefaultPosition, size = wx.DefaultSize,
 	             style = wx.DEFAULT_DIALOG_STYLE, usuario = None):
-		Mensajes().Info(self, "este es el boton que busco")
 		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
 		self.lstctrlorder = {0:("c.codigo","desc",""), 1:("c.fecha","desc","> "), 2:("i.iden1, i.iden2","desc",""),
 		                     3:("i.iden2, i.iden1","desc",""), 4:("c.saldo","desc",""), 5:("e.descripcion","desc",""),
@@ -50806,7 +50813,10 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		cu.close()
 		if rows:
 			for row in rows:
-				control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
+				if os.environ.get("POSTGRES") == "True":
+					control.Append(row[1], int(row[0]))
+				else:
+					control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
 				
 		control.Show(True)
 		control.Enable(True)
@@ -51018,19 +51028,32 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 					if fila %2 != 0: bgcolor = [255,153,153]
 					else:            bgcolor = [255,215,215]
 					
-				index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
-				lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
-				etapa = str(row[5].strip())
-				cliente = str(row[6].strip())
-				lctrl.SetStringItem(index, 0, str(row[0]))
-				lctrl.SetStringItem(index, 1, str(row[1]))
-				lctrl.SetStringItem(index, 2, self.GetString(row[2]))
-				lctrl.SetStringItem(index, 3, str(row[3]))
-				lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
-				lctrl.SetStringItem(index, 5, self.GetString(etapa))
-				lctrl.SetStringItem(index, 6, self.GetString(cliente))
-				lctrl.SetItemData(index, row[0])
-				fila += 1
+				if os.environ.get("POSTGRES") == "True":
+					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
+					lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
+					lctrl.SetStringItem(index, 0, str(row[0]))
+					lctrl.SetStringItem(index, 1, str(row[1]))
+					lctrl.SetStringItem(index, 2, str(row[2]))
+					lctrl.SetStringItem(index, 3, str(row[3]))
+					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
+					lctrl.SetStringItem(index, 5, row[5])
+					lctrl.SetStringItem(index, 6, row[6])
+					lctrl.SetItemData(index, row[0])
+					fila += 1
+				else:
+					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
+					lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
+					etapa = str(row[5].strip())
+					cliente = str(row[6].strip())
+					lctrl.SetStringItem(index, 0, str(row[0]))
+					lctrl.SetStringItem(index, 1, str(row[1]))
+					lctrl.SetStringItem(index, 2, self.GetString(row[2]))
+					lctrl.SetStringItem(index, 3, str(row[3]))
+					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
+					lctrl.SetStringItem(index, 5, self.GetString(etapa))
+					lctrl.SetStringItem(index, 6, self.GetString(cliente))
+					lctrl.SetItemData(index, row[0])
+					fila += 1
 				
 			wx.EndBusyCursor()
 			lctrl.SetColumnWidth(0, 60)
@@ -51088,27 +51111,40 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			cu = r_cngcmex.cursor()
 		except:
 			Mensajes().Info(self, u"� Problemas en la conexi�n !", u"Atenci�n")
-				
+		
+		if os.environ.get("POSTGRES") == "True":
+			Mensajes().Info(self, u"si entro postg", "")
+			cu.execute("select porcentaje from CPP order by fecha desc limit 1")
+		else:
+			Mensajes().Info(self, u"se fue por sql", "")
+			cu.execute("select top 1 porcentaje from CPP order by fecha desc")	
 		try:
-			cu.execute("select top 1 porcentaje from CPP order by fecha desc")
-		except:
-			Mensajes().Info(self, u"� Problemas en el execute primer query !", u"Atenci�n")
-			
-		try:
+			Mensajes().Info(self, u"ya esta aca", "")
 			row = fetchone(cu)
 			cpp = float(row[0])
 		except:
 			Mensajes().Info(self, u"� Problemas en el primer query !", u"Atenci�n")
 			
 		try:
-			query = """
-			select codigo, convert(varchar(10), fechadevencimiento, 103),
-			cargo, abono, saldo, datediff(day, fechadevencimiento, getdate()),
-			convert(varchar(10), fechadevencimiento, 111), convert(varchar(10), getdate(), 111), year(fechadeelaboracion ) from DOCUMENTO
-			where fk_cuenta = %s and saldo > 0 %s order by fechadevencimiento, codigo
-			""" % (self.cuenta, filtro)
-			sqlx = query.replace('\t', ' ')
-			sql = sqlx.replace('\n', ' ')
+			query = ""
+			if os.environ.get("POSTGRES") == "True":
+				query = """
+				select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
+				cargo, abono, saldo, DATE_PART('day', fechadevencimiento::timestamp - now()::timestamp),
+				to_char(fechadevencimiento, 'DD/MM/YYYY'), to_char(NOW(), 'DD/MM/YYYY'), extract(year from fechadeelaboracion ) from DOCUMENTO
+				where fk_cuenta = %s and saldo > 0 %s order by fechadevencimiento, codigo
+				""" % (self.cuenta, filtro)
+				sqlx = query.replace('\t', ' ')
+				sql = sqlx.replace('\n', ' ')
+			else:
+				query = """
+				select codigo, convert(varchar(10), fechadevencimiento, 103),
+				cargo, abono, saldo, datediff(day, fechadevencimiento, getdate()),
+				convert(varchar(10), fechadevencimiento, 111), convert(varchar(10), getdate(), 111), year(fechadeelaboracion ) from DOCUMENTO
+				where fk_cuenta = %s and saldo > 0 %s order by fechadevencimiento, codigo
+				""" % (self.cuenta, filtro)
+				sqlx = query.replace('\t', ' ')
+				sql = sqlx.replace('\n', ' ')
 			cu.execute(str(sql))
 			rows = fetchall(cu)
 			cu.close()
@@ -51618,7 +51654,10 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		lctrl = self.GetControl(ID_LISTCTRLRECIBOPAGOPINARESFUNC3RECIBO)
 		lctrl.ClearAll()
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
+		if os.environ.get("POSTGRES") == "True":
+			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
+		else:
+			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
 		row = fetchone(cu)
 		cpp = float(row[0])
 		fechadeposito = self.GetControl(ID_TEXTCTRLRECIBOPAGOPINARESFUNC3FECHARECIBO).GetValue()
