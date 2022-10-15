@@ -283,8 +283,8 @@ class WxWidget2Excel:
 				self.excel = dlg.GetPath().encode("iso8859-1")
 			else:
 				todobien = False
-				#Mensajes().Info( self.parent, u"Grabaré en el archivo de default\n%s" % excel, u"Atención")
-		elif Mensajes().YesNo( self.parent, u"¿ Desea elegir el archivo de excel a grabar ?", u"Confirmación"):
+				#Mensajes().Info( self.parent, u"Grabarï¿½ en el archivo de default\n%s" % excel, u"Atenciï¿½n")
+		elif Mensajes().YesNo( self.parent, u"ï¿½ Desea elegir el archivo de excel a grabar ?", u"Confirmaciï¿½n"):
 			if wx.Platform == '__WXMSW__':
 				key = _winreg.OpenKey( _winreg.HKEY_CURRENT_USER,  "Software\\Microsoft\\Windows\\CurrentVersion\Explorer\\Shell Folders")
 				ruta = _winreg.QueryValueEx( key, 'Personal')[0]
@@ -300,7 +300,7 @@ class WxWidget2Excel:
 				self.excel = dlg.GetPath().encode("iso8859-1")
 			else:
 				todobien = False
-				#Mensajes().Info( self.parent, u"Grabaré en el archivo de default\n%s" % excel, u"Atención")
+				#Mensajes().Info( self.parent, u"Grabarï¿½ en el archivo de default\n%s" % excel, u"Atenciï¿½n")
 			
 		try:
 			dlg.Destroy()
@@ -312,7 +312,7 @@ class WxWidget2Excel:
 	def GenerateExcelFileFromListCtrl(self):
 		ENCODING = "iso8859-1"
 		if not self.GetTemporalFile():
-			Mensajes().Info( self.parent, u"No puedo generar el archivo de excel", u"Atención")
+			Mensajes().Info( self.parent, u"No puedo generar el archivo de excel", u"Atenciï¿½n")
 			return
 		
 		workbook  = xl.Writer( self.temporal )
@@ -335,7 +335,7 @@ class WxWidget2Excel:
 		workbook.close()
 		
 		if not self.Rename():
-			Mensajes().Info(self.parent, "El archivo de excel no pudo ser procesado", u"Atención")
+			Mensajes().Info(self.parent, "El archivo de excel no pudo ser procesado", u"Atenciï¿½n")
 	
 	
 	def GenerateExcelFileFromGrid(self):
@@ -346,12 +346,12 @@ class WxWidget2Excel:
 				xle
 				self.GenerateWithXle()
 			except:
-				Mensajes().Info(self.parent, u"Por favor instale el módulo pyExcelerator", u"Atención")
+				Mensajes().Info(self.parent, u"Por favor instale el mï¿½dulo pyExcelerator", u"Atenciï¿½n")
 
 	def GenerateWithXl(self):
 		ENCODING = "iso8859-1"
 		if not self.GetTemporalFile():
-			Mensajes.Info( self.parent, u"No puedo generar el archivo de excel.", u"Atención")
+			Mensajes.Info( self.parent, u"No puedo generar el archivo de excel.", u"Atenciï¿½n")
 			return
 		
 		workbook  = xl.Writer( self.temporal )
@@ -422,7 +422,7 @@ class WxWidget2Excel:
 		warnings.warn("<<WorkBook Cerrado>>")
 
 		if not self.Rename():
-			Mensajes().Info(self.parent, u"El archivo de excel no pudo ser procesado.", u"Atención")
+			Mensajes().Info(self.parent, u"El archivo de excel no pudo ser procesado.", u"Atenciï¿½n")
 
 	def GenerateWithXle(self):
 		ENCODING = "iso8859-1"
@@ -554,7 +554,7 @@ class WxWidget2Excel:
 			return False	
 
 class Mensajes:
-	def YesNo(self, parent, question, caption = u"Confirmación"):
+	def YesNo(self, parent, question, caption = u"Confirmaciï¿½n"):
 		try:
 			dlg = GMD.GenericMessageDialog(parent, question, caption, wx.YES_NO | wx.ICON_QUESTION) # | GMD.GMD_USE_AQUABUTTONS)
 		except:
@@ -776,7 +776,7 @@ class GixContabilidad(object):
 				saldo = 0
 		except:
 			Mensajes().Info(self, u"Sucedio algo que impidio calcular el saldo inicial.\n" \
-					u"%s" % sql, u"Atención")
+					u"%s" % sql, u"Atenciï¿½n")
 			return 0
 			
 		fechainicialsaldo = "%s/%02d/%02d" % (fecha_ano, int(fecha_mes), int(dia))
@@ -792,7 +792,7 @@ class GixContabilidad(object):
 				cu.close()
 			except:
 				Mensajes().Info(self, u"Sucedio algo que impidio calcular el saldo inicial.\n" \
-						u"%s" % sql, u"Atención")
+						u"%s" % sql, u"Atenciï¿½n")
 				return saldo
 			if rows:
 				for row in rows:
@@ -805,7 +805,7 @@ class GixContabilidad(object):
 			return saldo
 
 class GixDragController(wx.Control):
-	""" Clase genérica para hacer uso del drag relacionando un control personalizado
+	""" Clase genï¿½rica para hacer uso del drag relacionando un control personalizado
 	"""
 	def __init__(self, parent, source, size=(25,25)):
 		size = (16,16)
@@ -986,7 +986,7 @@ class GixBase(object):
 		
 		basebusqueda = ""
 		dlg = wx.SingleChoiceDialog(
-				self, u'Elija Tipo de Dato para la Busqueda', u'Búsqueda por...',
+				self, u'Elija Tipo de Dato para la Busqueda', u'Bï¿½squeda por...',
 				opciones, wx.CHOICEDLG_STYLE
 				)
 		if dlg.ShowModal() == wx.ID_OK:
@@ -1022,7 +1022,7 @@ class GixBase(object):
 			self.MenuSetter( ID_MENUGRABAR, False)
 			
 	def DisplaySearchResults(self, tipobusqueda = "...", listaParaBuscar = []):
-		mf = wx.Frame(self, -1, u"Resultados de Búsqueda por %s" % tipobusqueda , 
+		mf = wx.Frame(self, -1, u"Resultados de Bï¿½squeda por %s" % tipobusqueda , 
 			wx.DefaultPosition, wx.Size(400, 120), 
 			wx.DEFAULT_FRAME_STYLE | wx.TINY_CAPTION_HORIZ)
 		
@@ -1062,7 +1062,7 @@ class GixBase(object):
 	
 		def SelectionDone(event):
 			if self.itemselection is None:
-				Mensajes().Info(self,u"No ha escogido aún", u"Atención")
+				Mensajes().Info(self,u"No ha escogido aï¿½n", u"Atenciï¿½n")
 			else:
 				
 				self.GetControl(control).SetValue(str(self.itemselection))
@@ -1118,7 +1118,7 @@ class GixBase(object):
 	
 		def SelectionDone(event):
 			if self.itemselection is None:
-				Mensajes().Info(self,u"No ha escogido aún", u"Atención")
+				Mensajes().Info(self,u"No ha escogido aï¿½n", u"Atenciï¿½n")
 			else:
 				
 				self.GetControl(control).SetCellValue(fila, col, str(self.itemselection))
@@ -1172,7 +1172,7 @@ class GixBase(object):
 			self.NewFlag = False
 			self.Text(True)
 			if not self.NewFlag:
-				if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\n¿ Desea ud. grabarlos ?",u"Confirmación") :
+				if Mensajes().YesNo(self,u"Algunos datos han cambiado\n\nï¿½ Desea ud. grabarlos ?",u"Confirmaciï¿½n") :
 					self.SaveRecord()
 					
 		if self.datointernoynombre:
@@ -1187,13 +1187,13 @@ class GixBase(object):
 			self.tb.EnableTool( ID_TOOLDEL, True)
 			self.MenuSetter( ID_MENUELIMINAR, True)
 		else:
-			Mensajes().Warn(self, u"Escoja un puesto válido", u"Atención")
+			Mensajes().Warn(self, u"Escoja un puesto vï¿½lido", u"Atenciï¿½n")
 
 	def OnSaveRecord( self, event):
 		self.NewFlag = False
 		self.Text()
 		if not self.NewFlag:
-			if Mensajes().YesNo(self,u"¿ Desea realmente grabar la información ?", u"Confirmación"):
+			if Mensajes().YesNo(self,u"ï¿½ Desea realmente grabar la informaciï¿½n ?", u"Confirmaciï¿½n"):
 				self.SaveRecord()
 	
 	def OnNewRecord(self, event):
@@ -1220,7 +1220,7 @@ class GixBase(object):
 			cu.close()
 			
 			if row is None:
-				Mensajes().Info(self, u"Para registrar la prerequisición es necesario que exista el empleado %s.\n¡ No puede registrar la prerequisición !" % self.empleado, u"Atención")
+				Mensajes().Info(self, u"Para registrar la prerequisiciï¿½n es necesario que exista el empleado %s.\nï¿½ No puede registrar la prerequisiciï¿½n !" % self.empleado, u"Atenciï¿½n")
 				self.EndModal(1)
 				self.Destroy()
 				return
@@ -1237,8 +1237,8 @@ class GixBase(object):
 			cu.close()
 			
 			if row is None:
-				Mensajes().Info(self, u"Para registrar la prerequisición es necesario que se le asigne un puesto al empleado:\n%s\n¡ No puede registrar la prerequisición !"
-						% nombreempleado.decode("iso8859-1"), u"Atención")
+				Mensajes().Info(self, u"Para registrar la prerequisiciï¿½n es necesario que se le asigne un puesto al empleado:\n%s\nï¿½ No puede registrar la prerequisiciï¿½n !"
+						% nombreempleado.decode("iso8859-1"), u"Atenciï¿½n")
 				self.EndModal(1)
 				self.Destroy()
 				return
@@ -1514,7 +1514,7 @@ class GixBase(object):
 		return False
 					
 	def GetCurrentDate(self):
-		""" Obtiene un tuple de dia mes y año con la fecha de hoy segun el db engine
+		""" Obtiene un tuple de dia mes y aï¿½o con la fecha de hoy segun el db engine
 		"""
 		cursor = r_cn.cursor()
 		sql = "select  day( getdate() ) ,  month( getdate() ), year( getdate() ) "
@@ -1546,7 +1546,7 @@ class GixBase(object):
 			sqlencoded = sql.encode("iso8859-1")
 			 #sqlencoded = sql
 		except:
-			Mensajes().Info(self,"Problemas al encoding del query \n%s" % sql,u"Atención")
+			Mensajes().Info(self,"Problemas al encoding del query \n%s" % sql,u"Atenciï¿½n")
 				
 			return False, ""
 		
@@ -1555,10 +1555,15 @@ class GixBase(object):
 			cursor = conexion.cursor()
 			cursor.execute(sqlencoded)
 			if insert:
-				cursor.execute('select scope_identity()')
-				#cursor.execute(sqlmax)
-				identity = fetchone(cursor)
-				identity = int(identity[0])
+				if os.environ.get("POSTGRES") == "True":
+					cursor.close()
+					conexion.commit()
+					return True, 0
+				else:
+					cursor.execute('select scope_identity()')
+					#cursor.execute(sqlmax)
+					identity = fetchone(cursor)
+					identity = int(identity[0])
 					
 			cursor.close()
 			conexion.commit()
@@ -1566,7 +1571,7 @@ class GixBase(object):
 		except:
 			warnings.warn("<<Cai en el except>>")
 			conexion.rollback()
-			Mensajes().Info(self, u"Problemas con \n%s\n\nConexion\n%s\n\nr_cn\n%s" % (sqlencoded, conexion, r_cn), u"Atención")
+			Mensajes().Info(self, u"Problemas con \n%s\n\nConexion\n%s\n\nr_cn\n%s" % (sqlencoded, conexion, r_cn), u"Atenciï¿½n")
 			return False, ""
 	
 	def SetColoreable( self, que):
@@ -1584,7 +1589,7 @@ class GixBase(object):
 	def OnFechaButton( self , event ):
 		""" 
 		Este evento se utiliza cuando alguien oprime el boton de fecha auxiliar
-		o que acompaña a un textctrl relativo a fecha
+		o que acompaï¿½a a un textctrl relativo a fecha
 		Antes en el __init__ del frame subclaseado o al principio fuera de todo metodo hay que
 		hacer el diccionario
 		self.DicDatesAndTxt
@@ -1631,7 +1636,7 @@ class GixBase(object):
 				xdia = lafecha.day
 				xmes = lafecha.month
 				xano = lafecha.year
-				Mensajes().Info(self, u"Fecha mal usaré la de hoy", u"Atención")
+				Mensajes().Info(self, u"Fecha mal usarï¿½ la de hoy", u"Atenciï¿½n")
 				
 			dlg = CalenDlg( self,xmes, xdia, xano )
 			
@@ -1643,7 +1648,7 @@ class GixBase(object):
 				result = dlg.result
 				self.GetControl( self.DicDatesAndTxt[id] ).SetValue(result[1] + '/' +  "%s" % (mes[result[2]]) + '/' + result[3])
 			except:
-				Mensajes().Warn(self, "Escoja una fecha",u"Atención")
+				Mensajes().Warn(self, "Escoja una fecha",u"Atenciï¿½n")
 		else:
 			pass
 		
@@ -1703,13 +1708,13 @@ class GixBase(object):
 				self.MenuSetter(ID_MENUGRABARTREE, False)
 
 	def OnDeleteRecord(self, event):
-		if Mensajes().YesNo(self,u"¿ Desea realmente eliminar este registro ?", u"Confirmación") :
+		if Mensajes().YesNo(self,u"ï¿½ Desea realmente eliminar este registro ?", u"Confirmaciï¿½n") :
 			if self.DeleteRecord():
 				lbx = self.GetControl(self.listbox)
 				pos = lbx.GetSelection()
 				self.MoveOneStep("PREVIOUS")
 				lbx.Delete(pos)
-				Mensajes().Info(self,u"¡ Registro Eliminado !",u"Atención")
+				Mensajes().Info(self,u"ï¿½ Registro Eliminado !",u"Atenciï¿½n")
 				self.tb.EnableTool( ID_TOOLSAV, False)
 				self.tb.EnableTool( ID_TOOLDEL, True)
 				self.tb.EnableTool( ID_TOOLNEW, True)
@@ -1759,7 +1764,7 @@ class GixBaseListCtrl(object):
 				self.Bind(wx.EVT_MENU, self.OnEditRecord, id=self.editlistctrlbtn)
 		popup = wx.Menu()
 		if idtitleblog not in  ("Movimiento", "Prospecto"):
-			popup.Append(ID_MOVTOPARTIDAS, u"Afectación de Partidas del Ingreso %s" % self.datointerno)
+			popup.Append(ID_MOVTOPARTIDAS, u"Afectaciï¿½n de Partidas del Ingreso %s" % self.datointerno)
 			popup.AppendSeparator()
 		popup.Append(ID_VIEWBLOG, u"Consultar el Blog del %s %s" % (self.idtitleblog, self.idregistryblog))
 		popup.Append(ID_ADDBLOG, u"Participar en el Blog...")
@@ -1818,7 +1823,7 @@ class GixBaseListCtrl(object):
 		
 	def OnViewLogProspecto(self, event):
 		goal = ((90, u"Fecha"), (90, u"Hora"), (90, u"A la Vista"), (100, u"Usuario"), (300, u"Gerente"), (300, u"Vendedor"),
-		        (300, u"Prospecto"), (90, u"Nacimiento"), (150, u"R.F.C."), (150, u"C.U.R.P."), (100, u"Tel. Cása"),
+		        (300, u"Prospecto"), (90, u"Nacimiento"), (150, u"R.F.C."), (150, u"C.U.R.P."), (100, u"Tel. Cï¿½sa"),
 		        (100, u"Tel. Oficina"), (100, u"Ext. Oficina"), (100, u"Celular"), (300, u"Trabajo"), (100, u"Cuenta"),
 		        (150, u"No. I.M.S.S."), (90, u"Alta"), (90, u"Cierre"), (200, u"Medio Publicitario"), (200, u"Medio Sugerido"),
 		        (90, u"Contado"), (90, u"Hipotecaria"))
@@ -1858,7 +1863,7 @@ class GixBaseListCtrl(object):
 			values ('%s', getdate(), '%s', '%s', '%s', '%s')
 			""" % (self.BlogGUID, self.usuario, comment, "", "")
 			if not self.QueryUpdateRecord(sql):
-				Mensajes().Info(self, u"¡ Problemas al actualizar el blog !", u"Atención")
+				Mensajes().Info(self, u"ï¿½ Problemas al actualizar el blog !", u"Atenciï¿½n")
 		
 	def GetEmpresa(self):
 		obj = Parametro(usuario = self.usuario)
@@ -1985,11 +1990,11 @@ class GixBaseListCtrl(object):
 				self.SetTitle(self.GetStringFromField(row[0]),)
 			else:
 				Mensajes().Info(self, u"No se ha encontrado la empresa de trabajo.\n" \
-						u"Por favor abandone este módulo y verifique.", u"Atención")
+						u"Por favor abandone este mï¿½dulo y verifique.", u"Atenciï¿½n")
 		except:
 			cu.close()
 			Mensajes().Info(self, u"Se estan experimentando problemas.\n" \
-					u"Por favor abandone este módulo y verifique.\n\n%s" % query, u"Atención")
+					u"Por favor abandone este mï¿½dulo y verifique.\n\n%s" % query, u"Atenciï¿½n")
 		
 	def ObtenerBanco(self, idbanco):
 		sql = "select nombre from gixbancos where idbanco = %s" % idbanco
@@ -2042,7 +2047,7 @@ class GixBaseListCtrl(object):
 		except:
 			Mensajes().Info(self, u"Problemas con la fecha al actualizar saldos\n" \
 							u"Partida: %s, Fecha: %s, Periodo: %s" \
-							% (partidaid, fechaingreso, periodo), u"Atención")
+							% (partidaid, fechaingreso, periodo), u"Atenciï¿½n")
 			updateok = False
 			return updateok
 		
@@ -2075,7 +2080,7 @@ class GixBaseListCtrl(object):
 							cu.execute(sqlencoded)
 						except:
 							Mensajes().Info(self, u"Problemas al agregar saldo\n%s" \
-									% sqlencoded, u"Atención")
+									% sqlencoded, u"Atenciï¿½n")
 							updateok = False
 							break
 					else:
@@ -2098,11 +2103,11 @@ class GixBaseListCtrl(object):
 						cu.execute(sqlencoded)
 					except:
 						Mensajes().Info(self,"Problemas al actualizar saldo\n%s" \
-								% sqlencoded, u"Atención")
+								% sqlencoded, u"Atenciï¿½n")
 						updateok = False
 						break
 			except:
-				Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atención")
+				Mensajes().Info(self, u"Problemas al actualizar saldos\n%s" % sql, u"Atenciï¿½n")
 				updateok = False
 				break
 			
@@ -2119,7 +2124,7 @@ class GixBaseListCtrl(object):
 						break
 				except:
 					Mensajes().Info(self,"Problemas al actualizar partidas madre\n%s" \
-							% sql, u"Atención")
+							% sql, u"Atenciï¿½n")
 					updateok = False
 					break
 			else:
@@ -2164,11 +2169,11 @@ class GixBaseListCtrl(object):
 						break
 				except:
 					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n%s" \
-							% sql, u"Atención")
+							% sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar periodo inicial\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 			
 		return todobien, saldo
@@ -2217,16 +2222,16 @@ class GixBaseListCtrl(object):
 							cu.execute(sqlencoded)
 						except:
 							Mensajes().Info(self,"Problemas al actualizar saldo\n%s" \
-									% sqlencoded, u"Atención")
+									% sqlencoded, u"Atenciï¿½n")
 							todobien = False
 							break
 				except:
 					Mensajes().Info(self, u"Problemas al buscar saldo inicial\n%s" \
-							% sql, u"Atención")
+							% sql, u"Atenciï¿½n")
 					todobien = False
 					break
 		except:
-			Mensajes().Info(self, u"Problemas al buscar último periodo\n%s" % sql, u"Atención")
+			Mensajes().Info(self, u"Problemas al buscar ï¿½ltimo periodo\n%s" % sql, u"Atenciï¿½n")
 			todobien = False
 		
 		return todobien
@@ -2243,7 +2248,7 @@ class GixBaseListCtrl(object):
 			updateok = self.UpdateBalance(cu, fechaingreso, self.cantidadeliminar)
 		except:
 			Mensajes().Info(self,"Problemas al Eliminar Registro\n%s" \
-					% sqlencoded, u"Atención")
+					% sqlencoded, u"Atenciï¿½n")
 			updateok = False
 
 		cu.close()
@@ -2497,7 +2502,7 @@ class GixFrameCatalogo(wx.Frame):
 		if self.onlyexcel:
 			self.HazExcel()
 		else:
-			if Mensajes().YesNo(self, u"Desea además archivo de Excel",u"Atención"):
+			if Mensajes().YesNo(self, u"Desea ademï¿½s archivo de Excel",u"Atenciï¿½n"):
 				self.HazExcel()
 			wx.BeginBusyCursor()
 			gridcontenthtml = self.grid.GetHtmlFromGrid("content")
@@ -2551,9 +2556,9 @@ class GixFrameCatalogo(wx.Frame):
 		return fld
 		
 	def Nosepuede( self, event):
-		Mensajes().Info(self,u"Ya no puede volver a intentar importación\n" \
+		Mensajes().Info(self,u"Ya no puede volver a intentar importaciï¿½n\n" \
 				u"Cierre la tabla ( Grid ) y vuelva a pedir\n" \
-				u"la opción desde el menú principal", u"Atención")
+				u"la opciï¿½n desde el menï¿½ principal", u"Atenciï¿½n")
 	
 	def HazExcel(self):
 		wb = WxWidget2Excel()
@@ -2623,7 +2628,7 @@ class GixProductoIntervaloFechasDialog(wx.Dialog, GixBase):
 		prod = wx.FindWindowById(ID_TEXTCTRLMRPRODUCTO)
 		
 		if fini.GetValue() == "" or ffin.GetValue() == "":
-			Mensajes().Info( self, u"¡ El intervalo de fechas no debe quedar en blanco !", u"Atención")
+			Mensajes().Info( self, u"ï¿½ El intervalo de fechas no debe quedar en blanco !", u"Atenciï¿½n")
 		else:
 			self.dia_ini, self.mes_ini, self.aho_ini  = fini.GetValue().split('/')
 			self.dia_fin, self.mes_fin, self.aho_fin  = ffin.GetValue().split('/')
@@ -2631,14 +2636,14 @@ class GixProductoIntervaloFechasDialog(wx.Dialog, GixBase):
 			fechafinal = "%s/%s/%s" % (self.aho_fin, self.mes_fin, self.dia_fin)
 			
 			if fechainicial > fechafinal:
-				Mensajes().Info( self, u"¡ La fecha inicial no debe ser mayor a la fecha final !", u"Atención")
+				Mensajes().Info( self, u"ï¿½ La fecha inicial no debe ser mayor a la fecha final !", u"Atenciï¿½n")
 			else:
 				#(self.dia_ini, self.mes_ini, self.aho_ini ) = fini.GetValue().split('/')
 				#(self.dia_fin, self.mes_fin, self.aho_fin ) = ffin.GetValue().split('/')
 				#self.Destroy()
 				
 				if prod.GetValue() == "":
-					Mensajes().Info( self, u"¡ El producto no debe quedar en blanco !", u"Atención")
+					Mensajes().Info( self, u"ï¿½ El producto no debe quedar en blanco !", u"Atenciï¿½n")
 				else:
 					self.producto = prod.GetValue()
 					self.intervalocorrecto = True
@@ -2653,7 +2658,7 @@ class GixProductoIntervaloFechasDialog(wx.Dialog, GixBase):
 	def OnBuscarProducto(self,event):
 		
 		query = "select id_producto, id_producto + ' - ' + descripcion from gixproductos order by descripcion"
-		self.RelatedFieldSearch(u"Búsqueda de Producto", query, ID_TEXTCTRLMRPRODUCTO)
+		self.RelatedFieldSearch(u"Bï¿½squeda de Producto", query, ID_TEXTCTRLMRPRODUCTO)
 		
 	def OnFechaButton( self, event):
 		id = event.GetId()
@@ -2683,7 +2688,7 @@ class GixProductoIntervaloFechasDialog(wx.Dialog, GixBase):
 				xdia = lafecha.day
 				xmes = lafecha.month
 				xano = lafecha.year
-				Mensajes().Info(self, u"Fecha mal usaré la de hoy", u"Atención")
+				Mensajes().Info(self, u"Fecha mal usarï¿½ la de hoy", u"Atenciï¿½n")
 				
 			dlg = CalenDlg( self,xmes, xdia, xano )
 			
@@ -2699,7 +2704,7 @@ class GixProductoIntervaloFechasDialog(wx.Dialog, GixBase):
 				#mifecha = "%02d/%02d/%s" % (int(result[1]), self.mes[result[2]], result[3])
 				#tbox.SetValue( mifecha)
 			except:
-				Mensajes().Warn(self, "Escoja una fecha",u"Atención")
+				Mensajes().Warn(self, "Escoja una fecha",u"Atenciï¿½n")
 		else:
 			pass
 		
@@ -2732,7 +2737,7 @@ class GixIntervaloFechasDialog(wx.Dialog, GixBase):
 		
 		if fini.GetValue() == "" or ffin.GetValue() == "":
 			self.intervalocorrecto = False
-			Mensajes().Info( self, u"¡ El intervalo de fechas no debe quedar en blanco !", u"Atención")
+			Mensajes().Info( self, u"ï¿½ El intervalo de fechas no debe quedar en blanco !", u"Atenciï¿½n")
 		else:
 			self.dia_ini, self.mes_ini, self.aho_ini  = fini.GetValue().split('/')
 			self.dia_fin, self.mes_fin, self.aho_fin  = ffin.GetValue().split('/')
@@ -2741,7 +2746,7 @@ class GixIntervaloFechasDialog(wx.Dialog, GixBase):
 			
 			if fechainicial > fechafinal:
 				self.intervalocorrecto = False
-				Mensajes().Info( self, u"¡ La fecha inicial no debe ser mayor a la fecha final !", u"Atención")
+				Mensajes().Info( self, u"ï¿½ La fecha inicial no debe ser mayor a la fecha final !", u"Atenciï¿½n")
 			else:
 				#(self.dia_ini, self.mes_ini, self.aho_ini ) = fini.GetValue().split('/')
 				#(self.dia_fin, self.mes_fin, self.aho_fin ) = ffin.GetValue().split('/')
@@ -2781,7 +2786,7 @@ class GixIntervaloFechasDialog(wx.Dialog, GixBase):
 				xdia = lafecha.day
 				xmes = lafecha.month
 				xano = lafecha.year
-				Mensajes().Info(self, u"Fecha mal usaré la de hoy", u"Atención")
+				Mensajes().Info(self, u"Fecha mal usarï¿½ la de hoy", u"Atenciï¿½n")
 				
 			dlg = CalenDlg( self,xmes, xdia, xano )
 			
@@ -2797,7 +2802,7 @@ class GixIntervaloFechasDialog(wx.Dialog, GixBase):
 				#mifecha = "%02d/%02d/%s" % (int(result[1]), self.mes[result[2]], result[3])
 				#tbox.SetValue( mifecha)
 			except:
-				Mensajes().Warn(self, "Escoja una fecha",u"Atención")
+				Mensajes().Warn(self, "Escoja una fecha",u"Atenciï¿½n")
 		else:
 			pass
 		
@@ -2842,7 +2847,7 @@ class GixCatalogoGridBase(gridlib.Grid, GixBase, GixContabilidad):
 		col = event.GetCol()
 		nombre = self.GetColLabelValue(col)
 		
-		if Mensajes().YesNo(self,"Desea eliminar la columna %s" % (nombre,),u"Atención"):
+		if Mensajes().YesNo(self,"Desea eliminar la columna %s" % (nombre,),u"Atenciï¿½n"):
 			self.DeleteCols(col,1)
 		return
 		
@@ -2918,15 +2923,15 @@ class GixCatalogoGridBase(gridlib.Grid, GixBase, GixContabilidad):
 			except:
 				letra = ""
 				
-			if letra == "á":
+			if letra == "ï¿½":
 				res = "&aacute;"
-			elif letra == "é":
+			elif letra == "ï¿½":
 				res = "&eacute;"
-			elif letra == "í":
+			elif letra == "ï¿½":
 				res = "&iacute;"
-			elif letra == "ó":
+			elif letra == "ï¿½":
 				res = "&oacute;"
-			elif letra == "ú":
+			elif letra == "ï¿½":
 				res = "&uacute;"
 			else:
 				res = letra
