@@ -14321,7 +14321,8 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 				sb.Layout()
 			else:
 				panel = wx.Panel(self, -1)
-				
+			
+			Mensajes().Info(self, "aqui mero", "")
 			if wx.Platform == '__WXMSW__':
 				EgresosChequesFuncion12(panel, True, True)
 			else:
@@ -16995,9 +16996,12 @@ Estatus de la solicitud: %s
 			self.ToggleBeneficiarioDevolucion(u"Solicitud", u"Utilizar esta Solicitud de Cheque por Concepto " \
 			                                  u"Diferente a Devoluci�n de Saldo a Favor", False, True)
 			self.ObtenerBeneficiarios()
+			Mensajes().Info(self, u"aqiu donde quiero 52", "")
 		wx.EndBusyCursor()
 		self.CalculaFechaCaptura()
-		self.CalculaFechaProgramada()
+		Mensajes().Info(self, u"aqiu donde quiero 53", "")
+		#self.CalculaFechaProgramada()
+		Mensajes().Info(self, u"aqiu donde quiero 54", "")
 		self.GetControl(self.idlcpartidas).Enable(False)
 		self.GetControl(self.idbtaplicarform).Enable(True)
 		self.GetControl(self.idbtaceptarform).Enable(True)
@@ -17010,6 +17014,7 @@ Estatus de la solicitud: %s
 			
 		control = self.GetControl(self.activecontrolafternewrecord)
 		control.SetFocus()
+		Mensajes().Info(self, u"aqiu donde quiero 6", "")
 		if self.usuario == "ELIZABETH" and not self.devolucionsaldo:
 			Mensajes().Info(self, u"Eli, si esta solicitud de cheque es para una\n" \
 			                u"devoluci�n de saldo a favor, recuerda que\n" \
@@ -17017,6 +17022,13 @@ Estatus de la solicitud: %s
 			                u"Solicitud de Devoluci�n de Saldo a Favor.", u"Recordatorio para Elizabeth")
 		
 	def CalculaFechaCaptura(self):
+		n = datetime.now()
+		y,m,d = n.year, n.month, n.day
+		fecha = "{}/{}/{}".format(d,m,y)
+		self.GetControl(self.idtcfechacaptura).SetValue(fecha)
+
+	def CalculaFechaCaptura2(self):
+		Mensajes().Info(self, u"este es ", "")
 		query = ""
 		if os.environ.get("POSTGRES") == "True":
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
@@ -17026,18 +17038,29 @@ Estatus de la solicitud: %s
 		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
+		Mensajes().Info(self, u"aqiu donde quiero {}".format(str(row[0])), "")
 		self.GetControl(self.idtcfechacaptura).SetValue(str(row[0]))
-		
+	
 	def CalculaFechaProgramada(self):
+		week_day_sum = {0:11, 1:10, 2:9, 3:8, 4:7, 5:13, 6:12}
+		d = datetime.date.today()
+		d1 = datetime.date.today()+datetime.timedelta(days=week_day_sum[d.weekday()])
+		self.GetControl(self.idtcfechaprogramada).SetValue("{:04d}/{:02d}/{:02d}".format(d1.year, d1.month, d1.day))
+
+	def CalculaFechaProgramada2(self):
 		week_day_sum = {0:11, 1:10, 2:9, 3:8, 4:7, 5:13, 6:12}
 		fechacaptura = self.GetControl(self.idtcfechacaptura).GetValue()
 		server_dy, server_mo, server_yr = fechacaptura.split('/')
 		server_date = "'%04d/%02d/%02d'" % (int(server_yr), int(server_mo), int(server_dy))
 		start_date = date(int(server_yr), int(server_mo), int(server_dy))
 		week_day = date.weekday(start_date)
-		sql = """
-		select convert(varchar(10), dateadd(day, %s, %s), 103)
-		""" % (week_day_sum[week_day], server_date)
+		sql=  ""
+		if os.environ.get("POSTGRES") == "True":
+			sql = """SELECT to_char(NOW() + INTERVAL '{} day', 'DD/MM/YYYY')""".format(week_day_sum[week_day])
+		else:
+			sql = """
+			select convert(varchar(10), dateadd(day, %s, %s), 103)
+			""" % (week_day_sum[week_day], server_date)
 		cu = r_cn.cursor()
 		cu.execute(str(sql))
 		row = fetchone(cu)
@@ -18216,7 +18239,7 @@ Estatus de la solicitud: %s
 			self.devolucionfiltro = ""
 		if countfiltros > 0: self.donde = "where"
 		else: self.donde = ""
-		
+		Mensajes().Info(self, "este es el que busco", "")
 		sql = """
 		select ch.idcheque, convert(varchar(10), ch.fechacaptura, 103), convert(varchar(10), ch.fechaprogramada, 103),
 		ch.numerochequeorigen, ch.cantidad, isnull(be.nombre, ''), em.RazonSocial, ch.estatus, ch.usuariosolicitante,
@@ -18231,6 +18254,7 @@ Estatus de la solicitud: %s
 		if printexcel: return sql
 		#if wx.Platform == "__WXMAC__":
 			#Mensajes().Info(self, u"Conexion: %s" % r_cn)
+		#cu = r_cngcmex.cursor() solicitudes apuntan a base de datos de iclardb7 para poder moverlas necesitamos ya sea migrar iclardb o cambiar queries y apuntar a esto
 		cu = r_cn.cursor()
 		cu.execute(str(sql))
 		rows = fetchall(cu)
@@ -51124,10 +51148,11 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			cpp = float(row[0])
 		except:
 			Mensajes().Info(self, u"� Problemas en el primer query !", u"Atenci�n")
-			
+		Mensajes().Info(self, u"se vino hasta acaaa", "")
 		try:
 			query = ""
 			if os.environ.get("POSTGRES") == "True":
+				Mensajes().Info(self, u"bronca 1", "")
 				query = """
 				select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
 				cargo, abono, saldo, DATE_PART('day', fechadevencimiento::timestamp - now()::timestamp),
@@ -51665,13 +51690,49 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			try:
 				fechadia, fechames, fechaano = fechadeposito.split("/")
 				fechadeposito = "%s/%02d/%02d" % (fechaano, int(fechames), int(fechadia))
-				query = """
-				select codigo, convert(varchar(10), fechadevencimiento, 103),
-				saldo, datediff(day, fechadevencimiento, '%s'),
-				convert(varchar(10), fechadevencimiento, 111), '%s' from DOCUMENTO
-				where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
-				""" % (str(fechadeposito), str(fechadeposito), self.cuenta)
+				if os.environ.get("POSTGRES") == "True":
+					Mensajes().Info(self, u"bronca 2", "")
+					query = """
+					select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
+					saldo, DATE_PART('day', fechadevencimiento::timestamp - '%s'),
+					to_char(fechadevencimiento, 'DD/MM/YYYY'), '%s' from DOCUMENTO
+					where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo""" % (str(fechadeposito), str(fechadeposito), self.cuenta)
+				else:
+					query = """
+					select codigo, convert(varchar(10), fechadevencimiento, 103),
+					saldo, datediff(day, fechadevencimiento, '%s'),
+					convert(varchar(10), fechadevencimiento, 111), '%s' from DOCUMENTO
+					where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
+					""" % (str(fechadeposito), str(fechadeposito), self.cuenta)
 			except:
+				if os.environ.get("POSTGRES") == "True":
+					Mensajes().Info(self, u"bronca 3", "")
+					query = """
+					select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
+					saldo, DATE_PART('day', fechadevencimiento::timestamp, NOW()),
+					to_char(fechadevencimiento, 'DD/MM/YYYY'),
+					to_char(NOW(), 'DD/MM/YYYY') from DOCUMENTO
+					where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
+					""" % self.cuenta
+				else:
+					query = """
+					select codigo, convert(varchar(10), fechadevencimiento, 103),
+					saldo, datediff(day, fechadevencimiento, getdate()),
+					convert(varchar(10), fechadevencimiento, 111),
+					convert(varchar(10), getdate(), 111) from DOCUMENTO
+					where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
+					""" % self.cuenta
+		else:
+			if os.environ.get("POSTGRES") == "True":
+				Mensajes().Info(self, u"bronca 4", "")
+				query = """
+				select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
+				saldo, DATE_PART('day',fechadevencimiento::timestamp - now()::timestamp),
+				to_char(fechadevencimiento, 'DD/MM/YYYY'),
+				to_char(NOW(), 'DD/MM/YYYY') from DOCUMENTO
+				where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
+				""" % self.cuenta
+			else:
 				query = """
 				select codigo, convert(varchar(10), fechadevencimiento, 103),
 				saldo, datediff(day, fechadevencimiento, getdate()),
@@ -51679,18 +51740,10 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 				convert(varchar(10), getdate(), 111) from DOCUMENTO
 				where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
 				""" % self.cuenta
-		else:
-			query = """
-			select codigo, convert(varchar(10), fechadevencimiento, 103),
-			saldo, datediff(day, fechadevencimiento, getdate()),
-			convert(varchar(10), fechadevencimiento, 111),
-			convert(varchar(10), getdate(), 111) from DOCUMENTO
-			where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
-			""" % self.cuenta
-			
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu.execute(str(sql))
+		Mensajes().Info(self, u"bronca lo paso 4", "")
 		rows = fetchall(cu)
 		cu.close()
 		fila, totpago, totmoratorios, tottotal = 0, 0, 0, 0
