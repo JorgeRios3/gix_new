@@ -34581,6 +34581,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def OnCambiarFormaDePago(self, evt):
 		pagos = {0:u"cr�dito", 1:u"contado"}
 		formadepago = self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection()
+		Mensajes().Info(self, "forma de pago {}".format(formadepago), "")
 		if self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection() > -1:
 			codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 			if codigolote:
