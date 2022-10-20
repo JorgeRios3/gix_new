@@ -33306,6 +33306,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		try:
 			aux = self.GetIdentity()
 			pkamortizacion = int(aux)
+			query = """select i.fk_etapa from gixamortizacion a join INMUEBLE i on a.fkinmueble = i.codigo where pkamortizacion= %s """ % pkamortizacion
+			cu = r_cngcmex.cursor()
+			cu.execute(self.PreparaQuery(query))
+			row = fetchone(cu)
+			cu.close()
+			Mensajes().Info(self, "esta es la etapa {}".format(row[0]), "")
 			query = ""
 			if os.environ.get("POSTGRES") == "True":
 				query = """
@@ -33796,6 +33802,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				""" % (engancheq, enganchel, fechaenganche)
 
 			#<div style="font-size:12px;"><span style="font-family: Arial;">
+
 			header = u"""
 			<body>
 			
