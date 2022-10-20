@@ -33312,6 +33312,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			row = fetchone(cu)
 			cu.close()
 			Mensajes().Info(self, "esta es la etapa {}".format(row[0]), "")
+			etapa_aux = row[0]
 			query = ""
 			if os.environ.get("POSTGRES") == "True":
 				query = """
@@ -33359,7 +33360,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					                u"Verifique la forma de pago")
 					return
 			wx.BeginBusyCursor()
-			gridcontenthtml, contrato = self.GetHtmlContrato()
+			gridcontenthtml, contrato = self.GetHtmlContrato(etapa_aux)
 			if gridcontenthtml:
 				self.ValidaToolBar()
 				archivo = "Contrato%s_%s.pdf" % (contrato, self.pkamortizacion)
@@ -33401,13 +33402,20 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			wx.EndBusyCursor()
 			Mensajes().Info(self, u"� Se presento un problema al imprimir el contrato !", u"Atenci�n")
 			
-	def GetHtmlContrato(self):
+	def GetHtmlContrato(self, etapa_aux):
 		cu = r_cngcmex.cursor()
 		cu.execute("select razonsocial, representantelegal, ciudad, estado, domicilio, colonia from empresa where codigo = 1")
 		row = fetchone(cu)
 		razonsocial = self.GetString(row[0]); representantelegal = self.GetString(row[1])
 		eciudad = self.GetString(row[2]); eestado = self.GetString(row[3])
 		edomicilio = self.GetString(row[4])
+		query = """select i.fk_etapa from gixamortizacion a join INMUEBLE i on a.fkinmueble = i.codigo where pkamortizacion= %s """ % self.pkamortizacion
+		#cu = r_cngcmex.cursor()
+		#cu.execute(self.PreparaQuery(query))
+		#row = fetchone(cu)
+		#cu.close()
+		#Mensajes().Info(self, "esta es la etapa {}".format(row[0]), "")
+		#etapa_aux = row[0]
 		if row[5]:
 			edomicilio += " Col. " + self.GetString(row[5])
 		query = ""
@@ -33803,49 +33811,176 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			#<div style="font-size:12px;"><span style="font-family: Arial;">
 
+			escritura = ""
+			escritura_texto= ""
+			if int(etapa_aux) == 34:
+				escritura = "18798"
+				escritura_texto="dieciocho mil setecientos noventa y ocho"
+			else:
+				escritura= "18799"
+				escritura_texto="dieciocho mil setecientos noventa y nueve"
+			
+
 			header = u"""
 			<body>
+
+			<div style="text-align: center;">
+			CONTRATO DE COMPRAVENTA DE TERRENO<br>
+			</div>
 			
 			<div style="text-align: right;">
 			NUMERO&nbsp; %s A<br>
 			</div>
 			<div style="text-align: justify;">
-			CONTRATO DE PROMESA DE COMPRA VENTA
-			QUE CELEBRAN POR UNA PARTE %s REPRESENTADA EN ESTE ACTO POR EL SE\xd1OR
+			Contrato de adhesión de compraventa de terreno destinado a casa habitación, al que, en lo sucesivo, 
+			se le denominara “EL CONTRATO”, que celebran por una parte, la Sociedad Mercantil denominada %s quien comparece al presente acto jurídico  a través de su Representante Legal el señor
 			%s, A QUIEN EN LO SUCESIVO SE LE
 			DENOMINAR\xc1 "LA PROMITENTE VENDEDORA", Y POR OTRA PARTE, EL(LOS) SE\xd1OR(ES)
-			%s, POR SU PROPIO DERECHO, A QUIEN(ES) EN LO SUCESIVO SE LE(S) DENOMINAR\xc1 "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", A AMBOS EN SU CONJUNTO SE LES DENOMINAR\xc1 "LAS PARTES",
-			EL CUAL SUJETAN AL CONTENIDO DE LAS SIGUIENTES DECLARACIONES Y CL\xc1USULAS:
+			%s, POR SU PROPIO DERECHO, A QUIEN(ES) EN LO SUCESIVO SE LE(S) DENOMINAR\xc1 "LA PARTE COMPRADORA"; 
+			ambos sujetos contractuales que en su conjunto serán designadas como “LAS PARTES”.
 			<br>
 			</div>
-			<div style="text-align: center;"><span style="font-weight: bold;"><br>DECLARACIONES:</span><br>
+			<div style="text-align: left;"><span style="font-weight: bold;"><br>DECLARACIONES:</span><br>
 			</div>
 			<br>
-			I.- Declara el representante de "LA PROMITENTE VENDEDORA", por conducto de su representante:<br>
-			<div style="text-align: justify;">a) Que su representada es una sociedad
-			mercantil legalmente constituida mediante escritura p\xfablica n\xfamero
-			43,065, otorgada el d\xeda 16 de agosto de 1991, ante la f\xe9 del Licenciado
-			Felipe Ignacio V\xe1zquez Aldana Sauza, Notario P\xfablico Suplente Adscrito
-			y Asociado n\xfamero 2 de Tlaquepaque, Jalisco, la cual se registr\xf3 bajo
-			inscripci\xf3n 311-312 del tomo 410 del Libro Primero del Registro P\xfablico
-			de Comercio de Guadalajara, Jalisco.<br>
+
+			<span style="font-weight: bold;">I.- Declara “LA PARTE VENDEDORA” que: <br/></span>
+			<div style="text-align: justify;"><br>
+			<span style="font-weight: bold;">
+			a.</span> 
+			Es una sociedad mercantil <span style="font-weight: bold;">MEXICANA</span>, legalmente constituida de conformidad 
+			con las Leyes de 
+			los Estados Unidos Mexicanos, según consta en el documento público 
+			<span style="font-weight: bold;">43,065</span> otorgado ante la fe 
+			del <span style="font-weight: bold;">Licenciado FELIPE IGNACIO VAZQUEZ ALDANA SAUZA</span> Notario Público número 
+			<span style="font-weight: bold;">2</span> dos de la municipalidad 
+			de  <span style="font-weight: bold;">San Pedro Tlaquepaque, Jalisco,</span> instrumento que consta inscrito en el Registro Público de la 
+			Propiedad de Comercio de <span style="font-weight: bold;">Guadalajara, Jalisco,</span> bajo Inscripción 311-312, del Tomo 410, del Libro 
+			Primero y que puede ser consultado por la compradora en WWW.PINARES TAPALPA.COM
+			<br>
 			</div>
-			<div style="text-align: justify;"><br>b)Que su representante cuenta con las facultades
-			juridicas necesarias para contratar y obligarla en los terminos de este contrato,
-			manifestando bajo protesta de decir verdad, que dichas facultades no le han sido revocadas,
-			limitadas, o modificadas en forma alguna.<br>
+			
+			<div style="text-align: justify;"><br>
+			<span style="font-weight: bold;" >b.</span>Su representante legal  
+			señor <spanstyle="font-weight: bold;">
+			JAIME LARES RANGEL,</span> 
+			cuenta con las facultades suficientes para obligarla en los términos y condiciones del 
+			presente contrato, lo cual se acredita en términos del instrumento público  
+			número 18,797 otorgado ante la fe del Licenciado JAVIER ALEJANDRO MACIAS PRECIADO 
+			Notario Público número 2 dos de la municipalidad de  El Salto, Jalisco, instrumento que 
+			consta inscrito en el Registro Público de la Propiedad de Comercio de Guadalajara, Jalisco, 
+			bajo El Folio Mercantil Electrónico número 15959, facultades que no le han sido revocadas 
+			ni modificadas en forma alguna. Tal documentación puede ser consultada 
+			por “LA PARTE COMPRADORA” en WWW.PINARES TAPALPA.COM
+			<br>
 			</div>
-			<div style="text-align: justify;"><br>c) Que su representada se encuentra inscrita
-			en el Registro Federal de Contribuyentes bajo la Clave: APR910816FJ3.<br>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			c.</span>Su <span style="font-weight: bold;">Objeto social</span> versa en su ARTICULO 2DO, dice a la letra EL OBJETO DE LA 
+			SOCIEDAD SERA: A) La compra venta, consignación y arrendamiento de toda clase de inmuebles, 
+			especialmente predios rústicos, granjas y huertos familiares, así como la planeación, 
+			proyección y realización de toda clase de trámites y obras tendientes al desarrollo de 
+			dichos inmuebles, incluyendo la perforación de pozos.
 			</div>
-			<div style="text-align: justify;"><br>d) Que tiene inter\xe9s en vender a "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", 
-			el inmueble que acontinuaci\xf3n se describe:<br>
+
+
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			d.</span>Su domicilio es el ubicado en Avenida Hidalgo numero 1443 Planta Baja, 
+			Colonia Americana en Guadalajara, Jalisco; Codigo Postal 44160 y su Registro Federal 
+			de Contribuyentes es <span style="font-weight: bold;">APR910816FJ3.</span>
+			<br>
 			</div>
-			<div style="text-align: justify;"><br>Lote marcado con la Letra %s del
-			M\xf3dulo %s, perteneciente al Desarrollo Campestre Recreativo
-			conocido como "%s", ubicado en el municipio de %s,
-			%s, dicho inmueble tiene una Superficie de %s m2.
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			e.</span>
+			Es legítima propietaria del terreno marcado con la manzana %s numero %s 
+			ubicado en el Fraccionamiento denominado %s, en el Municipio de %s, %s; 
+			como se acredita en términos de la Escritura Publica numero 74,331 setenta y 
+			cuatro mil trescientos treinta y uno de fecha 21 de Diciembre del año 2018 dos mil dieciocho 
+			ante la fe del Notario Público 130 de Guadalajara, Jalisco; Licenciado Roberto Armando Orozco 
+			Alonso  y debidamente inscrita el día 29 veintinueve de Noviembre del año 1991 en el Folio 
+			Real 5728368 en el Registro Público de la Propiedad y de Comercio de Ciudad Guzmán, en el 
+			Estado de Jalisco.
+			<br/><br/>
+			Dicha documentación puede ser consultada por la pate compradora en   WWW.PINARES TAPALPA.COM
+
+			<br>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			f.</span>
+			El inmueble indicado en el inciso previo, está sujeto al régimen de propiedad 
+			en condominio, en términos de la escritura púbica número %s 
+			%s 
+			de fecha 30 treinta de Septiembre del año 2020 otorgada ante la fe 
+			del Licenciado JAVIER ALEJANDRO MACIAS PRECIADO, 
+			Notario Público número 2 DOS de El Salto, Jalisco; instrumento en 
+			el cual están referidas las correspondientes áreas de uso común y 
+			porcentaje indiviso y que puede ser consultado en WWW.PINARES TAPALPA.COM
+			<br>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			g.</span>
+			El Terreno indicado en el inciso e previo, cuenta con uso de suelo <span style="font-weight: bold;">Habitacional 
+			Campestre</span> como se acredita en términos de las documentales que se agregan en el “Anexo A” 
+			del presente contrato. Asimismo, respecto de éste se cuenta con las siguientes licencias, 
+			permisos y autorizaciones <span style="font-weight: bold;">y urbanizaciones.</span>
+			<br/><br/>
+			Dicha documentación puede ser consultada por “LA PARTE COMPRADORA” en WWW.PINARES TAPALPA.COM
+			<br>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			h.</span>
+			El terreno objeto del contrato, no se encuentra sujeto algún régimen especial, se puede 
+			escriturar de inmediato y no está sujeto a régimen ejidal o comunal.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			i.</span>
+			El terreno cuenta con estudio de factibilidad técnico oficial avalado por autoridad 
+			competente, únicamente para efectos de las gestiones de trámite por lo que no requiere 
+			ningún tipo de la instalación de servicios básicos por la naturaleza del Fraccionamiento 
+			ya que es de vocación Campestre y no cuenta con energía eléctrica, ni instalaciones para 
+			gas natural o LP,  ni agua potable, drenaje, alcantarillado y alumbrado público
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			j.</span>
+			Al momento de la escrituración que formalice el contrato de compra venta del inmueble, 
+			este debe estar libre de todo gravamen que afecte la propiedad de la compradora sobre el mismo.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			k.</span>
+			Pone a disposición de “LA PARTE COMPRADORA”, la información y documentación 
+			especificada en los “Anexos D y E” del presente contrato.
+			<br/>
+			</div>
+
+
+
+
+
+			<div style="text-align: justify;"><br>
+			dicho inmueble tiene una Superficie de %s m2.
 			y las siguientes medidas y linderos:<br>
 			</div>
 			<br>
@@ -34100,7 +34235,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			** N&uacute;mero de Autorizaci&oacute;n de la Profeco: PFC.B.E.7/007544-2015 **
 			</body>
 			""" % (contrato, razonsocial, representantelegal, nombrecliente, letra, modulo, desarrollo, dciudad, destado,
-			       superficie, titulo1, lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, rfccliente, totalapagarq,
+			       escritura, escritura_texto, superficie, titulo1, lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, rfccliente, totalapagarq,
 			       totalapagarl, c2p1, "%", "%", eciudad, eestado,
 			       edomicilio,  domiciliocliente, ciudadcliente, estadocliente, int(fechadia), meses[int(fechames)],
 			       int(fechaano), razonsocial, representantelegal, nombrecliente, nombrevendedor)
