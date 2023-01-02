@@ -33581,7 +33581,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				plazomeses = plazotabla
 			else:
 				plazomeses = int(row[16])
-				
 			pagomensualq = str(amount_and_cents_with_commas(float(row[17])))
 			pagomensuall = (str(c2p(float(row[17])).texto()))
 			fechadia, fechames, fechaano = str(row[18]).split("/")
@@ -33809,7 +33808,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				""" % (engancheq, enganchel, fechaenganche)
 
 			#<div style="font-size:12px;"><span style="font-family: Arial;">
-
 			escritura = ""
 			escritura_texto= ""
 			if int(etapa_aux) == 34:
@@ -33819,7 +33817,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				escritura= "18799"
 				escritura_texto="dieciocho mil setecientos noventa y nueve"
 			
-
 			header = u"""
 			<body>
 
@@ -33831,56 +33828,57 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			NUMERO&nbsp; %s A<br>
 			</div>
 			<div style="text-align: justify;">
-			Contrato de adhesión de compraventa de terreno destinado a casa habitación, al que, en lo sucesivo, 
-			se le denominara “EL CONTRATO”, que celebran por una parte, la Sociedad Mercantil denominada %s quien comparece al presente acto jurídico  a través de su Representante Legal el señor
+			Contrato de adhesi\xf3n de compraventa de terreno destinado a casa habitaci\xf3n, al que, en lo sucesivo, 
+			se le denominara "EL CONTRATO", que celebran por una parte, la Sociedad Mercantil denominada %s quien comparece al presente acto jur\xeddico  a trav\xe9s de su 
+			Representante Legal el se\xf1or
 			%s, A QUIEN EN LO SUCESIVO SE LE
 			DENOMINAR\xc1 "LA PROMITENTE VENDEDORA", Y POR OTRA PARTE, EL(LOS) SE\xd1OR(ES)
 			%s, POR SU PROPIO DERECHO, A QUIEN(ES) EN LO SUCESIVO SE LE(S) DENOMINAR\xc1 "LA PARTE COMPRADORA"; 
-			ambos sujetos contractuales que en su conjunto serán designadas como “LAS PARTES”.
+			ambos sujetos contractuales que en su conjunto ser\xe1n designadas como "LAS PARTES".
 			<br>
 			</div>
 			<div style="text-align: left;"><span style="font-weight: bold;"><br>DECLARACIONES:</span><br>
 			</div>
 			<br>
 
-			<span style="font-weight: bold;">I.- Declara “LA PARTE VENDEDORA” que: <br/></span>
+			<span style="font-weight: bold;">I.- Declara "LA PARTE VENDEDORA" que: <br/></span>
 			<div style="text-align: justify;"><br>
 			<span style="font-weight: bold;">
 			a.</span> 
 			Es una sociedad mercantil <span style="font-weight: bold;">MEXICANA</span>, legalmente constituida de conformidad 
 			con las Leyes de 
-			los Estados Unidos Mexicanos, según consta en el documento público 
+			los Estados Unidos Mexicanos, seg\xfan consta en el documento p\xfablico 
 			<span style="font-weight: bold;">43,065</span> otorgado ante la fe 
-			del <span style="font-weight: bold;">Licenciado FELIPE IGNACIO VAZQUEZ ALDANA SAUZA</span> Notario Público número 
+			del <span style="font-weight: bold;">Licenciado FELIPE IGNACIO VAZQUEZ ALDANA SAUZA</span> Notario P\xfablico n\xfamero 
 			<span style="font-weight: bold;">2</span> dos de la municipalidad 
-			de  <span style="font-weight: bold;">San Pedro Tlaquepaque, Jalisco,</span> instrumento que consta inscrito en el Registro Público de la 
-			Propiedad de Comercio de <span style="font-weight: bold;">Guadalajara, Jalisco,</span> bajo Inscripción 311-312, del Tomo 410, del Libro 
+			de  <span style="font-weight: bold;">San Pedro Tlaquepaque, Jalisco,</span> instrumento que consta inscrito en el Registro P\xfablico de la 
+			Propiedad de Comercio de <span style="font-weight: bold;">Guadalajara, Jalisco,</span> bajo Inscripci\xf3n 311-312, del Tomo 410, del Libro 
 			Primero y que puede ser consultado por la compradora en WWW.PINARES TAPALPA.COM
 			<br>
 			</div>
 			
 			<div style="text-align: justify;"><br>
 			<span style="font-weight: bold;" >b.</span>Su representante legal  
-			señor <spanstyle="font-weight: bold;">
+			se\xf1or <spanstyle="font-weight: bold;">
 			JAIME LARES RANGEL,</span> 
-			cuenta con las facultades suficientes para obligarla en los términos y condiciones del 
-			presente contrato, lo cual se acredita en términos del instrumento público  
-			número 18,797 otorgado ante la fe del Licenciado JAVIER ALEJANDRO MACIAS PRECIADO 
-			Notario Público número 2 dos de la municipalidad de  El Salto, Jalisco, instrumento que 
-			consta inscrito en el Registro Público de la Propiedad de Comercio de Guadalajara, Jalisco, 
-			bajo El Folio Mercantil Electrónico número 15959, facultades que no le han sido revocadas 
-			ni modificadas en forma alguna. Tal documentación puede ser consultada 
-			por “LA PARTE COMPRADORA” en WWW.PINARES TAPALPA.COM
+			cuenta con las facultades suficientes para obligarla en los t\xe9rminos y condiciones del 
+			presente contrato, lo cual se acredita en t\xe9rminos del instrumento p\xfablico  
+			n\xfamero 18,797 otorgado ante la fe del Licenciado JAVIER ALEJANDRO MACIAS PRECIADO 
+			Notario P\xfablico n\xfamero 2 dos de la municipalidad de  El Salto, Jalisco, instrumento que 
+			consta inscrito en el Registro P\xfablico de la Propiedad de Comercio de Guadalajara, Jalisco, 
+			bajo El Folio Mercantil Electr\xf3nico n\xfamero 15959, facultades que no le han sido revocadas 
+			ni modificadas en forma alguna. Tal documentaci\xf3n puede ser consultada 
+			por "LA PARTE COMPRADORA" en WWW.PINARES TAPALPA.COM
 			<br>
 			</div>
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
 			c.</span>Su <span style="font-weight: bold;">Objeto social</span> versa en su ARTICULO 2DO, dice a la letra EL OBJETO DE LA 
-			SOCIEDAD SERA: A) La compra venta, consignación y arrendamiento de toda clase de inmuebles, 
-			especialmente predios rústicos, granjas y huertos familiares, así como la planeación, 
-			proyección y realización de toda clase de trámites y obras tendientes al desarrollo de 
-			dichos inmuebles, incluyendo la perforación de pozos.
+			SOCIEDAD SERA: A) La compra venta, consignaci\xf3n y arrendamiento de toda clase de inmuebles, 
+			especialmente predios r\xfasticos, granjas y huertos familiares, as\xed como la planeaci\xf3n, 
+			proyecci\xf3n y realizaci\xf3n de toda clase de tr\xe1mites y obras tendientes al desarrollo de 
+			dichos inmuebles, incluyendo la perforaci\xf3n de pozos.
 			</div>
 
 
@@ -33897,16 +33895,16 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
 			e.</span>
-			Es legítima propietaria del terreno marcado con la manzana %s numero %s 
+			Es leg\xedtima propietaria del terreno marcado con la manzana %s numero %s 
 			ubicado en el Fraccionamiento denominado %s, en el Municipio de %s, %s; 
-			como se acredita en términos de la Escritura Publica numero 74,331 setenta y 
-			cuatro mil trescientos treinta y uno de fecha 21 de Diciembre del año 2018 dos mil dieciocho 
-			ante la fe del Notario Público 130 de Guadalajara, Jalisco; Licenciado Roberto Armando Orozco 
-			Alonso  y debidamente inscrita el día 29 veintinueve de Noviembre del año 1991 en el Folio 
-			Real 5728368 en el Registro Público de la Propiedad y de Comercio de Ciudad Guzmán, en el 
+			como se acredita en t\xe9rminos de la Escritura Publica numero 74,331 setenta y 
+			cuatro mil trescientos treinta y uno de fecha 21 de Diciembre del a\xf1o 2018 dos mil dieciocho 
+			ante la fe del Notario P\xfablico 130 de Guadalajara, Jalisco; Licenciado Roberto Armando Orozco 
+			Alonso  y debidamente inscrita el d\xeda 29 veintinueve de Noviembre del a\xf1o 1991 en el Folio 
+			Real 5728368 en el Registro P\xfablico de la Propiedad y de Comercio de Ciudad Guzm\xe1n, en el 
 			Estado de Jalisco.
 			<br/><br/>
-			Dicha documentación puede ser consultada por la pate compradora en   WWW.PINARES TAPALPA.COM
+			Dicha documentaci\xf3n puede ser consultada por la pate compradora en   WWW.PINARES TAPALPA.COM
 
 			<br>
 			</div>
@@ -33914,13 +33912,13 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
 			f.</span>
-			El inmueble indicado en el inciso previo, está sujeto al régimen de propiedad 
-			en condominio, en términos de la escritura púbica número %s 
+			El inmueble indicado en el inciso previo, est\xe1 sujeto al r\xe9gimen de propiedad 
+			en condominio, en t\xe9rminos de la escritura p\xfabica n\xfamero %s 
 			%s 
-			de fecha 30 treinta de Septiembre del año 2020 otorgada ante la fe 
+			de fecha 30 treinta de Septiembre del a\xf1o 2020 otorgada ante la fe 
 			del Licenciado JAVIER ALEJANDRO MACIAS PRECIADO, 
-			Notario Público número 2 DOS de El Salto, Jalisco; instrumento en 
-			el cual están referidas las correspondientes áreas de uso común y 
+			Notario P\xfabico n\xfamero 2 DOS de El Salto, Jalisco; instrumento en 
+			el cual están referidas las correspondientes \xe1reas de uso com\xfan y 
 			porcentaje indiviso y que puede ser consultado en WWW.PINARES TAPALPA.COM
 			<br>
 			</div>
@@ -33929,19 +33927,19 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<br><span style="font-weight: bold;">
 			g.</span>
 			El Terreno indicado en el inciso e previo, cuenta con uso de suelo <span style="font-weight: bold;">Habitacional 
-			Campestre</span> como se acredita en términos de las documentales que se agregan en el “Anexo A” 
-			del presente contrato. Asimismo, respecto de éste se cuenta con las siguientes licencias, 
+			Campestre</span> como se acredita en t\xe9rminos de las documentales que se agregan en el "Anexo A"
+			del presente contrato. Asimismo, respecto de \xe9ste se cuenta con las siguientes licencias, 
 			permisos y autorizaciones <span style="font-weight: bold;">y urbanizaciones.</span>
 			<br/><br/>
-			Dicha documentación puede ser consultada por “LA PARTE COMPRADORA” en WWW.PINARES TAPALPA.COM
+			Dicha documentaci\xf3n puede ser consultada por "LA PARTE COMPRADORA" en WWW.PINARES TAPALPA.COM
 			<br>
 			</div>
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
 			h.</span>
-			El terreno objeto del contrato, no se encuentra sujeto algún régimen especial, se puede 
-			escriturar de inmediato y no está sujeto a régimen ejidal o comunal.
+			El terreno objeto del contrato, no se encuentra sujeto alg\xfan r\xe9gimen especial, se puede 
+			escriturar de inmediato y no est\xe1 sujeto a r\xe9gimen ejidal o comunal.
 			<br/>
 			</div>
 
@@ -33949,18 +33947,18 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
 			i.</span>
-			El terreno cuenta con estudio de factibilidad técnico oficial avalado por autoridad 
-			competente, únicamente para efectos de las gestiones de trámite por lo que no requiere 
-			ningún tipo de la instalación de servicios básicos por la naturaleza del Fraccionamiento 
-			ya que es de vocación Campestre y no cuenta con energía eléctrica, ni instalaciones para 
-			gas natural o LP,  ni agua potable, drenaje, alcantarillado y alumbrado público
+			El terreno cuenta con estudio de factibilidad t\xe9cnico oficial avalado por autoridad 
+			competente, únicamente para efectos de las gestiones de tr\xe1mite por lo que no requiere 
+			ning\xfan tipo de la instalaci\xf3n de servicios b\xe1sicos por la naturaleza del Fraccionamiento 
+			ya que es de vocaci\xf3n Campestre y no cuenta con energ\xeda el\xe9ctrica, ni instalaciones para 
+			gas natural o LP,  ni agua potable, drenaje, alcantarillado y alumbrado p\xfablico
 			<br/>
 			</div>
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
 			j.</span>
-			Al momento de la escrituración que formalice el contrato de compra venta del inmueble, 
+			Al momento de la escrituraci\xf3n que formalice el contrato de compra venta del inmueble, 
 			este debe estar libre de todo gravamen que afecte la propiedad de la compradora sobre el mismo.
 			<br/>
 			</div>
@@ -33969,19 +33967,19 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
 			k.</span>
-			Pone a disposición de “LA PARTE COMPRADORA”, la información y documentación 
-			especificada en los “Anexos D y E” del presente contrato.
+			Pone a disposici\xf3n de "LA PARTE COMPRADORA", la informaci\xf3n y documentaci\xf3n 
+			especificada en los "Anexos D y E" del presente contrato.
 			<br/>
 			</div>
 
-			<div style="text-align: left;"><span style="font-weight: bold;"><br>II. Declara “LA PARTE COMPRADORA” que:</span><br>
+			<div style="text-align: left;"><span style="font-weight: bold;"><br>II. Declara "LA PARTE COMPRADORA" que:</span><br>
 			</div>
 			<br>
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
 			a.</span>
-			Es de nacionalidad %s ***______________________, acredita su identidad en términos
+			Es de nacionalidad %s ***______________________, acredita su identidad en t\xe9rminos
 			<br/>
 			</div>
 
@@ -34220,7 +34218,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			_______________________________________________<br>
 			%s<br>
 			<br><br><br>
-			</div>n 
+			</div> 
 			<table
 			style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;"
 			border="0" cellpadding="2" cellspacing="2">
@@ -34245,11 +34243,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			** N&uacute;mero de Autorizaci&oacute;n de la Profeco: PFC.B.E.7/007544-2015 **
 			</body>
 			""" % (contrato, razonsocial, representantelegal, nombrecliente, letra, modulo, desarrollo, dciudad, destado,
-			       escritura, escritura_texto, superficie, titulo1, lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, rfccliente, totalapagarq,
+			       escritura, escritura_texto, "nacionalidad", superficie, titulo1, lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, rfccliente, totalapagarq,
 			       totalapagarl, c2p1, "%", "%", eciudad, eestado,
 			       edomicilio,  domiciliocliente, ciudadcliente, estadocliente, int(fechadia), meses[int(fechames)],
 			       int(fechaano), razonsocial, representantelegal, nombrecliente, nombrevendedor)
-			
+			Mensajes().Info(self, "jaja paso 1115", "")
 			jump1 = ""
 			jump2 = ""
 			jump3 = ""
