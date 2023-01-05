@@ -33506,10 +33506,15 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		cu.execute(str(sql))
 		row = fetchone(cu)
 		if row is not None:
-			cu.execute("select nombre, domicilio, colonia, ciudad, estado, rfc from cliente where codigo = %s" % int(row[19]))
+			cu.execute("select nombre, domicilio, colonia, ciudad, estado, rfc, numeroidentificacion, identificacion, edad, estadocivil, nacionalidad from cliente where codigo = %s" % int(row[19]))
 			cte = fetchone(cu)
 			nombrecliente = self.GetString(cte[0])
 			domiciliocliente = self.GetString(cte[1])
+			numeroidentificacion = self.GetString(cte[6])
+			identificacion = self.GetString(cte[7])
+			edad = self.GetString(cte[8])
+			estadocivil = self.GetString(cte[9])
+			nacionalidad = self.GetString(cte[10])
 			if cte[2]:
 				domiciliocliente += " Col. " + self.GetString(cte[2])
 				
@@ -33979,9 +33984,242 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
 			a.</span>
-			Es de nacionalidad %s ***______________________, acredita su identidad en t\xe9rminos
+			Es de nacionalidad <u>%s</u> , acredita su identidad en t\xe9rminos
+			%s con numero de folio %s (documento oficial emitido por ***) tiene %s y su estado civil es %s
+			
 			<br/>
 			</div>
+
+
+			<div style="text-align: left;"><span style="font-weight: bold;"><br>III. Declaran las partes que:</span><br>
+			</div>
+			<br>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			a.</span>
+			Es su voluntad celebrar el presente contrato de acuerdo a las siguientes
+			<br/>
+			</div>
+
+			<div style="text-align: left;"><span style="font-weight: bold;"><br>CLAUSULAS:</span><br>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Primera. Objeto.-</span>
+			En virtud del presente contrato, "LA PARTE VENDEDORA", VENDE  a "LA PARTE COMPRADORA", 
+			quien adquiere para sí, el terreno indicado en la declaración I, inciso e) anterior, el 
+			cual tiene las especificaciones de identificación, características, extension, estado 
+			físico general, en su caso áreas de uso común con otros inmuebles y porcentaje de indiviso 
+			referidos en el “Anexo C” del presente contrato, el cual firmado por ambas partes forma 
+			parte integrante del mismo;
+			
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Segunda. PRECIO Y FORMA DE PAGO</span>
+			<br/>
+			El precio que "LAS PARTES" han pactado por concepto de contraprestación asciende a la 
+			cantidad de $xxxxxx, (xxxxx xxxxx   xxxxx   xxxx 00/100 M.N.), el cual se establece por 
+			todo el "INMUEBLE" materia de Contrato, ya que la presente operación se realiza 
+			"ad corpus",por lo que en el supuesto de que al verificarse la medición del mismo, 
+			éste resulte de mayor o menor superficie, el precio no sufrirá alteración, tal como 
+			disponen los artículos 1858 y 1860 del Código Civil para el estado de Jalisco. 
+			"LAS PARTES" convienen en que el precio será pagado de la siguiente forma:
+			
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			1.- La cantidad de $xxxxxx, (xxxxx xxxxx   xxxxx   xxxx 00/100 M.N.), 
+			la deberá pagar "LA PARTE COMPRADORA” mediante un pago único el día 3 de Junio de 2021.
+			<br/>
+			</div>
+
+			"si es a credito aqui va todo lo de credito que son 2,3,4 puntos de forma y precio de pago"
+
+			<div style="text-align: justify;">
+			Si "LA PARTE VENDEDORA" incurre en gastos judiciales o extrajudiciales para realizar 
+			la cobranza de los pagos vencidos en su caso,
+			"LA PARTE COMPRADORA" estará(n) obligado(s) a reembolsarle 
+			éstos gastos a "LA PARTE VENDEDORA".
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			El precio por la compraventa es en Moneda Nacional, en caso de expresarse en moneda
+			 extranjera, se estará al tipo de cambio que rija en el lugar y fecha en que se realice 
+			 el pago, de conformidad con la legislación aplicable. Los conceptos de pago a cargo 
+			 de la compradora, deben ser cubierto con el método de pago referido a continuación ***.
+
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			Los pagos que realice la compradora, aun en forma extemporánea 
+			que sean aceptados por la vendedora, liberan a la compradora de las 
+			obligaciones inherentes a dichos pagos.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			Los importes señalados en esta cláusula, son todas las cantidades a 
+			cargo de la compradora por concepto de la compra venta, por lo que, la 
+			vendedora se obliga a respetar en todo momento dicho costo.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Tercera. Revocación.</span>
+			<br/>
+			"LA PARTE COMPRADORA" cuenta con un plazo de 5 días naturales contados 
+			a partir de la firma del contrato para revocar su consentimiento sobre la 
+			operación sin responsabilidad alguna de su parte, mediante aviso por escrito, 
+			de conformidad con la cláusula decima quinta. Para el caso de que la revocación 
+			se realice por correo certificado o registrado o servicio de mensajería, 
+			se tomara como fecha de revocación, la de recepción para su envió. <br/> 
+			Ante la cancelación de la compraventa, la vendedora se obliga a reintegrar todas 
+			las cantidades a la compradora por el mismo medio en el que esta haya efectuado el 
+			pago, dentro de los 15 días hábiles siguientes a la fecha en que le sea notificada 
+			la revocación.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			En caso de anticipo, la vendedora lo devolverá a la compradora en 
+			el mismo número y monto de las exhibiciones mediante las cuales esta efectuó 
+			dicho pago, salvo pacto en contrario.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Sexta. Firma de escritura pública.- </span>
+			<br/>
+			Las partes acuerdan que una vez liquidado la totalidad del precio de venta 
+			concurrirán ante el Notario Público que en su momento las partes designen, 
+			con el fin de otorgar y formalizar la escritura pública de compraventa; 
+			acto en el cual la vendedora entregará a la compradora todos aquellos documentos 
+			relativos al terreno que deban ser entregados a la compradora de conformidad con la 
+			legislación aplicable.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			Las partes acuerdan que, el costo del avaluó inmobiliario, gastos de escrituración, 
+			honorarios, impuestos, derechos y comisiones o gastos aplicables por apertura de crédito, 
+			en su caso, que se causen con motivo del dicho acto correrán a cuenta de la compradora, 
+			con excepción del impuesto sobre la renta que por Ley corresponde pagar a la vendedora, 
+			quien a partir de dicha formalización. 
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Séptima. Entrega y recepción del inmueble.-  </span>
+			<br/>
+			La vendedora se obliga a entregar a la compradora la posesión del terreno 
+			materia del presente contrato, siendo ya obligación del Comprador el pago del 
+			impuesto Predial desde este momento; en caso de Recisión del presente contrato 
+			"LA PARTE COMPRADORA" deberá restituir la posesión del inmueble a "LA PARTE VENDEDORA" 
+			dentro de un PLAZO no mayor a 5 cinco días contados a partir de la fecha en que ocurra 
+			la RECISION.
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			Las partes convienen que en caso de incumplimiento de 
+			"LA PARTE COMPRADORA" en cuanto a la restitución de la 
+			Posesión dentro del Plazo convenido pagaran a "LA PARTE VENDEDORA" 
+			por concepto de pena convencional una cantidad equivalente a 9  
+			nueve veces la UMA (unidad de medida  y actualización) 
+			por cada día de retraso en la entrega de la posesión.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Octava. Destino y modificación del inmueble.  </span>
+			<br/>
+			La compradora se obliga a respetar el uso campestre habitacional del inmueble, 
+			por lo que, le está prohibido instalar en el mismo cualquier tipo de comercio.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<b>El terreno se encuentre en un fraccionamiento, condominio o conjunto habitacional.-</b> 
+			A fin de preservar el contorno urbanístico y arquitectónico del lugar en donde 
+			se encuentra ubicado el terreno, en su caso la compradora se obliga a obtener 
+			de las autoridades correspondientes, las autorizaciones necesarias a efecto de 
+			realizarle cualquier  modificación. El fraccionamiento, condominio o conjunto habitacional:
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•     Cuenta con un Reglamento de adecuaciones o construcción, por lo que, la compradora se obliga a respetar dicha normatividad, misma que se adjunta al presente en el "Anexo F".
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Novena. Restricciones oficiales aplicables a la construcción en el terreno.- </span>
+			<br/>
+			En su caso, el terreno objeto de contrato está sujeto a las siguientes restricciones 
+			oficiales aplicables a la construcción:
+			<br/>
+			</div>
+
+
+
+			<div style="text-align: justify;">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•     <b>Restricciones ambientales</b> No hay
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•     <b>Colindancias con zonas ecológicas, reservas forestales y reservas federales</b> No hay
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•     <b>Cualquier otra limitación decretada por las autoridades competentes y/o previstas en la legislación aplicable</b> No hay
+			<br/>
+			</div>
+
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima. Relación de los derechos y obligaciones de las partes. -  </span>
+			<br/>
+			Los derechos y obligaciones de las partes contractuales son los 
+			siguientes (listado enunciativo más no limitativo)
+			<br/>
+			</div>
+
+			
+
+
+
+			
+
+
 
 
 
@@ -34243,7 +34481,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			** N&uacute;mero de Autorizaci&oacute;n de la Profeco: PFC.B.E.7/007544-2015 **
 			</body>
 			""" % (contrato, razonsocial, representantelegal, nombrecliente, letra, modulo, desarrollo, dciudad, destado,
-			       escritura, escritura_texto, "nacionalidad", superficie, titulo1, lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, rfccliente, totalapagarq,
+			       escritura, escritura_texto, nacionalidad, identificacion, numeroidentificacion, edad, estadocivil,
+				   superficie, titulo1, lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, rfccliente, totalapagarq,
 			       totalapagarl, c2p1, "%", "%", eciudad, eestado,
 			       edomicilio,  domiciliocliente, ciudadcliente, estadocliente, int(fechadia), meses[int(fechames)],
 			       int(fechaano), razonsocial, representantelegal, nombrecliente, nombrevendedor)
