@@ -33402,6 +33402,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, u"� Se presento un problema al imprimir el contrato !", u"Atenci�n")
 			
 	def GetHtmlContrato(self, etapa_aux):
+		fecha_dia = self.GetDate()
 		cu = r_cngcmex.cursor()
 		cu.execute("select razonsocial, representantelegal, ciudad, estado, domicilio, colonia from empresa where codigo = 1")
 		row = fetchone(cu)
@@ -33506,7 +33507,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		cu.execute(str(sql))
 		row = fetchone(cu)
 		if row is not None:
-			cu.execute("select nombre, domicilio, colonia, ciudad, estado, rfc, numeroidentificacion, identificacion, edad, estadocivil, nacionalidad from cliente where codigo = %s" % int(row[19]))
+			cu.execute("select nombre, domicilio, colonia, ciudad, estado, rfc, numeroidentificacion, identificacion, edad, estadocivil, nacionalidad, cp, email from cliente where codigo = %s" % int(row[19]))
 			cte = fetchone(cu)
 			nombrecliente = self.GetString(cte[0])
 			domiciliocliente = self.GetString(cte[1])
@@ -33517,6 +33518,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			nacionalidad = self.GetString(cte[10])
 			if cte[2]:
 				domiciliocliente += " Col. " + self.GetString(cte[2])
+			
+			domiciliocliente2 = domiciliocliente
+			domiciliocliente2+= " "+ self.GetString(cte[3]) 
+			domiciliocliente2+= " "+ self.GetString(cte[4])
+			domiciliocliente2+= " C.P. "+ self.GetString(cte[11])
+			emailcliente =  self.GetString(cte[12])
 				
 			ciudadcliente = self.GetString(cte[3])
 			estadocliente = self.GetString(cte[4])
@@ -34171,7 +34178,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 
 			<div style="text-align: justify;">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•     Cuenta con un Reglamento de adecuaciones o construcción, por lo que, la compradora se obliga a respetar dicha normatividad, misma que se adjunta al presente en el "Anexo F".
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-     Cuenta con un Reglamento de adecuaciones o construcción, por lo que, la compradora se obliga a respetar dicha normatividad, misma que se adjunta al presente en el "Anexo F".
 			<br/>
 			</div>
 
@@ -34187,18 +34194,18 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 
 			<div style="text-align: justify;">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•     <b>Restricciones ambientales</b> No hay
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-     <b>Restricciones ambientales</b> No hay
 			<br/>
 			</div>
 
 			<div style="text-align: justify;">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•     <b>Colindancias con zonas ecológicas, reservas forestales y reservas federales</b> No hay
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-     <b>Colindancias con zonas ecológicas, reservas forestales y reservas federales</b> No hay
 			<br/>
 			</div>
 
 
 			<div style="text-align: justify;">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;•     <b>Cualquier otra limitación decretada por las autoridades competentes y/o previstas en la legislación aplicable</b> No hay
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-     <b>Cualquier otra limitación decretada por las autoridades competentes y/o previstas en la legislación aplicable</b> No hay
 			<br/>
 			</div>
 
@@ -34212,6 +34219,434 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			siguientes (listado enunciativo más no limitativo)
 			<br/>
 			</div>
+
+
+			<table style="border: 1px solid black; border-collapse: collapse;">
+				<tr>
+					<td style="border: 1px solid black; border-collapse: collapse;"><b><br/>&nbsp;&nbsp;&nbsp;Parte Vendedora</b></td>
+				</tr>
+				<tr>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Derechos</b></td>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Obligaciones</b></td>
+					
+				</tr>
+				<tr>
+					<td>
+					<div><br/>&nbsp;-	Recibir por la entrega del inmueble objeto del contrato un precio cierto y en dinero.</div><br/>
+					<div>&nbsp;-	Recibir los pagos en el tiempo, lugar y forma acordados.</div> 
+					</td>
+					<td>
+					<div><br/>&nbsp;-	Brindar información y publicidad veraz, clara y actualizada del inmueble.<br/></div>
+					<div>&nbsp;-	Poner a disposición de la compradora la información y documentación del inmueble.<br/></div>
+					<div>&nbsp;-	No condicionar la compraventa a la contratación de servicios(s) adicional(es).<br/></div>
+					<div>&nbsp;-	Respetar el derecho de la compradora a cancelar la operación de consumo sin responsabilidad alguna dentro de los 5 días Naturales.<br/></div>
+					<div>&nbsp;-	Transferir la propiedad del inmueble a la compradora.<br/></div>
+					<div>&nbsp;-	Entregar a la compradora el inmueble en los términos y plazos acordados.<br/></div>
+					<div>&nbsp;-	Responsabilizarse de los daños y perjuicios ocasionados a la compradora si procede con dolo o mala fe en la contratación.<br/></div>
+					<div>&nbsp;-	Responder ante evicción o vicios ocultos.<br/></div>
+					</td>
+				</tr>
+			</table>
+
+			<br/><br/><br/>
+
+
+			<table style="border: 1px solid black; border-collapse: collapse;">
+				<tr>
+					<td style="border: 1px solid black; border-collapse: collapse;"><b><br/>&nbsp;&nbsp;&nbsp;Parte Compradora</b></td>
+				</tr>
+				<tr>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Derechos</b></td>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Obligaciones</b></td>
+					
+				</tr>
+				<tr>
+					<td>
+						<div><br/>&nbsp;-	Recibir información y publicidad veraz, clara y actualizada del inmueble.</div><br/>
+						<div>&nbsp;-		Recibir la información y documentación del inmueble.</div> 
+						<div>&nbsp;-		Cancelar la operación sin responsabilidad alguna dentro de los 5 días naturales posteriores a la firma del contrato.</div> 
+						<div>&nbsp;-		Recibir la propiedad del inmueble en los términos acordados.</div> 
+						<div>&nbsp;-		Exigir los daños y perjuicios ocasionados en caso de que la vendedora proceda con dolo o mala fe en la contratación.</div> 
+						<div>&nbsp;-		Ejercer acción civil ante la evicción o vicios ocultos.</div> 
+					</td>
+					<td>
+						<div><br/>&nbsp;-	Pagar por el inmueble objeto del contrato un precio cierto y en dinero.<br/></div>
+						<div>&nbsp;-		Pagar el precio en el tiempo, lugar y forma acordados. <br/></div>
+						
+					</td>
+				</tr>
+			</table>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima primera. Pena convencional. -</span>
+			Las partes acuerdan para el caso de incumplimiento de cualquiera 
+			de las obligaciones contraídas en el presente contrato, una pena 
+			convencional de la cantidad equivalente al 20 %% veinte por ciento, 
+			del precio total de compraventa establecido en la cláusula segunda, 
+			salvo indicación especifica pactada en el presente contrato.
+			
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima segunda. Rescisión.- </span>
+			Para el caso de que una de las partes no cumpliera las obligaciones a 
+			su cargo, sin necesidad de resolución judicial, el perjudicado podrá 
+			escoger entre exigir el cumplimiento o la resolución de la obligación, 
+			así como el pago de la pena convencional dispuesta en la cláusula decima 
+			primera. Si se rescinde la venta, la vendedora y la compradora deben restituirse 
+			las prestaciones que se hubieren hecho.
+			
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			Si el incumplimiento fuera a cargo de la vendedora, además 
+			de la pena señalada en la cláusula decima primera, debe restituir a 
+			la compradora todas las cantidades pagadas por esta (de manera enunciativa, 
+			mas no limitativa, el precio de compra venta, así como los pagos por concepto 
+			de gastos de escrituración, impuestos, avaluó, administración, apertura de 
+			crédito, erogaciones de investigación, costos por los accesorios o complementos, 
+			entre otros); si el incumplimiento fuera a cargo de "LA PARTE COMPRADORA", la 
+			vendedora podrá tener la pena convencional, de aquella cantidad entregada por 
+			la compradora.
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			La vendedora debe restituir a la compradora los saldos excedentes a su 
+			favor por el mismo medio en el que efectuó el pago, dentro de los 15 
+			días hábiles siguientes a la rescisión del contrato. En caso de anticipo, 
+			la vendedora lo devolverá a la compradora en el mismo número y monto de 
+			las exhibiciones mediante las cuales efectuó dicho pago, salvo pacto en contrario.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			En caso de que no se restituyeren las cantidades dentro del plazo 
+			establecido, se debe pagar a la contraparte el interés moratorio 
+			del 3%% mensual sobre la cantidad no devuelta por el tiempo que medie el 
+			retraso; interés que no debe resultar inequitativo, desproporcional, abusivo, 
+			ni excesivo. 
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			Si “LA PARTE VENDEDORA” hubiere entregado el inmueble vendido, 
+			tiene derecho a exigir a la compradora, por el uso de este, el pago de 
+			un alquiler o renta fijada.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			En los casos de operaciones en que el precio deba cubrirse en exhibiciones periódicas, 
+			cuando “LA PARTE COMPRADORA” haya pagado más de la tercera parte del precio o del 
+			número total de los pagos convenidos y la vendedora exija la rescisión cumplimiento 
+			del contrato por mora, la compradora tendrá el derecho a optar por la rescisión o 
+			por el pago del adeudo vencido más los intereses moratorios generados de conformidad 
+			con los párrafos antepenúltimo y penúltimo de la clausula segunda.
+			<br/>
+			</div>
+
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Décima tercera. Proceder en caso del fenecimiento de "LA PARTE COMPRADORA".- </span>
+			En caso de fallecimiento de “LA PARTE COMPRADORA” antes de la firma de la escritura pública de compra venta, 
+			se presume que su(s) sucesor(es) legítimos(s) la sucede(n) en todos los derechos y 
+			obligaciones derivados del presente contrato, salvo que manifieste(n) a la vendedora 
+			su deseo de no continuar con la compraventa, debiendo la vendedora restituirle(s) 
+			las cantidades que le hubiere pagado la compradora con motivo del presente contrato 
+			menos la penalización acordada;
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima cuarta. Notificaciones entre las partes.-  </span>
+			Todas las notificaciones, requerimientos, autorizaciones, avisos o cualquier 
+			otra comunicación que deban darse las partes conforme a este contrato, deben 
+			hacerse por escrito y considerarse como debidamente entregadas si  se encuentran 
+			firmadas por la respetiva parte contractual o su representante o apoderado legal y 
+			entregadas con acuse de recibo al destinatario o confirmación de recepción en:
+			<br/>
+			</div>
+
+
+
+			<table style="border: 1px solid black; border-collapse: collapse;">
+				<tr>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Parte vendedora</b></td>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Parte compradora</b></td>
+					
+				</tr>
+				<tr>
+					<td>
+						<div><br/>&nbsp;-	Domicilio Avenida Hidalgo 1443 PB Colonia Americana, Guadalajara, Jalisco. C.P. 44160 </div><br/>
+						<div>&nbsp;-		Correo electrónico atencion@pinarestapalpa.com</div> 
+						<div>&nbsp;-		Telefono 3338352159</div> 
+					</td>
+					<td>
+						<div><br/>&nbsp;-	Domicilio %s <br/></div>
+						<div>&nbsp;-		Correo electrónico %s<br/></div>
+						
+					</td>
+				</tr>
+			</table>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima Quinta. Canales de atención.- </span>
+			"LA PARTE VENDEDORA" cuenta con el siguiente canal de 
+			atención para recibir comentarios, sugerencias y quejas de la compradora:
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima Sexta. Datos personales. - </span>
+			Los datos personales que se obtengan por "LA PARTE VENDEDORA" deben 
+			ser tratados conforme a los principios de licitud, consentimiento, 
+			información, calidad, finalidad, o lealtad, proporcionalidad y responsabilidad.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			Para efecto de lo dispuesto en la Ley Federal de Protección de 
+			Datos Personales en Posesión de los particulares, "LA PARTE VENDEDORA" 
+			adjunta al presente contrato su Aviso de Privacidad en el "Anexo H", en 
+			el cual informa al titular de los datos personales, que información recabara 
+			y con qué finalidades.
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			En caso de tratarse de datos personales sensibles, "LA PARTE VENDEDORA" 
+			debe obtener consentimiento expreso y por escrito de titular para su tratamiento. 
+			No podrán crearse bases de datos que contengan datos personales, sensibles, sin que 
+			se justifique la creación de las mismas para finalidades legítimas, concretas y 
+			acordes con las actividades o fines explícitos que persigue el sujeto regulado.
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			En caso de que los datos personales fueren obtenidos de 
+			manera indirecta del titular, se debe informar a los titulares 
+			de los datos personales que así lo soliciten como se dio la 
+			transferencia u obtención de dichos datos y se deban observar 
+			las siguientes reglas:
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			a.</span>
+			Si fueron tratados para una finalidad distinta prevista en una transferencia 
+			consentida, o si los datos fueron obtenidos de una fuente de acceso público, 
+			el aviso de privacidad se debe de dar a conocer a la compradora en el primer 
+			contacto que se tenga con él.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			b.</span>
+			Cuando la vendedora pretenda utilizar los datos para una 
+			finalidad distinta a la consentida, el aviso de privacidad debe ser actualizado y 
+			darse a conocer al titular previo aprovechamiento de los datos personales.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			La persona titular de los datos personales o su representante legal podrán solicitar 
+			a la vendedora en cualquier momento el acceso, rectificación, cancelación u 
+			oposición respecto a sus datos personales y datos personales sensibles.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima Séptima. Competencia administrativa de la Procuraduría Federal del Consumidor (Profeco). -</span>
+			Ante cualquier controversia que se suscite sobre la interpretación o 
+			cumplimiento del presente contrato, "LA PARTE COMPRADORA" puede acudir a 
+			la Profeco, la cual tiene funciones de autoridad administrativa encargada 
+			de promover y proteger los derechos e intereses de los consumidores y 
+			procurar la equidad y certeza jurídica en las relaciones de consumo desde su 
+			ámbito competencial.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima octava. Competencia de las autoridades jurisdiccionales. - </span>
+			Para resolver cualquier controversia que se suscite sobre la interpretación o 
+			cumplimiento del presente contrato, las partes se someten a las autoridades 
+			jurisdiccionales competentes de Guadalajara, Jalisco; renunciando expresamente 
+			a cualquier otra jurisdicción que pudiera corresponderles, por razón de sus domicilios 
+			presentes o futuros o cualquier otra razón.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima Novena. Registro del modelo del contrato de adhesión. - </span>
+			El presente modelo del contrato de adhesión fue inscrito el día 
+			***__________ mes***________ año *** ________en el Registro Público 
+			de Contratos de Adhesión de la Profeco bajo el numero ***________________
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Número de registro.</span>
+			Cualquier diferencia entre el texto del contrato de adhesión registrado ante la 
+			Procuraduría y el utilizado en perjuicio de los consumidores, se tendrá por no puesta.
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			Leído que fue por las partes el contenido del presente contrato y 
+			sabedoras de su alcance legal, lo firman por duplicado la fecha de  %s
+			en la ciudad de Guadalajara Jalisco, por lo que, la vendedora está 
+			obligada a entregar un tanto del contrato y sus anexos originales y 
+			firmados a la compradora.
+			<br/>
+			</div>
+
+			<br/><br/><br/><br/><br/><br/><br/><br/>
+
+			<table class="center">
+			<tr>
+				<th>Firma de "LA PARTE VENDEDORA"</th>
+				<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+				<th>Firma de "LA PARTE COMPRADORA"</th>
+			</tr>
+			</table>
+
+
+			<br/><br/><br/>
+			<div style="text-align: justify;">
+			El presente contrato y sus anexos pueden signarse: de manera autógrafa original; o 
+			a través de una firma electrónica avanzada o fiable que será considerada para todos 
+			los efectos de la misma fuerza y consecuencia que la firma autógrafa original física 
+			de la parte firmante.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Autorización para la utilización de información con fines mercadotécnicos o publicitarios. -</span>
+			“LA PARTE COMPRADORA” si ( ) no ( ) acepta que la vendedora ceda o 
+			transmita a terceros, con fines mercadotécnicos publicitarios, la 
+			información proporcionada con motivo del presente contrato y si ( ) 
+			no ( ) acepta la vendedora le envié publicidad sobre viene su servicios.
+			<br/>
+			</div>
+
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Firma de "LA PARTE COMPRADORA".</span>
+			<br/>
+			</div>
+
+			<br/><br/><br/>
+			<div style="text-align: justify;">
+			Todo consumidor que no desee recibir publicidad por pate de los proveedores, en 
+			términos de la Ley Federal de Protección al Consumidor, puede inscribir 
+			de manera gratuita su número telefónico en el Registro Público der Consumidor 
+			(también denominado Registro Público para Evitar Publicidad) de la Profeco, a 
+			través del portal web https://repep.profeco.gob.mx/ o al 5596280000 
+			(desde la Ciudad de México, Guadalajara y Monterrey) u 8009628000 
+			(desde el resto de la República Mexicana).
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			Queda prohibido a los proveedores que utilicen información sobre consumidores con fines mercadotécnicos o publicitarios y a sus clientes, 
+			utilizar la información relativa a los consumidores con fines diferentes a 
+			los mercadotécnicos o publicitarios, así como enviar publicidad a los consumidores 
+			que expresamente les hubiere manifestado su voluntad de no recibirla o que estén 
+			inscritos en el registro Público de Consumidores (también denominado Registro 
+			Público para Evitar Publicidad). Los proveedores que sean objeto de publicidad son 
+			corresponsables del manejo de la información de consumidores cuando dicha publicidad 
+			la envíen a través de terceros.
+			<br/>
+			</div>
+			<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+
+
+			<div style="text-align: center;">
+			<br><span style="font-weight: bold; font-size:14px">
+			ACUERDO CON RESPECTO  AL CONTRATO DE COMPRA VENTA DE TERRENO</span>
+			<br/>
+			</div>
+
+			<br/><br/><br/><br/><br/><br/><br/>
+
+			<div style="text-align: justify; font-size:12px">
+			LAS PARTES COMPRADORA Y VENDEDORA ACUERDAN
+			<br/>
+			</div>
+			<br/><br/>
+
+
+			<div style="text-align: justify; font-size:12px">
+			Que una vez liquidado la totalidad del precio de venta concurrirán ante el Notario Público 
+			Número 2 del El Salto Jalisco, Lic. Javier Alejandro Macías Preciado, 
+			con el fin de otorgar y formalizar la escritura 
+			pública de compraventa
+			<br/>
+			</div>
+			<br/><br/>
+
+
+			<div style="text-align: justify; font-size:12px">
+			Guadalajara Jal. %s
+			<br/>
+			</div>
+			<br/><br/>
+
+
+			<table class="center">
+			<tr>
+				<th style="font-size:12px">LA PARTE VENDEDORA</th>
+				<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+				<th style="font-size:12px" >LA PARTE COMPRADORA</th>
+			</tr>
+			</table>
+
+
+
+
+
+			
+
+
+			
+
 
 			
 
@@ -34482,7 +34917,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</body>
 			""" % (contrato, razonsocial, representantelegal, nombrecliente, letra, modulo, desarrollo, dciudad, destado,
 			       escritura, escritura_texto, nacionalidad, identificacion, numeroidentificacion, edad, estadocivil,
-				   superficie, titulo1, lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, rfccliente, totalapagarq,
+				   domiciliocliente2, emailcliente, fecha_dia,fecha_dia,  superficie, titulo1, lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, rfccliente, totalapagarq,
 			       totalapagarl, c2p1, "%", "%", eciudad, eestado,
 			       edomicilio,  domiciliocliente, ciudadcliente, estadocliente, int(fechadia), meses[int(fechames)],
 			       int(fechaano), razonsocial, representantelegal, nombrecliente, nombrevendedor)
