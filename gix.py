@@ -33413,20 +33413,32 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		edomicilio = self.GetString(row[4])
 		query = """select i.fk_etapa from gixamortizacion a join INMUEBLE i on a.fkinmueble = i.codigo where pkamortizacion= %s """ % self.pkamortizacion
 		precio_template=""
+		descuento_template=""
 		enganche_template=""
 		saldofinanciar_template=""
 		pagomensual_template=""
+		plazomeses_template= ""
+		pagoinicial_template = ""
+		pagofinal_template = ""
+		fechacontrato_template = ""
 		if row[5]:
 			edomicilio += " Col. " + self.GetString(row[5])
-		query="""select (preciocontado-descuentoc), enganchec, saldoafinanciar, pagomensualfijo  from gixamortizacion a where a.pkamortizacion = %s""" % int(self.pkamortizacion)
+		query=""
+		if os.environ.get("POSTGRES") == "True":
+			query="""select preciocontado, descuentoc,  enganchec, saldoafinanciar, pagomensualfijo, plazomeses, to_char(fechacaptura, 'DD/MM/YYYY') from gixamortizacion a where a.pkamortizacion = %s""" % int(self.pkamortizacion)
+		else:
+			query="""select preciocontado, descuentoc,  enganchec, saldoafinanciar, pagomensualfijo, plazomeses, convert(varchar(10), fechacaptura, 103) from gixamortizacion a where a.pkamortizacion = %s""" % int(self.pkamortizacion)
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu.execute(str(sql))
 		row = fetchone(cu)
 		if row is not None:
 			precio_template= self.GetString(row[0])
-			enganche_template= self.GetString(row[1])
-			saldofinanciar_template= self.GetString(row[2])
-			pagomensual_template= self.GetString(row[3])
+			descuento_template= self.GetString(row[1])
+			enganche_template= self.GetString(row[2])
+			saldofinanciar_template= self.GetString(row[3])
+			pagomensual_template= self.GetString(row[4])
+			plazomeses_template= self.GetString(row[5])
+			fechacontrato_template = self.GetString(row[6])
 		query = ""
 		if os.environ.get("POSTGRES") == "True":
 			query = """
@@ -33448,6 +33460,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			plazotabla = len(rows)
 			di, mi, ai = str(rows[0][0]).split("/")			
 			df, mf, af = str(rows[len(rows) - 1][0]).split("/")
+			pagoinicial_template = "{}/{}/{}".format(di,mi,ai)
+			pagofinal_template = "{}/{}/{}".format(df,mf,af)
 			query=""
 			if os.environ.get("POSTGRES") == "True":
 				query = """
@@ -33620,7 +33634,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					sql = (query.replace('\n',' ')).replace('\t',' ')
 					cu = r_cngcmex.cursor()
 					cu.execute(str(sql))
-					rows = fetchall(cu)
+					rows = fetchall(cu)					
 					cu.close()
 
 					c2p1 = u"""
@@ -33846,7 +33860,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Segunda. PRECIO Y FORMA DE PAGO</span>
 			<br/>
 			El precio que "LAS PARTES" han pactado por concepto de contraprestaci\xf3n asciende a la 
-			cantidad de $%s, (xxxxx xxxxxx xxxxxx xxxxxxx xxxx 00/100 M.N.), el cual se 
+			cantidad de $%s, (%s/100 M.N.), el cual se 
 			establece por todo el "INMUEBLE" materia de Contrato, ya que la presente operaci\xf3n se 
 			realiza "ad corpus", por lo que en el supuesto de que al verificarse la medici\xf3n del 
 			mismo, \xe9ste resulte de mayor o menor superficie, el precio no sufrir\xe1 alteraci\xf3n, tal 
@@ -33857,7 +33871,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</div>
 
 			<div style="text-align: justify;">
-			1.- La cantidad de $%s, (xxxxx xxxxxxx  xxxxx  xxxxx  xxxxx 00/100 M.N.), 
+			1.- La cantidad de $%s, (%s/100 M.N.), 
 			manifiesta "LA PARTE VENDEDORA" quien la recibe en este acto a su entera satisfacci\xf3n, 
 			sirviendo el presente contrato de formal recibo por la entrega de dicha cantidad.
 			<br/><br/>
@@ -33865,9 +33879,9 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			2.- El resto de la contraprestaci\xf3n o sea la cantidad de $%s, 
-			(xxxxx xxxxxxx  xxxxx  xxxxx  xxxxx 00/100 M.N.), la deberá(n) 
-			pagar "LA PARTE VENDEDORA" mediante 24 amortizaciones mensuales, consecutivas sin i
-			ntereses del día 3 de Noviembre de 2022 al día 3 de Octubre de 2024, cada una por la cantidad de $%s, (xxxxx xxxxxxx  xxxxx  xxxxx  xxxxx 00/100 M.N.).
+			(%s/100 M.N.), la deber\xe1(n) 
+			pagar "LA PARTE VENDEDORA" mediante %s amortizaciones mensuales, consecutivas sin intereses 
+			del d\xeda %s al d\xeda %s, cada una por la cantidad de $%s, (%s/100 M.N.).
 			<br/><br/>
 			</div>
 
@@ -33875,7 +33889,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			3.- Las amortizaciones mensuales a que se refiere el punto anterior, se documentan 
 			mediante pagar\xe9(s) que en este acto suscribe "LA PARTE COMPRADORA" quien(es) est\xe1(n) 
 			de acuerdo en que dicho(s) título(s) de cr\xe9dito sea(n) descontado(s) con terceras 
-			personas f\xedsicas o morales a elección de "LA PARTE VENDEDORA ".
+			personas f\xedsicas o morales a elecci\xf3n de "LA PARTE VENDEDORA ".
 			<br/><br/>
 			</div>
 
@@ -33886,7 +33900,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<br/><br/>
 			</div>
 			
-			""" % (str(amount_and_cents_with_commas(float(precio_template))),str(amount_and_cents_with_commas(float(enganche_template))), str(amount_and_cents_with_commas(float(saldofinanciar_template))), str(amount_and_cents_with_commas(float(pagomensual_template))))
+			""" % (str(amount_and_cents_with_commas(float(precio_template)-float(descuento_template))),aletras(float(precio_template)-float(descuento_template)) ,
+			str(amount_and_cents_with_commas(float(enganche_template))), aletras(enganche_template), 
+			str(amount_and_cents_with_commas(float(saldofinanciar_template))), aletras(saldofinanciar_template), 
+			plazomeses_template ,pagoinicial_template, pagofinal_template,
+			str(amount_and_cents_with_commas(float(pagomensual_template))), 
+			aletras(pagomensual_template))
 	
 			else:
 				clausulasformadepago += u"""<div style="text-align: justify;">
@@ -33894,7 +33913,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Segunda. PRECIO Y FORMA DE PAGO</span>
 			<br/>
 			El precio que "LAS PARTES" han pactado por concepto de contraprestaci\xf3n asciende a la 
-			cantidad de $xxxxxx, (xxxxx xxxxx   xxxxx   xxxx 00/100 M.N.), el cual se establece por 
+			cantidad de $%s, (%s/100 M.N.), el cual se establece por 
 			todo el "INMUEBLE" materia de Contrato, ya que la presente operaci\xf3n se realiza 
 			"ad corpus",por lo que en el supuesto de que al verificarse la medici\xf3n del mismo, 
 			\xe9ste resulte de mayor o menor superficie, el precio no sufrir\xe1 alteraci\xf3n, tal como 
@@ -33905,10 +33924,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</div>
 
 			<div style="text-align: justify;">
-			1.- La cantidad de $xxxxxx, (xxxxx xxxxx   xxxxx   xxxx 00/100 M.N.), 
-			la deber\xe1 pagar "LA PARTE COMPRADORA" mediante un pago único el día 3 de Junio de 2021.
+			1.- La cantidad de $%s, (%s/100 M.N.), 
+			la deber\xe1 pagar "LA PARTE COMPRADORA" mediante un pago \xfanico el d\xeda %s.
 			<br/><br/>
-			</div>"""
+			</div>""" %(precio_template, aletras(precio_template), precio_template, aletras(precio_template), fechacontrato_template)
 
 
 			header = u"""
