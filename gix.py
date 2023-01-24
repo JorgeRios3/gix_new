@@ -21,6 +21,12 @@
 	#pass
 	
 #############
+MYPOSTGRES=False
+try:
+	f = open("forcepostgres", "r")
+	MYPOSTGRES = True
+except:
+	pass
 import os
 try:
 	import wx.lib.agw.toasterbox as TB
@@ -288,6 +294,7 @@ DICEMPRESAS = {}
 PASSWORD = "132435"
 FORCEHOST, FORCELOCAL, FORCEPORT, FORCEINSTANCE, FORCERPYC = "", "", "", "", ""
 FORCEWEB, FORCETEST, FORCEQUERYONLY, FORCEGCMEX, FORCESCROLL = "", "", "", "", ""
+FORCEPOSTGRES = ""
 SMARTICS, G_USER = "", ""
 MACHINE_HASH_VALUE = None
 URL = "iguana.grupoiclar.com"
@@ -7320,7 +7327,7 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 		
 	def ObtenerFechaDelDia(self):
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -9191,7 +9198,7 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 		
 	def ObtenerFechaDelDia(self):
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -14322,7 +14329,6 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 			else:
 				panel = wx.Panel(self, -1)
 			
-			Mensajes().Info(self, "aqui mero", "")
 			if wx.Platform == '__WXMSW__':
 				EgresosChequesFuncion12(panel, True, True)
 			else:
@@ -17030,7 +17036,7 @@ Estatus de la solicitud: %s
 	def CalculaFechaCaptura2(self):
 		Mensajes().Info(self, u"este es ", "")
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -17055,7 +17061,7 @@ Estatus de la solicitud: %s
 		start_date = date(int(server_yr), int(server_mo), int(server_dy))
 		week_day = date.weekday(start_date)
 		sql=  ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			sql = """SELECT to_char(NOW() + INTERVAL '{} day', 'DD/MM/YYYY')""".format(week_day_sum[week_day])
 		else:
 			sql = """
@@ -20608,7 +20614,7 @@ Estatus del egreso: %s
 		
 	def CalculaFechaCaptura(self):
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -26004,7 +26010,7 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 		
 	def GetTodayDate(self):
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -27071,7 +27077,7 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 		
 	def GetTodayDate(self):
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -27882,7 +27888,7 @@ class GixReporteHijosClientes(wx.Dialog, GixBase):
 		
 	def GetTodayDate(self):
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -28251,7 +28257,7 @@ class GixReporteGuardiasAsignadas(wx.Dialog, GixBase):
 		
 	def GetTodayDate(self):
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -30373,7 +30379,7 @@ class GixTablasAmortizacionFunc3(wx.Dialog, GixBase):
 			listctrlfiltro = "and nombre like '%s%s%s'" % ("%%", str(self.vendedorfiltro), "%%")
 		cu = r_cngcmex.cursor()
 		sql=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			sql= str("select codigo, nombre from VENDEDOR where activo = true %s order by nombre" % listctrlfiltro)
 		else:
 			sql = str("select codigo, nombre from VENDEDOR where activo = 1 %s order by nombre" % listctrlfiltro)
@@ -30459,7 +30465,7 @@ class GixTablasAmortizacionFunc4(wx.Dialog, GixBase):
 		lctrl = self.GetControl(ID_LISTCTRLAMORFUNC4)
 		lctrl.Enable(False); lctrl.Show(False); lctrl.ClearAll()
 		campos = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			campos = "codigo, concat(trim(iden2), '-',trim(iden1)), superficie, preciopormetro"
 		else:
 			campos = "codigo, rtrim(ltrim(iden2)) + '-' + rtrim(ltrim(iden1)), superficie, preciopormetro"
@@ -30758,7 +30764,7 @@ class GixTablasAmortizacionFunc8(wx.Dialog, GixBase):
 			listctrlfiltro = "where nombre like '%s%s%s'" % ("%%", str(self.clientefiltro), "%%")
 		cu = r_cngcmex.cursor()
 		query =""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select a.pkamortizacion, a.fechaelaboracion,
 			concat(trim(i.iden2), '-', trim(i.iden1)), trim(e.descripcion), coalesce(c.nombre, '')
@@ -30841,7 +30847,7 @@ class GixTablasAmortizacionFunc9(wx.Dialog, GixBase):
 	def ObtenerFechaDelDia(self):
 		cu = r_cngcmex.cursor()
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -31321,7 +31327,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def ObtenerFechaDelDia(self, primerpago = False):
 		cu = r_cngcmex.cursor()
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -31628,7 +31634,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		self.NuevaTabla()
 		query = ""
 		try:
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = """
 				select a.fechacaptura, a.fechaelaboracion, a.formapago,
 				a.fkcliente, coalesce(trim(c.nombre), ''), a.fkvendedor, coalesce(trim(v.nombre), ''), a.fketapa,
@@ -31730,7 +31736,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def RefrescaTablaAmortizacion(self, pkamortizacion):
 		wx.BeginBusyCursor()
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select pkamortizaciondetalle, numerodepago, fechadepago,
 			saldoinicial, pagofijo, abonocapital, interes, saldofinal, pagado, insertado, eliminado,
@@ -31959,7 +31965,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			else:
 				Mensajes().Info(self, u"� No se grab� la informaci�n !", u"Atenci�n")
 		sql=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			sql = """
 			delete from gixamortizaciondetalle where fkamortizacion = %s and pagado = false and insertado = false and eliminado = false
 			""" % identity
@@ -32200,7 +32206,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -32212,7 +32218,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def GetTime(self):
 		cu = r_cngcmex.cursor()
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = "select current_time(2)"
 		else:
 			query = "select convert(varchar(8), getdate(), 108)"
@@ -32245,7 +32251,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			dato = fetchone(cu)
 			fechaenganche = str(dato[0])
 			query = ""
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = """
 				select fechadepago, numerodepago, pagofijo
 				from gixamortizaciondetalle
@@ -32526,7 +32532,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			aux = self.GetIdentity()
 			pkamortizacion = int(aux)
 			query = ""
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = """
 		        select fechadepago, numerodepago, pagofijo
 		        from gixamortizaciondetalle
@@ -32605,7 +32611,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		mes = {1:"Enero", 2:"Febrero", 3:"Marzo", 4:"Abril", 5:"Mayo", 6:"Junio", 7:"Julio",
 		       8:"Agosto", 9:"Septiembre", 10:"Octubre", 11:"Noviembre", 12:"Diciembre"}
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select a.enganchec, to_char(a.fechaenganche, 'DD/MM/YYYY'), c.nombre, c.domicilio, c.colonia,
 			c.telefonocasa, trim(concat(c.ciudad, ', ', c.estado, ' ', c.cp)), to_char(fechaelaboracion, 'DD/MM/YYYY')
@@ -32762,7 +32768,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			aux = self.GetIdentity()
 			pkamortizacion = int(aux)
 			query = ""
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = """select to_char(fechadepago, 'DD/MM/YYYY'), numerodepago, pagofijo from dbo.gixamortizaciondetalle
 				where fkamortizacion = %s and eliminado = False order by fechadepago, numerodepago
 				""" % pkamortizacion
@@ -32804,7 +32810,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					                u"Si es a cr�dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = """
 				select count(*) from gixamortizaciondetalle
 				where fkamortizacion = %s and eliminado = false and insertado = true
@@ -32860,7 +32866,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		mes = {1:"Enero", 2:"Febrero", 3:"Marzo", 4:"Abril", 5:"Mayo", 6:"Junio", 7:"Julio",
 		       8:"Agosto", 9:"Septiembre", 10:"Octubre", 11:"Noviembre", 12:"Diciembre"}
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select to_char(fechadepago, 'DD/MM/YYYY') from gixamortizaciondetalle
 			where fkamortizacion = %s and eliminado = false order by fechadepago
@@ -32884,7 +32890,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			di, mi, ai = str(rows[0][0]).split("/")
 			df, mf, af = str(rows[len(rows) - 1][0]).split("/")
 			query = ""
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = """
 				select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = false
 				""" % int(self.pkamortizacion)
@@ -32914,7 +32920,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			if pagofijo <= 0:
 				return ""
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select c.nombre, c.domicilio, c.colonia,
 			c.telefonocasa, trim(concat(c.ciudad, ', ', c.estado,' ', c.cp)),
@@ -33049,7 +33055,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		messmall = {1:"Ene", 2:"Feb", 3:"Mar", 4:"Abr", 5:"May", 6:"Jun", 7:"Jul",
 		            8:"Ago", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dic"}
 		query =""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			jeje select fechadepago from gixamortizaciondetalle
 			where fkamortizacion = %s and eliminado = 0 order by fechadepago
@@ -33084,7 +33090,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		else:
 			return ""
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select c.nombre, c.domicilio, c.colonia,
 			c.telefonocasa, trim(concat(c.ciudad, ', ', c.estado, ' ', c.cp)),
@@ -33313,7 +33319,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, "esta es la etapa {}".format(row[0]), "")
 			etapa_aux = row[0]
 			query = ""
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = """
 		        select fechadepago, numerodepago, pagofijo
 		        from gixamortizaciondetalle
@@ -33426,9 +33432,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		if row[5]:
 			edomicilio += " Col. " + self.GetString(row[5])
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		
+		if FORCEPOSTGRES:
+			print("se fue por aqui")
 			query="""select preciocontado, descuentoc,  enganchec, saldoafinanciar, pagomensualfijo, plazomeses, to_char(fechacaptura, 'DD/MM/YYYY') from gixamortizacion a where a.pkamortizacion = %s""" % int(self.pkamortizacion)
 		else:
+			print("se fue por aca")
 			query="""select preciocontado, descuentoc,  enganchec, saldoafinanciar, pagomensualfijo, plazomeses, convert(varchar(10), fechacaptura, 103) from gixamortizacion a where a.pkamortizacion = %s""" % int(self.pkamortizacion)
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu.execute(str(sql))
@@ -33442,7 +33451,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			plazomeses_template= self.GetString(row[5])
 			fechacontrato_template = self.GetString(row[6])
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select to_char(fechadepago, 'DD/MM/YYYY') from gixamortizaciondetalle
 			where fkamortizacion = %s and eliminado = False order by fechadepago
@@ -33465,7 +33474,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			pagoinicial_template = "{}/{}/{}".format(di,mi,ai)
 			pagofinal_template = "{}/{}/{}".format(df,mf,af)
 			query=""
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = """
 				select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = false
 				""" % int(self.pkamortizacion)
@@ -33485,7 +33494,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			plazotabla, totaltabla = 0, 0
 			di, mi, ai, df, mf, af = 0, 0, 0, 0, 0, 0
 		query= ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """select count(*) from gixamortizaciondetalle
 			where fkamortizacion = %s and eliminado = false and insertado=true
 			""" % int(self.pkamortizacion)
@@ -33504,7 +33513,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			else:
 				plazotabla, totaltabla = 0, 0
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select trim(i.iden1), trim(i.iden2), a.enganchec, i.superficie, a.saldoafinanciar, i.preciopormetro,
 			case a.plazomeses when 0 then (a.saldoafinanciar + a.enganchec) else ((a.pagomensualfijo * a.plazomeses) + a.enganchec) end,
@@ -34836,7 +34845,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		try:
 			aux = self.GetIdentity()
 			pkamortizacion = int(aux)
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = """
 		        select fechadepago, numerodepago, pagofijo
 		        from gixamortizaciondetalle
@@ -34931,7 +34940,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def GetHtmlTabla(self):
 		Mensajes().Info(self, "aaaaqui 1")
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select sum(abonocapital) + sum(interes) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = false
 			""" % int(self.pkamortizacion)
@@ -34948,7 +34957,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		abonointeres = 0
 		if dato is not None:
 			abonointeres = float(dato[0])
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select concat(trim(i.iden2), '-', trim(i.iden1)), a.enganchec, i.superficie, a.saldoafinanciar, i.preciopormetro,
 			case a.plazomeses when 0 then (a.saldoafinanciar + a.enganchec) else ((a.pagomensualfijo * a.plazomeses) + a.enganchec) end,
@@ -35047,7 +35056,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			header = header.replace('%time%',self.GetTime())
 			Mensajes().Info(self, "aaaaqui 12")
 			query = ""
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = """
 				select numerodepago, to_char(fechadepago, 'DD/MM/YYYY'), saldoinicial, pagofijo, abonocapital, interes, saldofinal
 				from gixamortizaciondetalle where fkamortizacion = %s and eliminado = false order by fechadepago, numerodepago
@@ -35220,7 +35229,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def OnElegirVendedor(self, evt):
 		cu = r_cngcmex.cursor()
 		sql=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			sql="select codigo, nombre from VENDEDOR where activo = true order by nombre"
 		else:
 			sql="select codigo, nombre from VENDEDOR where activo = 1 order by nombre"
@@ -35332,7 +35341,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				
 		cu = r_cngcmex.cursor()
 		campos = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			campos = "concat(trim(iden2), '-',trim(iden1)), tipo, superficie, preciopormetro"
 		else:
 			campos = "rtrim(ltrim(iden2)) + '-' + rtrim(ltrim(iden1)), tipo, superficie, preciopormetro"
@@ -36541,7 +36550,7 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -36626,7 +36635,7 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 			d, m, a = self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC2FECHAHASTA).GetValue().split('/')
 			filtrofecha1 = "and d.fechadevencimiento <= '%04d/%02d/%02d'" % (int(a), int(m), int(d))
 			filtrofecha2 = "and r.fechaemision <= '%04d/%02d/%02d'" % (int(a), int(m), int(d))
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select m.codigo as movimiento, d.fechadevencimiento as fecha,
 			d.codigo as documento, 0 as recibo, 0 as consdesarrollo, m.cantidad as cargo, 0 as abono,
@@ -37262,7 +37271,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		cu.close()
 		if rows:
 			for row in rows:
-				if os.environ.get("POSTGRES") == "True":
+				if MYPOSTGRES:
 					control.Append(self.GetString(row[1]), int(row[0]))
 				else:
 					control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
@@ -37404,7 +37413,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		if self.etapa:
 			listctrlfiltro += " and e.codigo = %s" % int(self.etapa)
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			if "c.congelada = 0" in listctrlfiltro:
 				listctrlfiltro = listctrlfiltro.replace("c.congelada = 0", "c.congelada = false")
 			query = """
@@ -37489,7 +37498,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 					lctrl.SetStringItem(index, 2, self.GetString(row[2]))
 					lctrl.SetStringItem(index, 3, str(row[3]))
 					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
-					if os.environ.get("POSTGRES") == "True":
+					if MYPOSTGRES:
 						lctrl.SetStringItem(index, 5, row[5])
 						lctrl.SetStringItem(index, 6, row[6])
 					else:
@@ -37742,7 +37751,7 @@ class GixReporteOfertasAsignacionesFunc1(wx.Frame, GixBase):
 		inmueble = ""
 		if codigo:
 			cu = r_cn.cursor()
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				cu.execute(str("select trim(iden2) + trim(iden1) from inmueble where codigo = %s" % codigo))
 			else:
 				cu.execute(str("select rtrim(ltrim(iden2)) + rtrim(ltrim(iden1)) from inmueble where codigo = %s" % codigo))
@@ -37974,7 +37983,7 @@ class GixAsignacionPreciosInmueblesFunc2(wx.Dialog, GixBase):
 	def GetDate(self):
 		cu = r_cn.cursor()
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -38183,7 +38192,7 @@ class GixAsignacionPreciosInmueblesFunc1(wx.Frame, GixBase):
 	def GetDate(self):
 		cu = r_cn.cursor()
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -38437,7 +38446,7 @@ class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 	def GetDate(self):
 		cu = r_cn.cursor()
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -39026,7 +39035,7 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 	def GetDate(self):
 		cu = r_cn.cursor()
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -40069,7 +40078,7 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -40110,7 +40119,7 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		conyugerfc, conyugeocupacion, curp, conyugecurp, email, identificacion, numeroidentificacion, edad 
 		from cliente where codigo = %s
 		""" % self.codigocliente
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select nombre, rfc, nacionalidad, lugardenacimiento, fechadenacimiento,
 			estadocivil, situacion, regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa,
@@ -40283,7 +40292,7 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		else:
 			cu = r_cngcmex.cursor()
 			query = ""
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				query = "select codigo from cliente order by codigo desc limit 1"
 			else:
 				query = "select top 1 codigo from cliente order by codigo desc"
@@ -40318,12 +40327,11 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 				self.Destroy()
 
 class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
-	print("aqui")
-	print(os.environ.get("POSTGRES"))
-	if os.environ.get("POSTGRES") == "True":
-		print("POSTGRES")
+	if MYPOSTGRES:
+		print("este POSTGRES")
 	else:
-		print("sql")
+		print("este agarro sql")
+	
 	logging.info("probando a ver si funciona")
 	def __init__(self, parent, id = -1, title = u"Clientes", pos = wx.DefaultPosition, size = wx.DefaultSize,
 	             style = wx.DEFAULT_FRAME_STYLE):
@@ -40534,7 +40542,7 @@ class GixVendedoresVentasPinaresFunc2(wx.Dialog, GixBase):
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -41662,7 +41670,7 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 	def GetDate(self):
 		cu = r_cn.cursor()
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -49364,7 +49372,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 	
 	def ObtenerFechaDelDia(self):
 		query=""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 		else:
 			query = "select convert(varchar(10), getdate(), 103)"
@@ -49512,7 +49520,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		lctrl = self.GetControl(ID_LISTCTRLPAGOCLIENTESFUNC1DOCUMENTOSCONSALDO)
 		lctrl.ClearAll(); lctrl.InsertColumn(0, "", wx.LIST_FORMAT_CENTER); lctrl.SetColumnWidth(0, 0)
 		cu = r_cn.cursor()
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
 		else:
 			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
@@ -49684,7 +49692,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		row = fetchone(cu)
 		if row:
 			fkcuentapagare = int(row[0])
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
 		else:
 			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
@@ -49849,7 +49857,7 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1INTERESMORATORIO).SetValue("0.00")
 		self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1TOTALPAGAR).SetValue("0.00")
 		cu = r_cn.cursor()
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
 		else:
 			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
@@ -50670,7 +50678,7 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 		if rows:
 			Mensajes().Info(self, "hubo rows en obtener etapas")
 			for row in rows:
-				if os.environ.get("POSTGRES") == "True":
+				if MYPOSTGRES:
 					control.Append(row[1], int(row[0]))
 				else:
 					control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
@@ -50804,7 +50812,7 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 		if self.etapa:
 			listctrlfiltro += " and e.codigo = %s" % int(self.etapa)
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """select c.codigo, to_char(c.fecha, 'DD/MM/YYYY'), i.iden1, i.iden2,
 			c.saldo, trim(e.descripcion), trim(t.nombre)
 			from CUENTA c
@@ -50853,12 +50861,12 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 				else:
 					if fila %2 != 0: bgcolor = [255,153,153]
 					else:            bgcolor = [255,215,215]
-				if os.environ.get("POSTGRES") == "True":
+				if MYPOSTGRES:
 					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
 				else:
 					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
 				lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
-				if os.environ.get("POSTGRES") == "True":
+				if MYPOSTGRES:
 					#etapa = str(row[5].strip())
 					#cliente = str(row[6].strip())
 					lctrl.SetStringItem(index, 0, str(row[0]))
@@ -50993,7 +51001,7 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		lctrl.Show(False)
 		lctrl.ClearAll()
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select codigo, to_char(fechadeelaboracion, 'DD/MM/YYYY'), to_char(fechadevencimiento, 'DD/MM/YYYY'),
 			cargo, abono, saldo from DOCUMENTO where fk_cuenta = %s order by fechadevencimiento, codigo
@@ -51074,7 +51082,7 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		lctrl.Show(False)
 		lctrl.ClearAll()
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """
 			select r.codigo, r.consdesarrollo, to_char(r.fechaemision, 'DD/MM/YYYY'),
 			m.cantidad, m.relaciondepago, r.referencia, r.status
@@ -51517,7 +51525,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		cu.close()
 		if rows:
 			for row in rows:
-				if os.environ.get("POSTGRES") == "True":
+				if MYPOSTGRES:
 					control.Append(row[1], int(row[0]))
 				else:
 					control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
@@ -51681,7 +51689,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		if self.etapa:
 			listctrlfiltro += " and e.codigo = %s" % int(self.etapa)
 		query = ""
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			query = """select c.codigo, to_char(c.fecha, 'DD/MM/YYYY'), i.iden1, i.iden2,
 			c.saldo, trim(e.descripcion), trim(t.nombre)
 			from CUENTA c
@@ -51732,7 +51740,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 					if fila %2 != 0: bgcolor = [255,153,153]
 					else:            bgcolor = [255,215,215]
 					
-				if os.environ.get("POSTGRES") == "True":
+				if MYPOSTGRES:
 					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
 					lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
 					lctrl.SetStringItem(index, 0, str(row[0]))
@@ -51816,7 +51824,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		except:
 			Mensajes().Info(self, u"� Problemas en la conexi�n !", u"Atenci�n")
 		
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			Mensajes().Info(self, u"si entro postg", "")
 			cu.execute("select porcentaje from CPP order by fecha desc limit 1")
 		else:
@@ -51831,7 +51839,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		Mensajes().Info(self, u"se vino hasta acaaa", "")
 		try:
 			query = ""
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				Mensajes().Info(self, u"bronca 1", "")
 				query = """
 				select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
@@ -52359,7 +52367,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		lctrl = self.GetControl(ID_LISTCTRLRECIBOPAGOPINARESFUNC3RECIBO)
 		lctrl.ClearAll()
 		cu = r_cngcmex.cursor()
-		if os.environ.get("POSTGRES") == "True":
+		if MYPOSTGRES:
 			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
 		else:
 			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
@@ -52370,7 +52378,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			try:
 				fechadia, fechames, fechaano = fechadeposito.split("/")
 				fechadeposito = "%s/%02d/%02d" % (fechaano, int(fechames), int(fechadia))
-				if os.environ.get("POSTGRES") == "True":
+				if MYPOSTGRES:
 					Mensajes().Info(self, u"bronca 2", "")
 					query = """
 					select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
@@ -52385,7 +52393,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 					where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
 					""" % (str(fechadeposito), str(fechadeposito), self.cuenta)
 			except:
-				if os.environ.get("POSTGRES") == "True":
+				if MYPOSTGRES:
 					Mensajes().Info(self, u"bronca 3", "")
 					query = """
 					select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
@@ -52403,7 +52411,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 					where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
 					""" % self.cuenta
 		else:
-			if os.environ.get("POSTGRES") == "True":
+			if MYPOSTGRES:
 				Mensajes().Info(self, u"bronca 4", "")
 				query = """
 				select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
@@ -62053,7 +62061,7 @@ class GixFrame(wx.Frame, GixBase):
 		
 	def RestableceConexion(self):
 		#if conectar_con_server(FORCERPYC, FORCEHOST, FORCEPORT, FORCELOCAL, FORCETEST, FORCEINSTANCE, FORCEWEB):
-		if gixmodel.inicializacion(logging, FORCERPYC, FORCEHOST, FORCEPORT, FORCELOCAL, FORCETEST, FORCEINSTANCE, FORCEWEB, SMARTICS):	
+		if gixmodel.inicializacion(logging, FORCERPYC, FORCEHOST, FORCEPORT, FORCELOCAL, FORCETEST, FORCEINSTANCE, FORCEWEB, SMARTICS, FORCEPOSTGRES):	
 			global r_cn
 			global mcache
 			r_cn = gixmodel.reasignarconexion()
@@ -65848,6 +65856,12 @@ def main(argv=None):
 			f_gcmex = True
 		except:
 			pass
+		f_postgres = False
+		try:
+			f = open("forcepostgres", "r")
+			f_postgres = True
+		except:
+			pass
 
 		f_scroll = False
 		try:
@@ -65858,7 +65872,7 @@ def main(argv=None):
 
 		#if conectar_con_server(f_rpyc, f_host, f_port, f_local, f_test, f_instance, f_web, smartics):
 		if gixmodel.inicializacion(logging, f_rpyc, f_host, f_port, f_local, f_test, f_instance, f_web, f_gcmex,
-		                           f_scroll, smartics, f_queryonly):
+		                           f_scroll, smartics, f_queryonly, f_postgres):
 			global mcache
 			global jsonweb
 	
@@ -65866,17 +65880,18 @@ def main(argv=None):
 			global auto_ansi2oem
 			global engine2
 			global FORCEHOST; global FORCELOCAL; global FORCEPORT; global FORCEINSTANCE
-			global FORCERPYC; global FORCEWEB; global FORCETEST; global FORCEGCMEX; global FORCESCROLL; global SMARTICS
-			global FORCEWEBSERVER; global FORCEQUERYONLY
+			global FORCERPYC; global FORCEWEB; global FORCETEST; global FORCEGCMEX; global FORCESCROLL; global SMARTICS; global FORCEPOSTGRES
+			global FORCEWEBSERVER; global FORCEQUERYONLY; global FORCEPOSTGRES
 			mcache, engine2, r_cn, r_cngcmex, jsonweb, auto_ansi2oem, FORCEHOST, FORCELOCAL, FORCEPORT, FORCEINSTANCE, FORCERPYC, \
-			FORCEWEB, FORCETEST, FORCEGCMEX, FORCESCROLL, SMARTICS, FORCEQUERYONLY = gixmodel.globales()
-			asignaForce(FORCEHOST, FORCELOCAL, FORCEPORT, FORCEINSTANCE, FORCERPYC, FORCEWEB, FORCETEST, FORCEGCMEX, FORCESCROLL, SMARTICS, FORCEQUERYONLY)	
+			FORCEWEB, FORCETEST, FORCEGCMEX, FORCESCROLL, SMARTICS, FORCEQUERYONLY, FORCEGCMEX, FORCEPOSTGRES = gixmodel.globales()
+			asignaForce(FORCEHOST, FORCELOCAL, FORCEPORT, FORCEINSTANCE, FORCERPYC, FORCEWEB, FORCETEST, FORCEGCMEX, FORCESCROLL, SMARTICS, FORCEQUERYONLY, FORCEPOSTGRES)	
 			asignaJsonweb(jsonweb)
 			asignaConexion(r_cn)
 			asignaConexionGcmex(r_cngcmex)
 			asignaEngine(engine2)
 			FORCEWEBSERVER = f_webserver
 			FORCEQUERYONLY = f_queryonly
+			FORCEPOSTGRES = f_postgres
 			
 			app = GixApp(True, "rastreo.txt")
 			if wx.Platform == '__WXMSW__':
