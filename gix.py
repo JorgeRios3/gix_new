@@ -33402,7 +33402,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, u"� Se presento un problema al imprimir el contrato !", u"Atenci�n")
 			
 	def GetHtmlContrato(self, etapa_aux):
-		clausulasformadepago = ""
+		clausulasformadepago = "" 
 		formadepago = self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection()
 		fecha_dia = self.GetDate()
 		cu = r_cngcmex.cursor()
@@ -33411,7 +33411,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		razonsocial = self.GetString(row[0]); representantelegal = self.GetString(row[1])
 		eciudad = self.GetString(row[2]); eestado = self.GetString(row[3])
 		edomicilio = self.GetString(row[4])
-		query = """select i.fk_etapa from gixamortizacion a join INMUEBLE i on a.fkinmueble = i.codigo where pkamortizacion= %s """ % self.pkamortizacion
+		#query = """select i.fk_etapa from gixamortizacion a join INMUEBLE i on a.fkinmueble = i.codigo where pkamortizacion= %s """ % self.pkamortizacion
 		precio_template=""
 		descuento_template=""
 		enganche_template=""
@@ -33421,6 +33421,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		pagoinicial_template = ""
 		pagofinal_template = ""
 		fechacontrato_template = ""
+		metododepago = "metodo de pago"
+		rfc_cliente_template = ""
 		if row[5]:
 			edomicilio += " Col. " + self.GetString(row[5])
 		query=""
@@ -33534,6 +33536,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			cte = fetchone(cu)
 			nombrecliente = self.GetString(cte[0])
 			domiciliocliente = self.GetString(cte[1])
+			rfc_cliente_template =self.GetString(cte[5])
 			numeroidentificacion = self.GetString(cte[6])
 			identificacion = self.GetString(cte[7])
 			edad = self.GetString(cte[8])
@@ -33847,6 +33850,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			#<div style="font-size:12px;"><span style="font-family: Arial;">
 			escritura = ""
 			escritura_texto= ""
+			saltos_linea_acuerdo =""
 			if int(etapa_aux) == 34:
 				escritura = "18798"
 				escritura_texto="dieciocho mil setecientos noventa y ocho"
@@ -33855,6 +33859,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				escritura_texto="dieciocho mil setecientos noventa y nueve"
 
 			if self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection() == 0:
+				saltos_linea_acuerdo= u"""<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>"""
 				clausulasformadepago+=u"""<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
 			Segunda. PRECIO Y FORMA DE PAGO</span>
@@ -33888,7 +33893,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<div style="text-align: justify;">
 			3.- Las amortizaciones mensuales a que se refiere el punto anterior, se documentan 
 			mediante pagar\xe9(s) que en este acto suscribe "LA PARTE COMPRADORA" quien(es) est\xe1(n) 
-			de acuerdo en que dicho(s) título(s) de cr\xe9dito sea(n) descontado(s) con terceras 
+			de acuerdo en que dicho(s) t\xedtulo(s) de cr\xe9dito sea(n) descontado(s) con terceras 
 			personas f\xedsicas o morales a elecci\xf3n de "LA PARTE VENDEDORA ".
 			<br/><br/>
 			</div>
@@ -33976,8 +33981,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			JAIME LARES RANGEL,</span> 
 			cuenta con las facultades suficientes para obligarla en los t\xe9rminos y condiciones del 
 			presente contrato, lo cual se acredita en t\xe9rminos del instrumento p\xfablico  
-			n\xfamero 18,797 otorgado ante la fe del Licenciado JAVIER ALEJANDRO MACIAS PRECIADO 
-			Notario P\xfablico n\xfamero 2 dos de la municipalidad de  El Salto, Jalisco, instrumento que 
+			n\xfamero 18,797 otorgado ante la fe del <span style="font-weight: bold;">Licenciado JAVIER ALEJANDRO MACIAS PRECIADO 
+			Notario P\xfablico n\xfamero 2 dos de la municipalidad de  El Salto, Jalisco,</span> instrumento que 
 			consta inscrito en el Registro P\xfablico de la Propiedad de Comercio de Guadalajara, Jalisco, 
 			bajo El Folio Mercantil Electr\xf3nico n\xfamero 15959, facultades que no le han sido revocadas 
 			ni modificadas en forma alguna. Tal documentaci\xf3n puede ser consultada 
@@ -34001,7 +34006,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<br><span style="font-weight: bold;">
 			d.</span>Su domicilio es el ubicado en Avenida Hidalgo numero 1443 Planta Baja, 
 			Colonia Americana en Guadalajara, Jalisco; Codigo Postal 44160 y su Registro Federal 
-			de Contribuyentes es <span style="font-weight: bold;">APR910816FJ3.</span>
+			de Contribuyentes es <span style="font-weight: bold;">%s.</span>
 			<br>
 			</div>
 
@@ -34022,7 +34027,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			
 			<br/>
 
-			ubicado en el Fraccionamiento denominado %s, en el Municipio de %s, %s; 
+			Ubicado en el Fraccionamiento denominado %s, en el Municipio de %s, %s; 
 			como se acredita en t\xe9rminos de la Escritura Publica numero 74,331 setenta y 
 			cuatro mil trescientos treinta y uno de fecha 21 de Diciembre del a\xf1o 2018 dos mil dieciocho 
 			ante la fe del Notario P\xfablico 130 de Guadalajara, Jalisco; Licenciado Roberto Armando Orozco 
@@ -34155,7 +34160,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			El precio por la compraventa es en Moneda Nacional, en caso de expresarse en moneda
 			 extranjera, se estar\xe1 al tipo de cambio que rija en el lugar y fecha en que se realice 
 			 el pago, de conformidad con la legislaci\xf3n aplicable. Los conceptos de pago a cargo 
-			 de la compradora, deben ser cubierto con el m\xe9todo de pago referido a continuaci\xf3n ***.
+			 de la compradora, deben ser cubierto con el m\xe9todo de pago referido a continuaci\xf3n %s.
 
 			<br/>
 			</div>
@@ -34204,7 +34209,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Sexta. Firma de escritura p\xfablica.- </span>
+			Cuarta. Firma de escritura p\xfablica.- </span>
 			<br/>
 			Las partes acuerdan que una vez liquidado la totalidad del precio de venta 
 			concurrir\xe1n ante el Notario P\xfablico que en su momento las partes designen, 
@@ -34228,7 +34233,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			S\xe9ptima. Entrega y recepci\xf3n del inmueble.-  </span>
+			Quinta. Entrega y recepci\xf3n del inmueble.-  </span>
 			<br/>
 			La vendedora se obliga a entregar a la compradora la posesi\xf3n del terreno 
 			materia del presente contrato, siendo ya obligaci\xf3n del Comprador el pago del 
@@ -34249,10 +34254,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<br/>
 			</div>
 
-
+			<br/><br/>
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Octava. Destino y modificaci\xf3n del inmueble.  </span>
+			Sexta. Destino y modificaci\xf3n del inmueble.  </span>
 			<br/>
 			La compradora se obliga a respetar el uso campestre habitacional del inmueble, 
 			por lo que, le est\xe1 prohibido instalar en el mismo cualquier tipo de comercio.
@@ -34279,7 +34284,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Novena. Restricciones oficiales aplicables a la construcci\xf3n en el terreno.- </span>
+			Septima. Restricciones oficiales aplicables a la construcci\xf3n en el terreno.- </span>
 			<br/>
 			En su caso, el terreno objeto de contrato est\xe1 sujeto a las siguientes restricciones 
 			oficiales aplicables a la construcci\xf3n:
@@ -34308,10 +34313,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Decima. Relaci\xf3n de los derechos y obligaciones de las partes. -  </span>
+			Octava. Relaci\xf3n de los derechos y obligaciones de las partes. -  </span>
 			<br/>
 			Los derechos y obligaciones de las partes contractuales son los 
-			siguientes (listado enunciativo más no limitativo)
+			siguientes (listado enunciativo m\xe1s no limitativo)
 			<br/>
 			</div>
 
@@ -34343,7 +34348,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				</tr>
 			</table>
 
-			<br/><br/><br/>
+			<br/>
 
 
 			<table style="border: 1px solid black; border-collapse: collapse;">
@@ -34375,7 +34380,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Decima primera. Pena convencional. -</span>
+			Novena. Pena convencional. -</span>
 			Las partes acuerdan para el caso de incumplimiento de cualquiera 
 			de las obligaciones contra\xeddas en el presente contrato, una pena 
 			convencional de la cantidad equivalente al 20 %% veinte por ciento, 
@@ -34388,7 +34393,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Decima segunda. Rescisi\xf3n.- </span>
+			Decima. Rescisi\xf3n.- </span>
 			Para el caso de que una de las partes no cumpliera las obligaciones a 
 			su cargo, sin necesidad de resoluci\xf3n judicial, el perjudicado podr\xe1 
 			escoger entre exigir el cumplimiento o la resoluci\xf3n de la obligaci\xf3n, 
@@ -34405,7 +34410,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			de la pena se\xf1alada en la cl\xe1usula decima primera, debe restituir a 
 			la compradora todas las cantidades pagadas por esta (de manera enunciativa, 
 			mas no limitativa, el precio de compra venta, as\xed como los pagos por concepto 
-			de gastos de escrituraci\xf3n, impuestos, avaluó, administraci\xf3n, apertura de 
+			de gastos de escrituraci\xf3n, impuestos, avalu\xf3, administraci\xf3n, apertura de 
 			cr\xe9dito, erogaciones de investigaci\xf3n, costos por los accesorios o complementos, 
 			entre otros); si el incumplimiento fuera a cargo de "LA PARTE COMPRADORA", la 
 			vendedora podr\xe1 tener la pena convencional, de aquella cantidad entregada por 
@@ -34454,7 +34459,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			D\xe9cima tercera. Proceder en caso del fenecimiento de "LA PARTE COMPRADORA".- </span>
+			D\xe9cima primera. Proceder en caso del fenecimiento de "LA PARTE COMPRADORA".- </span>
 			En caso de fallecimiento de "LA PARTE COMPRADORA" antes de la firma de la escritura 
 			p\xfablica de compra venta, 
 			se presume que su(s) sucesor(es) leg\xedtimos(s) la sucede(n) en todos los derechos y 
@@ -34467,7 +34472,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Decima cuarta. Notificaciones entre las partes.-  </span>
+			Decima segunda. Notificaciones entre las partes.-  </span>
 			Todas las notificaciones, requerimientos, autorizaciones, avisos o cualquier 
 			otra comunicaci\xf3n que deban darse las partes conforme a este contrato, deben 
 			hacerse por escrito y considerarse como debidamente entregadas si  se encuentran 
@@ -34487,7 +34492,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				<tr>
 					<td>
 						<div><br/>&nbsp;-	Domicilio Avenida Hidalgo 1443 PB Colonia Americana, Guadalajara, Jalisco. C.P. 44160 </div><br/>
-						<div>&nbsp;-		Correo electrónico atencion@pinarestapalpa.com</div> 
+						<div>&nbsp;-		Correo electr\xf3nico atencion@pinarestapalpa.com</div> 
 						<div>&nbsp;-		Telefono 3338352159</div> 
 					</td>
 					<td>
@@ -34501,15 +34506,15 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Decima Quinta. Canales de atenci\xf3n.- </span>
+			Decima tercera. Canales de atenci\xf3n.- </span>
 			"LA PARTE VENDEDORA" cuenta con el siguiente canal de 
-			atención para recibir comentarios, sugerencias y quejas de la compradora:
+			atenci\xf3n para recibir comentarios, sugerencias y quejas de la compradora:
 			<br/>
 			</div>
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Decima Sexta. Datos personales. - </span>
+			Decima cuarta. Datos personales. - </span>
 			Los datos personales que se obtengan por "LA PARTE VENDEDORA" deben 
 			ser tratados conforme a los principios de licitud, consentimiento, 
 			informaci\xf3n, calidad, finalidad, o lealtad, proporcionalidad y responsabilidad.
@@ -34576,7 +34581,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Decima S\xe9ptima. Competencia administrativa de la Procuradur\xeda Federal del Consumidor (Profeco). -</span>
+			Decima quinta. Competencia administrativa de la Procuradur\xeda Federal del Consumidor (Profeco). -</span>
 			Ante cualquier controversia que se suscite sobre la interpretaci\xf3n o 
 			cumplimiento del presente contrato, "LA PARTE COMPRADORA" puede acudir a 
 			la Profeco, la cual tiene funciones de autoridad administrativa encargada 
@@ -34589,7 +34594,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Decima octava. Competencia de las autoridades jurisdiccionales. - </span>
+			Decima sexta. Competencia de las autoridades jurisdiccionales. - </span>
 			Para resolver cualquier controversia que se suscite sobre la interpretaci\xf3n o 
 			cumplimiento del presente contrato, las partes se someten a las autoridades 
 			jurisdiccionales competentes de Guadalajara, Jalisco; renunciando expresamente 
@@ -34601,10 +34606,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Decima Novena. Registro del modelo del contrato de adhesi\xf3n. - </span>
-			El presente modelo del contrato de adhesi\xf3n fue inscrito el d\xeda 
-			***__________ mes***________ a\xf1o *** ________en el Registro P\xfablico 
-			de Contratos de Adhesi\xf3n de la Profeco bajo el n\xfamero ***________________
+			Decima septima. Registro del modelo del contrato de adhesi\xf3n. - </span>
+			El presente modelo del contrato de adhesi\xf3n con el Registro P\xfablico de Contratos de Adhesi\xf3n de la Profeco bajo el numero PFC.JAL.B11/00024-2222
 			<br/>
 			</div>
 
@@ -34630,14 +34633,14 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<table class="center">
 			<tr>
-				<th>Firma de "LA PARTE VENDEDORA"</th>
-				<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-				<th>Firma de "LA PARTE COMPRADORA"</th>
+				<td>"ARCADIA PROMOTORA S. DE R.L. DE C.V." <br/> Representada por  el Ing. Jaime Lares Rangel</td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GERENTE DE VENTAS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td>%s</td>
 			</tr>
 			</table>
 
 
-			<br/><br/><br/>
+			<br/><br/><br/><br/><br/>
 			<div style="text-align: justify;">
 			El presente contrato y sus anexos pueden signarse: de manera aut\xf3grafa original; o 
 			a trav\xe9s de una firma electr\xf3nica avanzada o fiable que ser\xe1 considerada para todos 
@@ -34645,6 +34648,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			de la parte firmante.
 			<br/>
 			</div>
+
+			<br/><br/><br/>
 
 
 			<div style="text-align: justify;">
@@ -34661,7 +34666,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			<br><span style="font-weight: bold;">
-			Firma de "LA PARTE COMPRADORA".</span>
+			%s.</span>
 			<br/>
 			</div>
 
@@ -34692,6 +34697,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 
+			<br/><br/><br/><br/> %s
+
 
 
 			<div style="text-align: center;">
@@ -34713,7 +34720,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Que una vez liquidado la totalidad del precio de venta concurrir\xe1n ante el Notario P\xfablico 
 			N\xfamero 2 del El Salto Jalisco, Lic. Javier Alejandro Mac\xedas Preciado, 
 			con el fin de otorgar y formalizar la escritura 
-			pública de compraventa
+			p\xfablica de compraventa
 			<br/>
 			</div>
 			<br/><br/>
@@ -34723,14 +34730,14 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Guadalajara Jal. %s
 			<br/>
 			</div>
-			<br/><br/>
+			<br/><br/><br/><br/><br/><br/><br/>
 
 
 			<table class="center">
 			<tr>
-				<th style="font-size:12px">LA PARTE VENDEDORA</th>
+				<th style="font-size:12px">"ARCADIA PROMOTORA S. DE R.L. DE C.V." <br/> Representada por  el Ing. Jaime Lares Rangel</th>
 				<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-				<th style="font-size:12px" >LA PARTE COMPRADORA</th>
+				<th style="font-size:12px" >%s</th>
 			</tr>
 			</table>
 
@@ -34756,10 +34763,10 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 
 			</body>
-			""" % (contrato, razonsocial, representantelegal, nombrecliente, letra, modulo, superficie, titulo1, 
+			""" % (contrato, razonsocial, representantelegal, nombrecliente, letra, modulo, rfc_cliente_template, superficie, titulo1, 
 				lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, desarrollo, dciudad, destado,
 			       escritura, escritura_texto, nacionalidad, identificacion, numeroidentificacion, edad, estadocivil,
-				   clausulasformadepago, domiciliocliente2, emailcliente, fecha_dia,fecha_dia)
+				   clausulasformadepago, metododepago, domiciliocliente2, emailcliente, fecha_dia, nombrecliente, nombrecliente, saltos_linea_acuerdo, fecha_dia, nombrecliente)
 			Mensajes().Info(self, "jaja paso 1115", "")
 			jump1 = ""
 			jump2 = ""
