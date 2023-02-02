@@ -15934,6 +15934,9 @@ ID_CHOICECLIENTEPINARESFUNC2OCUPACION = 11534
 ID_NOTEBOOKCLIENTEPINARESFUNC2 = 11535
 ID_BUTTONCLIENTEPINARESFUNC2CANCELAR = 11536
 ID_BUTTONCLIENTEPINARESFUNC2ACEPTAR = 11537
+ID_TEXTCTRLCLIENTEPINARESFUNC2IDENT = 11937
+ID_TEXTCTRLCLIENTEPINARESFUNC2NUMEROIDEN = 11938
+ID_TEXTCTRLCLIENTEPINARESFUNC2EDADCLI2 = 11939
 
 def ClientesVentasPinaresFunc2( parent, call_fit = True, set_sizer = True ):
     item0 = wx.BoxSizer( wx.VERTICAL )
@@ -15951,6 +15954,7 @@ def ClientesVentasPinaresFunc2( parent, call_fit = True, set_sizer = True ):
     item6 = wx.TextCtrl( parent, ID_TEXTCTRLCLIENTEPINARESFUNC2NOMBRE, "", wx.DefaultPosition, [383,-1], 0 )
     item6.SetToolTip( wx.ToolTip(u"Nombre del Cliente") )
     item4.Add( item6, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
 
     item7 = wx.StaticText( parent, ID_TEXT, u"Id", wx.DefaultPosition, wx.DefaultSize, 0 )
     item4.Add( item7, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
@@ -16031,6 +16035,37 @@ def ClientesVentasPinaresFunc2( parent, call_fit = True, set_sizer = True ):
     item28 = wx.TextCtrl( parent, ID_TEXTCTRLCLIENTEPINARESFUNC2CURP, "", wx.DefaultPosition, [169,-1], 0 )
     item28.SetToolTip( wx.ToolTip(u"Clave Unica del Registro de la Población") )
     item20.Add( item28, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+    
+
+    item501 = wx.StaticText( parent, ID_TEXT, u"Identificacion", wx.DefaultPosition, wx.DefaultSize, 0 )
+    item20.Add( item501, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+    item502 = wx.TextCtrl( parent, ID_TEXTCTRLCLIENTEPINARESFUNC2IDENT, "", wx.DefaultPosition, [125,-1], 0 )
+    item502.SetToolTip( wx.ToolTip(u"INE, Pasaporte...") )
+    item20.Add( item502, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+    item503 = wx.StaticText( parent, ID_TEXT, u"Numero", wx.DefaultPosition, wx.DefaultSize, 0 )
+    item20.Add( item503, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+    item504 = wx.TextCtrl( parent, ID_TEXTCTRLCLIENTEPINARESFUNC2NUMEROIDEN, "", wx.DefaultPosition, [169,-1], 0 )
+    item504.SetToolTip( wx.ToolTip(u"numero") )
+    item20.Add( item504, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+
+    item505 = wx.StaticText( parent, ID_TEXT, u"Edad", wx.DefaultPosition, wx.DefaultSize, 0 )
+    item20.Add( item505, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+    item506 = wx.TextCtrl( parent, ID_TEXTCTRLCLIENTEPINARESFUNC2EDADCLI2, "", wx.DefaultPosition, [169,-1], 0 )
+    item506.SetToolTip( wx.ToolTip(u"Edad") )
+    item20.Add( item506, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+
+
+    
+
+
+
 
     item3.Add( item20, 0, wx.ALIGN_CENTER_VERTICAL, 5 )
 

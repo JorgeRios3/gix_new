@@ -21,7 +21,13 @@
 	#pass
 	
 #############
-
+MYPOSTGRES=False
+try:
+	f = open("forcepostgres", "r")
+	MYPOSTGRES = True
+except:
+	pass
+import os
 try:
 	import wx.lib.agw.toasterbox as TB
 
@@ -288,6 +294,7 @@ DICEMPRESAS = {}
 PASSWORD = "132435"
 FORCEHOST, FORCELOCAL, FORCEPORT, FORCEINSTANCE, FORCERPYC = "", "", "", "", ""
 FORCEWEB, FORCETEST, FORCEQUERYONLY, FORCEGCMEX, FORCESCROLL = "", "", "", "", ""
+FORCEPOSTGRES = ""
 SMARTICS, G_USER = "", ""
 MACHINE_HASH_VALUE = None
 URL = "iguana.grupoiclar.com"
@@ -7319,9 +7326,13 @@ class GixVentasProspectosBueno(wx.Frame, GixBase, GixBaseListCtrl):
 		control.Enable(True)
 		
 	def ObtenerFechaDelDia(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(ID_TEXTCTRLPROSPECTOFECHAALTA).SetValue("%s" % str(row[0]))
@@ -9186,9 +9197,13 @@ class GixVentasProspectosBuenoOriginal(wx.Frame, GixBase, GixBaseListCtrl):
 		control.Enable(True)
 		
 	def ObtenerFechaDelDia(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(ID_TEXTCTRLPROSPECTOFECHAALTA).SetValue("%s" % str(row[0]))
@@ -14313,7 +14328,7 @@ class GixEgrSolicitudCheques(wx.Frame, GixBase, GixBaseListCtrl):
 				sb.Layout()
 			else:
 				panel = wx.Panel(self, -1)
-				
+			
 			if wx.Platform == '__WXMSW__':
 				EgresosChequesFuncion12(panel, True, True)
 			else:
@@ -16987,9 +17002,12 @@ Estatus de la solicitud: %s
 			self.ToggleBeneficiarioDevolucion(u"Solicitud", u"Utilizar esta Solicitud de Cheque por Concepto " \
 			                                  u"Diferente a Devoluci�n de Saldo a Favor", False, True)
 			self.ObtenerBeneficiarios()
+			Mensajes().Info(self, u"aqiu donde quiero 52", "")
 		wx.EndBusyCursor()
 		self.CalculaFechaCaptura()
-		self.CalculaFechaProgramada()
+		Mensajes().Info(self, u"aqiu donde quiero 53", "")
+		#self.CalculaFechaProgramada()
+		Mensajes().Info(self, u"aqiu donde quiero 54", "")
 		self.GetControl(self.idlcpartidas).Enable(False)
 		self.GetControl(self.idbtaplicarform).Enable(True)
 		self.GetControl(self.idbtaceptarform).Enable(True)
@@ -17002,6 +17020,7 @@ Estatus de la solicitud: %s
 			
 		control = self.GetControl(self.activecontrolafternewrecord)
 		control.SetFocus()
+		Mensajes().Info(self, u"aqiu donde quiero 6", "")
 		if self.usuario == "ELIZABETH" and not self.devolucionsaldo:
 			Mensajes().Info(self, u"Eli, si esta solicitud de cheque es para una\n" \
 			                u"devoluci�n de saldo a favor, recuerda que\n" \
@@ -17009,23 +17028,45 @@ Estatus de la solicitud: %s
 			                u"Solicitud de Devoluci�n de Saldo a Favor.", u"Recordatorio para Elizabeth")
 		
 	def CalculaFechaCaptura(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		n = datetime.now()
+		y,m,d = n.year, n.month, n.day
+		fecha = "{}/{}/{}".format(d,m,y)
+		self.GetControl(self.idtcfechacaptura).SetValue(fecha)
+
+	def CalculaFechaCaptura2(self):
+		Mensajes().Info(self, u"este es ", "")
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
+		Mensajes().Info(self, u"aqiu donde quiero {}".format(str(row[0])), "")
 		self.GetControl(self.idtcfechacaptura).SetValue(str(row[0]))
-		
+	
 	def CalculaFechaProgramada(self):
+		week_day_sum = {0:11, 1:10, 2:9, 3:8, 4:7, 5:13, 6:12}
+		d = datetime.date.today()
+		d1 = datetime.date.today()+datetime.timedelta(days=week_day_sum[d.weekday()])
+		self.GetControl(self.idtcfechaprogramada).SetValue("{:04d}/{:02d}/{:02d}".format(d1.year, d1.month, d1.day))
+
+	def CalculaFechaProgramada2(self):
 		week_day_sum = {0:11, 1:10, 2:9, 3:8, 4:7, 5:13, 6:12}
 		fechacaptura = self.GetControl(self.idtcfechacaptura).GetValue()
 		server_dy, server_mo, server_yr = fechacaptura.split('/')
 		server_date = "'%04d/%02d/%02d'" % (int(server_yr), int(server_mo), int(server_dy))
 		start_date = date(int(server_yr), int(server_mo), int(server_dy))
 		week_day = date.weekday(start_date)
-		sql = """
-		select convert(varchar(10), dateadd(day, %s, %s), 103)
-		""" % (week_day_sum[week_day], server_date)
+		sql=  ""
+		if MYPOSTGRES:
+			sql = """SELECT to_char(NOW() + INTERVAL '{} day', 'DD/MM/YYYY')""".format(week_day_sum[week_day])
+		else:
+			sql = """
+			select convert(varchar(10), dateadd(day, %s, %s), 103)
+			""" % (week_day_sum[week_day], server_date)
 		cu = r_cn.cursor()
 		cu.execute(str(sql))
 		row = fetchone(cu)
@@ -18204,7 +18245,7 @@ Estatus de la solicitud: %s
 			self.devolucionfiltro = ""
 		if countfiltros > 0: self.donde = "where"
 		else: self.donde = ""
-		
+		Mensajes().Info(self, "este es el que busco", "")
 		sql = """
 		select ch.idcheque, convert(varchar(10), ch.fechacaptura, 103), convert(varchar(10), ch.fechaprogramada, 103),
 		ch.numerochequeorigen, ch.cantidad, isnull(be.nombre, ''), em.RazonSocial, ch.estatus, ch.usuariosolicitante,
@@ -18219,6 +18260,7 @@ Estatus de la solicitud: %s
 		if printexcel: return sql
 		#if wx.Platform == "__WXMAC__":
 			#Mensajes().Info(self, u"Conexion: %s" % r_cn)
+		#cu = r_cngcmex.cursor() solicitudes apuntan a base de datos de iclardb7 para poder moverlas necesitamos ya sea migrar iclardb o cambiar queries y apuntar a esto
 		cu = r_cn.cursor()
 		cu.execute(str(sql))
 		rows = fetchall(cu)
@@ -20571,9 +20613,13 @@ Estatus del egreso: %s
 		control.SetFocus()
 		
 	def CalculaFechaCaptura(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(self.idtcfechacaptura).SetValue(str(row[0]))
@@ -25963,9 +26009,13 @@ class GixReporteRecibosElaborados(wx.Dialog, GixBase):
 		self.FillListCtrl()
 		
 	def GetTodayDate(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -27026,9 +27076,13 @@ class GixReporteRecibosPinares(wx.Dialog, GixBase):
 		self.FillListCtrl()
 		
 	def GetTodayDate(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -27833,9 +27887,13 @@ class GixReporteHijosClientes(wx.Dialog, GixBase):
 		self.FillListCtrl()
 		
 	def GetTodayDate(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -28198,9 +28256,13 @@ class GixReporteGuardiasAsignadas(wx.Dialog, GixBase):
 		self.FillListCtrl()
 		
 	def GetTodayDate(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -30316,7 +30378,12 @@ class GixTablasAmortizacionFunc3(wx.Dialog, GixBase):
 		if self.vendedorfiltro:
 			listctrlfiltro = "and nombre like '%s%s%s'" % ("%%", str(self.vendedorfiltro), "%%")
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select codigo, nombre from VENDEDOR where activo = 1 %s order by nombre" % listctrlfiltro))
+		sql=""
+		if MYPOSTGRES:
+			sql= str("select codigo, nombre from VENDEDOR where activo = true %s order by nombre" % listctrlfiltro)
+		else:
+			sql = str("select codigo, nombre from VENDEDOR where activo = 1 %s order by nombre" % listctrlfiltro)
+		cu.execute(sql)
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
@@ -30397,7 +30464,11 @@ class GixTablasAmortizacionFunc4(wx.Dialog, GixBase):
 		wx.BeginBusyCursor()
 		lctrl = self.GetControl(ID_LISTCTRLAMORFUNC4)
 		lctrl.Enable(False); lctrl.Show(False); lctrl.ClearAll()
-		campos = "codigo, rtrim(ltrim(iden2)) + '-' + rtrim(ltrim(iden1)), superficie, preciopormetro"
+		campos = ""
+		if MYPOSTGRES:
+			campos = "codigo, concat(trim(iden2), '-',trim(iden1)), superficie, preciopormetro"
+		else:
+			campos = "codigo, rtrim(ltrim(iden2)) + '-' + rtrim(ltrim(iden1)), superficie, preciopormetro"
 		filtro = ""
 		if self.etapa > 0:
 			filtro = "and fk_etapa = %s" % self.etapa
@@ -30692,15 +30763,27 @@ class GixTablasAmortizacionFunc8(wx.Dialog, GixBase):
 		if self.clientefiltro:
 			listctrlfiltro = "where nombre like '%s%s%s'" % ("%%", str(self.clientefiltro), "%%")
 		cu = r_cngcmex.cursor()
-		query = """
-		select a.pkamortizacion, convert(varchar(10), a.fechaelaboracion, 103),
-		rtrim(ltrim(i.iden2)) + '-' + rtrim(ltrim(i.iden1)), rtrim(ltrim(e.descripcion)), isnull(c.nombre, '')
-		from gixamortizacion a
-		join INMUEBLE i on a.fkinmueble = i.codigo
-		join ETAPA e on a.fketapa = e.codigo
-		left join CLIENTE c on a.fkcliente = c.codigo
-		%s order by a.fechaelaboracion desc, a.pkamortizacion desc
-		""" % listctrlfiltro
+		query =""
+		if MYPOSTGRES:
+			query = """
+			select a.pkamortizacion, a.fechaelaboracion,
+			concat(trim(i.iden2), '-', trim(i.iden1)), trim(e.descripcion), coalesce(c.nombre, '')
+			from gixamortizacion a
+			join INMUEBLE i on a.fkinmueble = i.codigo
+			join ETAPA e on a.fketapa = e.codigo
+			left join CLIENTE c on a.fkcliente = c.codigo
+			%s order by a.fechaelaboracion desc, a.pkamortizacion desc
+			""" % listctrlfiltro
+		else:
+			query = """
+			select a.pkamortizacion, convert(varchar(10), a.fechaelaboracion, 103),
+			rtrim(ltrim(i.iden2)) + '-' + rtrim(ltrim(i.iden1)), rtrim(ltrim(e.descripcion)), isnull(c.nombre, '')
+			from gixamortizacion a
+			join INMUEBLE i on a.fkinmueble = i.codigo
+			join ETAPA e on a.fketapa = e.codigo
+			left join CLIENTE c on a.fkcliente = c.codigo
+			%s order by a.fechaelaboracion desc, a.pkamortizacion desc
+			""" % listctrlfiltro
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu.execute(str(sql))
 		rows = fetchall(cu)
@@ -30763,7 +30846,12 @@ class GixTablasAmortizacionFunc9(wx.Dialog, GixBase):
 		
 	def ObtenerFechaDelDia(self):
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select convert(varchar(10), getdate(), 103)"))
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(ID_TEXTCTRLAMORFUNC9FECHAPAGO).SetValue(str(row[0]))
@@ -31110,7 +31198,7 @@ class GixTablasAmortizacionFunc13(wx.Dialog, GixBase):
 class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def __init__(self, parent, id, title, pos = wx.DefaultPosition, size = wx.DefaultSize, style = wx.DEFAULT_FRAME_STYLE, usuario = None):
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
-		self.usuarioautorizado = ("CESAR", "ENRIQUE")
+		self.usuarioautorizado = ("CESAR", "ENRIQUE", "MALR")
 		self.usuario = usuario
 		self.currentitem, self.fkamortizacion, self.numerodepago, self.pkamortizaciondetalle = -1, 0, 0, 0
 		self.DicDatesAndTxt = {ID_BITMAPBUTTONAMORFUNC1ELEGIRFECHAELABORACION : ID_TEXTCTRLAMORFUNC1FECHAELABORACION}
@@ -31160,7 +31248,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		self.CreateStatusBar(3)
 		self.SetStatusWidths(anchos)
 		self.SetStatusText(u"          Arcadia - Pinares Tapalpa", 1)
-		self.SetStatusText(u"Tabla de Pagos/Amortizaci�n, Contratos y Cuentas", 2)
+		self.SetStatusText(u"Tabla de Pagos/Amortización, Contratos y Cuentas", 2)
 		if wx.Platform == '__WXMSW__':
 			self.GetControl(ID_LISTCTRLAMORFUNC1).SetSize(wx.Size(950, 340))
 		else:
@@ -31238,7 +31326,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		
 	def ObtenerFechaDelDia(self, primerpago = False):
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select convert(varchar(10), getdate(), 103)"))
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT TO_CHAR(NOW() :: DATE, 'dd/mm/yyyy')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		fecha = str(row[0])
@@ -31519,7 +31612,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		self.cambio = False
 		self.GetControl(ID_TEXTCTRLAMORFUNC1FECHAELABORACION).SetFocus()
 		
-	def OnAbrir(self, evt):
+	def OnAbrir(self, evt):		
 		if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 			if self.cambio:
 				if Mensajes().YesNo(self, u"� Desea guardar la informaci�n ?", u"Confirmaci�n"):
@@ -31539,24 +31632,44 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def TablaAmortizacionElegida(self, pkamortizacion):
 		wx.BeginBusyCursor()
 		self.NuevaTabla()
-		query = """
-		select convert(varchar(10), a.fechacaptura, 103), convert(varchar(10), a.fechaelaboracion, 103), a.formapago,
-		a.fkcliente, isnull(rtrim(ltrim(c.nombre)), ''), a.fkvendedor, isnull(rtrim(ltrim(v.nombre)), ''), a.fketapa,
-		a.fkinmueble, rtrim(ltrim(i.iden2)) + '-' + rtrim(ltrim(i.iden1)), i.tipo, i.superficie, i.preciopormetro,
-		a.tasainteresanual, a.plazomeses, convert(varchar(10), a.fechaprimerpago, 103), a.preciocontado,
-		a.descuentop, a.descuentoc, a.enganchep, a.enganchec, a.saldoafinanciar, a.pagomensualfijo,
-		a.contrato, a.cuenta
-		from gixamortizacion a
-		left join CLIENTE c on a.fkcliente = c.codigo
-		left join VENDEDOR v on a.fkvendedor = v.codigo
-		join INMUEBLE i on a.fkinmueble = i.codigo
-		where a.pkamortizacion = %s
-		""" % pkamortizacion
-		sql = (query.replace('\n',' ')).replace('\t',' ')
-		cu = r_cngcmex.cursor()
-		cu.execute(str(sql))
-		row = fetchone(cu)
-		cu.close()
+		query = ""
+		try:
+			if MYPOSTGRES:
+				query = """
+				select a.fechacaptura, a.fechaelaboracion, a.formapago,
+				a.fkcliente, coalesce(trim(c.nombre), ''), a.fkvendedor, coalesce(trim(v.nombre), ''), a.fketapa,
+				a.fkinmueble, concat(trim(i.iden2),'-',trim(i.iden1)), i.tipo, i.superficie, i.preciopormetro,
+				a.tasainteresanual, a.plazomeses, a.fechaprimerpago, a.preciocontado,
+				a.descuentop, a.descuentoc, a.enganchep, a.enganchec, a.saldoafinanciar, a.pagomensualfijo,
+				a.contrato, a.cuenta
+				from gixamortizacion a
+				left join CLIENTE c on a.fkcliente = c.codigo
+				left join VENDEDOR v on a.fkvendedor = v.codigo
+				join INMUEBLE i on a.fkinmueble = i.codigo
+				where a.pkamortizacion = %s
+				""" % pkamortizacion
+			else:
+				query = """
+				select convert(varchar(10), a.fechacaptura, 103), convert(varchar(10), a.fechaelaboracion, 103), a.formapago,
+				a.fkcliente, isnull(rtrim(ltrim(c.nombre)), ''), a.fkvendedor, isnull(rtrim(ltrim(v.nombre)), ''), a.fketapa,
+				a.fkinmueble, rtrim(ltrim(i.iden2)) + '-' + rtrim(ltrim(i.iden1)), i.tipo, i.superficie, i.preciopormetro,
+				a.tasainteresanual, a.plazomeses, convert(varchar(10), a.fechaprimerpago, 103), a.preciocontado,
+				a.descuentop, a.descuentoc, a.enganchep, a.enganchec, a.saldoafinanciar, a.pagomensualfijo,
+				a.contrato, a.cuenta
+				from gixamortizacion a
+				left join CLIENTE c on a.fkcliente = c.codigo
+				left join VENDEDOR v on a.fkvendedor = v.codigo
+				join INMUEBLE i on a.fkinmueble = i.codigo
+				where a.pkamortizacion = %s
+				""" % pkamortizacion
+			sql = (query.replace('\n',' ')).replace('\t',' ')
+			cu = r_cngcmex.cursor()
+			cu.execute(str(sql))
+			row = fetchone(cu)
+			cu.close()
+		except:
+			logging.info("cayo en el error")
+			print("errorrrr ")
 		self.tasainteresanual = float(row[13]); self.plazomeses = int(row[14])
 		#join gixamortizaciondefaults d on 1 = d.pkamortizaciondefault
 		#self.contadomeses = int(row[23]); self.contadodescuento = float(row[24])
@@ -31622,13 +31735,23 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 	def RefrescaTablaAmortizacion(self, pkamortizacion):
 		wx.BeginBusyCursor()
-		query = """
-		select pkamortizaciondetalle, numerodepago, convert(varchar(10), fechadepago, 103),
-		saldoinicial, pagofijo, abonocapital, interes, saldofinal, pagado, insertado, eliminado,
-		pagoaplicado, (pagofijo - pagoaplicado)
-		from gixamortizaciondetalle
-		where fkamortizacion = %s %s order by fechadepago, numerodepago
-		""" % (pkamortizacion, self.vistatabla)
+		query = ""
+		if MYPOSTGRES:
+			query = """
+			select pkamortizaciondetalle, numerodepago, fechadepago,
+			saldoinicial, pagofijo, abonocapital, interes, saldofinal, pagado, insertado, eliminado,
+			pagoaplicado, (pagofijo - pagoaplicado)
+			from gixamortizaciondetalle
+			where fkamortizacion = %s order by fechadepago, numerodepago
+			""" % (pkamortizacion)
+		else:
+			query = """
+			select pkamortizaciondetalle, numerodepago, convert(varchar(10), fechadepago, 103),
+			saldoinicial, pagofijo, abonocapital, interes, saldofinal, pagado, insertado, eliminado,
+			pagoaplicado, (pagofijo - pagoaplicado)
+			from gixamortizaciondetalle
+			where fkamortizacion = %s %s order by fechadepago, numerodepago
+			""" % (pkamortizacion, self.vistatabla)
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
@@ -31841,10 +31964,15 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				self.GetControl(ID_TEXTCTRLAMORFUNC1ID).SetValue(" Id %s" % str(identity))
 			else:
 				Mensajes().Info(self, u"� No se grab� la informaci�n !", u"Atenci�n")
-				
-		sql = """
-		delete from gixamortizaciondetalle where fkamortizacion = %s and pagado = 0 and insertado = 0 and eliminado = 0
-		""" % identity
+		sql=""
+		if MYPOSTGRES:
+			sql = """
+			delete from gixamortizaciondetalle where fkamortizacion = %s and pagado = false and insertado = false and eliminado = false
+			""" % identity
+		else:
+			sql = """
+			delete from gixamortizaciondetalle where fkamortizacion = %s and pagado = 0 and insertado = 0 and eliminado = 0
+			""" % identity
 		try:
 			cursor = r_cngcmex.cursor()
 			cursor.execute(str(sql))
@@ -32076,15 +32204,25 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		return (identity.replace('Id','')).replace(' ','')
 	
 	def GetDate(self):
-		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		cu = r_cngcmex.cursor()
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
 
 	def GetTime(self):
-		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(8), getdate(), 108)")
+		cu = r_cngcmex.cursor()
+		query = ""
+		if MYPOSTGRES:
+			query = "select current_time(2)"
+		else:
+			query = "select convert(varchar(8), getdate(), 108)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -32112,12 +32250,21 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			cu.execute(self.PreparaQuery(query))
 			dato = fetchone(cu)
 			fechaenganche = str(dato[0])
-			query = """
-		        select convert(varchar(10), fechadepago, 111), numerodepago, pagofijo
-		        from gixamortizaciondetalle
-		        where fkamortizacion = %s and eliminado <> 1 and pagado <> 1
-		        order by fechadepago, numerodepago
-		        """ % pkamortizacion
+			query = ""
+			if MYPOSTGRES:
+				query = """
+				select fechadepago, numerodepago, pagofijo
+				from gixamortizaciondetalle
+				where fkamortizacion = %s and eliminado = False and pagado = False
+				order by fechadepago, numerodepago
+				""" % pkamortizacion
+			else:
+				query = """
+					select convert(varchar(10), fechadepago, 111), numerodepago, pagofijo
+					from gixamortizaciondetalle
+					where fkamortizacion = %s and eliminado <> 1 and pagado <> 1
+					order by fechadepago, numerodepago
+					""" % pkamortizacion
 			cu.execute(self.PreparaQuery(query))
 			rows = fetchall(cu)
 			cu.close()
@@ -32384,12 +32531,21 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		try:
 			aux = self.GetIdentity()
 			pkamortizacion = int(aux)
-			query = """
-		        select convert(varchar(10), fechadepago, 111), numerodepago, pagofijo
+			query = ""
+			if MYPOSTGRES:
+				query = """
+		        select fechadepago, numerodepago, pagofijo
 		        from gixamortizaciondetalle
-		        where fkamortizacion = %s and eliminado <> 1 and pagado <> 1
+		        where fkamortizacion = %s and eliminado = False and pagado = False
 		        order by fechadepago, numerodepago
 		        """ % pkamortizacion
+			else:
+				query = """
+					select convert(varchar(10), fechadepago, 111), numerodepago, pagofijo
+					from gixamortizaciondetalle
+					where fkamortizacion = %s and eliminado <> 1 and pagado <> 1
+					order by fechadepago, numerodepago
+					""" % pkamortizacion
 			cu = r_cngcmex.cursor()
 			cu.execute(self.PreparaQuery(query))
 			rows = fetchall(cu)
@@ -32451,15 +32607,24 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, u"� Se presento un problema al imprimir el pagar� !", u"Atenci�n")
 			
 	def GetHtmlPagareEnganche(self):
+		Mensajes().Info(self, "pagare7")
 		mes = {1:"Enero", 2:"Febrero", 3:"Marzo", 4:"Abril", 5:"Mayo", 6:"Junio", 7:"Julio",
 		       8:"Agosto", 9:"Septiembre", 10:"Octubre", 11:"Noviembre", 12:"Diciembre"}
-		query = """
-	        select a.enganchec, convert(varchar(10), a.fechaenganche, 103), c.nombre, c.domicilio, c.colonia,
-	        c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
-		convert(varchar(10), fechaelaboracion, 103) from gixamortizacion a
-	        join cliente c on a.fkcliente = c.codigo
-	        where a.pkamortizacion = %s
-	        """ % self.pkamortizacion
+		query = ""
+		if MYPOSTGRES:
+			query = """
+			select a.enganchec, to_char(a.fechaenganche, 'DD/MM/YYYY'), c.nombre, c.domicilio, c.colonia,
+			c.telefonocasa, trim(concat(c.ciudad, ', ', c.estado, ' ', c.cp)), to_char(fechaelaboracion, 'DD/MM/YYYY')
+			from dbo.gixamortizacion a join dbo.cliente c on a.fkcliente = c.codigo where a.pkamortizacion = %s
+			""" % self.pkamortizacion
+		else:
+			query = """
+			select a.enganchec, convert(varchar(10), a.fechaenganche, 103), c.nombre, c.domicilio, c.colonia,
+			c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
+			convert(varchar(10), fechaelaboracion, 103) from gixamortizacion a
+			join cliente c on a.fkcliente = c.codigo
+			where a.pkamortizacion = %s
+			""" % self.pkamortizacion
 		cu = r_cngcmex.cursor()
 		cu.execute(self.PreparaQuery(query))
 		row = fetchone(cu)
@@ -32562,8 +32727,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		return html
 	
 	def OnImprimirPagarePagos(self, evt):
+		Mensajes().Info(self, "pagare1")
 		self.pkamortizacion = self.GetIdentity()
+		Mensajes().Info(self, "pagare2")
 		if self.pkamortizacion:
+			Mensajes().Info(self, "pagare3")
 			if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 				if self.cambio:
 					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaci�n.\n\n" \
@@ -32575,6 +32743,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			else:
 				Mensajes().Info(self, u"� Asigne un inmueble !", u"Atenci�n")
 		else:
+			Mensajes().Info(self, "pagare4")
 			index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 			if index < 0:
 				Mensajes().Info(self, u"� No hay nada que imprimir !", u"Atenci�n")
@@ -32598,12 +32767,18 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		try:
 			aux = self.GetIdentity()
 			pkamortizacion = int(aux)
-			query = """
-		        select convert(varchar(10), fechadepago, 111), numerodepago, pagofijo
-		        from gixamortizaciondetalle
-		        where fkamortizacion = %s and eliminado <> 1
-		        order by fechadepago, numerodepago
-		        """ % pkamortizacion
+			query = ""
+			if MYPOSTGRES:
+				query = """select to_char(fechadepago, 'DD/MM/YYYY'), numerodepago, pagofijo from dbo.gixamortizaciondetalle
+				where fkamortizacion = %s and eliminado = False order by fechadepago, numerodepago
+				""" % pkamortizacion
+			else:
+				query = """
+				select convert(varchar(10), fechadepago, 111), numerodepago, pagofijo
+				from gixamortizaciondetalle
+				where fkamortizacion = %s and eliminado <> 1
+				order by fechadepago, numerodepago
+				""" % pkamortizacion
 			cu = r_cngcmex.cursor()
 			cu.execute(self.PreparaQuery(query))
 			rows = fetchall(cu)
@@ -32635,11 +32810,16 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					                u"Si es a cr�dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
-				
-			query = """
-			select count(*) from gixamortizaciondetalle
-			where fkamortizacion = %s and eliminado = 0 and insertado <> 0
-			""" % pkamortizacion
+			if MYPOSTGRES:
+				query = """
+				select count(*) from gixamortizaciondetalle
+				where fkamortizacion = %s and eliminado = false and insertado = true
+				""" % pkamortizacion
+			else:
+				query = """
+				select count(*) from gixamortizaciondetalle
+				where fkamortizacion = %s and eliminado = 0 and insertado <> 0
+				""" % pkamortizacion
 			sql = (query.replace('\n',' ')).replace('\t',' ')
 			cu = r_cngcmex.cursor()
 			cu.execute(str(sql))
@@ -32685,11 +32865,17 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def GetHtmlPagarePagos(self):
 		mes = {1:"Enero", 2:"Febrero", 3:"Marzo", 4:"Abril", 5:"Mayo", 6:"Junio", 7:"Julio",
 		       8:"Agosto", 9:"Septiembre", 10:"Octubre", 11:"Noviembre", 12:"Diciembre"}
-		
-		query = """
-		select convert(varchar(10), fechadepago, 103) from gixamortizaciondetalle
-		where fkamortizacion = %s and eliminado = 0 order by fechadepago
-		""" % int(self.pkamortizacion)
+		query=""
+		if MYPOSTGRES:
+			query = """
+			select to_char(fechadepago, 'DD/MM/YYYY') from gixamortizaciondetalle
+			where fkamortizacion = %s and eliminado = false order by fechadepago
+			""" % int(self.pkamortizacion)
+		else:
+			query = """
+			select convert(varchar(10), fechadepago, 103) from gixamortizaciondetalle
+			where fkamortizacion = %s and eliminado = 0 order by fechadepago
+			""" % int(self.pkamortizacion)
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
@@ -32703,9 +32889,15 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			plazotabla = len(rows)
 			di, mi, ai = str(rows[0][0]).split("/")
 			df, mf, af = str(rows[len(rows) - 1][0]).split("/")
-			query = """
-			select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0
-			""" % int(self.pkamortizacion)
+			query = ""
+			if MYPOSTGRES:
+				query = """
+				select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = false
+				""" % int(self.pkamortizacion)
+			else:
+				query = """
+				select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0
+				""" % int(self.pkamortizacion)
 			sql = (query.replace('\n',' ')).replace('\t',' ')
 			cu = r_cngcmex.cursor()
 			cu.execute(str(sql))
@@ -32727,14 +32919,23 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			pagofijo = float(row[0])
 			if pagofijo <= 0:
 				return ""
-			
-		query = """
+		query = ""
+		if MYPOSTGRES:
+			query = """
+			select c.nombre, c.domicilio, c.colonia,
+			c.telefonocasa, trim(concat(c.ciudad, ', ', c.estado,' ', c.cp)),
+			to_char(a.fechaelaboracion, 'DD/MM/YYYY') from gixamortizacion a
+			join cliente c on a.fkcliente = c.codigo
+			where a.pkamortizacion = %s
+			""" % self.pkamortizacion
+		else:
+			query = """
 	        select c.nombre, c.domicilio, c.colonia,
-	        c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
-		convert(varchar(10), a.fechaelaboracion, 103) from gixamortizacion a
-	        join cliente c on a.fkcliente = c.codigo
-	        where a.pkamortizacion = %s
-	        """ % self.pkamortizacion
+			c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
+			convert(varchar(10), a.fechaelaboracion, 103) from gixamortizacion a
+			join cliente c on a.fkcliente = c.codigo
+			where a.pkamortizacion = %s
+			""" % self.pkamortizacion
 		cu = r_cngcmex.cursor()
 		cu.execute(self.PreparaQuery(query))
 		row = fetchone(cu)
@@ -32853,11 +33054,17 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		       8:"Agosto", 9:"Septiembre", 10:"Octubre", 11:"Noviembre", 12:"Diciembre"}
 		messmall = {1:"Ene", 2:"Feb", 3:"Mar", 4:"Abr", 5:"May", 6:"Jun", 7:"Jul",
 		            8:"Ago", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dic"}
-		
-		query = """
-		select convert(varchar(10), fechadepago, 103) from gixamortizaciondetalle
-		where fkamortizacion = %s and eliminado = 0 order by fechadepago
-		""" % int(self.pkamortizacion)
+		query =""
+		if MYPOSTGRES:
+			query = """
+			jeje select fechadepago from gixamortizaciondetalle
+			where fkamortizacion = %s and eliminado = 0 order by fechadepago
+			""" % int(self.pkamortizacion)
+		else:
+			query = """
+			select convert(varchar(10), fechadepago, 103) from gixamortizaciondetalle
+			where fkamortizacion = %s and eliminado = 0 order by fechadepago
+			""" % int(self.pkamortizacion)
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
@@ -32882,14 +33089,23 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				return ""
 		else:
 			return ""
-			
-		query = """
-	        select c.nombre, c.domicilio, c.colonia,
-	        c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
-		convert(varchar(10), a.fechaelaboracion, 103) from gixamortizacion a
-	        join cliente c on a.fkcliente = c.codigo
-	        where a.pkamortizacion = %s
-	        """ % self.pkamortizacion
+		query = ""
+		if MYPOSTGRES:
+			query = """
+			select c.nombre, c.domicilio, c.colonia,
+			c.telefonocasa, trim(concat(c.ciudad, ', ', c.estado, ' ', c.cp)),
+			to_char(a.fechaelaboracion, 'DD/MM/YYYY') from gixamortizacion a
+			join cliente c on a.fkcliente = c.codigo
+			where a.pkamortizacion = %s
+			""" % self.pkamortizacion
+		else:
+			query = """
+			select c.nombre, c.domicilio, c.colonia,
+			c.telefonocasa, ltrim(rtrim(c.ciudad + ', ' + c.estado + ' ' + c.cp)),
+			convert(varchar(10), a.fechaelaboracion, 103) from gixamortizacion a
+			join cliente c on a.fkcliente = c.codigo
+			where a.pkamortizacion = %s
+			""" % self.pkamortizacion
 		cu = r_cngcmex.cursor()
 		cu.execute(self.PreparaQuery(query))
 		row = fetchone(cu)
@@ -33095,12 +33311,28 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		try:
 			aux = self.GetIdentity()
 			pkamortizacion = int(aux)
-			query = """
-		        select convert(varchar(10), fechadepago, 111), numerodepago, pagofijo
+			query = """select i.fk_etapa from gixamortizacion a join INMUEBLE i on a.fkinmueble = i.codigo where pkamortizacion= %s """ % pkamortizacion
+			cu = r_cngcmex.cursor()
+			cu.execute(self.PreparaQuery(query))
+			row = fetchone(cu)
+			cu.close()
+			Mensajes().Info(self, "esta es la etapa {}".format(row[0]), "")
+			etapa_aux = row[0]
+			query = ""
+			if MYPOSTGRES:
+				query = """
+		        select fechadepago, numerodepago, pagofijo
 		        from gixamortizaciondetalle
-		        where fkamortizacion = %s and eliminado <> 1 and pagado <> 1
+		        where fkamortizacion = %s and eliminado = False and pagado = False
 		        order by fechadepago, numerodepago
 		        """ % pkamortizacion
+			else:
+				query = """
+					select convert(varchar(10), fechadepago, 111), numerodepago, pagofijo
+					from gixamortizaciondetalle
+					where fkamortizacion = %s and eliminado <> 1 and pagado <> 1
+					order by fechadepago, numerodepago
+					""" % pkamortizacion
 			cu = r_cngcmex.cursor()
 			cu.execute(self.PreparaQuery(query))
 			rows = fetchall(cu)
@@ -33132,9 +33364,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					                u"Si es a cr�dito cambie la forma de pago.",
 					                u"Verifique la forma de pago")
 					return
-
 			wx.BeginBusyCursor()
-			gridcontenthtml, contrato = self.GetHtmlContrato()
+			gridcontenthtml, contrato = self.GetHtmlContrato(etapa_aux)
 			if gridcontenthtml:
 				self.ValidaToolBar()
 				archivo = "Contrato%s_%s.pdf" % (contrato, self.pkamortizacion)
@@ -33176,21 +33407,60 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			wx.EndBusyCursor()
 			Mensajes().Info(self, u"� Se presento un problema al imprimir el contrato !", u"Atenci�n")
 			
-	def GetHtmlContrato(self):
+	def GetHtmlContrato(self, etapa_aux):
+		clausulasformadepago = "" 
+		formadepago = self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection()
+		fecha_dia = self.GetDate()
 		cu = r_cngcmex.cursor()
 		cu.execute("select razonsocial, representantelegal, ciudad, estado, domicilio, colonia from empresa where codigo = 1")
 		row = fetchone(cu)
 		razonsocial = self.GetString(row[0]); representantelegal = self.GetString(row[1])
 		eciudad = self.GetString(row[2]); eestado = self.GetString(row[3])
 		edomicilio = self.GetString(row[4])
+		#query = """select i.fk_etapa from gixamortizacion a join INMUEBLE i on a.fkinmueble = i.codigo where pkamortizacion= %s """ % self.pkamortizacion
+		precio_template=""
+		descuento_template=""
+		enganche_template=""
+		saldofinanciar_template=""
+		pagomensual_template=""
+		plazomeses_template= ""
+		pagoinicial_template = ""
+		pagofinal_template = ""
+		fechacontrato_template = ""
+		metododepago = "metodo de pago"
+		rfc_cliente_template = ""
 		if row[5]:
 			edomicilio += " Col. " + self.GetString(row[5])
+		query=""
 		
-		query = """
-		select convert(varchar(10), fechadepago, 103) from gixamortizaciondetalle
-		where fkamortizacion = %s and eliminado = 0 order by fechadepago
-		""" % int(self.pkamortizacion)
-
+		if FORCEPOSTGRES:
+			print("se fue por aqui")
+			query="""select preciocontado, descuentoc,  enganchec, saldoafinanciar, pagomensualfijo, plazomeses, to_char(fechacaptura, 'DD/MM/YYYY') from gixamortizacion a where a.pkamortizacion = %s""" % int(self.pkamortizacion)
+		else:
+			print("se fue por aca")
+			query="""select preciocontado, descuentoc,  enganchec, saldoafinanciar, pagomensualfijo, plazomeses, convert(varchar(10), fechacaptura, 103) from gixamortizacion a where a.pkamortizacion = %s""" % int(self.pkamortizacion)
+		sql = (query.replace('\n',' ')).replace('\t',' ')
+		cu.execute(str(sql))
+		row = fetchone(cu)
+		if row is not None:
+			precio_template= self.GetString(row[0])
+			descuento_template= self.GetString(row[1])
+			enganche_template= self.GetString(row[2])
+			saldofinanciar_template= self.GetString(row[3])
+			pagomensual_template= self.GetString(row[4])
+			plazomeses_template= self.GetString(row[5])
+			fechacontrato_template = self.GetString(row[6])
+		query = ""
+		if MYPOSTGRES:
+			query = """
+			select to_char(fechadepago, 'DD/MM/YYYY') from gixamortizaciondetalle
+			where fkamortizacion = %s and eliminado = False order by fechadepago
+			""" % int(self.pkamortizacion)
+		else:
+			query = """
+			select convert(varchar(10), fechadepago, 103) from gixamortizaciondetalle
+			where fkamortizacion = %s and eliminado = 0 order by fechadepago
+			""" % int(self.pkamortizacion)
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu.execute(str(sql))
 		rows = fetchall(cu)
@@ -33199,11 +33469,19 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				return "", 0
 			
 			plazotabla = len(rows)
-			di, mi, ai = str(rows[0][0]).split("/")
+			di, mi, ai = str(rows[0][0]).split("/")			
 			df, mf, af = str(rows[len(rows) - 1][0]).split("/")
-			query = """
-			select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0
-			""" % int(self.pkamortizacion)
+			pagoinicial_template = "{}/{}/{}".format(di,mi,ai)
+			pagofinal_template = "{}/{}/{}".format(df,mf,af)
+			query=""
+			if MYPOSTGRES:
+				query = """
+				select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = false
+				""" % int(self.pkamortizacion)
+			else:
+				query = """
+				select sum(pagofijo) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0
+				""" % int(self.pkamortizacion)
 			sql = (query.replace('\n',' ')).replace('\t',' ')
 			cu.execute(str(sql))
 			row = fetchone(cu)
@@ -33215,11 +33493,16 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			
 			plazotabla, totaltabla = 0, 0
 			di, mi, ai, df, mf, af = 0, 0, 0, 0, 0, 0
-			
-		query = """
-		select count(*) from gixamortizaciondetalle
-		where fkamortizacion = %s and eliminado = 0 and insertado <> 0
-		""" % int(self.pkamortizacion)
+		query= ""
+		if MYPOSTGRES:
+			query = """select count(*) from gixamortizaciondetalle
+			where fkamortizacion = %s and eliminado = false and insertado=true
+			""" % int(self.pkamortizacion)
+		else:
+			query = """
+			select count(*) from gixamortizaciondetalle
+			where fkamortizacion = %s and eliminado = 0 and insertado <> 0
+			""" % int(self.pkamortizacion)
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu.execute(str(sql))
 		row = fetchone(cu)
@@ -33229,43 +33512,67 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				pagoextra = True
 			else:
 				plazotabla, totaltabla = 0, 0
-		
-		query = """
-		select rtrim(ltrim(i.iden1)), rtrim(ltrim(i.iden2)), a.enganchec, i.superficie, a.saldoafinanciar, i.preciopormetro,
-		case a.plazomeses when 0 then (a.saldoafinanciar + a.enganchec) else ((a.pagomensualfijo * a.plazomeses) + a.enganchec) end,
-		i.titulo1, i.lindero1, i.titulo2, i.lindero2, i.titulo3, i.lindero3, i.titulo4, i.lindero4,
-		case a.plazomeses when 0 then a.saldoafinanciar else (a.pagomensualfijo * a.plazomeses) end,
-		a.plazomeses, a.pagomensualfijo, convert(varchar(10), a.fechaelaboracion, 103), a.fkcliente, a.fkvendedor,
-		a.contrato, a.cuenta, convert(varchar(10), a.fechaprimerpago, 103), convert(varchar(10), a.fechaenganche, 103)
-		from gixamortizacion a
-		join INMUEBLE i on a.fkinmueble = i.codigo
-		where a.pkamortizacion = %s
-		""" % int(self.pkamortizacion)
+		query=""
+		if MYPOSTGRES:
+			query = """
+			select trim(i.iden1), trim(i.iden2), a.enganchec, i.superficie, a.saldoafinanciar, i.preciopormetro,
+			case a.plazomeses when 0 then (a.saldoafinanciar + a.enganchec) else ((a.pagomensualfijo * a.plazomeses) + a.enganchec) end,
+			i.titulo1, i.lindero1, i.titulo2, i.lindero2, i.titulo3, i.lindero3, i.titulo4, i.lindero4,
+			case a.plazomeses when 0 then a.saldoafinanciar else (a.pagomensualfijo * a.plazomeses) end,
+			a.plazomeses, a.pagomensualfijo, to_char(a.fechaelaboracion, 'DD/MM/YYYY'), a.fkcliente, a.fkvendedor,
+			a.contrato, a.cuenta, to_char(a.fechaprimerpago, 'DD/MM/YYYY'), to_char(a.fechaenganche, 'DD/MM/YYYY')
+			from gixamortizacion a
+			join INMUEBLE i on a.fkinmueble = i.codigo
+			where a.pkamortizacion = %s
+			""" % int(self.pkamortizacion)
+		else:
+			query = """
+			select rtrim(ltrim(i.iden1)), rtrim(ltrim(i.iden2)), a.enganchec, i.superficie, a.saldoafinanciar, i.preciopormetro,
+			case a.plazomeses when 0 then (a.saldoafinanciar + a.enganchec) else ((a.pagomensualfijo * a.plazomeses) + a.enganchec) end,
+			i.titulo1, i.lindero1, i.titulo2, i.lindero2, i.titulo3, i.lindero3, i.titulo4, i.lindero4,
+			case a.plazomeses when 0 then a.saldoafinanciar else (a.pagomensualfijo * a.plazomeses) end,
+			a.plazomeses, a.pagomensualfijo, convert(varchar(10), a.fechaelaboracion, 103), a.fkcliente, a.fkvendedor,
+			a.contrato, a.cuenta, convert(varchar(10), a.fechaprimerpago, 103), convert(varchar(10), a.fechaenganche, 103)
+			from gixamortizacion a
+			join INMUEBLE i on a.fkinmueble = i.codigo
+			where a.pkamortizacion = %s
+			""" % int(self.pkamortizacion)
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu.execute(str(sql))
 		row = fetchone(cu)
 		if row is not None:
-			cu.execute("select nombre, domicilio, colonia, ciudad, estado, rfc from cliente where codigo = %s" % int(row[19]))
+			cu.execute("select nombre, domicilio, colonia, ciudad, estado, rfc, numeroidentificacion, identificacion, edad, estadocivil, nacionalidad, cp, email from cliente where codigo = %s" % int(row[19]))
 			cte = fetchone(cu)
 			nombrecliente = self.GetString(cte[0])
 			domiciliocliente = self.GetString(cte[1])
+			rfc_cliente_template =self.GetString(cte[5])
+			numeroidentificacion = self.GetString(cte[6])
+			identificacion = self.GetString(cte[7])
+			edad = self.GetString(cte[8])
+			estadocivil = self.GetString(cte[9])
+			estados_civiles = {'0':"Soltero", '1':'Casado', '2':'Viudo', '3':'Divorciado'}
+			estadocivil = estados_civiles[estadocivil]
+			nacionalidad = self.GetString(cte[10])
 			if cte[2]:
 				domiciliocliente += " Col. " + self.GetString(cte[2])
+			
+			domiciliocliente2 = domiciliocliente
+			domiciliocliente2+= " "+ self.GetString(cte[3]) 
+			domiciliocliente2+= " "+ self.GetString(cte[4])
+			domiciliocliente2+= " C.P. "+ self.GetString(cte[11])
+			emailcliente =  self.GetString(cte[12])
 				
 			ciudadcliente = self.GetString(cte[3])
 			estadocliente = self.GetString(cte[4])
 			rfccliente = self.GetString(cte[5])
-
 			cu.execute("select nombre from vendedor where codigo = %s" % int(row[20]))
 			ven = fetchone(cu)
 			nombrevendedor = self.GetString(ven[0])
-
 			cu.execute("select contrato, descripcion, ciudad, estado from desarrollo where codigo = 5")
 			des = fetchone(cu)
 			contrato = int(des[0]); desarrollo = self.GetString(des[1])
 			dciudad = self.GetString(des[2]); destado = self.GetString(des[3])
 			cu.close()
-			
 			if int(row[21]) > 0:
 				contrato = int(row[21])
 				if int(row[22]) > 0:
@@ -33277,12 +33584,14 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					except:
 						pass
 			else:
+				Mensajes().Info(self, u"si existe 10 ")
 				sql = "update desarrollo set contrato = %s where codigo = 5" % (contrato + 1)
 				todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
+				Mensajes().Info(self, u"si existe 11 ")
 				if not todook:
 					Mensajes().Info(self, u"� Problemas al actualizar el contrato (1) !", u"Atenci�n")
 					return ""
-			
+				Mensajes().Info(self, u"si existe 12 ")
 				sql = "update gixamortizacion set contrato = %s where pkamortizacion = %s" % (contrato, self.pkamortizacion)
 				todook, trash = self.QueryUpdateRecord(sql, conexion = r_cngcmex)
 				if not todook:
@@ -33321,7 +33630,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				plazomeses = plazotabla
 			else:
 				plazomeses = int(row[16])
-				
 			pagomensualq = str(amount_and_cents_with_commas(float(row[17])))
 			pagomensuall = (str(c2p(float(row[17])).texto()))
 			fechadia, fechames, fechaano = str(row[18]).split("/")
@@ -33338,7 +33646,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					sql = (query.replace('\n',' ')).replace('\t',' ')
 					cu = r_cngcmex.cursor()
 					cu.execute(str(sql))
-					rows = fetchall(cu)
+					rows = fetchall(cu)					
 					cu.close()
 
 					c2p1 = u"""
@@ -33549,308 +33857,926 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				""" % (engancheq, enganchel, fechaenganche)
 
 			#<div style="font-size:12px;"><span style="font-family: Arial;">
+			escritura = ""
+			escritura_texto= ""
+			saltos_linea_acuerdo =""
+			if int(etapa_aux) == 34:
+				escritura = "18798"
+				escritura_texto="dieciocho mil setecientos noventa y ocho"
+			else:
+				escritura= "18799"
+				escritura_texto="dieciocho mil setecientos noventa y nueve"
+
+			if self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection() == 0:
+				saltos_linea_acuerdo= u"""<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>"""
+				clausulasformadepago+=u"""<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Segunda. PRECIO Y FORMA DE PAGO</span>
+			<br/>
+			El precio que "LAS PARTES" han pactado por concepto de contraprestaci\xf3n asciende a la 
+			cantidad de $%s, (%s/100 M.N.), el cual se 
+			establece por todo el "INMUEBLE" materia de Contrato, ya que la presente operaci\xf3n se 
+			realiza "ad corpus", por lo que en el supuesto de que al verificarse la medici\xf3n del 
+			mismo, \xe9ste resulte de mayor o menor superficie, el precio no sufrir\xe1 alteraci\xf3n, tal 
+			como disponen los art\xedculos 1858 y 1860 del C\xf3digo Civil para el estado de Jalisco. 
+			"LAS PARTES" convienen en que el precio ser\xe1 pagado de la siguiente forma:
+			
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			1.- La cantidad de $%s, (%s/100 M.N.), 
+			manifiesta "LA PARTE VENDEDORA" quien la recibe en este acto a su entera satisfacci\xf3n, 
+			sirviendo el presente contrato de formal recibo por la entrega de dicha cantidad.
+			<br/><br/>
+			</div>
+
+			<div style="text-align: justify;">
+			2.- El resto de la contraprestaci\xf3n o sea la cantidad de $%s, 
+			(%s/100 M.N.), la deber\xe1(n) 
+			pagar "LA PARTE VENDEDORA" mediante %s amortizaciones mensuales, consecutivas sin intereses 
+			del d\xeda %s al d\xeda %s, cada una por la cantidad de $%s, (%s/100 M.N.).
+			<br/><br/>
+			</div>
+
+			<div style="text-align: justify;">
+			3.- Las amortizaciones mensuales a que se refiere el punto anterior, se documentan 
+			mediante pagar\xe9(s) que en este acto suscribe "LA PARTE COMPRADORA" quien(es) est\xe1(n) 
+			de acuerdo en que dicho(s) t\xedtulo(s) de cr\xe9dito sea(n) descontado(s) con terceras 
+			personas f\xedsicas o morales a elecci\xf3n de "LA PARTE VENDEDORA ".
+			<br/><br/>
+			</div>
+
+			<div style="text-align: justify;">
+			4.- En caso de que "LA PARTE COMPRADORA" incurra(n) en mora en el pago de 
+			las amortizaciones se causar\xe1n intereses moratorios por todo el tiempo que se 
+			mantenga insoluto dicho pago a una tasa del 35 %% anual.
+			<br/><br/>
+			</div>
+			
+			""" % (str(amount_and_cents_with_commas(float(precio_template)-float(descuento_template))),aletras(float(precio_template)-float(descuento_template)) ,
+			str(amount_and_cents_with_commas(float(enganche_template))), aletras(enganche_template), 
+			str(amount_and_cents_with_commas(float(saldofinanciar_template))), aletras(saldofinanciar_template), 
+			plazomeses_template ,pagoinicial_template, pagofinal_template,
+			str(amount_and_cents_with_commas(float(pagomensual_template))), 
+			aletras(pagomensual_template))
+	
+			else:
+				clausulasformadepago += u"""<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Segunda. PRECIO Y FORMA DE PAGO</span>
+			<br/>
+			El precio que "LAS PARTES" han pactado por concepto de contraprestaci\xf3n asciende a la 
+			cantidad de $%s, (%s/100 M.N.), el cual se establece por 
+			todo el "INMUEBLE" materia de Contrato, ya que la presente operaci\xf3n se realiza 
+			"ad corpus",por lo que en el supuesto de que al verificarse la medici\xf3n del mismo, 
+			\xe9ste resulte de mayor o menor superficie, el precio no sufrir\xe1 alteraci\xf3n, tal como 
+			disponen los art\xedculos 1858 y 1860 del C\xf3digo Civil para el estado de Jalisco. 
+			"LAS PARTES" convienen en que el precio ser\xe1 pagado de la siguiente forma:
+			
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			1.- La cantidad de $%s, (%s/100 M.N.), 
+			la deber\xe1 pagar "LA PARTE COMPRADORA" mediante un pago \xfanico el d\xeda %s.
+			<br/><br/>
+			</div>""" %(precio_template, aletras(precio_template), precio_template, aletras(precio_template), fechacontrato_template)
+
+
 			header = u"""
 			<body>
+
+			<div style="text-align: center;">
+			CONTRATO DE COMPRAVENTA DE TERRENO<br>
+			</div>
 			
 			<div style="text-align: right;">
 			NUMERO&nbsp; %s A<br>
 			</div>
 			<div style="text-align: justify;">
-			CONTRATO DE PROMESA DE COMPRA VENTA
-			QUE CELEBRAN POR UNA PARTE %s REPRESENTADA EN ESTE ACTO POR EL SE\xd1OR
+			Contrato de adhesi\xf3n de compraventa de terreno destinado a casa habitaci\xf3n, al que, en lo sucesivo, 
+			se le denominara "EL CONTRATO", que celebran por una parte, la Sociedad Mercantil denominada %s quien comparece al presente acto jur\xeddico  a trav\xe9s de su 
+			Representante Legal el se\xf1or
 			%s, A QUIEN EN LO SUCESIVO SE LE
 			DENOMINAR\xc1 "LA PROMITENTE VENDEDORA", Y POR OTRA PARTE, EL(LOS) SE\xd1OR(ES)
-			%s, POR SU PROPIO DERECHO, A QUIEN(ES) EN LO SUCESIVO SE LE(S) DENOMINAR\xc1 "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", A AMBOS EN SU CONJUNTO SE LES DENOMINAR\xc1 "LAS PARTES",
-			EL CUAL SUJETAN AL CONTENIDO DE LAS SIGUIENTES DECLARACIONES Y CL\xc1USULAS:
+			%s, POR SU PROPIO DERECHO, A QUIEN(ES) EN LO SUCESIVO SE LE(S) DENOMINAR\xc1 "LA PARTE COMPRADORA"; 
+			ambos sujetos contractuales que en su conjunto ser\xe1n designadas como "LAS PARTES".
 			<br>
 			</div>
-			<div style="text-align: center;"><span style="font-weight: bold;"><br>DECLARACIONES:</span><br>
+			<div style="text-align: left;"><span style="font-weight: bold;"><br>DECLARACIONES:</span><br>
 			</div>
 			<br>
-			I.- Declara el representante de "LA PROMITENTE VENDEDORA", por conducto de su representante:<br>
-			<div style="text-align: justify;">a) Que su representada es una sociedad
-			mercantil legalmente constituida mediante escritura p\xfablica n\xfamero
-			43,065, otorgada el d\xeda 16 de agosto de 1991, ante la f\xe9 del Licenciado
-			Felipe Ignacio V\xe1zquez Aldana Sauza, Notario P\xfablico Suplente Adscrito
-			y Asociado n\xfamero 2 de Tlaquepaque, Jalisco, la cual se registr\xf3 bajo
-			inscripci\xf3n 311-312 del tomo 410 del Libro Primero del Registro P\xfablico
-			de Comercio de Guadalajara, Jalisco.<br>
-			</div>
-			<div style="text-align: justify;"><br>b)Que su representante cuenta con las facultades
-			juridicas necesarias para contratar y obligarla en los terminos de este contrato,
-			manifestando bajo protesta de decir verdad, que dichas facultades no le han sido revocadas,
-			limitadas, o modificadas en forma alguna.<br>
-			</div>
-			<div style="text-align: justify;"><br>c) Que su representada se encuentra inscrita
-			en el Registro Federal de Contribuyentes bajo la Clave: APR910816FJ3.<br>
-			</div>
-			<div style="text-align: justify;"><br>d) Que tiene inter\xe9s en vender a "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", 
-			el inmueble que acontinuaci\xf3n se describe:<br>
-			</div>
-			<div style="text-align: justify;"><br>Lote marcado con la Letra %s del
-			M\xf3dulo %s, perteneciente al Desarrollo Campestre Recreativo
-			conocido como "%s", ubicado en el municipio de %s,
-			%s, dicho inmueble tiene una Superficie de %s m2.
-			y las siguientes medidas y linderos:<br>
-			</div>
+
+			<span style="font-weight: bold;">I.- Declara "LA PARTE VENDEDORA" que: <br/></span>
+			<div style="text-align: justify;"><br>
+			<span style="font-weight: bold;">
+			a.</span> 
+			Es una sociedad mercantil <span style="font-weight: bold;">MEXICANA</span>, legalmente constituida de conformidad 
+			con las Leyes de 
+			los Estados Unidos Mexicanos, seg\xfan consta en el documento p\xfablico 
+			<span style="font-weight: bold;">43,065</span> otorgado ante la fe 
+			del <span style="font-weight: bold;">Licenciado FELIPE IGNACIO VAZQUEZ ALDANA SAUZA</span> Notario P\xfablico n\xfamero 
+			<span style="font-weight: bold;">2</span> dos de la municipalidad 
+			de  <span style="font-weight: bold;">San Pedro Tlaquepaque, Jalisco,</span> instrumento que consta inscrito en el Registro P\xfablico de la 
+			Propiedad de Comercio de <span style="font-weight: bold;">Guadalajara, Jalisco,</span> bajo Inscripci\xf3n 311-312, del Tomo 410, del Libro 
+			Primero y que puede ser consultado por la compradora en WWW.PINARES TAPALPA.COM
 			<br>
-			%s :&nbsp;&nbsp;&nbsp; %s<br>
-			%s :&nbsp;&nbsp;&nbsp; %s<br>
-			%s :&nbsp;&nbsp;&nbsp; %s<br>
-			%s :&nbsp;&nbsp;&nbsp; %s<br>
-			(en lo sucesivo "EL INMUEBLE").<br>
-			<div style="text-align: justify;">
-			<br>
-			e) Que "EL INMUEBLE" se encuentra libre de todo gravamen, limitacion
-			de dominio y de cualquier responsabilidad, al corriente en el pago del impuesto predial y demas
-			contribuciones que le corresponden, as\xed como de los servicios con que cuentan.<br>
 			</div>
-			<div style="text-align: justify;"><br>f) Que ha ofrecido en venta "EL INMUEBLE", y que "EL(LOS)
-			PROMITENTE(S) COMPRADOR(ES)" ha(n) tomado y aceptado en todos sus t\xe9rminos, la oferta realizada
-			de conformidad con los dispuesto en el presente Contrato.
-			<br></div>			
-			AQUIESTABA
-			<div style="text-align: justify;"><br>II.- Declara "El(LOS) RPOMINENTE(S) COMPRADOR(ES)":
-			</div>
-			<div style="text-align:justify;">a) Ser persona(s), f\xedsica(s), de nacionalidad mexicana, mayor(es) de edad,
-			y que cuenta(n) con la capacidad jur\xeddica para contratarse en t\xe9rminos del presente instrumento.
-			<br></div>
-			<div style="text-align:justify;"><br>b) Que se encuentra(n) inscrito(s) en el Registro Federal de Contribuyentes
-			bajo Clave(s) %s:
-			</div>
-			JUMP3
-			JUMP3
-			<div style="text-align:justify;"><br>c) Que en su deseo de adquirir de "LA PROMITENTE VENDEDORA" "EL INMUEBLE",
-			bajo los t\xe9rminos y condiciones que m\xe1s adelante se establecen.
-			<br></div>
-			<div style="text-align:justify;"><br>III.- Declaran "LAS PARTES", la primera por conducto de su representante:
-			<br></div>
-			<div style="text-align: justify;">a) Que reconocen como ciertas las Declaraciones anteriores.
-			</div>
-			<div style="text-align: justify;"><br>b) Que se reconocen la personalidad con la que comparecen a la firma de este Contrato.
-			</div>
-			<div style="text-align: justify;"><br>c) Que comparecen en este acto al otorgar su consentimiento,
-			manifestando conocer plenamente el sentido del presente Contrato, no existiendo dolo, mala fe, enriquecimiento ilegitimo,
-			lesi\xf3n o error que pudiera invalidarlo.
-			<br></div>
-			<div style="text-align: justify;"><br>En base a las Declaraciones que anteceden, "LAS PARTES" convienen en celebrar el presente
-			CONTRATO de Promesa de Compraventa, de conformidad con las siguientes,
-			<br></div>
-			<br>
-			<div style="text-align: center;"><span style="font-weight: bold;">CL\xc1USULAS:<br></span>
-			</div>
-			<div style="text-align:justify;><span style="font-weight: bold;">PRIMERA.-OBJETO<br></div>
-			<div style="text-align:justify;">Por virtud del presente Instrumento "LA PROMITENTE VENDEDORA" promete vender "EL INMUEBLE" "ad corpus" a
-			"EL(LOS) PROMITENTE(S) COMPRADOR(ES)" quien(es) se obliga(n) a comprarlo, y pagar el precio acordado por "LAS PARTES", bajo los t\xe9rminos
-			y condiciones que m\xe1s adelante se establecen. 
-			<br></div>
-			<div style="text-align:justify;><span style="font-weight: bold;">SEGUNDA.- PRECIO Y FORMA DE PAGO<br></div>
-			
-			<div style="text-align: justify;">El precio que "LAS PARTES"
-			han pactado por concepto de contraprestaci\xf3n asciende a la cantidad de
-			$%s, (%s), el cual se establece por todo
-			el "INMUEBLE" materia de Contrato, ya que la presente operaci\xf3n se
-			realiza "ad corpus", por lo que en el supuesto de que al verificarse la
-			medici\xf3n del mismo, \xe9ste resulte de mayor o menor superficie, el
-			precio no sufrir\xe1 alteraci\xf3n, tal como disponen los art\xedculos 1858 y
-			1860 del C\xf3digo Civil para el estado de Jalisco. "LAS PARTES" convienen en que el precio ser\xe1 pagado de la siguiente forma:<br>
-			</div>
-			
-			    %s
-			    
-			
-			<div><br><br></div>
-			<div style="text-align:justify;><span style="font-weight: bold;">QUINTA.- ESCRITURACI\xd3N<br></div>
-			<div style="text-align: justify;">"LA PROMITENTE VENDEDORA" se obliga a escriturar a "EL(LOS) PROMITENTE(S) COMPRADOR(ES)"
-			"EL INMUEBLE", una vez que este(os) haya(n) liquidado
-			la totalidad del precio de venta, y ser\xe1n a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" 
-			todos los gastos que genera dicha transmisi\xf3n de propiedad,
-			tanto en el otorgamiento del presente Contrato como en la escritura
-			p\xfablica correspondiente, como son Impuesto Sobre Transmisi\xf3n
-			Patrimonial, derechos del Registro P\xfablico de la Propiedad, Aval\xfao y
-			honorarios notariales o cualquier otro gasto, impuesto o derecho que se
-			cause con la propia escritura, siendo \xfanicamente a cargo de "LA PROMITENTE
-			VENDEDORA" &nbsp;el impuesto &nbsp;sobre la &nbsp;Renta &nbsp;que &nbsp;
-			se &nbsp;llegase &nbsp;a causar por la
-			venta &nbsp;de &nbsp;"EL INMUEBLE"; &nbsp;asimismo "EL(LOS) PROMITENTE(S) COMPRADOR((ES)",
-			en su caso,deber\xe1(n) estar al
-			corriente en las cuotas condominales y se obliga(n) a entregar toda la
-			documentaci\xf3n que sea necesaria al Fedatario P\xfablico correspondiente
-			para el otorgamiento de la referida escritura.<br></div>
-			<div style="text-align: justify;"><br>"LA PROMITENTE VENDEDORA"
-			girar\xe1 instrucci\xf3n al Notario P\xfablico de su elecci\xf3n 30 (treinta) d\xedas
-			naturales despu\xe9s de liquidado el precio de operaci\xf3n, misma que tendr\xe1
-			una vigencia de 45 (cuarenta y cinco) d\xedas naturales para que "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES) acuda(n) ante Dicho Notario, presente(n) su documentaci\xf3n y firme(n)
-			la escritura correspondiente.&nbsp; En caso de no formalizar la
-			escritura p\xfablica de que se trata en el plazo de la vigencia de la
-			instrucci\xf3n, "LA PROMITENTE VENDEDORA" podr\xe1 girar nueva instrucci\xf3n con un
-			costo administrativo a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" de $ 100.00 ( CIEN
-			PESOS 00/100 M.N.) por cada d\xeda transcurrido desde la fecha de
-			caducidad de la primera instrucci\xf3n y hasta la fecha de la nueva
-			instrucci\xf3n.<br><br>
-			</div>			
-			JUMP1
-			<div style="text-align:justify;><span style="font-weight: bold;">SEXTA.- ENTREGA DE LA POSESI\xd3N DE "EL INMUEBLE".<br></div>
-			<div style="text-align: justify;">La posesi\xf3n material de "EL
-			INMUEBLE", la entrega en este acto "LA PROMITENTE VENDEDORA" a "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", a su entera satisfacci\xf3n. En caso de rescisi\xf3n del
-			presente contrato "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", deber\xe1(n)
-			restituir la posesi\xf3n de dicho inmueble a "LA PROMITENTE VENDEDORA",
-			dentro de un plazo no mayor a 5 d\xedas contados a partir de la fecha en
-			que ocurra la rescisi\xf3n. "LAS PARTES" convienen expresamente que en caso
-			de incumplimiento de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" en cuanto a
-			la restituci\xf3n de la posesi\xf3n dentro del plazo convenido, pagar\xe1(n) a
-			"LA PROMITENTE VENDEDORA" por concepto de pena convencional una
-			cantidad equivalente a 9 veces el salario m\xednimo vigente en esta
-			ciudad de Guadalajara, Jalisco, por cada d\xeda de retraso en la entrega de dicha posesi\xf3n.<br><br><br><br>
-			</div>
-			JUMP2
-			<div style="text-align:justify;><span style="font-weight: bold;">SEPTIMA.- PENA CONVENCIONAL.<br></div>
-			<div style="textrm-align: justify;">En caso de incumplimiento
-			de alguna de las obligaciones que asumen "LAS PARTES" en el presente
-			Contrato, la parte que incumpla pagar\xe1 a la otra por concepto de pena
-			convencional una cantidad equivalente al 25%s calculado sobre el monto
-			total del precio pactado. En caso de que el incumplimiento fuere por
-			parte de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", "LA PROMITENTE
-			VENDEDORA" podr\xe1 optar por rescindir el presente contrato sin necesidad
-			de declaraci\xf3n judicial previa, mediante simple notificaci\xf3n hecha por
-			escrito.<br><br><br><br>
-			</div>
-			JUMP3
-			<div style="text-align:justify;><span style="font-weight: bold;">OCTAVA.- CESI\xd3N.<br></div>
-			<div style="text-align: justify;">En caso de que "EL(LOS)
-			PROMITENTE(S) COMPRADOR(ES)", quisiere(n) ceder los derechos del
-			presente contrato, deber\xe1 de notificarlo por escrito a "LA PROMITENTE
-			VENDEDORA" y adem\xe1s se obliga(n) a pagarle a esta, una cantidad
-			equivalente al 5%s sobre el valor total de la correspondiente cesi\xf3n de
-			derechos. Sin el consentimiento expreso por escrito de "LA PROMITENTE
-			VENDEDORA", la cesi\xf3n de derechos no surtir\xe1 efecto legal alguno.<br><br><br><br>
-			</div>
-			<div style="text-align:justify;><span style="font-weight: bold;">NOVENA.- IMPUESTOS PREDIAL DE "EL INMUEBLE".<br></div>
-			<div style="text-align: justify;">"EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)" se obliga(n) a pagar a partir de esta fecha el impuesto
-			predial correspondiente a "EL INMUEBLE" y "LA PROMITENTE VENDEDORA" se obliga a entregar al
-			corriente el saldo del impuesto.<br><br><br><br>
-			</div>
-			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA.- CONSTRUCCION DE "EL INMUEBLE".<br></div>
-			<div style="text-align: justify;">"EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", se obliga(n) a acatar las caracter\xedsticas de obra que
-			se\xf1ale la Direcci\xf3n de Obras P\xfablicas del
-			H. Ayuntamiento respectivo,
-			as\xed como las limitaciones que se\xf1ala el
-			reglamento del Desarrollo,
-			respecto a la construcci\xf3n que edifiquen sobre "EL INMUEBLE" misma que
-			deber\xe1 ser recreativa campestres.<br><br><br><br><br><br>
-			</div>
-			<div style="text-align:justify;><span style="font-weight: bold;">DECIMO PRIMERA.- REGIMEN DE PROPIEDAD EN CONDOMINIO.<br></div>
-			<div style="text-align: justify;">"LAS PARTES" convienen
-			en que "LA PROMITENTE VENDEDORA" podr\xe1, sin requerir el consentimiento
-			de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", sujetar "EL INMUEBLE" al Regimen de Propiedad y Condominio.
-			En caso de que "EL INMUEBLE" se afecte al R\xe9gimen de Propiedad y Condominio "LA
-			PROMITENTE VENDEDORA", se obliga a transmitir a "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)", el mismo conjuntamente con la acci\xf3n de dominio
-			indivisa sobre las \xe1reas comunes que corresponda al lote condominal.
-			&nbsp; por su cuenta "EL(LOS) PROMITENTE(S) COMPRADOR(ES)" se obliga(n) a cumplir y acatar
-			en todos sus t\xe9rminos el
-			reglamento de administraci\xf3n del condominio.
-			"El inmueble" deber\xe1 estar libre de gravamen, al corriente de sus
-			obligaciones fiscales y "LA PROMITENTE VENDEDORA" se obligar\xe1 al
-			saneamiento para el caso de evicci\xf3n en los t\xe9rminos de Ley.<br><br><br>
-			</div>
-			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA SEGUNDA.- GASTOS.<br></div>
-			<div style="text-align: justify;">Los gastos
-			ocasionados por el presente contrato, as\xed como los gastos, impuestos,
-			derechos y honorarios ocasionados por la escritura de compra venta
-			definitiva ser\xe1n a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)". El
-			impuesto sobre la renta ser\xe1 pagado por "LA PROMITENTE VENDEDORA".<br><br><br>
-			</div>
-			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA TERCERA.- TRIBUNALES COMPETENTES<br></div>
-			<div style="text-align: justify;">Para la
-			interpretaci\xf3n y cumplimiento del presente contrato "LAS PARTES" se
-			someten expresamente a los Tribunales de esta ciudad de Guadalajara,
-			Jalisco, renunciando al fuero presente o futuro que por cualquier causa
-			pudiere corresponderles.<br><br><br><br><br>
-			</div>
-			<div style="text-align:justify;><span style="font-weight: bold;">D\xc9CIMA CUARTA.- DEPOSITARIO DE "EL INMUEBLE".<br></div>
-			<div style="text-align: justify;">En el caso de que "LA
-			PROMITENTE VENDEDORA" exigiere judicialmente, el cumplimiento de las
-			obligaciones a cargo de "EL(LOS) PROMITENTE(S) COMPRADOR(ES)", \xe9ste(os)
-			conviene(n) en que no ser\xe1(n) depositario(s) de "EL INMUEBLE" objeto de este
-			contrato, y por lo tanto se obliga a entregar a "LA PROMITENTE
-			VENDEDORA" al depositario que \xe9sta nombre dicho inmueble; siendo
-			responsable(s) de cualquier da\xf1o o perjuicio que el inmueble sufra
-			mientras el depositario no tome posesi\xf3n de su cargo.<br>
-			</div>
-			JUMP1
-			<div style="text-align: justify;"><br>Todas las prestaciones derivadas de
-			este contrato, deber\xe1 pagarlas y cumplirlas "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)" en la Ciudad de %s, %s, en las oficinas de
-			la empresa ubicadas en %s, o en las que designe con
-			posterioridad, mediante aviso dado por escrito a "EL(LOS) PROMITENTE(S)
-			COMPRADOR(ES)". El cambio de domicilio, los emplazamientos y dem\xe1s diligencias judiciales o extrajudiciales
-			, se practicar\xe1n en el domicilio se\xf1alado en la presente cl\xe1usula<br><br><br><br><br>
-			</div>
-			<br>
-			JUMP1
-			<div style="text-align:justify;><span style="font-weight: bold;">DECIMA QUINTA.- <br></div>
-			<div style="text-align: justify;">Para todos los efectos judiciales relativos al presente contrato, el acreditado
-			se\xf1ala como su domicilio %s en la Ciudad de %s, %s.  Mientras 
-			"EL(LOS) PROMINENTES COMPRADOR(ES)" no notifiquen por escrito a la "PROMINENTE VENDEDORA" el cambio de domicilio, 
-			los emplazamientos y demas diligencias judiciales o extrajudiciales, se practicar\xe1n en el domicilio se\xf1alado en la presente cl\xe1usula.
-			<br><br>
-			</div>
-			JUMP2
-			JUMP3
 			
 			<div style="text-align: justify;"><br>
-			Enteradas "LAS PARTES" del valor,
-			alcances y consecuencias legales del presente contrato, lo ratifican y
-			firman por duplicado en la Ciudad de Guadalajara, Jalisco, a los
-			%s d\xedas del mes de %s de %s.<br><br><br>
+			<span style="font-weight: bold;" >b.</span>Su representante legal  
+			se\xf1or <spanstyle="font-weight: bold;">
+			JAIME LARES RANGEL,</span> 
+			cuenta con las facultades suficientes para obligarla en los t\xe9rminos y condiciones del 
+			presente contrato, lo cual se acredita en t\xe9rminos del instrumento p\xfablico  
+			n\xfamero 18,797 otorgado ante la fe del <span style="font-weight: bold;">Licenciado JAVIER ALEJANDRO MACIAS PRECIADO 
+			Notario P\xfablico n\xfamero 2 dos de la municipalidad de  El Salto, Jalisco,</span> instrumento que 
+			consta inscrito en el Registro P\xfablico de la Propiedad de Comercio de Guadalajara, Jalisco, 
+			bajo El Folio Mercantil Electr\xf3nico n\xfamero 15959, facultades que no le han sido revocadas 
+			ni modificadas en forma alguna. Tal documentaci\xf3n puede ser consultada 
+			por "LA PARTE COMPRADORA" en WWW.PINARES TAPALPA.COM
+			<br>
 			</div>
-			<div style="text-align: center;"><br>"LA PROMITENTE VENDEDORA"<br>
-			<br><br>
-			_______________________________________________<br>
-			%s<br>
-			REPRESENTADA POR EL %s<br>
-			<br><br><br>
-			"EL(LOS) PROMITENTE(S) COMPRADOR(ES)"<br>
-			<br><br>
-			_______________________________________________<br>
-			%s<br>
-			<br><br><br>
-			</div>n 
-			<table
-			style="text-align: left; width: 100px; margin-left: auto; margin-right: auto;"
-			border="0" cellpadding="2" cellspacing="2">
-			<tbody>
-			<tr>
-			<td style="vertical-align: top; text-align: center;">TESTIGO<br>
-			<br><br>
-			__________________________________________<br>
-			Gerente de Ventas <br>
-			Juan Pablo Lares Monraz
-			</td>
-			<td style="vertical-align: top; text-align: center; width: 100px;"><br>
-			</td>
-			<td style="vertical-align: top; text-align: center;">TESTIGO<br>
-			<br><br>
-			__________________________________________<br>
-			%s
-			</td>
-			</tr>
-			</tbody>
-			</table>
-			** N&uacute;mero de Autorizaci&oacute;n de la Profeco: PFC.B.E.7/007544-2015 **
-			</body>
-			""" % (contrato, razonsocial, representantelegal, nombrecliente, letra, modulo, desarrollo, dciudad, destado,
-			       superficie, titulo1, lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, rfccliente, totalapagarq,
-			       totalapagarl, c2p1, "%", "%", eciudad, eestado,
-			       edomicilio,  domiciliocliente, ciudadcliente, estadocliente, int(fechadia), meses[int(fechames)],
-			       int(fechaano), razonsocial, representantelegal, nombrecliente, nombrevendedor)
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			c.</span>Su <span style="font-weight: bold;">Objeto social</span> versa en su ARTICULO 2DO, dice a la letra EL OBJETO DE LA 
+			SOCIEDAD SERA: A) La compra venta, consignaci\xf3n y arrendamiento de toda clase de inmuebles, 
+			especialmente predios r\xfasticos, granjas y huertos familiares, as\xed como la planeaci\xf3n, 
+			proyecci\xf3n y realizaci\xf3n de toda clase de tr\xe1mites y obras tendientes al desarrollo de 
+			dichos inmuebles, incluyendo la perforaci\xf3n de pozos.
+			</div>
+
+
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			d.</span>Su domicilio es el ubicado en Avenida Hidalgo numero 1443 Planta Baja, 
+			Colonia Americana en Guadalajara, Jalisco; Codigo Postal 44160 y su Registro Federal 
+			de Contribuyentes es <span style="font-weight: bold;">%s.</span>
+			<br>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			e.</span>
+			Es leg\xedtima propietaria del terreno marcado con la manzana %s numero %s,
+			dicho inmueble tiene una superficie de %s M2 y las siguientes medidas y linderos:
+			<br/>
+
+
+
+
+			%s :&nbsp;&nbsp;&nbsp; %s<br>
+			%s :&nbsp;&nbsp;&nbsp; %s<br>
+			%s :&nbsp;&nbsp;&nbsp; %s<br>
+			%s :&nbsp;&nbsp;&nbsp; %s<br>
 			
+			<br/>
+
+			Ubicado en el Fraccionamiento denominado %s, en el Municipio de %s, %s; 
+			como se acredita en t\xe9rminos de la Escritura Publica numero 74,331 setenta y 
+			cuatro mil trescientos treinta y uno de fecha 21 de Diciembre del a\xf1o 2018 dos mil dieciocho 
+			ante la fe del Notario P\xfablico 130 de Guadalajara, Jalisco; Licenciado Roberto Armando Orozco 
+			Alonso  y debidamente inscrita el d\xeda 29 veintinueve de Noviembre del a\xf1o 1991 en el Folio 
+			Real 5728368 en el Registro P\xfablico de la Propiedad y de Comercio de Ciudad Guzm\xe1n, en el 
+			Estado de Jalisco.
+			<br/><br/>
+			Dicha documentaci\xf3n puede ser consultada por la pate compradora en   WWW.PINARES TAPALPA.COM
+
+			<br>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			f.</span>
+			El inmueble indicado en el inciso previo, est\xe1 sujeto al r\xe9gimen de propiedad 
+			en condominio, en t\xe9rminos de la escritura p\xfabica n\xfamero %s 
+			%s 
+			de fecha 30 treinta de Septiembre del a\xf1o 2020 otorgada ante la fe 
+			del Licenciado JAVIER ALEJANDRO MACIAS PRECIADO, 
+			Notario P\xfabico n\xfamero 2 DOS de El Salto, Jalisco; instrumento en 
+			el cual están referidas las correspondientes \xe1reas de uso com\xfan y 
+			porcentaje indiviso y que puede ser consultado en WWW.PINARES TAPALPA.COM
+			<br>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			g.</span>
+			El Terreno indicado en el inciso e previo, cuenta con uso de suelo <span style="font-weight: bold;">Habitacional 
+			Campestre</span> como se acredita en t\xe9rminos de las documentales que se agregan en el "Anexo A"
+			del presente contrato. Asimismo, respecto de \xe9ste se cuenta con las siguientes licencias, 
+			permisos y autorizaciones <span style="font-weight: bold;">y urbanizaciones.</span>
+			<br/><br/>
+			Dicha documentaci\xf3n puede ser consultada por "LA PARTE COMPRADORA" en WWW.PINARES TAPALPA.COM
+			<br>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			h.</span>
+			El terreno objeto del contrato, no se encuentra sujeto alg\xfan r\xe9gimen especial, se puede 
+			escriturar de inmediato y no est\xe1 sujeto a r\xe9gimen ejidal o comunal.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			i.</span>
+			El terreno cuenta con estudio de factibilidad t\xe9cnico oficial avalado por autoridad 
+			competente, \xfanicamente para efectos de las gestiones de tr\xe1mite por lo que no requiere 
+			ning\xfan tipo de la instalaci\xf3n de servicios b\xe1sicos por la naturaleza del Fraccionamiento 
+			ya que es de vocaci\xf3n Campestre y no cuenta con energ\xeda el\xe9ctrica, ni instalaciones para 
+			gas natural o LP,  ni agua potable, drenaje, alcantarillado y alumbrado p\xfablico
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			j.</span>
+			Al momento de la escrituraci\xf3n que formalice el contrato de compra venta del inmueble, 
+			este debe estar libre de todo gravamen que afecte la propiedad de la compradora sobre el mismo.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			k.</span>
+			Pone a disposici\xf3n de "LA PARTE COMPRADORA", la informaci\xf3n y documentaci\xf3n 
+			especificada en los "Anexos D y E" del presente contrato.
+			<br/>
+			</div>
+
+			<div style="text-align: left;"><span style="font-weight: bold;"><br>II. Declara "LA PARTE COMPRADORA" que:</span><br>
+			</div>
+			<br>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			a.</span>
+			Es de nacionalidad <u>%s</u> , acredita su identidad en t\xe9rminos
+			%s con numero de folio %s  tiene %s a\xf1os y su estado civil es %s
+			
+			<br/>
+			</div>
+
+
+			<div style="text-align: left;"><span style="font-weight: bold;"><br>III. Declaran las partes que:</span><br>
+			</div>
+			<br>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			a.</span>
+			Es su voluntad celebrar el presente contrato de acuerdo a las siguientes
+			<br/>
+			</div>
+
+			<div style="text-align: left;"><span style="font-weight: bold;"><br>CLAUSULAS:</span><br>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Primera. Objeto.-</span>
+			En virtud del presente contrato, "LA PARTE VENDEDORA", VENDE  a "LA PARTE COMPRADORA", 
+			quien adquiere para s\xed, el terreno indicado en la declaraci\xf3n I, inciso e) anterior, el 
+			cual tiene las especificaciones de identificaci\xf3n, caracter\xedsticas, extension, estado 
+			f\xedsico general, en su caso \xe1reas de uso com\xfan con otros inmuebles y porcentaje de indiviso 
+			referidos en el "Anexo C" del presente contrato, el cual firmado por ambas partes forma 
+			parte integrante del mismo;
+			
+			<br/>
+			</div>
+
+
+			%s
+
+			<div style="text-align: justify;">
+			Si "LA PARTE VENDEDORA" incurre en gastos judiciales o extrajudiciales para realizar 
+			la cobranza de los pagos vencidos en su caso,
+			"LA PARTE COMPRADORA" estar\xe1(n) obligado(s) a reembolsarle 
+			\xe9stos gastos a "LA PARTE VENDEDORA".
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			El precio por la compraventa es en Moneda Nacional, en caso de expresarse en moneda
+			 extranjera, se estar\xe1 al tipo de cambio que rija en el lugar y fecha en que se realice 
+			 el pago, de conformidad con la legislaci\xf3n aplicable. Los conceptos de pago a cargo 
+			 de la compradora, deben ser cubierto con el m\xe9todo de pago referido a continuaci\xf3n %s.
+
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			Los pagos que realice la compradora, aun en forma extempor\xe1nea 
+			que sean aceptados por la vendedora, liberan a la compradora de las 
+			obligaciones inherentes a dichos pagos.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			Los importes se\xf1alados en esta cl\xe1usula, son todas las cantidades a 
+			cargo de la compradora por concepto de la compra venta, por lo que, la 
+			vendedora se obliga a respetar en todo momento dicho costo.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Tercera. Revocaci\xf3n.</span>
+			<br/>
+			"LA PARTE COMPRADORA" cuenta con un plazo de 5 d\xedas naturales contados 
+			a partir de la firma del contrato para revocar su consentimiento sobre la 
+			operaci\xf3n sin responsabilidad alguna de su parte, mediante aviso por escrito, 
+			de conformidad con la cl\xe1usula decima quinta. Para el caso de que la revocaci\xf3n 
+			se realice por correo certificado o registrado o servicio de mensajer\xeda, 
+			se tomara como fecha de revocaci\xf3n, la de recepci\xf3n para su envi\xf3. <br/> 
+			Ante la cancelaci\xf3n de la compraventa, la vendedora se obliga a reintegrar todas 
+			las cantidades a la compradora por el mismo medio en el que esta haya efectuado el 
+			pago, dentro de los 15 d\xedas h\xe1biles siguientes a la fecha en que le sea notificada 
+			la revocaci\xf3n.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			En caso de anticipo, la vendedora lo devolver\xe1 a la compradora en 
+			el mismo n\xfamero y monto de las exhibiciones mediante las cuales esta efectu\xf3 
+			dicho pago, salvo pacto en contrario.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Cuarta. Firma de escritura p\xfablica.- </span>
+			<br/>
+			Las partes acuerdan que una vez liquidado la totalidad del precio de venta 
+			concurrir\xe1n ante el Notario P\xfablico que en su momento las partes designen, 
+			con el fin de otorgar y formalizar la escritura p\xfablica de compraventa; 
+			acto en el cual la vendedora entregar\xe1 a la compradora todos aquellos documentos 
+			relativos al terreno que deban ser entregados a la compradora de conformidad con la 
+			legislaci\xf3n aplicable.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			Las partes acuerdan que, el costo del avalu\xf3 inmobiliario, gastos de escrituraci\xf3n, 
+			honorarios, impuestos, derechos y comisiones o gastos aplicables por apertura de cr\xe9dito, 
+			en su caso, que se causen con motivo del dicho acto correr\xe1n a cuenta de la compradora, 
+			con excepci\xf3n del impuesto sobre la renta que por Ley corresponde pagar a la vendedora, 
+			quien a partir de dicha formalizaci\xf3n. 
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Quinta. Entrega y recepci\xf3n del inmueble.-  </span>
+			<br/>
+			La vendedora se obliga a entregar a la compradora la posesi\xf3n del terreno 
+			materia del presente contrato, siendo ya obligaci\xf3n del Comprador el pago del 
+			impuesto Predial desde este momento; en caso de Recisi\xf3n del presente contrato 
+			"LA PARTE COMPRADORA" deber\xe1 restituir la posesi\xf3n del inmueble a "LA PARTE VENDEDORA" 
+			dentro de un PLAZO no mayor a 5 cinco d\xedas contados a partir de la fecha en que ocurra 
+			la RECISION.
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			Las partes convienen que en caso de incumplimiento de 
+			"LA PARTE COMPRADORA" en cuanto a la restituci\xf3n de la 
+			Posesi\xf3n dentro del Plazo convenido pagaran a "LA PARTE VENDEDORA" 
+			por concepto de pena convencional una cantidad equivalente a 9  
+			nueve veces la UMA (unidad de medida  y actualizaci	\xf3n) 
+			por cada d\xeda de retraso en la entrega de la posesi\xf3n.
+			<br/>
+			</div>
+
+			<br/><br/>
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Sexta. Destino y modificaci\xf3n del inmueble.  </span>
+			<br/>
+			La compradora se obliga a respetar el uso campestre habitacional del inmueble, 
+			por lo que, le est\xe1 prohibido instalar en el mismo cualquier tipo de comercio.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<b>El terreno se encuentre en un fraccionamiento, condominio o conjunto habitacional.-</b> 
+			A fin de preservar el contorno urban\xedstico y arquitect\xf3nico del lugar en donde 
+			se encuentra ubicado el terreno, en su caso la compradora se obliga a obtener 
+			de las autoridades correspondientes, las autorizaciones necesarias a efecto de 
+			realizarle cualquier  modificaci\xf3n. El fraccionamiento, condominio o conjunto habitacional:
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-     Cuenta con un Reglamento de adecuaciones o 
+			construcci\xf3n, por lo que, la compradora se obliga a respetar dicha normatividad, 
+			misma que se adjunta al presente en el "Anexo F".
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Septima. Restricciones oficiales aplicables a la construcci\xf3n en el terreno.- </span>
+			<br/>
+			En su caso, el terreno objeto de contrato est\xe1 sujeto a las siguientes restricciones 
+			oficiales aplicables a la construcci\xf3n:
+			<br/>
+			</div>
+
+
+
+			<div style="text-align: justify;">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-     <b>Restricciones ambientales</b> No hay
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-     <b>Colindancias con zonas ecol\xf3gicas, reservas forestales y reservas federales</b> No hay
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-     <b>Cualquier otra limitaci\xf3n decretada por las autoridades competentes y/o previstas en la legislaci\xf3n aplicable</b> No hay
+			<br/>
+			</div>
+
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Octava. Relaci\xf3n de los derechos y obligaciones de las partes. -  </span>
+			<br/>
+			Los derechos y obligaciones de las partes contractuales son los 
+			siguientes (listado enunciativo m\xe1s no limitativo)
+			<br/>
+			</div>
+
+
+			<table style="border: 1px solid black; border-collapse: collapse;">
+				<tr>
+					<td style="border: 1px solid black; border-collapse: collapse;"><b><br/>&nbsp;&nbsp;&nbsp;Parte Vendedora</b></td>
+				</tr>
+				<tr>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Derechos</b></td>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Obligaciones</b></td>
+					
+				</tr>
+				<tr>
+					<td>
+					<div><br/>&nbsp;-	Recibir por la entrega del inmueble objeto del contrato un precio cierto y en dinero.</div><br/>
+					<div>&nbsp;-	Recibir los pagos en el tiempo, lugar y forma acordados.</div> 
+					</td>
+					<td>
+					<div><br/>&nbsp;-	Brindar informaci\xf3n y publicidad veraz, clara y actualizada del inmueble.<br/></div>
+					<div>&nbsp;-	Poner a disposici\xf3n de la compradora la informaci\xf3n y documentaci\xf3n del inmueble.<br/></div>
+					<div>&nbsp;-	No condicionar la compraventa a la contrataci\xf3n de servicios(s) adicional(es).<br/></div>
+					<div>&nbsp;-	Respetar el derecho de la compradora a cancelar la operación de consumo sin responsabilidad alguna dentro de los 5 d\xedas Naturales.<br/></div>
+					<div>&nbsp;-	Transferir la propiedad del inmueble a la compradora.<br/></div>
+					<div>&nbsp;-	Entregar a la compradora el inmueble en los t\xe9rminos y plazos acordados.<br/></div>
+					<div>&nbsp;-	Responsabilizarse de los da\xf1os y perjuicios ocasionados a la compradora si procede con dolo o mala fe en la contrataci\xf3n.<br/></div>
+					<div>&nbsp;-	Responder ante evicci\xf3n o vicios ocultos.<br/></div>
+					</td>
+				</tr>
+			</table>
+
+			<br/>
+
+
+			<table style="border: 1px solid black; border-collapse: collapse;">
+				<tr>
+					<td style="border: 1px solid black; border-collapse: collapse;"><b><br/>&nbsp;&nbsp;&nbsp;Parte Compradora</b></td>
+				</tr>
+				<tr>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Derechos</b></td>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Obligaciones</b></td>
+					
+				</tr>
+				<tr>
+					<td>
+						<div><br/>&nbsp;-	Recibir informaci\xf3n y publicidad veraz, clara y actualizada del inmueble.</div><br/>
+						<div>&nbsp;-		Recibir la informaci\xf3n y documentaci\xf3n del inmueble.</div> 
+						<div>&nbsp;-		Cancelar la operaci\xf3n sin responsabilidad alguna dentro de los 5 d\xedas naturales posteriores a la firma del contrato.</div> 
+						<div>&nbsp;-		Recibir la propiedad del inmueble en los t\xe9rminos acordados.</div> 
+						<div>&nbsp;-		Exigir los da\xf1os y perjuicios ocasionados en caso de que la vendedora proceda con dolo o mala fe en la contrataci\xf3n.</div> 
+						<div>&nbsp;-		Ejercer acci\xf3n civil ante la evicci\xf3n o vicios ocultos.</div> 
+					</td>
+					<td>
+						<div><br/>&nbsp;-	Pagar por el inmueble objeto del contrato un precio cierto y en dinero.<br/></div>
+						<div>&nbsp;-		Pagar el precio en el tiempo, lugar y forma acordados. <br/></div>
+						
+					</td>
+				</tr>
+			</table>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Novena. Pena convencional. -</span>
+			Las partes acuerdan para el caso de incumplimiento de cualquiera 
+			de las obligaciones contra\xeddas en el presente contrato, una pena 
+			convencional de la cantidad equivalente al 20 %% veinte por ciento, 
+			del precio total de compraventa establecido en la cl\xe1usula segunda, 
+			salvo indicaci\xf3n especifica pactada en el presente contrato.
+			
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima. Rescisi\xf3n.- </span>
+			Para el caso de que una de las partes no cumpliera las obligaciones a 
+			su cargo, sin necesidad de resoluci\xf3n judicial, el perjudicado podr\xe1 
+			escoger entre exigir el cumplimiento o la resoluci\xf3n de la obligaci\xf3n, 
+			as\xed como el pago de la pena convencional dispuesta en la cl\xe1usula decima 
+			primera. Si se rescinde la venta, la vendedora y la compradora deben restituirse 
+			las prestaciones que se hubieren hecho.
+			
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			Si el incumplimiento fuera a cargo de la vendedora, adem\xe1s 
+			de la pena se\xf1alada en la cl\xe1usula decima primera, debe restituir a 
+			la compradora todas las cantidades pagadas por esta (de manera enunciativa, 
+			mas no limitativa, el precio de compra venta, as\xed como los pagos por concepto 
+			de gastos de escrituraci\xf3n, impuestos, avalu\xf3, administraci\xf3n, apertura de 
+			cr\xe9dito, erogaciones de investigaci\xf3n, costos por los accesorios o complementos, 
+			entre otros); si el incumplimiento fuera a cargo de "LA PARTE COMPRADORA", la 
+			vendedora podr\xe1 tener la pena convencional, de aquella cantidad entregada por 
+			la compradora.
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			La vendedora debe restituir a la compradora los saldos excedentes a su 
+			favor por el mismo medio en el que efectu\xf3 el pago, dentro de los 15 
+			d\xe1as h\xe1biles siguientes a la rescisi\xf3n del contrato. En caso de anticipo, 
+			la vendedora lo devolver\xe1 a la compradora en el mismo n\xfamero y monto de 
+			las exhibiciones mediante las cuales efectu\xf3 dicho pago, salvo pacto en contrario.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			En caso de que no se restituyeren las cantidades dentro del plazo 
+			establecido, se debe pagar a la contraparte el inter\xe9s moratorio 
+			del 3%% mensual sobre la cantidad no devuelta por el tiempo que medie el 
+			retraso; inter\xe9s que no debe resultar inequitativo, desproporcional, abusivo, 
+			ni excesivo. 
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			Si "LA PARTE VENDEDORA" hubiere entregado el inmueble vendido, 
+			tiene derecho a exigir a la compradora, por el uso de este, el pago de 
+			un alquiler o renta fijada.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			En los casos de operaciones en que el precio deba cubrirse en exhibiciones peri\xf3dicas, 
+			cuando "LA PARTE COMPRADORA" haya pagado m\xe1s de la tercera parte del precio o del 
+			n\xfamero total de los pagos convenidos y la vendedora exija la rescisi\xf3n cumplimiento 
+			del contrato por mora, la compradora tendr\xe1 el derecho a optar por la rescisi\xf3n o 
+			por el pago del adeudo vencido m\xe1s los intereses moratorios generados de conformidad 
+			con los p\xe1rrafos antepen\xfaltimo y pen\xfaltimo de la clausula segunda.
+			<br/>
+			</div>
+
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			D\xe9cima primera. Proceder en caso del fenecimiento de "LA PARTE COMPRADORA".- </span>
+			En caso de fallecimiento de "LA PARTE COMPRADORA" antes de la firma de la escritura 
+			p\xfablica de compra venta, 
+			se presume que su(s) sucesor(es) leg\xedtimos(s) la sucede(n) en todos los derechos y 
+			obligaciones derivados del presente contrato, salvo que manifieste(n) a la vendedora 
+			su deseo de no continuar con la compraventa, debiendo la vendedora restituirle(s) 
+			las cantidades que le hubiere pagado la compradora con motivo del presente contrato 
+			menos la penalizaci\xf3n acordada;
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima segunda. Notificaciones entre las partes.-  </span>
+			Todas las notificaciones, requerimientos, autorizaciones, avisos o cualquier 
+			otra comunicaci\xf3n que deban darse las partes conforme a este contrato, deben 
+			hacerse por escrito y considerarse como debidamente entregadas si  se encuentran 
+			firmadas por la respetiva parte contractual o su representante o apoderado legal y 
+			entregadas con acuse de recibo al destinatario o confirmaci\xf3n de recepci\xf3n en:
+			<br/>
+			</div>
+
+
+
+			<table style="border: 1px solid black; border-collapse: collapse;">
+				<tr>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Parte vendedora</b></td>
+					<td><br/><b>&nbsp;&nbsp;&nbsp;Parte compradora</b></td>
+					
+				</tr>
+				<tr>
+					<td>
+						<div><br/>&nbsp;-	Domicilio Avenida Hidalgo 1443 PB Colonia Americana, Guadalajara, Jalisco. C.P. 44160 </div><br/>
+						<div>&nbsp;-		Correo electr\xf3nico atencion@pinarestapalpa.com</div> 
+						<div>&nbsp;-		Telefono 3338352159</div> 
+					</td>
+					<td>
+						<div><br/>&nbsp;-	Domicilio %s <br/></div>
+						<div>&nbsp;-		Correo electr\xf3nico %s<br/></div>
+						
+					</td>
+				</tr>
+			</table>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima tercera. Canales de atenci\xf3n.- </span>
+			"LA PARTE VENDEDORA" cuenta con el siguiente canal de 
+			atenci\xf3n para recibir comentarios, sugerencias y quejas de la compradora:
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima cuarta. Datos personales. - </span>
+			Los datos personales que se obtengan por "LA PARTE VENDEDORA" deben 
+			ser tratados conforme a los principios de licitud, consentimiento, 
+			informaci\xf3n, calidad, finalidad, o lealtad, proporcionalidad y responsabilidad.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			Para efecto de lo dispuesto en la Ley Federal de Protecci\xf3n de 
+			Datos Personales en Posesi\xf3n de los particulares, "LA PARTE VENDEDORA" 
+			adjunta al presente contrato su Aviso de Privacidad en el "Anexo H", en 
+			el cual informa al titular de los datos personales, que informaci\xf3n recabara 
+			y con qu\xe9 finalidades.
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			En caso de tratarse de datos personales sensibles, "LA PARTE VENDEDORA" 
+			debe obtener consentimiento expreso y por escrito de titular para su tratamiento. 
+			No podr\xe1n crearse bases de datos que contengan datos personales, sensibles, sin que 
+			se justifique la creaci\xf3n de las mismas para finalidades leg\xedtimas, concretas y 
+			acordes con las actividades o fines expl\xedcitos que persigue el sujeto regulado.
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			En caso de que los datos personales fueren obtenidos de 
+			manera indirecta del titular, se debe informar a los titulares 
+			de los datos personales que as\xed lo soliciten como se dio la 
+			transferencia u obtenci\xf3n de dichos datos y se deban observar 
+			las siguientes reglas:
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			a.</span>
+			Si fueron tratados para una finalidad distinta prevista en una transferencia 
+			consentida, o si los datos fueron obtenidos de una fuente de acceso p\xfablico, 
+			el aviso de privacidad se debe de dar a conocer a la compradora en el primer 
+			contacto que se tenga con \xe9l.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			b.</span>
+			Cuando la vendedora pretenda utilizar los datos para una 
+			finalidad distinta a la consentida, el aviso de privacidad debe ser actualizado y 
+			darse a conocer al titular previo aprovechamiento de los datos personales.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			La persona titular de los datos personales o su representante legal podr\xe1n solicitar 
+			a la vendedora en cualquier momento el acceso, rectificaci\xf3n, cancelaci\xf3n u 
+			oposici\xf3n respecto a sus datos personales y datos personales sensibles.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima quinta. Competencia administrativa de la Procuradur\xeda Federal del Consumidor (Profeco). -</span>
+			Ante cualquier controversia que se suscite sobre la interpretaci\xf3n o 
+			cumplimiento del presente contrato, "LA PARTE COMPRADORA" puede acudir a 
+			la Profeco, la cual tiene funciones de autoridad administrativa encargada 
+			de promover y proteger los derechos e intereses de los consumidores y 
+			procurar la equidad y certeza jur\xeddica en las relaciones de consumo desde su 
+			\xe1mbito competencial.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima sexta. Competencia de las autoridades jurisdiccionales. - </span>
+			Para resolver cualquier controversia que se suscite sobre la interpretaci\xf3n o 
+			cumplimiento del presente contrato, las partes se someten a las autoridades 
+			jurisdiccionales competentes de Guadalajara, Jalisco; renunciando expresamente 
+			a cualquier otra jurisdicci\xf3n que pudiera corresponderles, por raz\xf3n de sus domicilios 
+			presentes o futuros o cualquier otra raz\xf3n.
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Decima septima. Registro del modelo del contrato de adhesi\xf3n. - </span>
+			El presente modelo del contrato de adhesi\xf3n con el Registro P\xfablico de Contratos de Adhesi\xf3n de la Profeco bajo el numero PFC.JAL.B11/00024-2222
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			N\xfamero de registro.</span>
+			Cualquier diferencia entre el texto del contrato de adhesi\xf3n registrado ante la 
+			Procuradur\xeda y el utilizado en perjuicio de los consumidores, se tendr\xe1 por no puesta.
+			<br/>
+			</div>
+
+			<div style="text-align: justify;">
+			Le\xeddo que fue por las partes el contenido del presente contrato y 
+			sabedoras de su alcance legal, lo firman por duplicado la fecha de  %s
+			en la ciudad de Guadalajara Jalisco, por lo que, la vendedora est\xe1 
+			obligada a entregar un tanto del contrato y sus anexos originales y 
+			firmados a la compradora.
+			<br/>
+			</div>
+
+			<br/><br/><br/><br/><br/><br/><br/><br/>
+
+			<table class="center">
+			<tr>
+				<td>"ARCADIA PROMOTORA S. DE R.L. DE C.V." <br/> Representada por  el Ing. Jaime Lares Rangel</td>
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GERENTE DE VENTAS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td>%s</td>
+			</tr>
+			</table>
+
+
+			<br/><br/><br/><br/><br/>
+			<div style="text-align: justify;">
+			El presente contrato y sus anexos pueden signarse: de manera aut\xf3grafa original; o 
+			a trav\xe9s de una firma electr\xf3nica avanzada o fiable que ser\xe1 considerada para todos 
+			los efectos de la misma fuerza y consecuencia que la firma aut\xf3grafa original f\xedsica 
+			de la parte firmante.
+			<br/>
+			</div>
+
+			<br/><br/><br/>
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			Autorizaci\xf3n para la utilizaci\xf3n de informaci\xf3n con fines mercadot\xe9cnicos o publicitarios. -</span>
+			"LA PARTE COMPRADORA" si ( ) no ( ) acepta que la vendedora ceda o 
+			transmita a terceros, con fines mercadot\xe9cnicos publicitarios, la 
+			informaci\xf3n proporcionada con motivo del presente contrato y si ( ) 
+			no ( ) acepta la vendedora le envi\xe9 publicidad sobre viene su servicios.
+			<br/>
+			</div>
+
+
+
+			<div style="text-align: justify;">
+			<br><span style="font-weight: bold;">
+			%s.</span>
+			<br/>
+			</div>
+
+			<br/><br/><br/>
+			<div style="text-align: justify;">
+			Todo consumidor que no desee recibir publicidad por pate de los proveedores, en 
+			t\xe9rminos de la Ley Federal de Protecci\xf3n al Consumidor, puede inscribir 
+			de manera gratuita su n\xfamero telef\xf3nico en el Registro P\xfablico der Consumidor 
+			(tambi\xe9n denominado Registro P\xfablico para Evitar Publicidad) de la Profeco, a 
+			trav\xe9s del portal web https://repep.profeco.gob.mx/ o al 5596280000 
+			(desde la Ciudad de M\xe9xico, Guadalajara y Monterrey) u 8009628000 
+			(desde el resto de la Rep\xfablica Mexicana).
+			<br/>
+			</div>
+
+
+			<div style="text-align: justify;">
+			Queda prohibido a los proveedores que utilicen informaci\xf3n sobre consumidores con fines mercadot\xe9cnicos o publicitarios y a sus clientes, 
+			utilizar la informaci\xf3n relativa a los consumidores con fines diferentes a 
+			los mercadot\xe9cnicos o publicitarios, as\xed como enviar publicidad a los consumidores 
+			que expresamente les hubiere manifestado su voluntad de no recibirla o que est\xe9n 
+			inscritos en el registro P\xfablico de Consumidores (tambi\xe9n denominado Registro 
+			P\xfablico para Evitar Publicidad). Los proveedores que sean objeto de publicidad son 
+			corresponsables del manejo de la informaci\xf3n de consumidores cuando dicha publicidad 
+			la env\xeden a trav\xe9s de terceros.
+			<br/>
+			</div>
+			<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+			<br/><br/><br/><br/> %s
+
+
+
+			<div style="text-align: center;">
+			<br><span style="font-weight: bold; font-size:14px">
+			ACUERDO CON RESPECTO  AL CONTRATO DE COMPRA VENTA DE TERRENO</span>
+			<br/>
+			</div>
+
+			<br/><br/><br/><br/><br/><br/><br/>
+
+			<div style="text-align: justify; font-size:12px">
+			LAS PARTES COMPRADORA Y VENDEDORA ACUERDAN
+			<br/>
+			</div>
+			<br/><br/>
+
+
+			<div style="text-align: justify; font-size:12px">
+			Que una vez liquidado la totalidad del precio de venta concurrir\xe1n ante el Notario P\xfablico 
+			N\xfamero 2 del El Salto Jalisco, Lic. Javier Alejandro Mac\xedas Preciado, 
+			con el fin de otorgar y formalizar la escritura 
+			p\xfablica de compraventa
+			<br/>
+			</div>
+			<br/><br/>
+
+
+			<div style="text-align: justify; font-size:12px">
+			Guadalajara Jal. %s
+			<br/>
+			</div>
+			<br/><br/><br/><br/><br/><br/><br/>
+
+
+			<table class="center">
+			<tr>
+				<th style="font-size:12px">"ARCADIA PROMOTORA S. DE R.L. DE C.V." <br/> Representada por  el Ing. Jaime Lares Rangel</th>
+				<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+				<th style="font-size:12px" >%s</th>
+			</tr>
+			</table>
+
+
+
+
+
+			
+
+
+			
+
+
+			
+
+
+
+			
+
+
+
+
+
+
+			</body>
+			""" % (contrato, razonsocial, representantelegal, nombrecliente, letra, modulo, rfc_cliente_template, superficie, titulo1, 
+				lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, desarrollo, dciudad, destado,
+			       escritura, escritura_texto, nacionalidad, identificacion, numeroidentificacion, edad, estadocivil,
+				   clausulasformadepago, metododepago, domiciliocliente2, emailcliente, fecha_dia, nombrecliente, nombrecliente, saltos_linea_acuerdo, fecha_dia, nombrecliente)
+			Mensajes().Info(self, "jaja paso 1115", "")
 			jump1 = ""
 			jump2 = ""
 			jump3 = ""
@@ -33919,12 +34845,20 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		try:
 			aux = self.GetIdentity()
 			pkamortizacion = int(aux)
-			query = """
-		        select convert(varchar(10), fechadepago, 111), numerodepago, pagofijo
+			if MYPOSTGRES:
+				query = """
+		        select fechadepago, numerodepago, pagofijo
 		        from gixamortizaciondetalle
-		        where fkamortizacion = %s and eliminado <> 1 and pagado <> 1
+		        where fkamortizacion = %s and eliminado = False and pagado = False
 		        order by fechadepago, numerodepago
 		        """ % pkamortizacion
+			else:
+				query = """
+					select convert(varchar(10), fechadepago, 111), numerodepago, pagofijo
+					from gixamortizaciondetalle
+					where fkamortizacion = %s and eliminado <> 1 and pagado <> 1
+					order by fechadepago, numerodepago
+					""" % pkamortizacion
 			cu = r_cngcmex.cursor()
 			cu.execute(self.PreparaQuery(query))
 			rows = fetchall(cu)
@@ -34004,9 +34938,17 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, u"� Se presento un problema al imprimir la tabla !", u"Atenci�n")
 
 	def GetHtmlTabla(self):
-		query = """
-		select sum(abonocapital) + sum(interes) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0
-		""" % int(self.pkamortizacion)
+		Mensajes().Info(self, "aaaaqui 1")
+		query = ""
+		if MYPOSTGRES:
+			query = """
+			select sum(abonocapital) + sum(interes) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = false
+			""" % int(self.pkamortizacion)
+		else:
+			query = """
+			select sum(abonocapital) + sum(interes) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0
+			""" % int(self.pkamortizacion)
+		Mensajes().Info(self, "aaaaqui 2")
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
@@ -34015,20 +34957,32 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		abonointeres = 0
 		if dato is not None:
 			abonointeres = float(dato[0])
-		
-		query = """
-		select rtrim(ltrim(i.iden2)) + '-' + rtrim(ltrim(i.iden1)), a.enganchec, i.superficie, a.saldoafinanciar, i.preciopormetro,
-		case a.plazomeses when 0 then (a.saldoafinanciar + a.enganchec) else ((a.pagomensualfijo * a.plazomeses) + a.enganchec) end,
-		a.cuenta
-		from gixamortizacion a
-		join INMUEBLE i on a.fkinmueble = i.codigo
-		where a.pkamortizacion = %s
-		""" % int(self.pkamortizacion)
+		if MYPOSTGRES:
+			query = """
+			select concat(trim(i.iden2), '-', trim(i.iden1)), a.enganchec, i.superficie, a.saldoafinanciar, i.preciopormetro,
+			case a.plazomeses when 0 then (a.saldoafinanciar + a.enganchec) else ((a.pagomensualfijo * a.plazomeses) + a.enganchec) end,
+			a.cuenta
+			from dbo.gixamortizacion a
+			join dbo.INMUEBLE i on a.fkinmueble = i.codigo
+			where a.pkamortizacion = %s
+			""" % int(self.pkamortizacion)
+		else:
+			query = """
+			select rtrim(ltrim(i.iden2)) + '-' + rtrim(ltrim(i.iden1)), a.enganchec, i.superficie, a.saldoafinanciar, i.preciopormetro,
+			case a.plazomeses when 0 then (a.saldoafinanciar + a.enganchec) else ((a.pagomensualfijo * a.plazomeses) + a.enganchec) end,
+			a.cuenta
+			from gixamortizacion a
+			join INMUEBLE i on a.fkinmueble = i.codigo
+			where a.pkamortizacion = %s
+			""" % int(self.pkamortizacion)
+		Mensajes().Info(self, "aaaaqui 3")
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
+		Mensajes().Info(self, "aaaaqui 4")
 		row = fetchone(cu)
 		cu.close()
+		Mensajes().Info(self, "aaaaqui 5")
 		if row is not None:
 			a = u"�"; e = u"�"; i = u"�"; o = u"�"; u = u"�"
 			meses = ("", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic")
@@ -34036,15 +34990,18 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			superficie = str(amount_and_cents_with_commas(float(row[2])))
 			saldoafinanciar = str(amount_and_cents_with_commas(float(row[3])))
 			preciom2 = str(amount_and_cents_with_commas(float(row[4])))
+			Mensajes().Info(self, "aaaaqui 6")
 			if abonointeres:
 				totalapagar = str(amount_and_cents_with_commas(abonointeres + float(row[1])))
+				Mensajes().Info(self, "aaaaqui 7")
 			else:
 				totalapagar = str(amount_and_cents_with_commas(float(row[5])))
-				
+				Mensajes().Info(self, "aaaaqui 8")
 			cuenta = int(row[6])
+			Mensajes().Info(self, "aaaaqui 9")
 			#if cuenta:
 				#return "", cuenta
-			
+			Mensajes().Info(self, "jaja 10")
 			header = """
 			<table
 			 style="width: 993px; height: 200px; text-align: left; margin-left: auto; margin-right: auto;"
@@ -34059,7 +35016,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</table>
 			<div style="text-align: right;"><big><big>&nbsp;<span
 			 style="font-weight: bold;">Id de la Tabla:&nbsp;""" + str(self.pkamortizacion) + """</big></big>
-			 <br>%date%&nbsp;%time%&nbsp;&nbsp;(%page%)</span><br>
+			 <br>good_fecha%&nbsp;%time%&nbsp;&nbsp;(%page%)</span><br>
 			</div>
 			<hr style="width: 100%; height: 2px;">
 			<table style="text-align: left; width: 985px; height: 82px; margin-left: auto; margin-right: auto;"
@@ -34093,18 +35050,29 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</table>
 			<hr style="width: 100%; height: 1px;" noshade="noshade">
 			"""
-			header = header.replace('%date%',self.GetDate())
+			Mensajes().Info(self, "hasta aca 11")
+			header = header.replace('good_fecha',self.GetDate())
+			Mensajes().Info(self, "jajajaja 11")
 			header = header.replace('%time%',self.GetTime())
-			
-			query = """
-			select numerodepago, convert(varchar(10), fechadepago, 103), saldoinicial, pagofijo, abonocapital, interes, saldofinal
-			from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0 order by fechadepago, numerodepago
-			""" % int(self.pkamortizacion)
+			Mensajes().Info(self, "aaaaqui 12")
+			query = ""
+			if MYPOSTGRES:
+				query = """
+				select numerodepago, to_char(fechadepago, 'DD/MM/YYYY'), saldoinicial, pagofijo, abonocapital, interes, saldofinal
+				from gixamortizaciondetalle where fkamortizacion = %s and eliminado = false order by fechadepago, numerodepago
+				""" % int(self.pkamortizacion)
+			else:
+				query = """
+				select numerodepago, convert(varchar(10), fechadepago, 103), saldoinicial, pagofijo, abonocapital, interes, saldofinal
+				from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0 order by fechadepago, numerodepago
+				""" % int(self.pkamortizacion)
 			sql = (query.replace('\n',' ')).replace('\t',' ')
 			cu = r_cngcmex.cursor()
 			cu.execute(str(sql))
+			Mensajes().Info(self, "aaaaqui 13")
 			rows = fetchall(cu)
 			cu.close()
+			Mensajes().Info(self, "aaaaqui 14")
 			detail, footer = "", ""
 			lines, page, pages = 0, 1, 1
 			if rows:
@@ -34260,7 +35228,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 	def OnElegirVendedor(self, evt):
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select codigo, nombre from VENDEDOR where activo = 1 order by nombre"))
+		sql=""
+		if MYPOSTGRES:
+			sql="select codigo, nombre from VENDEDOR where activo = true order by nombre"
+		else:
+			sql="select codigo, nombre from VENDEDOR where activo = 1 order by nombre"
+		cu.execute(sql)
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
@@ -34287,6 +35260,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	def OnCambiarFormaDePago(self, evt):
 		pagos = {0:u"cr�dito", 1:u"contado"}
 		formadepago = self.GetControl(ID_CHOICEAMORFUNC1FORMADEPAGO).GetSelection()
+		Mensajes().Info(self, "forma de pago {}".format(formadepago), "")
 		if self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection() > -1:
 			codigolote = self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue()
 			if codigolote:
@@ -34366,7 +35340,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				cambio = True
 				
 		cu = r_cngcmex.cursor()
-		campos = "rtrim(ltrim(iden2)) + '-' + rtrim(ltrim(iden1)), tipo, superficie, preciopormetro"
+		campos = ""
+		if MYPOSTGRES:
+			campos = "concat(trim(iden2), '-',trim(iden1)), tipo, superficie, preciopormetro"
+		else:
+			campos = "rtrim(ltrim(iden2)) + '-' + rtrim(ltrim(iden1)), tipo, superficie, preciopormetro"
 		cu.execute(str("select %s from INMUEBLE where codigo = %s" % (campos, codigolote)))
 		row = fetchone(cu)
 		cu.close()
@@ -35544,7 +36522,9 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 		#panel = wx.Panel(self, -1)
 		EstadoCuentaPinaresFunc2(self)
 		self.DicDatesAndTxt = {ID_BITMAPBUTTONESTADOCUENTAPINARESFUNC2ELEGIRFECHAHASTA : ID_TEXTCTRLESTADOCUENTAPINARESFUNC2FECHAHASTA}
+		Mensajes().Info(self, "obtener encabezado", "")
 		self.ObtenerEncabezado()
+		Mensajes().Info(self, "paso obtener encabezado", "")
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC2FECHAHASTA).SetValue(self.GetDate())
 		for v in self.DicDatesAndTxt.keys():
 			self.Bind(wx.EVT_BUTTON, self.OnFechaButton, id = v )
@@ -35559,7 +36539,9 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 		wx.EVT_BUTTON(self, ID_BITMAPBUTTONESTADOCUENTAPINARESFUNC2IMPRIMIR, self.OnImprimir)
 		wx.EVT_BUTTON(self, ID_BUTTONESTADOCUENTAPINARESFUNC2SALIR, self.OnClose)
 		wx.EVT_CLOSE(self, self.OnClose)
+		Mensajes().Info(self, "antes de fillcrl", "")
 		self.FillListCtrl()
+		Mensajes().Info(self, "despues de fillcrl", "")
 		
 	def OnClose(self, evt):
 	        self.EndModal(1)
@@ -35567,7 +36549,12 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 		
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query = ""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -35648,26 +36635,46 @@ class GixEstadoCuentaPinaresFunc2(wx.Dialog, GixBase):
 			d, m, a = self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC2FECHAHASTA).GetValue().split('/')
 			filtrofecha1 = "and d.fechadevencimiento <= '%04d/%02d/%02d'" % (int(a), int(m), int(d))
 			filtrofecha2 = "and r.fechaemision <= '%04d/%02d/%02d'" % (int(a), int(m), int(d))
-			
-		query = """
-		select m.codigo as movimiento, d.fechadevencimiento as fecha,
-		d.codigo as documento, 0 as recibo, 0 as consdesarrollo, m.cantidad as cargo, 0 as abono,
-		isnull(m.relaciondepago, '') as relacionpago, '' as referencia, convert(varchar(10), d.fechadevencimiento, 103),
-		d.saldo as saldo, 0 as interesmoratorio
-		from documento d
-		join movimiento m on m.fk_documento = d.codigo
-		where d.fk_cuenta = %s and m.cargoabono = 'C' %s
-		union
-		select m.codigo as movimiento, r.fechaemision as fecha,
-		d.codigo as documento, r.codigo as recibo, r.consdesarrollo as consdesarrollo, 0 as cargo, m.cantidad as abono,
-		isnull(m.relaciondepago,'') as relacionpago, r.referencia as referencia, convert(varchar(10), r.fechaemision, 103),
-		0 as saldo, r.interesmoratorio as interesmoratorio
-		from recibo r
-		join movimiento m on m.numrecibo = r.codigo
-		join documento d on d.codigo = m.fk_documento
-		where d.fk_cuenta = %s and m.cargoabono = 'A' and r.status = 'A' %s
-		order by 2
-		""" % (self.cuenta, filtrofecha1, self.cuenta, filtrofecha2)
+		if MYPOSTGRES:
+			query = """
+			select m.codigo as movimiento, d.fechadevencimiento as fecha,
+			d.codigo as documento, 0 as recibo, 0 as consdesarrollo, m.cantidad as cargo, 0 as abono,
+			COALESCE(m.relaciondepago, '') as relacionpago, '' as referencia, to_char(d.fechadevencimiento, 'DD/MM/YYYY'),
+			d.saldo as saldo, 0 as interesmoratorio
+			from documento d
+			join movimiento m on m.fk_documento = d.codigo
+			where d.fk_cuenta = %s and m.cargoabono = 'C' %s
+			union
+			select m.codigo as movimiento, r.fechaemision as fecha,
+			d.codigo as documento, r.codigo as recibo, r.consdesarrollo as consdesarrollo, 0 as cargo, m.cantidad as abono,
+			COALESCE(m.relaciondepago,'') as relacionpago, r.referencia as referencia, to_char(r.fechaemision, 'DD/MM/YYYY'),
+			0 as saldo, r.interesmoratorio as interesmoratorio
+			from recibo r
+			join movimiento m on m.numrecibo = r.codigo
+			join documento d on d.codigo = m.fk_documento
+			where d.fk_cuenta = %s and m.cargoabono = 'A' and r.status = 'A' %s
+			order by 2
+			""" % (self.cuenta, filtrofecha1, self.cuenta, filtrofecha2)
+		else:	
+			query = """
+			select m.codigo as movimiento, d.fechadevencimiento as fecha,
+			d.codigo as documento, 0 as recibo, 0 as consdesarrollo, m.cantidad as cargo, 0 as abono,
+			isnull(m.relaciondepago, '') as relacionpago, '' as referencia, convert(varchar(10), d.fechadevencimiento, 103),
+			d.saldo as saldo, 0 as interesmoratorio
+			from documento d
+			join movimiento m on m.fk_documento = d.codigo
+			where d.fk_cuenta = %s and m.cargoabono = 'C' %s
+			union
+			select m.codigo as movimiento, r.fechaemision as fecha,
+			d.codigo as documento, r.codigo as recibo, r.consdesarrollo as consdesarrollo, 0 as cargo, m.cantidad as abono,
+			isnull(m.relaciondepago,'') as relacionpago, r.referencia as referencia, convert(varchar(10), r.fechaemision, 103),
+			0 as saldo, r.interesmoratorio as interesmoratorio
+			from recibo r
+			join movimiento m on m.numrecibo = r.codigo
+			join documento d on d.codigo = m.fk_documento
+			where d.fk_cuenta = %s and m.cargoabono = 'A' and r.status = 'A' %s
+			order by 2
+			""" % (self.cuenta, filtrofecha1, self.cuenta, filtrofecha2)
 		
 		sql = (query.replace('\t', ' ')).replace('\n', ' ')
 		cu = r_cngcmex.cursor()
@@ -36134,6 +37141,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 	def __init__(self, parent, id = -1, title = "", pos = wx.DefaultPosition, size = wx.DefaultSize,
 	             style = wx.DEFAULT_FRAME_STYLE, usuario = None):
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
+		Mensajes().Info(self, "iniciando Estados de Cuenta")
 		self.lstctrlorder = {0:("c.codigo","desc",""), 1:("c.fecha","desc","> "), 2:("i.iden1, i.iden2","desc",""),
 		                     3:("i.iden2, i.iden1","desc",""), 4:("c.saldo","desc",""), 5:("e.descripcion","desc",""),
 		                     6:("t.nombre","desc","")}
@@ -36154,8 +37162,9 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		self.choiceinxinmueble = 1
 		self.GetControl(ID_CHOICEESTADOCUENTAPINARESFUNC1INMUEBLEFILTRO).SetSelection(self.choiceinxinmueble)
 		self.Bind(wx.EVT_CHOICE, self.OnChoiceCtrlInmueble, id = ID_CHOICEESTADOCUENTAPINARESFUNC1INMUEBLEFILTRO)
-		
+		Mensajes().Info(self, "iniciando1")
 		self.ObtenerEtapas()
+		Mensajes().Info(self, "iniciando2")
 		self.Bind(wx.EVT_CHOICE, self.OnChoiceCtrlEtapa, id = ID_CHOICEESTADOCUENTAPINARESFUNC1ETAPAFILTRO)
 		wx.EVT_BUTTON(self, ID_BITMAPBUTTONESTADOCUENTAPINARESFUNC1LIMPIARETAPAFILTRO, self.OnLimpiarEtapaFiltro)
 		
@@ -36237,7 +37246,17 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		
 	def OnInfoCliente( self, evt):
 		Mensajes().Info(self,u"En construcci�n", u"Atenci�n")
-		
+	
+	def GetString(self, valor):
+		dato = ""
+		try:
+			dato = valor.decode("iso8859-1")
+		except:
+			try:
+				dato = str(valor)
+			except:
+				dato = valor
+		return dato.strip()
 		
 	def ObtenerEtapas(self):
 		control = self.GetControl(ID_CHOICEESTADOCUENTAPINARESFUNC1ETAPAFILTRO)
@@ -36252,8 +37271,10 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		cu.close()
 		if rows:
 			for row in rows:
-				control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
-				
+				if MYPOSTGRES:
+					control.Append(self.GetString(row[1]), int(row[0]))
+				else:
+					control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
 		control.SetSelection(-1)
 		
 	def OnChoiceCtrlEtapa(self, evt):
@@ -36391,18 +37412,32 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 			
 		if self.etapa:
 			listctrlfiltro += " and e.codigo = %s" % int(self.etapa)
-			
-		query = """
-		select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
-		c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
-		from CUENTA c
-		join CLIENTE t on c.fk_cliente = t.codigo
-		join INMUEBLE i on c.fk_inmueble = i.codigo
-		join ETAPA e on i.fk_etapa = e.codigo
-		join DESARROLLO d on e.fk_desarrollo = d.codigo
-		where d.codigo = %s and d.fk_empresa = %s
-		%s order by %s
-		""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		query = ""
+		if MYPOSTGRES:
+			if "c.congelada = 0" in listctrlfiltro:
+				listctrlfiltro = listctrlfiltro.replace("c.congelada = 0", "c.congelada = false")
+			query = """
+			select c.codigo, to_char(c.fecha, 'DD/MM/YYYY'), i.iden1, i.iden2,
+			c.saldo, trim(e.descripcion), trim(t.nombre)
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		else:
+			query = """select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
+			c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
 		sql = (query.replace('\t', ' ')).replace('\n', ' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
@@ -36436,7 +37471,6 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		lctrl = self.GetControl(ID_LISTCTRLESTADOCUENTAPINARESFUNC1)
 		if lctrl.GetItemCount() > 0:
 			lctrl.ClearAll()
-			
 		if rows:
 			lctrl.InsertColumn(0, u"%sCuenta" % self.lstctrlorder[0][2], wx.LIST_FORMAT_CENTER)
 			lctrl.InsertColumn(1, u"%sCreaci�n" % self.lstctrlorder[1][2], wx.LIST_FORMAT_CENTER)
@@ -36445,31 +37479,40 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 			lctrl.InsertColumn(4, u"%sSaldo" % self.lstctrlorder[4][2], wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(5, u"%sEtapa" % self.lstctrlorder[5][2])
 			lctrl.InsertColumn(6, u"%sCliente" % self.lstctrlorder[6][2])
-			for row in rows:
-				if float(row[4]) > 0:
-					if fila %2 != 0: bgcolor = [204,204,255]
-					else:            bgcolor = [230,230,255]
-				elif float(row[4]) == 0:
-					if fila %2 != 0: bgcolor = [248,181,68]
-					else:            bgcolor = [251,212,146]
-				else:
-					if fila %2 != 0: bgcolor = [255,153,153]
-					else:            bgcolor = [255,215,215]
-					
-				index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
-				lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
-				etapa = str(row[5].strip())
-				cliente = str(row[6].strip())
-				lctrl.SetStringItem(index, 0, str(row[0]))
-				lctrl.SetStringItem(index, 1, str(row[1]))
-				lctrl.SetStringItem(index, 2, self.GetString(row[2]))
-				lctrl.SetStringItem(index, 3, str(row[3]))
-				lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
-				lctrl.SetStringItem(index, 5, self.GetString(etapa))
-				lctrl.SetStringItem(index, 6, self.GetString(cliente))
-				lctrl.SetItemData(index, row[0])
-				fila += 1
-				total += float(row[4])
+			Mensajes().Info(self, "entrooo 1")
+			try:
+				for i,row in enumerate(rows):
+					if float(row[4]) > 0:
+						if fila %2 != 0: bgcolor = [204,204,255]
+						else:            bgcolor = [230,230,255]
+					elif float(row[4]) == 0:
+						if fila %2 != 0: bgcolor = [248,181,68]
+						else:            bgcolor = [251,212,146]
+					else:
+						if fila %2 != 0: bgcolor = [255,153,153]
+						else:            bgcolor = [255,215,215]
+					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
+					lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
+					lctrl.SetStringItem(index, 0, str(row[0]))
+					lctrl.SetStringItem(index, 1, str(row[1]))
+					lctrl.SetStringItem(index, 2, self.GetString(row[2]))
+					lctrl.SetStringItem(index, 3, str(row[3]))
+					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
+					if MYPOSTGRES:
+						lctrl.SetStringItem(index, 5, row[5])
+						lctrl.SetStringItem(index, 6, row[6])
+					else:
+						etapa = str(row[5].strip())
+						lctrl.SetStringItem(index, 5, self.GetString(etapa))
+						cliente = str(row[6].strip())
+						lctrl.SetStringItem(index, 6, self.GetString(cliente))
+					lctrl.SetItemData(index, row[0])
+					fila += 1
+					total += float(row[4])
+					#Mensajes().Info(self, "entrooo 15 {}".format(i))
+			except:
+				Mensajes().Info(self, "trono en  {}, {}".format(i, row))
+
 				
 			lctrl.SetColumnWidth(0, 60)
 			lctrl.SetColumnWidth(1, 90)
@@ -36483,7 +37526,6 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 			lctrl.InsertColumn(0, "       No se Encontraron Cuentas", wx.LIST_FORMAT_CENTER)
 			lctrl.SetColumnWidth(0, 200)
 			self.Habilita()
-			
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALREGISTROS).SetBackgroundColour(wx.Colour(153,255,153))
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALREGISTROS).SetValue(str(int(fila)))
 		self.GetControl(ID_TEXTCTRLESTADOCUENTAPINARESFUNC1TOTALSALDO).SetBackgroundColour(wx.Colour(153,255,153))
@@ -36709,7 +37751,10 @@ class GixReporteOfertasAsignacionesFunc1(wx.Frame, GixBase):
 		inmueble = ""
 		if codigo:
 			cu = r_cn.cursor()
-			cu.execute(str("select rtrim(ltrim(iden2)) + rtrim(ltrim(iden1)) from inmueble where codigo = %s" % codigo))
+			if MYPOSTGRES:
+				cu.execute(str("select trim(iden2) + trim(iden1) from inmueble where codigo = %s" % codigo))
+			else:
+				cu.execute(str("select rtrim(ltrim(iden2)) + rtrim(ltrim(iden1)) from inmueble where codigo = %s" % codigo))
 			row = fetchone(cu)
 			cu.close()
 			if row is not None:
@@ -36937,7 +37982,12 @@ class GixAsignacionPreciosInmueblesFunc2(wx.Dialog, GixBase):
 		
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -37141,7 +38191,12 @@ class GixAsignacionPreciosInmueblesFunc1(wx.Frame, GixBase):
 		
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -37390,7 +38445,12 @@ class GixPreciosEtapaFunc2(wx.Dialog, GixBase):
 		
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -37974,7 +39034,12 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 	
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -38003,6 +39068,7 @@ class GixClientesVentasFunc2(wx.Dialog, GixBase):
 		return (sql.replace('\t', ' ')).replace('\n', ' ')
 	
 	def PreparaEdicion(self):
+		print("en edicion")
 		query = """
 		select nombre, rfc, nacionalidad, lugardenacimiento, convert(varchar(10), fechadenacimiento, 103),
 		estadocivil, situacion, regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa,
@@ -38954,7 +40020,7 @@ class GixClientesVentasFunc1(wx.Frame, GixBase):
 			
 		self.GetControl(ID_BUTTONCLIENTEFUNC1EDITAR).Enable(False)
 		wx.EndBusyCursor()
-		
+
 class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 	def __init__(self, parent, id = -1, title = u"Arcadia (Pinares Tapalpa) - Editando Cliente", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, codigocliente = 0, filllistctrl = None):
@@ -39011,7 +40077,12 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 	
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -39045,9 +40116,18 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		estadocivil, situacion, regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa,
 		telefonotrabajo, conyugenombre, conyugenacionalidad, conyugelugardenacimiento,
 		convert(varchar(10), conyugefechadenacimiento, 103),
-		conyugerfc, conyugeocupacion, curp, conyugecurp, email
+		conyugerfc, conyugeocupacion, curp, conyugecurp, email, identificacion, numeroidentificacion, edad 
 		from cliente where codigo = %s
 		""" % self.codigocliente
+		if MYPOSTGRES:
+			query = """
+			select nombre, rfc, nacionalidad, lugardenacimiento, fechadenacimiento,
+			estadocivil, situacion, regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa,
+			telefonotrabajo, conyugenombre, conyugenacionalidad, conyugelugardenacimiento,
+			conyugefechadenacimiento, 103
+			conyugerfc, conyugeocupacion, curp, conyugecurp, email, identificacion, numeroidentificacion, edad
+			from cliente where codigo = %s
+			""" % self.codigocliente
 		cu = r_cngcmex.cursor()
 		cu.execute(self.PreparaQuery(query))
 		row = fetchone(cu)
@@ -39062,6 +40142,10 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2TELEFONOOFICINA).SetValue(self.GetString(row[15]))
 			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2RFC).SetValue(self.GetString(row[1]))
 			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2CURP).SetValue(self.GetString(row[22]))
+
+			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2IDENT).SetValue(self.GetString(row[25]))
+			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2NUMEROIDEN).SetValue(self.GetString(row[26]))
+			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2EDADCLI2).SetValue(str(row[27]))
 			try:
 				self.GetControl(ID_CHOICECLIENTEPINARESFUNC2ESTADOCIVIL).SetSelection(int(row[5]))
 			except:
@@ -39184,6 +40268,11 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		curpconyuge = self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC4CURP).GetValue()
 		
 		ocupacionconyuge = str(self.GetControl(ID_CHOICECLIENTEPINARESFUNC4OCUPACION).GetSelection())
+
+		identificacion = self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2IDENT).GetValue()
+		numeroidentificacion = self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2NUMEROIDEN).GetValue()
+		edad = int(self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2EDADCLI2).GetValue())
+		
 		
 		if self.codigocliente:
 			sql = """
@@ -39193,16 +40282,21 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 			domicilio = '%s', colonia = '%s', cp = '%s', ciudad = '%s', estado = '%s', telefonocasa = '%s',
 			telefonotrabajo = '%s', conyugenombre = '%s', conyugenacionalidad = '%s', conyugelugardenacimiento = '%s',
 			%s, conyugerfc = '%s', conyugeocupacion = '%s', curp = '%s',
-			conyugecurp = '%s', email = '%s'
+			conyugecurp = '%s', email = '%s', identificacion='%s', numeroidentificacion='%s', edad=%i
 		        where codigo = %s
 		        """ % (nombre, rfc, nacionalidad, lugarnacimiento, fechanacimiento, estadocivil, situacion, regimen,
 			       ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa, telefonooficina, nombreconyuge,
 			       nacionalidadconyuge, lugarnacimientoconyuge, fechanacimientoconyugeu, rfcconyuge, ocupacionconyuge,
-			       curp, curpconyuge, email, self.codigocliente)
+			       curp, curpconyuge, email, identificacion, numeroidentificacion, edad, self.codigocliente)
 			todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql), conexion = r_cngcmex)
 		else:
 			cu = r_cngcmex.cursor()
-			cu.execute("select top 1 codigo from cliente order by codigo desc")
+			query = ""
+			if MYPOSTGRES:
+				query = "select codigo from cliente order by codigo desc limit 1"
+			else:
+				query = "select top 1 codigo from cliente order by codigo desc"
+			cu.execute(query)
 			row = fetchone(cu)
 			cu.close()
 			self.codigocliente = int(row[0]) + 1
@@ -39211,14 +40305,14 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		        (codigo, nombre, rfc, nacionalidad, lugardenacimiento, fechadenacimiento, estadocivil, situacion, regimen,
 			ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa, telefonotrabajo, conyugenombre,
 			conyugenacionalidad, conyugelugardenacimiento, conyugefechadenacimiento, conyugerfc, conyugeocupacion, curp,
-			conyugecurp, email)
+			conyugecurp, email, identificacion, numeroidentificacion, edad)
 			values
 			(%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
-			'%s', %s, '%s', '%s', '%s', '%s', '%s')
+			'%s', %s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %i)
 		        """ % (self.codigocliente, nombre, rfc, nacionalidad, lugarnacimiento, fechanacimiento, estadocivil, situacion,
 			       regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa, telefonooficina, nombreconyuge,
 			       nacionalidadconyuge, lugarnacimientoconyuge, fechanacimientoconyugei, rfcconyuge, ocupacionconyuge,
-			       curp, curpconyuge, email)
+			       curp, curpconyuge, email, identificacion, numeroidentificacion, edad)
 			todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql), conexion = r_cngcmex)
 			
 		if not todook:
@@ -39233,6 +40327,12 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 				self.Destroy()
 
 class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
+	if MYPOSTGRES:
+		print("este POSTGRES")
+	else:
+		print("este agarro sql")
+	
+	logging.info("probando a ver si funciona")
 	def __init__(self, parent, id = -1, title = u"Clientes", pos = wx.DefaultPosition, size = wx.DefaultSize,
 	             style = wx.DEFAULT_FRAME_STYLE):
 		wx.Frame.__init__(self, parent, id, title, pos, size, style)
@@ -39289,10 +40389,12 @@ class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
 		return dato.strip()
 
 	def OnDoSearchIdCliente(self, evt):
+		print("entro aqui 10")
 		self.idclientefiltro = self.GetControl(ID_SEARCHCTRLCLIENTEPINARESFUNC1BUSCARIDCLIENTE).GetValue()
 		self.FillListCtrl()
 
 	def OnCleanIdCliente(self, evt):
+		print("entro aqui 11")
 		self.GetControl(ID_SEARCHCTRLCLIENTEPINARESFUNC1BUSCARIDCLIENTE).SetValue("")
 		self.idclientefiltro = ""
 		self.FillListCtrl()
@@ -39308,9 +40410,11 @@ class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
 		self.FillListCtrl()
 		
 	def OnChoiceClientes(self, evt):
+		print("entro aqui 7")
 		self.FillListCtrl()
 
 	def OnSelected(self, evt):
+		print("entro aqui 6")
 		currentitem = evt.m_itemIndex
 		datointerno = self.GetControl(ID_LISTCTRLCLIENTEPINARESFUNC1).GetItem(currentitem, 0).GetText()
 		self.codigocliente = int(datointerno)
@@ -39319,24 +40423,30 @@ class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
 		evt.Skip()
 		
 	def OnDeselected(self, evt):
+		print("entro aqui 5")
 		self.codigocliente, self.nombrecliente = 0, ""
 		self.GetControl(ID_BUTTONCLIENTEPINARESFUNC1EDITAR).Enable(False)
 		evt.Skip()
 	
 	def OnActivated(self, evt):
+		print("entro aqui 4")
 		dlg = GixClientesVentasPinaresFunc2(self, codigocliente = self.codigocliente, filllistctrl = self.FillListCtrl)
 		dlg.CenterOnParent()
 		dlg.ShowModal()
 		
 	def OnAgregar(self, evt):
+		print("entro aqui 3")
 		dlg = GixClientesVentasPinaresFunc2(self, title = u"Arcadia (Pinares Tapalpa) - Agregando Cliente", filllistctrl = self.FillListCtrl)
 		dlg.CenterOnParent()
 		dlg.ShowModal()
 		
 	def OnRefrescar(self, evt):
+		print("entro aqui 2")
 		self.FillListCtrl()
 		
 	def FillListCtrl(self):
+		print("entro aqui jajajaja")
+		logging.info("probando a ver si funciona")
 		wx.BeginBusyCursor()
 		lctrl = self.GetControl(ID_LISTCTRLCLIENTEPINARESFUNC1)
 		if lctrl.GetItemCount() > 0 or lctrl.GetColumnCount() > 0:
@@ -39431,7 +40541,12 @@ class GixVendedoresVentasPinaresFunc2(wx.Dialog, GixBase):
 	
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -40554,7 +41669,12 @@ class GixOfertasDeCompraFunc1(wx.Dialog, GixBase):
 		
 	def GetDate(self):
 		cu = r_cn.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 103)")
+		query=""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -48251,9 +49371,13 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 	
 	
 	def ObtenerFechaDelDia(self):
-		sql = "select convert(varchar(10), getdate(), 103)"
+		query=""
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		else:
+			query = "select convert(varchar(10), getdate(), 103)"
 		cu = r_cn.cursor()
-		cu.execute(str(sql))
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1FECHAPAGO).SetValue("%s" % str(row[0]))
@@ -48396,7 +49520,10 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		lctrl = self.GetControl(ID_LISTCTRLPAGOCLIENTESFUNC1DOCUMENTOSCONSALDO)
 		lctrl.ClearAll(); lctrl.InsertColumn(0, "", wx.LIST_FORMAT_CENTER); lctrl.SetColumnWidth(0, 0)
 		cu = r_cn.cursor()
-		cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
+		if MYPOSTGRES:
+			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
+		else:
+			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
 		row = fetchone(cu)
 		cu.close()
 		cpp = float(row[0])
@@ -48565,7 +49692,10 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		row = fetchone(cu)
 		if row:
 			fkcuentapagare = int(row[0])
-		cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
+		if MYPOSTGRES:
+			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
+		else:
+			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
 		row = fetchone(cu)
 		cpp = float(row[0])
 		sql = "select datediff(day, d.fechadevencimiento, getdate()) from documento_pagare d where d.codigo = %s" % ( codigopagare, )
@@ -48727,7 +49857,10 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 		self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1INTERESMORATORIO).SetValue("0.00")
 		self.GetControl(ID_TEXTCTRLPAGOCLIENTESFUNC1TOTALPAGAR).SetValue("0.00")
 		cu = r_cn.cursor()
-		cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
+		if MYPOSTGRES:
+			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
+		else:
+			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
 		row = fetchone(cu)
 		cu.close()
 		cpp = float(row[0])
@@ -49515,7 +50648,6 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 		self.Bind(wx.EVT_SEARCHCTRL_SEARCH_BTN, self.OnDoSearchCliente, id = ID_SEARCHCTRLRECIBOPAGOPINARESFUNC1CLIENTEFILTRO)
 		self.Bind(wx.EVT_SEARCHCTRL_CANCEL_BTN, self.OnCleanCliente, id = ID_SEARCHCTRLRECIBOPAGOPINARESFUNC1CLIENTEFILTRO)
 		self.Bind(wx.EVT_TEXT_ENTER, self.OnDoSearchCliente, id = ID_SEARCHCTRLRECIBOPAGOPINARESFUNC1CLIENTEFILTRO)
-		
 		self.Bind(wx.EVT_LIST_COL_CLICK, self.OnSortListCtrl, id = ID_LISTCTRLRECIBOPAGOPINARESFUNC1)
 		self.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelected, id = ID_LISTCTRLRECIBOPAGOPINARESFUNC1)
 		self.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.OnDeselected, id = ID_LISTCTRLRECIBOPAGOPINARESFUNC1)
@@ -49544,9 +50676,13 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 		rows = fetchall(cu)
 		cu.close()
 		if rows:
+			Mensajes().Info(self, "hubo rows en obtener etapas")
 			for row in rows:
-				control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
-				
+				if MYPOSTGRES:
+					control.Append(row[1], int(row[0]))
+				else:
+					control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
+		Mensajes().Info(self, "hubo rows termino")
 		control.Show(True)
 		control.Enable(True)
 		control.SetSelection(-1)
@@ -49675,17 +50811,29 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 			listctrlfiltro += " and t.nombre like '%s%s%s'" % ("%%", str(self.cliente), "%%")
 		if self.etapa:
 			listctrlfiltro += " and e.codigo = %s" % int(self.etapa)
-		query = """
-		select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
-		c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
-		from CUENTA c
-		join CLIENTE t on c.fk_cliente = t.codigo
-		join INMUEBLE i on c.fk_inmueble = i.codigo
-		join ETAPA e on i.fk_etapa = e.codigo
-		join DESARROLLO d on e.fk_desarrollo = d.codigo
-		where d.codigo = %s and d.fk_empresa = %s
-		%s order by %s
-		""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		query = ""
+		if MYPOSTGRES:
+			query = """select c.codigo, to_char(c.fecha, 'DD/MM/YYYY'), i.iden1, i.iden2,
+			c.saldo, trim(e.descripcion), trim(t.nombre)
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		else:
+			query = """select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
+			c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu = r_cngcmex.cursor()
@@ -49713,21 +50861,37 @@ class GixRecibosPagoPinaresFunc1(wx.Frame, GixBase):
 				else:
 					if fila %2 != 0: bgcolor = [255,153,153]
 					else:            bgcolor = [255,215,215]
-				index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
+				if MYPOSTGRES:
+					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
+				else:
+					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
 				lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
-				etapa = str(row[5].strip())
-				cliente = str(row[6].strip())
-				lctrl.SetStringItem(index, 0, str(row[0]))
-				lctrl.SetStringItem(index, 1, str(row[1]))
-				lctrl.SetStringItem(index, 2, self.GetString(row[2]))
-				lctrl.SetStringItem(index, 3, str(row[3]))
-				lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
-				lctrl.SetStringItem(index, 5, self.GetString(etapa))
-				lctrl.SetStringItem(index, 6, self.GetString(cliente))
-				lctrl.SetItemData(index, row[0])
-				fila += 1
-				total += float(row[4])
-				
+				if MYPOSTGRES:
+					#etapa = str(row[5].strip())
+					#cliente = str(row[6].strip())
+					lctrl.SetStringItem(index, 0, str(row[0]))
+					lctrl.SetStringItem(index, 1, str(row[1]))
+					lctrl.SetStringItem(index, 2, str(row[2]))
+					lctrl.SetStringItem(index, 3, str(row[3]))
+					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
+					lctrl.SetStringItem(index, 5, row[5])
+					lctrl.SetStringItem(index, 6, row[6])
+					lctrl.SetItemData(index, row[0])
+					fila += 1
+					total += float(row[4])
+				else:
+					etapa = str(row[5].strip())
+					cliente = str(row[6].strip())
+					lctrl.SetStringItem(index, 0, str(row[0]))
+					lctrl.SetStringItem(index, 1, str(row[1]))
+					lctrl.SetStringItem(index, 2, self.GetString(row[2]))
+					lctrl.SetStringItem(index, 3, str(row[3]))
+					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
+					lctrl.SetStringItem(index, 5, self.GetString(etapa))
+					lctrl.SetStringItem(index, 6, self.GetString(cliente))
+					lctrl.SetItemData(index, row[0])
+					fila += 1
+					total += float(row[4])
 			lctrl.SetColumnWidth(0, 60)
 			lctrl.SetColumnWidth(1, 90)
 			lctrl.SetColumnWidth(2, 70)
@@ -49836,10 +51000,17 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		lctrl.Enable(False)
 		lctrl.Show(False)
 		lctrl.ClearAll()
-		query = """
-		select codigo, convert(varchar(10), fechadeelaboracion, 103), convert(varchar(10), fechadevencimiento, 103),
-		cargo, abono, saldo from DOCUMENTO where fk_cuenta = %s order by fechadevencimiento, codigo
-		""" % self.cuenta
+		query = ""
+		if MYPOSTGRES:
+			query = """
+			select codigo, to_char(fechadeelaboracion, 'DD/MM/YYYY'), to_char(fechadevencimiento, 'DD/MM/YYYY'),
+			cargo, abono, saldo from DOCUMENTO where fk_cuenta = %s order by fechadevencimiento, codigo
+			""" % self.cuenta
+		else:
+			query = """
+			select codigo, convert(varchar(10), fechadeelaboracion, 103), convert(varchar(10), fechadevencimiento, 103),
+			cargo, abono, saldo from DOCUMENTO where fk_cuenta = %s order by fechadevencimiento, codigo
+			""" % self.cuenta
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu = r_cngcmex.cursor()
@@ -49910,13 +51081,23 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		lctrl.Enable(False)
 		lctrl.Show(False)
 		lctrl.ClearAll()
-		query = """
-		select r.codigo, r.consdesarrollo, convert(varchar(10), r.fechaemision, 103),
-		m.cantidad, m.relaciondepago, r.referencia, r.status
-		from RECIBO r 
-		join MOVIMIENTO m on r.codigo = m.numrecibo
-		where m.fk_documento = %s and m.cargoabono = 'A' order by r.fechaemision desc, r.codigo desc
-		""" % self.documento
+		query = ""
+		if MYPOSTGRES:
+			query = """
+			select r.codigo, r.consdesarrollo, to_char(r.fechaemision, 'DD/MM/YYYY'),
+			m.cantidad, m.relaciondepago, r.referencia, r.status
+			from RECIBO r 
+			join MOVIMIENTO m on r.codigo = m.numrecibo
+			where m.fk_documento = %s and m.cargoabono = 'A' order by r.fechaemision desc, r.codigo desc
+			""" % self.documento
+		else:
+			query = """
+			select r.codigo, r.consdesarrollo, convert(varchar(10), r.fechaemision, 103),
+			m.cantidad, m.relaciondepago, r.referencia, r.status
+			from RECIBO r 
+			join MOVIMIENTO m on r.codigo = m.numrecibo
+			where m.fk_documento = %s and m.cargoabono = 'A' order by r.fechaemision desc, r.codigo desc
+			""" % self.documento
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu = r_cngcmex.cursor()
@@ -50344,7 +51525,10 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		cu.close()
 		if rows:
 			for row in rows:
-				control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
+				if MYPOSTGRES:
+					control.Append(row[1], int(row[0]))
+				else:
+					control.Append(str(row[1]).decode("iso8859-1"), int(row[0]))
 				
 		control.Show(True)
 		control.Enable(True)
@@ -50504,18 +51688,29 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			
 		if self.etapa:
 			listctrlfiltro += " and e.codigo = %s" % int(self.etapa)
-			
-		query = """
-		select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
-		c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
-		from CUENTA c
-		join CLIENTE t on c.fk_cliente = t.codigo
-		join INMUEBLE i on c.fk_inmueble = i.codigo
-		join ETAPA e on i.fk_etapa = e.codigo
-		join DESARROLLO d on e.fk_desarrollo = d.codigo
-		where d.codigo = %s and d.fk_empresa = %s
-		%s order by %s
-		""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		query = ""
+		if MYPOSTGRES:
+			query = """select c.codigo, to_char(c.fecha, 'DD/MM/YYYY'), i.iden1, i.iden2,
+			c.saldo, trim(e.descripcion), trim(t.nombre)
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
+		else:
+			query = """select c.codigo, convert(varchar(10), c.fecha, 103), i.iden1, i.iden2,
+			c.saldo, rtrim(ltrim(e.descripcion)), rtrim(ltrim(t.nombre))
+			from CUENTA c
+			join CLIENTE t on c.fk_cliente = t.codigo
+			join INMUEBLE i on c.fk_inmueble = i.codigo
+			join ETAPA e on i.fk_etapa = e.codigo
+			join DESARROLLO d on e.fk_desarrollo = d.codigo
+			where d.codigo = %s and d.fk_empresa = %s
+			%s order by %s
+			""" % (self.desarrollo, self.empresa, listctrlfiltro, self.lstctrlsort)
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu = r_cngcmex.cursor()
@@ -50545,19 +51740,32 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 					if fila %2 != 0: bgcolor = [255,153,153]
 					else:            bgcolor = [255,215,215]
 					
-				index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
-				lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
-				etapa = str(row[5].strip())
-				cliente = str(row[6].strip())
-				lctrl.SetStringItem(index, 0, str(row[0]))
-				lctrl.SetStringItem(index, 1, str(row[1]))
-				lctrl.SetStringItem(index, 2, self.GetString(row[2]))
-				lctrl.SetStringItem(index, 3, str(row[3]))
-				lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
-				lctrl.SetStringItem(index, 5, self.GetString(etapa))
-				lctrl.SetStringItem(index, 6, self.GetString(cliente))
-				lctrl.SetItemData(index, row[0])
-				fila += 1
+				if MYPOSTGRES:
+					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
+					lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
+					lctrl.SetStringItem(index, 0, str(row[0]))
+					lctrl.SetStringItem(index, 1, str(row[1]))
+					lctrl.SetStringItem(index, 2, str(row[2]))
+					lctrl.SetStringItem(index, 3, str(row[3]))
+					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
+					lctrl.SetStringItem(index, 5, row[5])
+					lctrl.SetStringItem(index, 6, row[6])
+					lctrl.SetItemData(index, row[0])
+					fila += 1
+				else:
+					index = lctrl.InsertStringItem(sys.maxint, str(row[0]))
+					lctrl.SetItemBackgroundColour(index, wx.Colour(bgcolor[0], bgcolor[1], bgcolor[2]))
+					etapa = str(row[5].strip())
+					cliente = str(row[6].strip())
+					lctrl.SetStringItem(index, 0, str(row[0]))
+					lctrl.SetStringItem(index, 1, str(row[1]))
+					lctrl.SetStringItem(index, 2, self.GetString(row[2]))
+					lctrl.SetStringItem(index, 3, str(row[3]))
+					lctrl.SetStringItem(index, 4, str(amount_and_cents_with_commas(row[4])))
+					lctrl.SetStringItem(index, 5, self.GetString(etapa))
+					lctrl.SetStringItem(index, 6, self.GetString(cliente))
+					lctrl.SetItemData(index, row[0])
+					fila += 1
 				
 			wx.EndBusyCursor()
 			lctrl.SetColumnWidth(0, 60)
@@ -50615,27 +51823,41 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			cu = r_cngcmex.cursor()
 		except:
 			Mensajes().Info(self, u"� Problemas en la conexi�n !", u"Atenci�n")
-				
+		
+		if MYPOSTGRES:
+			Mensajes().Info(self, u"si entro postg", "")
+			cu.execute("select porcentaje from CPP order by fecha desc limit 1")
+		else:
+			Mensajes().Info(self, u"se fue por sql", "")
+			cu.execute("select top 1 porcentaje from CPP order by fecha desc")	
 		try:
-			cu.execute("select top 1 porcentaje from CPP order by fecha desc")
-		except:
-			Mensajes().Info(self, u"� Problemas en el execute primer query !", u"Atenci�n")
-			
-		try:
+			Mensajes().Info(self, u"ya esta aca", "")
 			row = fetchone(cu)
 			cpp = float(row[0])
 		except:
 			Mensajes().Info(self, u"� Problemas en el primer query !", u"Atenci�n")
-			
+		Mensajes().Info(self, u"se vino hasta acaaa", "")
 		try:
-			query = """
-			select codigo, convert(varchar(10), fechadevencimiento, 103),
-			cargo, abono, saldo, datediff(day, fechadevencimiento, getdate()),
-			convert(varchar(10), fechadevencimiento, 111), convert(varchar(10), getdate(), 111), year(fechadeelaboracion ) from DOCUMENTO
-			where fk_cuenta = %s and saldo > 0 %s order by fechadevencimiento, codigo
-			""" % (self.cuenta, filtro)
-			sqlx = query.replace('\t', ' ')
-			sql = sqlx.replace('\n', ' ')
+			query = ""
+			if MYPOSTGRES:
+				Mensajes().Info(self, u"bronca 1", "")
+				query = """
+				select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
+				cargo, abono, saldo, DATE_PART('day', fechadevencimiento::timestamp - now()::timestamp),
+				to_char(fechadevencimiento, 'DD/MM/YYYY'), to_char(NOW(), 'DD/MM/YYYY'), extract(year from fechadeelaboracion ) from DOCUMENTO
+				where fk_cuenta = %s and saldo > 0 %s order by fechadevencimiento, codigo
+				""" % (self.cuenta, filtro)
+				sqlx = query.replace('\t', ' ')
+				sql = sqlx.replace('\n', ' ')
+			else:
+				query = """
+				select codigo, convert(varchar(10), fechadevencimiento, 103),
+				cargo, abono, saldo, datediff(day, fechadevencimiento, getdate()),
+				convert(varchar(10), fechadevencimiento, 111), convert(varchar(10), getdate(), 111), year(fechadeelaboracion ) from DOCUMENTO
+				where fk_cuenta = %s and saldo > 0 %s order by fechadevencimiento, codigo
+				""" % (self.cuenta, filtro)
+				sqlx = query.replace('\t', ' ')
+				sql = sqlx.replace('\n', ' ')
 			cu.execute(str(sql))
 			rows = fetchall(cu)
 			cu.close()
@@ -51145,7 +52367,10 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		lctrl = self.GetControl(ID_LISTCTRLRECIBOPAGOPINARESFUNC3RECIBO)
 		lctrl.ClearAll()
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
+		if MYPOSTGRES:
+			cu.execute(str("select porcentaje from CPP order by fecha desc limit 1"))
+		else:
+			cu.execute(str("select top 1 porcentaje from CPP order by fecha desc"))
 		row = fetchone(cu)
 		cpp = float(row[0])
 		fechadeposito = self.GetControl(ID_TEXTCTRLRECIBOPAGOPINARESFUNC3FECHARECIBO).GetValue()
@@ -51153,13 +52378,49 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			try:
 				fechadia, fechames, fechaano = fechadeposito.split("/")
 				fechadeposito = "%s/%02d/%02d" % (fechaano, int(fechames), int(fechadia))
-				query = """
-				select codigo, convert(varchar(10), fechadevencimiento, 103),
-				saldo, datediff(day, fechadevencimiento, '%s'),
-				convert(varchar(10), fechadevencimiento, 111), '%s' from DOCUMENTO
-				where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
-				""" % (str(fechadeposito), str(fechadeposito), self.cuenta)
+				if MYPOSTGRES:
+					Mensajes().Info(self, u"bronca 2", "")
+					query = """
+					select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
+					saldo, DATE_PART('day', fechadevencimiento::timestamp - '%s'),
+					to_char(fechadevencimiento, 'DD/MM/YYYY'), '%s' from DOCUMENTO
+					where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo""" % (str(fechadeposito), str(fechadeposito), self.cuenta)
+				else:
+					query = """
+					select codigo, convert(varchar(10), fechadevencimiento, 103),
+					saldo, datediff(day, fechadevencimiento, '%s'),
+					convert(varchar(10), fechadevencimiento, 111), '%s' from DOCUMENTO
+					where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
+					""" % (str(fechadeposito), str(fechadeposito), self.cuenta)
 			except:
+				if MYPOSTGRES:
+					Mensajes().Info(self, u"bronca 3", "")
+					query = """
+					select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
+					saldo, DATE_PART('day', fechadevencimiento::timestamp, NOW()),
+					to_char(fechadevencimiento, 'DD/MM/YYYY'),
+					to_char(NOW(), 'DD/MM/YYYY') from DOCUMENTO
+					where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
+					""" % self.cuenta
+				else:
+					query = """
+					select codigo, convert(varchar(10), fechadevencimiento, 103),
+					saldo, datediff(day, fechadevencimiento, getdate()),
+					convert(varchar(10), fechadevencimiento, 111),
+					convert(varchar(10), getdate(), 111) from DOCUMENTO
+					where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
+					""" % self.cuenta
+		else:
+			if MYPOSTGRES:
+				Mensajes().Info(self, u"bronca 4", "")
+				query = """
+				select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
+				saldo, DATE_PART('day',fechadevencimiento::timestamp - now()::timestamp),
+				to_char(fechadevencimiento, 'DD/MM/YYYY'),
+				to_char(NOW(), 'DD/MM/YYYY') from DOCUMENTO
+				where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
+				""" % self.cuenta
+			else:
 				query = """
 				select codigo, convert(varchar(10), fechadevencimiento, 103),
 				saldo, datediff(day, fechadevencimiento, getdate()),
@@ -51167,18 +52428,10 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 				convert(varchar(10), getdate(), 111) from DOCUMENTO
 				where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
 				""" % self.cuenta
-		else:
-			query = """
-			select codigo, convert(varchar(10), fechadevencimiento, 103),
-			saldo, datediff(day, fechadevencimiento, getdate()),
-			convert(varchar(10), fechadevencimiento, 111),
-			convert(varchar(10), getdate(), 111) from DOCUMENTO
-			where fk_cuenta = %s and saldo > 0 order by fechadevencimiento, codigo
-			""" % self.cuenta
-			
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu.execute(str(sql))
+		Mensajes().Info(self, u"bronca lo paso 4", "")
 		rows = fetchall(cu)
 		cu.close()
 		fila, totpago, totmoratorios, tottotal = 0, 0, 0, 0
@@ -60808,7 +62061,7 @@ class GixFrame(wx.Frame, GixBase):
 		
 	def RestableceConexion(self):
 		#if conectar_con_server(FORCERPYC, FORCEHOST, FORCEPORT, FORCELOCAL, FORCETEST, FORCEINSTANCE, FORCEWEB):
-		if gixmodel.inicializacion(logging, FORCERPYC, FORCEHOST, FORCEPORT, FORCELOCAL, FORCETEST, FORCEINSTANCE, FORCEWEB, SMARTICS):	
+		if gixmodel.inicializacion(logging, FORCERPYC, FORCEHOST, FORCEPORT, FORCELOCAL, FORCETEST, FORCEINSTANCE, FORCEWEB, SMARTICS, FORCEPOSTGRES):	
 			global r_cn
 			global mcache
 			r_cn = gixmodel.reasignarconexion()
@@ -60994,7 +62247,7 @@ class GixFrame(wx.Frame, GixBase):
 					ID_MENU_RECFINARCADIA_RECIBOS_PAGO_PINARES = (u"Arcadia (Pinares Tapalpa) - Aplicaci�n de Pagos y Generaci�n de Recibos", GixRecibosPagoPinaresFunc1, 1000,650),
 					ID_MENU_PRESUP_ANALISISCOSTOS = (u"An�lisis de Costos - Vivienda Economica", GixPresupAnalisisCostos, 940, 655),
 					ID_MENU_VENTAS_RECIBOS_DE_PAGO = (u"Pagos de Clientes", GixPagosDeClientesFunc1, 770,420),
-					ID_MENU_RECFINARCADIA_TABLAS_AMORTIZACION_PINARES = (u"Tablas de Pagos/Amortizaci�n, Contratos y Generaci�n de Cuentas", GixTablasAmortizacionFunc1, 970,700),
+					ID_MENU_RECFINARCADIA_TABLAS_AMORTIZACION_PINARES = (u"Tablas de Pagos/Amortización, Contratos y Generación de Cuentas", GixTablasAmortizacionFunc1, 970,700),
 					ID_MENU_VENTAS_LISTA_DE_PRECIOS = (u"Lista de Precios", GixPreciosEtapaFunc1, 770,630),
 					ID_MENU_VENTAS_OFERTAS_DE_COMPRA = (u"Ofertas de Compra", GixOfertasDeCompraFunc1, 630,580),
 		                        ID_MENU_VENTAS_REPORTE_OFERTAS_ASIGNACIONES = (u"Reporte de Ofertas de Compra y Asignaci�n de Inmuebles", GixReporteOfertasAsignacionesFunc1, 970, 700),
@@ -64658,4 +65911,3 @@ def main(argv=None):
 
 if __name__ == "__main__":
 	sys.exit(main())
-	
