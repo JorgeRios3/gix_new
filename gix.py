@@ -17002,12 +17002,9 @@ Estatus de la solicitud: %s
 			self.ToggleBeneficiarioDevolucion(u"Solicitud", u"Utilizar esta Solicitud de Cheque por Concepto " \
 			                                  u"Diferente a Devoluci�n de Saldo a Favor", False, True)
 			self.ObtenerBeneficiarios()
-			Mensajes().Info(self, u"aqiu donde quiero 52", "")
 		wx.EndBusyCursor()
 		self.CalculaFechaCaptura()
-		Mensajes().Info(self, u"aqiu donde quiero 53", "")
 		#self.CalculaFechaProgramada()
-		Mensajes().Info(self, u"aqiu donde quiero 54", "")
 		self.GetControl(self.idlcpartidas).Enable(False)
 		self.GetControl(self.idbtaplicarform).Enable(True)
 		self.GetControl(self.idbtaceptarform).Enable(True)
@@ -17020,7 +17017,6 @@ Estatus de la solicitud: %s
 			
 		control = self.GetControl(self.activecontrolafternewrecord)
 		control.SetFocus()
-		Mensajes().Info(self, u"aqiu donde quiero 6", "")
 		if self.usuario == "ELIZABETH" and not self.devolucionsaldo:
 			Mensajes().Info(self, u"Eli, si esta solicitud de cheque es para una\n" \
 			                u"devoluci�n de saldo a favor, recuerda que\n" \
@@ -17044,7 +17040,6 @@ Estatus de la solicitud: %s
 		cu.execute(str(query))
 		row = fetchone(cu)
 		cu.close()
-		Mensajes().Info(self, u"aqiu donde quiero {}".format(str(row[0])), "")
 		self.GetControl(self.idtcfechacaptura).SetValue(str(row[0]))
 	
 	def CalculaFechaProgramada(self):
