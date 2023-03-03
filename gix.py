@@ -32607,7 +32607,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, u"� Se presento un problema al imprimir el pagar� !", u"Atenci�n")
 			
 	def GetHtmlPagareEnganche(self):
-		Mensajes().Info(self, "pagare7")
 		mes = {1:"Enero", 2:"Febrero", 3:"Marzo", 4:"Abril", 5:"Mayo", 6:"Junio", 7:"Julio",
 		       8:"Agosto", 9:"Septiembre", 10:"Octubre", 11:"Noviembre", 12:"Diciembre"}
 		query = ""
@@ -32727,11 +32726,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 		return html
 	
 	def OnImprimirPagarePagos(self, evt):
-		Mensajes().Info(self, "pagare1")
 		self.pkamortizacion = self.GetIdentity()
-		Mensajes().Info(self, "pagare2")
 		if self.pkamortizacion:
-			Mensajes().Info(self, "pagare3")
 			if self.GetControl(ID_TEXTCTRLAMORFUNC1CODIGOINMUEBLE).GetValue():
 				if self.cambio:
 					if Mensajes().YesNo(self, u"Para imprimir es necesario guardar la informaci�n.\n\n" \
@@ -32743,7 +32739,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			else:
 				Mensajes().Info(self, u"� Asigne un inmueble !", u"Atenci�n")
 		else:
-			Mensajes().Info(self, "pagare4")
 			index = self.GetControl(ID_CHOICEAMORFUNC1ETAPA).GetSelection()
 			if index < 0:
 				Mensajes().Info(self, u"� No hay nada que imprimir !", u"Atenci�n")
@@ -33316,7 +33311,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			cu.execute(self.PreparaQuery(query))
 			row = fetchone(cu)
 			cu.close()
-			Mensajes().Info(self, "esta es la etapa {}".format(row[0]), "")
 			etapa_aux = row[0]
 			query = ""
 			if MYPOSTGRES:
@@ -33909,7 +33903,12 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<div style="text-align: justify;">
 			4.- En caso de que "LA PARTE COMPRADORA" incurra(n) en mora en el pago de 
-			las amortizaciones se causar\xe1n intereses moratorios por todo el tiempo que se 
+			las amortizaciones se causar\xe1n intereses 
+			
+			
+			
+			
+			 por todo el tiempo que se 
 			mantenga insoluto dicho pago a una tasa del 35 %% anual.
 			<br/><br/>
 			</div>
@@ -34776,7 +34775,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 				lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, desarrollo, dciudad, destado,
 			       escritura, escritura_texto, nacionalidad, identificacion, numeroidentificacion, edad, estadocivil,
 				   clausulasformadepago, metododepago, domiciliocliente2, emailcliente, fecha_dia, nombrecliente, nombrecliente, saltos_linea_acuerdo, fecha_dia, nombrecliente)
-			Mensajes().Info(self, "jaja paso 1115", "")
 			jump1 = ""
 			jump2 = ""
 			jump3 = ""
@@ -34938,7 +34936,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			Mensajes().Info(self, u"� Se presento un problema al imprimir la tabla !", u"Atenci�n")
 
 	def GetHtmlTabla(self):
-		Mensajes().Info(self, "aaaaqui 1")
 		query = ""
 		if MYPOSTGRES:
 			query = """
@@ -34948,7 +34945,6 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			query = """
 			select sum(abonocapital) + sum(interes) from gixamortizaciondetalle where fkamortizacion = %s and eliminado = 0
 			""" % int(self.pkamortizacion)
-		Mensajes().Info(self, "aaaaqui 2")
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
@@ -34975,14 +34971,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			join INMUEBLE i on a.fkinmueble = i.codigo
 			where a.pkamortizacion = %s
 			""" % int(self.pkamortizacion)
-		Mensajes().Info(self, "aaaaqui 3")
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
-		Mensajes().Info(self, "aaaaqui 4")
 		row = fetchone(cu)
 		cu.close()
-		Mensajes().Info(self, "aaaaqui 5")
 		if row is not None:
 			a = u"�"; e = u"�"; i = u"�"; o = u"�"; u = u"�"
 			meses = ("", "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic")
@@ -34990,18 +34983,13 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			superficie = str(amount_and_cents_with_commas(float(row[2])))
 			saldoafinanciar = str(amount_and_cents_with_commas(float(row[3])))
 			preciom2 = str(amount_and_cents_with_commas(float(row[4])))
-			Mensajes().Info(self, "aaaaqui 6")
 			if abonointeres:
 				totalapagar = str(amount_and_cents_with_commas(abonointeres + float(row[1])))
-				Mensajes().Info(self, "aaaaqui 7")
 			else:
 				totalapagar = str(amount_and_cents_with_commas(float(row[5])))
-				Mensajes().Info(self, "aaaaqui 8")
 			cuenta = int(row[6])
-			Mensajes().Info(self, "aaaaqui 9")
 			#if cuenta:
 				#return "", cuenta
-			Mensajes().Info(self, "jaja 10")
 			header = """
 			<table
 			 style="width: 993px; height: 200px; text-align: left; margin-left: auto; margin-right: auto;"
@@ -35050,11 +35038,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			</table>
 			<hr style="width: 100%; height: 1px;" noshade="noshade">
 			"""
-			Mensajes().Info(self, "hasta aca 11")
 			header = header.replace('good_fecha',self.GetDate())
-			Mensajes().Info(self, "jajajaja 11")
 			header = header.replace('%time%',self.GetTime())
-			Mensajes().Info(self, "aaaaqui 12")
 			query = ""
 			if MYPOSTGRES:
 				query = """
@@ -35069,10 +35054,8 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			sql = (query.replace('\n',' ')).replace('\t',' ')
 			cu = r_cngcmex.cursor()
 			cu.execute(str(sql))
-			Mensajes().Info(self, "aaaaqui 13")
 			rows = fetchall(cu)
 			cu.close()
-			Mensajes().Info(self, "aaaaqui 14")
 			detail, footer = "", ""
 			lines, page, pages = 0, 1, 1
 			if rows:
@@ -37162,9 +37145,7 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		self.choiceinxinmueble = 1
 		self.GetControl(ID_CHOICEESTADOCUENTAPINARESFUNC1INMUEBLEFILTRO).SetSelection(self.choiceinxinmueble)
 		self.Bind(wx.EVT_CHOICE, self.OnChoiceCtrlInmueble, id = ID_CHOICEESTADOCUENTAPINARESFUNC1INMUEBLEFILTRO)
-		Mensajes().Info(self, "iniciando1")
 		self.ObtenerEtapas()
-		Mensajes().Info(self, "iniciando2")
 		self.Bind(wx.EVT_CHOICE, self.OnChoiceCtrlEtapa, id = ID_CHOICEESTADOCUENTAPINARESFUNC1ETAPAFILTRO)
 		wx.EVT_BUTTON(self, ID_BITMAPBUTTONESTADOCUENTAPINARESFUNC1LIMPIARETAPAFILTRO, self.OnLimpiarEtapaFiltro)
 		
@@ -37479,7 +37460,6 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 			lctrl.InsertColumn(4, u"%sSaldo" % self.lstctrlorder[4][2], wx.LIST_FORMAT_RIGHT)
 			lctrl.InsertColumn(5, u"%sEtapa" % self.lstctrlorder[5][2])
 			lctrl.InsertColumn(6, u"%sCliente" % self.lstctrlorder[6][2])
-			Mensajes().Info(self, "entrooo 1")
 			try:
 				for i,row in enumerate(rows):
 					if float(row[4]) > 0:
