@@ -18240,7 +18240,6 @@ Estatus de la solicitud: %s
 			self.devolucionfiltro = ""
 		if countfiltros > 0: self.donde = "where"
 		else: self.donde = ""
-		Mensajes().Info(self, "este es el que busco", "")
 		sql = """
 		select ch.idcheque, convert(varchar(10), ch.fechacaptura, 103), convert(varchar(10), ch.fechaprogramada, 103),
 		ch.numerochequeorigen, ch.cantidad, isnull(be.nombre, ''), em.RazonSocial, ch.estatus, ch.usuariosolicitante,
