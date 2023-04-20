@@ -15938,7 +15938,7 @@ ID_TEXTCTRLCLIENTEPINARESFUNC2IDENT = 11937
 ID_TEXTCTRLCLIENTEPINARESFUNC2NUMEROIDEN = 11938
 ID_TEXTCTRLCLIENTEPINARESFUNC2EDADCLI2 = 11939
 
-def ClientesVentasPinaresFunc2( parent, call_fit = True, set_sizer = True ):
+def ClientesVentasPinaresFunc2( parent, call_fit = False, set_sizer = True ):
     item0 = wx.BoxSizer( wx.VERTICAL )
     
     item2 = wx.StaticBox( parent, -1, u"Cliente" )
@@ -16060,13 +16060,6 @@ def ClientesVentasPinaresFunc2( parent, call_fit = True, set_sizer = True ):
     item506.SetToolTip( wx.ToolTip(u"Edad") )
     item20.Add( item506, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
 
-
-
-    
-
-
-
-
     item3.Add( item20, 0, wx.ALIGN_CENTER_VERTICAL, 5 )
 
     item29 = wx.FlexGridSizer( 0, 6, 0, 0 )
@@ -16143,8 +16136,8 @@ def ClientesVentasPinaresFunc2( parent, call_fit = True, set_sizer = True ):
 
     if set_sizer == True:
         parent.SetSizer( item0 )
-        if call_fit == True:
-            item0.SetSizeHints( parent )
+        #if call_fit == True:
+        #    item0.SetSizeHints( parent )
     
     return item0
 

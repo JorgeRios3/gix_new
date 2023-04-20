@@ -39998,7 +39998,8 @@ class GixClientesVentasFunc1(wx.Frame, GixBase):
 class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 	def __init__(self, parent, id = -1, title = u"Arcadia (Pinares Tapalpa) - Editando Cliente", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, codigocliente = 0, filllistctrl = None):
-		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
+		screenSize = wx.DisplaySize()
+		wx.Dialog.__init__(self, parent, id, title, pos, screenSize, style)
 		self.codigocliente = codigocliente
 		self.FillListCtrl = filllistctrl
 		if wx.Platform == '__WXMSW__':
