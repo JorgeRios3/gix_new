@@ -15947,6 +15947,12 @@ def ClientesVentasPinaresFunc2( parent, call_fit = False, set_sizer = True ):
     item3 = wx.FlexGridSizer( 0, 1, 0, 0 )
     
     item4 = wx.FlexGridSizer( 0, 4, 0, 0 )
+
+    item46 = wx.Button( parent, ID_BUTTONCLIENTEPINARESFUNC2CANCELAR, u"Cancelar", wx.DefaultPosition, wx.DefaultSize, 0 )
+    item4.Add( item46, 0, wx.ALIGN_CENTER|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
+
+    item47 = wx.Button( parent, ID_BUTTONCLIENTEPINARESFUNC2ACEPTAR, u"Aceptar", wx.DefaultPosition, wx.DefaultSize, 0 )
+    item4.Add( item47, 0, wx.ALIGN_CENTER|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
     
     item5 = wx.StaticText( parent, ID_TEXT, u"Nombre", wx.DefaultPosition, wx.DefaultSize, 0 )
     item4.Add( item5, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
@@ -16124,11 +16130,6 @@ def ClientesVentasPinaresFunc2( parent, call_fit = False, set_sizer = True ):
 
     item45 = wx.BoxSizer( wx.HORIZONTAL )
     
-    item46 = wx.Button( parent, ID_BUTTONCLIENTEPINARESFUNC2CANCELAR, u"Cancelar", wx.DefaultPosition, wx.DefaultSize, 0 )
-    item45.Add( item46, 0, wx.ALIGN_CENTER|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
-
-    item47 = wx.Button( parent, ID_BUTTONCLIENTEPINARESFUNC2ACEPTAR, u"Aceptar", wx.DefaultPosition, wx.DefaultSize, 0 )
-    item45.Add( item47, 0, wx.ALIGN_CENTER|wx.LEFT|wx.RIGHT|wx.TOP, 5 )
 
     item1.Add( item45, 0, wx.ALIGN_RIGHT|wx.ALIGN_CENTER_VERTICAL|wx.LEFT, 5 )
 
@@ -16136,8 +16137,8 @@ def ClientesVentasPinaresFunc2( parent, call_fit = False, set_sizer = True ):
 
     if set_sizer == True:
         parent.SetSizer( item0 )
-        #if call_fit == True:
-        #    item0.SetSizeHints( parent )
+        if call_fit == True:
+            item0.SetSizeHints( parent )
     
     return item0
 
