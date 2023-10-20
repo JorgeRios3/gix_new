@@ -34635,11 +34635,16 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<table class="center">
 			<tr>
-				<td>"ARCADIA PROMOTORA S. DE R.L. DE C.V." <br/> Representada por  el Ing. Jaime Lares Rangel</td>
-				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GERENTE DE VENTAS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td>%s</td>
+				<td style="margin-top:16px; padding-top:16px; text-align:center">
+				<div style="border-top: 2px solid black; border-spacing: 2px; margin-right:10px; padding-top:1px;">"ARCADIA PROMOTORA S. DE R.L. DE C.V." <br/> Representada por  el Ing. Jaime Lares Rangel</div>
+				</td>
+				<td style="margin-top:16px; padding-top:16px; text-align:center">
+				<div style="border-top: 2px solid black; border-spacing: 2px; margin-right:10px; padding-top:1px;">Juan Pablo Lares Monraz<br/>Gerente de Ventas
+				</div></td>
+				<td style="text-align:center"><div style="border-top: 2px solid black; border-spacing: 2px; margin-right:5px">%s</div></td>
 			</tr>
 			</table>
+
 
 
 			<br/><br/><br/><br/><br/>
@@ -34737,9 +34742,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 			<table class="center">
 			<tr>
-				<th style="font-size:12px">"ARCADIA PROMOTORA S. DE R.L. DE C.V." <br/> Representada por  el Ing. Jaime Lares Rangel</th>
-				<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-				<th style="font-size:12px" >%s</th>
+				<td style="margin-top:16px; padding-top:16px"><div style="border-top: 2px solid black; border-spacing: 2px; margin-right:10px; padding-top:1px;">"ARCADIA PROMOTORA S. DE R.L. DE C.V." <br/> Representada por  el Ing. Jaime Lares Rangel</div>
+				</td>&nbsp;&nbsp;&nbsp;&nbsp;
+				<td style="text-align:center"><div style="width:200px">
+				</div></td>
+				<td style="text-align:center"><div style="border-top: 2px solid black; border-spacing: 2px; margin-right:5px">%s</div></td>
 			</tr>
 			</table>
 
@@ -34765,7 +34772,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 
 
 			</body>
-			""" % (contrato, razonsocial, representantelegal, nombrecliente, letra, modulo, rfc_cliente_template, superficie, titulo1, 
+			""" % (contrato, razonsocial, representantelegal, nombrecliente, rfc_cliente_template, letra, modulo, superficie, titulo1, 
 				lindero1, titulo2, lindero2, titulo3, lindero3, titulo4, lindero4, desarrollo, dciudad, destado,
 			       escritura, escritura_texto, nacionalidad, identificacion, numeroidentificacion, edad, estadocivil,
 				   clausulasformadepago, metododepago, domiciliocliente2, emailcliente, fecha_dia, nombrecliente, nombrecliente, saltos_linea_acuerdo, fecha_dia, nombrecliente)
