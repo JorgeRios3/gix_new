@@ -295,7 +295,7 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 					engine2=None
 					if os.environ.get("POSTGRES") == "True":
 						Mensajes().Info(self, u"postgres ")
-						engine2 = create_engine('postgresql://iclarpro:2015@localhost/arcadia?charset=iso-8859-1', connect_args={'options': '-csearch_path={}'.format('dbo,arcadia,public')})
+						engine2 = create_engine('postgresql://iclarpro:2015@localhost/arcadia', connect_args={'options': '-csearch_path={}'.format('public,arcadia,public')})
 					else:
 						Mensajes().Info(self, u"sql ")
 						engine2 = create_engine(conexion)
@@ -365,7 +365,7 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 					conexion = "mssql://%s:%s@%s" % (cn_data2[1], cn_data2[2], DSN)
 					engine2=None
 					if os.environ.get("POSTGRES") == "True":
-						engine2 = create_engine('postgresql://iclarpro:2015@localhost/arcadia', connect_args={'options': '-csearch_path={}'.format('dbo,arcadia,public')})
+						engine2 = create_engine('postgresql://iclarpro:2015@localhost/arcadia', connect_args={'options': '-csearch_path={}'.format('public,arcadia,public')})
 					else:
 						engine2 = create_engine(conexion)
 					conn = engine2.connect()
