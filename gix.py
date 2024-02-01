@@ -39348,7 +39348,8 @@ class GixClientesVentasFunc1(wx.Frame, GixBase):
 class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 	def __init__(self, parent, id = -1, title = u"Arcadia (Pinares Tapalpa) - Editando Cliente", pos = wx.DefaultPosition,
 	             size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE, codigocliente = 0, filllistctrl = None):
-		wx.Dialog.__init__(self, parent, id, title, pos, size, style)
+		screenSize = wx.DisplaySize()
+		wx.Dialog.__init__(self, parent, id, title, pos, screenSize, style)
 		self.codigocliente = codigocliente
 		self.FillListCtrl = filllistctrl
 		if wx.Platform == '__WXMSW__':
@@ -39440,7 +39441,7 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		estadocivil, situacion, regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa,
 		telefonotrabajo, conyugenombre, conyugenacionalidad, conyugelugardenacimiento,
 		convert(varchar(10), conyugefechadenacimiento, 103),
-		conyugerfc, conyugeocupacion, curp, conyugecurp, email
+		conyugerfc, conyugeocupacion, curp, conyugecurp, email, identificacion, numeroidentificacion, edad 
 		from cliente where codigo = %s
 		""" % self.codigocliente
 		if ISPOSTGRES:
@@ -39449,7 +39450,7 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 			estadocivil, situacion, regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa,
 			telefonotrabajo, conyugenombre, conyugenacionalidad, conyugelugardenacimiento,
 			conyugefechadenacimiento, 103
-			conyugerfc, conyugeocupacion, curp, conyugecurp, email
+			conyugerfc, conyugeocupacion, curp, conyugecurp, email, identificacion, numeroidentificacion, edad
 			from cliente where codigo = %s
 			""" % self.codigocliente
 		cu = r_cngcmex.cursor()
@@ -39466,6 +39467,10 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2TELEFONOOFICINA).SetValue(self.GetString(row[15]))
 			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2RFC).SetValue(self.GetString(row[1]))
 			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2CURP).SetValue(self.GetString(row[22]))
+
+			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2IDENT).SetValue(self.GetString(row[25]))
+			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2NUMEROIDEN).SetValue(self.GetString(row[26]))
+			self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2EDADCLI2).SetValue(str(row[27]))
 			try:
 				self.GetControl(ID_CHOICECLIENTEPINARESFUNC2ESTADOCIVIL).SetSelection(int(row[5]))
 			except:
@@ -39588,6 +39593,11 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		curpconyuge = self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC4CURP).GetValue()
 		
 		ocupacionconyuge = str(self.GetControl(ID_CHOICECLIENTEPINARESFUNC4OCUPACION).GetSelection())
+
+		identificacion = self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2IDENT).GetValue()
+		numeroidentificacion = self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2NUMEROIDEN).GetValue()
+		edad = int(self.GetControl(ID_TEXTCTRLCLIENTEPINARESFUNC2EDADCLI2).GetValue())
+		
 		
 		if self.codigocliente:
 			sql = """
@@ -39597,12 +39607,12 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 			domicilio = '%s', colonia = '%s', cp = '%s', ciudad = '%s', estado = '%s', telefonocasa = '%s',
 			telefonotrabajo = '%s', conyugenombre = '%s', conyugenacionalidad = '%s', conyugelugardenacimiento = '%s',
 			%s, conyugerfc = '%s', conyugeocupacion = '%s', curp = '%s',
-			conyugecurp = '%s', email = '%s'
+			conyugecurp = '%s', email = '%s', identificacion='%s', numeroidentificacion='%s', edad=%i
 		        where codigo = %s
 		        """ % (nombre, rfc, nacionalidad, lugarnacimiento, fechanacimiento, estadocivil, situacion, regimen,
 			       ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa, telefonooficina, nombreconyuge,
 			       nacionalidadconyuge, lugarnacimientoconyuge, fechanacimientoconyugeu, rfcconyuge, ocupacionconyuge,
-			       curp, curpconyuge, email, self.codigocliente)
+			       curp, curpconyuge, email, identificacion, numeroidentificacion, edad, self.codigocliente)
 			todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql), conexion = r_cngcmex)
 		else:
 			cu = r_cngcmex.cursor()
@@ -39620,14 +39630,14 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 		        (codigo, nombre, rfc, nacionalidad, lugardenacimiento, fechadenacimiento, estadocivil, situacion, regimen,
 			ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa, telefonotrabajo, conyugenombre,
 			conyugenacionalidad, conyugelugardenacimiento, conyugefechadenacimiento, conyugerfc, conyugeocupacion, curp,
-			conyugecurp, email)
+			conyugecurp, email, identificacion, numeroidentificacion, edad)
 			values
 			(%s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s',
-			'%s', %s, '%s', '%s', '%s', '%s', '%s')
+			'%s', %s, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %i)
 		        """ % (self.codigocliente, nombre, rfc, nacionalidad, lugarnacimiento, fechanacimiento, estadocivil, situacion,
 			       regimen, ocupacion, domicilio, colonia, cp, ciudad, estado, telefonocasa, telefonooficina, nombreconyuge,
 			       nacionalidadconyuge, lugarnacimientoconyuge, fechanacimientoconyugei, rfcconyuge, ocupacionconyuge,
-			       curp, curpconyuge, email)
+			       curp, curpconyuge, email, identificacion, numeroidentificacion, edad)
 			todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql), conexion = r_cngcmex)
 			
 		if not todook:
@@ -39643,9 +39653,10 @@ class GixClientesVentasPinaresFunc2(wx.Dialog, GixBase):
 
 class GixClientesVentasPinaresFunc1(wx.Frame, GixBase):
 	if ISPOSTGRES:
-		print("POSTGRES")
+		print("este POSTGRES")
 	else:
-		print("sql")
+		print("este agarro sql")
+	
 	logging.info("probando a ver si funciona")
 	def __init__(self, parent, id = -1, title = u"Clientes", pos = wx.DefaultPosition, size = wx.DefaultSize,
 	             style = wx.DEFAULT_FRAME_STYLE):
