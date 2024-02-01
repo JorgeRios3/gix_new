@@ -64748,7 +64748,10 @@ class LoginDialog(wx.Dialog, GixBase):
 			resultado = str(row[0])
 			cursor.close()
 			if resultado == "0":
-				sql = "select count(*) from usuarios where Usuario = '%s'" % Usuario
+				if ISPOSTGRES:
+					sql = "select count(*) from usuarios_gix where Usuario = '%s'" % Usuario
+				else:
+					sql = "select count(*) from usuarios where Usuario = '%s'" % Usuario
 			else:
 				sql = "select 1"
 				
@@ -64756,11 +64759,18 @@ class LoginDialog(wx.Dialog, GixBase):
 				if gixanip is False:
 					return False
 		else:
-			sql = "SELECT COUNT(*) FROM Usuarios WHERE Usuario = '" + Usuario
-			sql = sql + "' AND md5 = '" + self.Hash(Password)
-			sql = sql + "'"
-		
-		cursor = r_cn.cursor()
+			if ISPOSTGRES:
+				sql = "SELECT COUNT(*) FROM Usuarios_gix WHERE Usuario = '" + Usuario
+				sql = sql + "' AND md5 = '" + self.Hash(Password)
+				sql = sql + "'"
+			else:
+				sql = "SELECT COUNT(*) FROM Usuarios WHERE Usuario = '" + Usuario
+				sql = sql + "' AND md5 = '" + self.Hash(Password)
+				sql = sql + "'"
+		if ISPOSTGRES:
+			cursor = r_cngcmex.cursor()
+		else:
+			cursor = r_cn.cursor()
 		cursor.execute( str(sql) )
 		row = fetchone(cursor)
 		resultado = str(row[0])
