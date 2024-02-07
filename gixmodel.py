@@ -160,11 +160,11 @@ def gravatarimage(size = 30):
 	
 def globales():
 	return (mcache, engine2, r_cn, r_cngcmex, jsonweb, auto_ansi2oem, FORCEHOST, FORCELOCAL, FORCEPORT, FORCEINSTANCE,
-	        FORCERPYC, FORCEWEB, FORCETEST, FORCEGCMEX, FORCESCROLL, SMARTICS, FORCEQUERYONLY)
+	        FORCERPYC, FORCEWEB, FORCETEST, FORCEGCMEX, FORCESCROLL, SMARTICS, FORCEQUERYONLY, ISPOSTGRES)
 
 def inicializacion(logging = None, force_rpyc = False, force_host = False, force_port = False, force_local = False,
                    force_test = False, force_instance = False, force_web = False, force_gcmex = False, force_scroll = False,
-                   smartics = False, force_queryonly = False):
+                   smartics = False, force_queryonly = False, ispostgres=False):
 	
 	aviso = logging.debug
 	
@@ -198,10 +198,11 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 	global FORCEHOST; global FORCELOCAL; global FORCEPORT; global FORCEINSTANCE
 	global FORCERPYC; global FORCEWEB; global FORCETEST; global FORCEGCMEX; global FORCESCROLL
 	global SMARTICS; global FORCEQUERYONLY
+	global ISPOSTGRES
 	
 	FORCEHOST = force_host; FORCELOCAL = force_local; FORCEPORT = force_port; FORCEINSTANCE = force_instance
 	FORCERPYC = force_rpyc; FORCEWEB = force_web; FORCETEST = force_test; FORCEGCMEX = force_gcmex
-	FORCESCROLL = force_scroll; SMARTICS = smartics; FORCEQUERYONLY = force_queryonly
+	FORCESCROLL = force_scroll; SMARTICS = smartics; FORCEQUERYONLY = force_queryonly; ISPOSTGRES=ispostgres
 	#asignaForce(FORCEHOST, FORCELOCAL, FORCEPORT, FORCEINSTANCE, FORCERPYC, FORCEWEB, FORCETEST, SMARTICS)
 	
 	if sys.version_info[0] != 2 or sys.version_info[1] not in ( 5,6,7):
@@ -293,7 +294,7 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 						DSN = "ARCADIAODBCTEST"
 					conexion = "mssql://%s:%s@%s" % (cn_data2[1], cn_data2[2], DSN)
 					engine2=None
-					if os.environ.get("POSTGRES") == "True":
+					if ISPOSTGRES:
 						Mensajes().Info(self, u"postgres ")
 						engine2 = create_engine('postgresql://iclarpro:2015@localhost/arcadia', connect_args={'options': '-csearch_path={}'.format('public,arcadia,public')})
 					else:
@@ -364,7 +365,7 @@ def inicializacion(logging = None, force_rpyc = False, force_host = False, force
 						DSN = "ARCADIAODBCTEST"
 					conexion = "mssql://%s:%s@%s" % (cn_data2[1], cn_data2[2], DSN)
 					engine2=None
-					if os.environ.get("POSTGRES") == "True":
+					if ISPOSTGRES:
 						engine2 = create_engine('postgresql://iclarpro:2015@localhost/arcadia', connect_args={'options': '-csearch_path={}'.format('public,arcadia,public')})
 					else:
 						engine2 = create_engine(conexion)
