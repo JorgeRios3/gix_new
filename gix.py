@@ -33691,6 +33691,13 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 					from gixamortizaciondetalle
 					where fkamortizacion = %s and eliminado = 0 order by fechadepago, numerodepago
 					""" % int(self.pkamortizacion)
+					if MYPOSTGRES:
+						query = """
+						select numerodepago, to_char(fechadepago, 'DD/MM/YYYY'), pagofijo
+						from gixamortizaciondetalle
+						where fkamortizacion = %s and eliminado = 0 order by fechadepago, numerodepago
+						""" % int(self.pkamortizacion)
+					
 					sql = (query.replace('\n',' ')).replace('\t',' ')
 					cu = r_cngcmex.cursor()
 					cu.execute(str(sql))
@@ -34907,7 +34914,7 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			pkamortizacion = int(aux)
 			if MYPOSTGRES:
 				query = """
-		        select fechadepago, numerodepago, pagofijo
+		        select to_char(fechadepago, 'DD/MM/YYYY'), numerodepago, pagofijo
 		        from gixamortizaciondetalle
 		        where fkamortizacion = %s and eliminado = False and pagado = False
 		        order by fechadepago, numerodepago
@@ -35798,8 +35805,17 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 	        select pkamortizaciondetalle from gixamortizaciondetalle
 	        where fkamortizacion = %s and eliminado = 0 and pagado = 0 order by fechadepago, numerodepago
 	        """ % self.fkamortizacion
+		if MYPOSTGRES:
+			query = """
+	        select pkamortizaciondetalle from gixamortizaciondetalle
+	        where fkamortizacion = %s and eliminado = false and pagado = false order by fechadepago, numerodepago
+	        """ % self.fkamortizacion
+
 		cu = r_cngcmex.cursor()
-		cu.execute(str("select count(*) from gixamortizaciondetalle where fkamortizacion = %s and pagado = 1" % self.fkamortizacion))
+		query = str("select count(*) from gixamortizaciondetalle where fkamortizacion = %s and pagado = 1" % self.fkamortizacion)
+		if MYPOSTGRES:
+			query = str("select count(*) from gixamortizaciondetalle where fkamortizacion = %s and pagado = true" % self.fkamortizacion)
+		cu.execute(query)
 		pagos = fetchone(cu)
 		if int(pagos[0]) > 0:
 			if Mensajes().YesNo(self, u"� Desea incluir los pagos en la renumeraci�n de la tabla ?", u"Confirmaci�n"):
@@ -35857,6 +35873,11 @@ class GixTablasAmortizacionFunc1(wx.Frame, GixBase):
 			query = """
 		        select pkamortizaciondetalle, abonocapital, interes from gixamortizaciondetalle
 		        where fkamortizacion = %s and eliminado = 0 and pagado = 0 order by fechadepago, numerodepago
+		        """ % fkamortizacion
+			if MYPOSTGRES:
+				query = """
+		        select pkamortizaciondetalle, abonocapital, interes from gixamortizaciondetalle
+		        where fkamortizacion = %s and eliminado = false and pagado = false order by fechadepago, numerodepago
 		        """ % fkamortizacion
 			sql = (query.replace('\n',' ')).replace('\t',' ')
 			cu = r_cngcmex.cursor()
@@ -35982,6 +36003,18 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 		left join notaria n on i.fk_notario = n.codigo
 		where i.codigo = %s
 		""" % self.inmueble
+		if MYPOSTGRES:
+			query = """
+			select rtrim(ltrim(i.iden2)) + rtrim(ltrim(i.iden1)) + ' - ' + rtrim(ltrim(e.descripcion)), rtrim(ltrim(c.nombre)),
+			coalesce(i.fechaescriturado, ''), coalesce(i.fk_notario, 0),
+			coalesce('NOTARIA PUBLICA NUMERO ' + n.numero_notaria, ''), coalesce(n.nombre_notario, '')
+			from inmueble i
+			join etapa e on i.fk_etapa = e.codigo
+			join cuenta t on i.codigo = t.fk_inmueble
+			join cliente c on t.fk_cliente = c.codigo
+			left join notaria n on i.fk_notario = n.codigo
+			where i.codigo = %s
+			""" % self.inmueble
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
@@ -36069,6 +36102,23 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 		join notaria n on i.fk_notario = n.codigo
 		where i.codigo = %s
 		""" % self.inmueble
+		if MYPOSTGRES:
+			query = """
+			select i.fechaescriturado, 'NOTARIA PUBLICA NUMERO ' + n.numero_notaria, n.nombre_notario, rtrim(ltrim(e.descripcion)),
+			coalesce(rtrim(ltrim(c.nombre)), ''), coalesce(rtrim(ltrim(c.nacionalidad)), ''), coalesce(c.estadocivil, ''),
+			coalesce(c.regimen, ''), coalesce(rtrim(ltrim(c.lugardenacimiento)), ''),
+			coalesce(to_char(c.fechadenacimiento, 'DD/MM/YYYY'), ''), coalesce(c.ocupacion, ''), coalesce(c.domicilio, ''),
+			coalesce(c.colonia, ''), coalesce(c.ciudad, ''), coalesce(c.estado, ''), coalesce(c.cp, ''), coalesce(c.telefonocasa, ''),
+			coalesce(c.telefonotrabajo, ''), coalesce(c.conyugenombre, ''), rtrim(ltrim(i.iden2)), rtrim(ltrim(i.iden1)),
+			i.superficie, t.codigo
+			from inmueble i
+			join etapa e on i.fk_etapa = e.codigo
+			join cuenta t on i.codigo = t.fk_inmueble
+			join cliente c on t.fk_cliente = c.codigo
+			join notaria n on i.fk_notario = n.codigo
+			where i.codigo = %s
+			""" % self.inmueble
+
 		sql = (query.replace('\n',' ')).replace('\t',' ')
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
@@ -37418,7 +37468,11 @@ class GixEstadoCuentaPinaresFunc1(wx.Frame, GixBase):
 		
 	def GetDate(self):
 		cu = r_cngcmex.cursor()
-		cu.execute("select convert(varchar(10), getdate(), 111)")
+		query="select convert(varchar(10), getdate(), 111)"
+		if MYPOSTGRES:
+			query="SELECT to_char(NOW(), 'DD/MM/YYYY')"
+		
+		cu.execute(query)
 		row = fetchone(cu)
 		cu.close()
 		return str(row[0])
@@ -40727,7 +40781,10 @@ class GixVendedoresVentasPinaresFunc2(wx.Dialog, GixBase):
 			todook, trash = self.QueryUpdateRecord(self.PreparaQuery(sql), conexion = r_cngcmex)
 		else:
 			cu = r_cngcmex.cursor()
-			cu.execute("select top 1 codigo from vendedor order by codigo desc")
+			query = "select top 1 codigo from vendedor order by codigo desc"
+			if MYPOSTGRES:
+				query = "select codigo from vendedor order by codigo desc limit 1"
+			cu.execute(query)
 			row = fetchone(cu)
 			cu.close()
 			self.codigovendedor = int(row[0]) + 1
@@ -49164,6 +49221,8 @@ class GixPagosDeClientesFunc1(wx.Dialog, GixBase):
 					raise
 				
 				sql = "select convert(varchar(10), getdate(), 111)"
+				if MYPOSTGRES:
+					sql="SELECT to_char(NOW(), 'DD/MM/YYYY')"
 				cu.execute(sql)
 				row = fetchone(cu)
 				fechahoy = str(row[0])
@@ -51269,6 +51328,21 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 		join ETAPA t on t.codigo = i.fk_etapa
 		where r.codigo = %s
 		""" % consecutivorecibo
+		if MYPOSTGRES:
+			sql = """
+			select to_char(r.fechaemision, 'DD/MM/YYYY'), r.abonocapital, r.interesmoratorio, r.totalrecibo, r.referencia,
+			r.consdesarrollo, to_char(r.fechaaplicacion, 'DD/MM/YYYY'), c.codigo, c.fk_inmueble, c.fk_cliente, c.saldo,
+			i.iden1, i.iden2, e.nombre, t.descripcion
+			from RECIBO r
+			join MOVIMIENTO m on m.numrecibo = r.codigo
+			join DOCUMENTO d on d.codigo = m.fk_documento
+			join CUENTA c on c.codigo = d.fk_cuenta
+			join INMUEBLE i on i.codigo = c.fk_inmueble
+			join CLIENTE e on e.codigo = c.fk_cliente
+			join ETAPA t on t.codigo = i.fk_etapa
+			where r.codigo = %s
+			""" % consecutivorecibo
+
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
 		row = fetchone(cu)
@@ -51395,6 +51469,14 @@ class GixRecibosPagoPinaresFunc2(wx.Dialog, GixBase):
 			where cargoabono = 'A' and fk_tipo = 4 and numrecibo = %s
 			order by fechavencimientodoc
 			""" % consecutivorecibo
+			if MYPOSTGRES:
+				sql = """
+				select codigo, cantidad, relaciondepago, to_char(fechavencimientodoc, 'DD/MM/YYYY'), fk_documento
+				from MOVIMIENTO
+				where cargoabono = 'A' and fk_tipo = 4 and numrecibo = %s
+				order by fechavencimientodoc
+				""" % consecutivorecibo
+
 			cu = r_cngcmex.cursor()
 			cu.execute(str(sql))
 			rows = fetchall(cu)
@@ -51528,7 +51610,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		self.DicDatesAndTxt = {ID_BITMAPBUTTONRECIBOPAGOPINARESFUNC3FECHAINICIALELEGIR : ID_TEXTCTRLRECIBOPAGOPINARESFUNC3FECHAINICIALFILTRO,
 				       ID_BITMAPBUTTONRECIBOPAGOPINARESFUNC3FECHAFINALELEGIR: ID_TEXTCTRLRECIBOPAGOPINARESFUNC3FECHAFINALFILTRO,
 		                       ID_BITMAPBUTTONRECIBOPAGOPINARESFUNC3ELEGIRFECHARECIBO: ID_TEXTCTRLRECIBOPAGOPINARESFUNC3FECHARECIBO}
-		self.specialuser = ["ADRIANA", "MARTHA"]
+		self.specialuser = ["ADRIANA", "MARTHA", "CESAR"]
 		self.usuario = usuario
 		self.cliente = ""
 		self.empresa, self.desarrollo, self.etapa = 1, 5, 0
@@ -52056,12 +52138,16 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		if Mensajes().YesNo(self, u"� Desea realmente generar y aplicar el recibo ?", u"Confirmaci�n"):
 			todobien = False
 			sql = "exec dbo.NumeroReciboDesSP %s" % self.desarrollo
+			if MYPOSTGRES:
+				sql="select max(consdesarrollo)+1 from recibo where fk_desarrollo=5"
 			cu = r_cngcmex.cursor()
 			cu.execute(str(sql))
 			row = fetchone(cu)
 			if row is not None:
 				self.numerorecibo = int(row[0])
 				sql = "exec dbo.NumeroReciboSP"
+				if MYPOSTGRES:
+					sql="select max(consdesarrollo)+1 from recibo where fk_desarrollo=5"
 				cu.execute(str(sql))
 				row = fetchone(cu)
 				if row is not None:
@@ -52079,8 +52165,16 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 							sql = "exec dbo.InsertarMovimientoSP %s, '%s', '%s', %s, %s, %s, '%s', '%s'" % \
 							    (datos[0], fecharecibo, "A", documento, 4, self.consecutivorecibo,
 							     datos[2], datos[1])
+							if MYPOSTGRES:
+								sql="select max(codigo)+1 from movimiento"
+								cu.execute(str(sql))
+								row = fetchone(cu)
+								sql=f"""insert into movimiento (codigo, cantidad, fecha, relaciondepago, cargoabono, fk_documento, fk_tipo, numrecibo, fechavencimientodoc)
+								values ({row[0]}, {datos[0]}, '{fecharecibo}', '{datos[2]}', 'A', {documento}, 4, {self.consecutivorecibo}, '{datos[1]}')""" 
 							cu.execute(str(sql))
 							sql = "exec dbo.AbonaDocyCtaSP %s, %s" % (documento, datos[0])
+							if MYPOSTGRES:
+								pass # aqui necesito hacer los queries para reemplazar exec dbo.InsertarReciboSP
 							cu.execute(str(sql))
 						sql = "exec dbo.InsertarReciboSP %s, '%s', %s, %s, %s, '%s', %s" % \
 					            (self.numerorecibo, str(fecharecibo), float(abonocapital.replace(",","")),
@@ -52154,6 +52248,20 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		join ETAPA t on t.codigo = i.fk_etapa
 		where r.codigo = %s
 		""" % consecutivorecibo
+		if MYPOSTGRES:
+			sql = """
+			select to_char(r.fechaemision, 'DD/MM/YYYY'), r.abonocapital, r.interesmoratorio, r.totalrecibo, r.referencia,
+			r.consdesarrollo, to_char(r.fechaaplicacion, 'DD/MM/YYYY'), c.codigo, c.fk_inmueble, c.fk_cliente, c.saldo,
+			i.iden1, i.iden2, e.nombre, t.descripcion
+			from RECIBO r
+			join MOVIMIENTO m on m.numrecibo = r.codigo
+			join DOCUMENTO d on d.codigo = m.fk_documento
+			join CUENTA c on c.codigo = d.fk_cuenta
+			join INMUEBLE i on i.codigo = c.fk_inmueble
+			join CLIENTE e on e.codigo = c.fk_cliente
+			join ETAPA t on t.codigo = i.fk_etapa
+			where r.codigo = %s
+			""" % consecutivorecibo
 		cu = r_cngcmex.cursor()
 		cu.execute(str(sql))
 		row = fetchone(cu)
@@ -52280,6 +52388,13 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			where cargoabono = 'A' and fk_tipo = 4 and numrecibo = %s
 			order by fechavencimientodoc
 			""" % consecutivorecibo
+			if MYPOSTGRES:
+				sql = """
+				select codigo, cantidad, relaciondepago, to_char(fechavencimientodoc, 'DD/MM/YYYY'), fk_documento
+				from MOVIMIENTO
+				where cargoabono = 'A' and fk_tipo = 4 and numrecibo = %s
+				order by fechavencimientodoc
+				""" % consecutivorecibo
 			cu = r_cngcmex.cursor()
 			cu.execute(str(sql))
 			rows = fetchall(cu)
