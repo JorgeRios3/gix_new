@@ -51978,22 +51978,18 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 			Mensajes().Info(self, u"� Problemas en la conexi�n !", u"Atenci�n")
 		
 		if MYPOSTGRES:
-			Mensajes().Info(self, u"si entro postg", "")
 			cu.execute("select porcentaje from CPP order by fecha desc limit 1")
 		else:
 			Mensajes().Info(self, u"se fue por sql", "")
 			cu.execute("select top 1 porcentaje from CPP order by fecha desc")	
 		try:
-			Mensajes().Info(self, u"ya esta aca", "")
 			row = fetchone(cu)
 			cpp = float(row[0])
 		except:
 			Mensajes().Info(self, u"� Problemas en el primer query !", u"Atenci�n")
-		Mensajes().Info(self, u"se vino hasta acaaa", "")
 		try:
 			query = ""
 			if MYPOSTGRES:
-				Mensajes().Info(self, u"bronca 1", "")
 				query = """
 				select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
 				cargo, abono, saldo, DATE_PART('day', fechadevencimiento::timestamp - now()::timestamp),
@@ -52133,6 +52129,8 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 				relacion = self.documentosrecibo[int(self.datointerno)][2]
 				self.documentosrecibo[int(self.datointerno)] = (float(importe), fechavencimiento, relacion)
 				self.FillListCtrlRecibos()
+	def createrecibo(self, vals):
+		pass
 
 	def OnAplicarRecibo(self, evt):
 		if Mensajes().YesNo(self, u"� Desea realmente generar y aplicar el recibo ?", u"Confirmaci�n"):
@@ -52150,6 +52148,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 					sql="select max(consdesarrollo)+1 from recibo where fk_desarrollo=5"
 				cu.execute(str(sql))
 				row = fetchone(cu)
+				cu.close()
 				if row is not None:
 					self.consecutivorecibo = int(row[0])
 					encabezado = u"Detalle del Recibo %s - Id %s:" % (self.numerorecibo, self.consecutivorecibo)
@@ -52162,6 +52161,7 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 						totalrecibo = self.GetControl(ID_TEXTCTRLRECIBOPAGOPINARESFUNC3RECIBOTOTAL).GetValue()
 						referencia = self.GetControl(ID_TEXTCTRLRECIBOPAGOPINARESFUNC3RECIBOREFERENCIA).GetValue().encode("iso8859-1")
 						for documento, datos in self.documentosrecibo.iteritems():
+							cu = r_cngcmex.cursor()
 							sql = "exec dbo.InsertarMovimientoSP %s, '%s', '%s', %s, %s, %s, '%s', '%s'" % \
 							    (datos[0], fecharecibo, "A", documento, 4, self.consecutivorecibo,
 							     datos[2], datos[1])
@@ -52169,18 +52169,31 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 								sql="select max(codigo)+1 from movimiento"
 								cu.execute(str(sql))
 								row = fetchone(cu)
-								sql=f"""insert into movimiento (codigo, cantidad, fecha, relaciondepago, cargoabono, fk_documento, fk_tipo, numrecibo, fechavencimientodoc)
-								values ({row[0]}, {datos[0]}, '{fecharecibo}', '{datos[2]}', 'A', {documento}, 4, {self.consecutivorecibo}, '{datos[1]}')""" 
+								sql="""insert into movimiento (codigo, cantidad, fecha, relaciondepago, cargoabono, fk_documento, fk_tipo, numrecibo, fechavencimientodoc) values ({}, {}, '{}', '{}', '{}', {}, {}, {}, '{}')""".format(row[0], datos[0], fecharecibo, datos[2], 'A', documento, 4, self.consecutivorecibo, datos[1])
 							cu.execute(str(sql))
-							sql = "exec dbo.AbonaDocyCtaSP %s, %s" % (documento, datos[0])
+							Mensajes().Info(self, u"paso estejaja 1", u"")
 							if MYPOSTGRES:
-								pass # aqui necesito hacer los queries para reemplazar exec dbo.InsertarReciboSP
-							cu.execute(str(sql))
+								sql="""update documento set saldo=(saldo-{}), abono=(abono+{}) where codigo={}""".format(datos[0], datos[0], documento)
+								cu.execute(str(sql))
+								sql= """update cuenta set saldo=(saldo-{}) where codigo=(select fk_cuenta from documento where codigo={})""".format(datos[0], documento)
+								cu.execute(str(sql))
+							Mensajes().Info(self, u"paso estejeje 2", u"")
+							if not MYPOSTGRES:
+								sql = "exec dbo.AbonaDocyCtaSP %s, %s" % (documento, datos[0])
+								cu.execute(str(sql))
+							cu.close()
+						cu = r_cngcmex.cursor()
 						sql = "exec dbo.InsertarReciboSP %s, '%s', %s, %s, %s, '%s', %s" % \
 					            (self.numerorecibo, str(fecharecibo), float(abonocapital.replace(",","")),
 					             float(moratorios.replace(",","")), float(totalrecibo.replace(",","")),
 					             str(referencia), int(self.desarrollo))
+						if MYPOSTGRES:
+							sql="select max(codigo)+1 from recibo"
+							cu.execute(str(sql))
+							row = fetchone(cu)
+							sql="""insert into recibo (codigo, fechaemision, abonocapital, interesmoratorio, totalrecibo, referencia, status, fk_desarrollo, consdesarrollo) values ({}, '{}', {}, {}, {}, '{}', '{}', {}, {})""".format(row[0], str(fecharecibo), float(abonocapital.replace(",","")), float(moratorios.replace(",","")), float(totalrecibo.replace(",","")), str(referencia), 'A', int(self.desarrollo), self.numerorecibo)
 						cu.execute(str(sql))
+						Mensajes().Info(self, u"paso estejojo 2", u"")
 						todobien = True
 					except:
 						Mensajes().Info(self, u"� Revise la fecha del recibo !", u"Atenci�n")
@@ -52574,7 +52587,6 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 				fechadia, fechames, fechaano = fechadeposito.split("/")
 				fechadeposito = "%s/%02d/%02d" % (fechaano, int(fechames), int(fechadia))
 				if MYPOSTGRES:
-					Mensajes().Info(self, u"bronca 2", "")
 					query = """
 					select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
 					saldo, DATE_PART('day', fechadevencimiento::timestamp - '%s'),
@@ -52589,7 +52601,6 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 					""" % (str(fechadeposito), str(fechadeposito), self.cuenta)
 			except:
 				if MYPOSTGRES:
-					Mensajes().Info(self, u"bronca 3", "")
 					query = """
 					select codigo, to_char(fechadevencimiento, 'DD/MM/YYYY'),
 					saldo, DATE_PART('day', fechadevencimiento::timestamp, NOW()),
@@ -52625,7 +52636,6 @@ class GixRecibosPagoPinaresFunc3(wx.Dialog, GixBase):
 		sqlx = query.replace('\t', ' ')
 		sql = sqlx.replace('\n', ' ')
 		cu.execute(str(sql))
-		Mensajes().Info(self, u"bronca lo paso 4", "")
 		rows = fetchall(cu)
 		cu.close()
 		fila, totpago, totmoratorios, tottotal = 0, 0, 0, 0
