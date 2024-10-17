@@ -36247,7 +36247,9 @@ class GixInstruccionEscrituraFunc2(wx.Dialog, GixBase):
 			style="font-family: Arial; font-weight: bold;">ING. JAIME LARES RANGEL
 			</span><br style="font-family: Arial; font-weight: bold;">
 			<span style="font-family: Arial; font-weight: bold;">REPRESENTANTE
-			LEGAL ARCADIA PROMOTORA</span></big>
+			LEGAL ARCADIA PROMOTORA</span><br>
+			<span style="font-family: Arial; font-weight: bold;">ARCADIA PROMOTORA</span>
+			</big>
 			<br>
 			</div>
 			</div>
